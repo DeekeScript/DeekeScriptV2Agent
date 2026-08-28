@@ -8,11 +8,17 @@
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
-| text / title / label | String | 可选，转圈旁边的说明，支持 `{{path}}` |
+| text / title / label | String | 可选说明，支持 `{{path}}` |
+| mode | String | `row` 横向转圈（默认）；`column` 转圈在上；`dots` 三点跳动 |
+| size | Number | 转圈边长，默认 18；`column` 时默认 28 |
 | showIf | String | 为真时显示。不要默认常显 |
 
 ```json
 { "type": "loading", "text": "加载中", "showIf": "loading" }
+```
+
+```json
+{ "type": "loading", "mode": "dots", "text": "请稍候" }
 ```
 
 ```javascript

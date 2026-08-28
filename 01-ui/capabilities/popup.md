@@ -2,6 +2,8 @@
 
 给当前页加遮罩弹层、嵌自定义组件时读这篇。弹层盖在当前页上，不是新页面，不进返回栈。写在页面根上的 `popups`，或 `body` 里用 `type: popup`（同样画到最上层，不占正文布局）。显示隐藏用 `showIf`，或 `this.showPopup` / `this.hidePopup`。点遮罩会把对应字段写成 `false`。
 
+同类 overlay（都不占正文布局）：[actionSheet](../components/actionSheet.md)、[dialog](../components/dialog.md)、[modal](../components/modal.md)、[popover](../components/popover.md)、[mask](../components/mask.md)、[imageViewer](../components/imageViewer.md)。组件字段见 [popup 组件](../components/popup.md)。
+
 ## popups 字段
 
 | 参数名 | 类型 | 说明 |

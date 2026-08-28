@@ -42,6 +42,7 @@ DeekeScript V2 做两件事，彼此解耦：
 - 切底栏用 `switchTab`，不要 `navigate`。
 - 找节点用 `UiSelector().text('发送').findOne()`，不要 Auto.js 的 `text('发送').findOnce()`。
 - 表单 `name` 绑定 `data`；页面 `Storage.put*`，脚本 `Storage.get*`。键名加项目前缀。
+- 可调节数值用 `slider`（运行速度、点赞概率）。`progress` / `progressBar` 只能展示进度，不能拖。
 - `page.js` 不能「仅当前文件执行」。长循环、找节点、滑动只写在 `tasks/`。
 - V2 **没有 Hook**。不要生成 `hooks`、`app_start`、`Engines.closeHook()`。
 - WebView 不和 Page 通信，且必须写 `style.height`。

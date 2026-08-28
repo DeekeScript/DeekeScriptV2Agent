@@ -13,7 +13,7 @@
 | js | String | 否 | 默认加载同目录 `page.js` |
 | enablePullDownRefresh | Boolean | 否 | 打开整页下拉。见 [下拉刷新](./capabilities/refresh.md) |
 | body | Array | 是 | 组件列表 |
-| popups | Array | 否 | 弹层。显示隐藏用 `showIf`。嵌自定义组件在弹层 `body` 里写 `{ "type": "choose" }` |
+| popups | Array | 否 | overlay 弹层。显示隐藏用 `showIf`。也可把 `popup` / `actionSheet` / `dialog` / `modal` 等写在 `body` 里，同样盖在最上层 |
 
 ## 覆盖 window 的规则
 

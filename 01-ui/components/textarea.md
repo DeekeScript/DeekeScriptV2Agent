@@ -1,6 +1,6 @@
 # textarea
 
-多行文本。外观和 [input](./input.md) 一样：默认下划线，`variant: "box"` 为圆角边框。
+多行文本。外观和 [input](./input.md) 一样：默认下划线，`variant: "box"` 为圆角边框，`variant: "plain"` 为无边框纯背景。
 
 通用字段见 [通用字段](./_common.md)。
 
@@ -11,7 +11,7 @@
 | value | String | 默认值 |
 | hint | String | 占位 |
 | minLines | Number | 最少行数，默认 3 |
-| variant | String | 同 Input：`line`（默认）/ `box` |
+| variant | String | 同 Input：`line`（默认）/ `box` / `plain` |
 | size | String | 同 Input，仅边框样式生效 |
 | style.radius / borderWidth / borderColor / background | — | 同 Input |
 

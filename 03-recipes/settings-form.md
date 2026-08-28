@@ -1,6 +1,6 @@
 # 配置页表单
 
-一页：`input` / `textarea` / `range` / `switch` / `progress`，保存到 `Storage`。输入会写回 `this.data`，点保存才持久化。任务脚本用同一 key 去 `Storage.get`。
+一页：`input` / `textarea` / `range` / `switch` / `slider`，保存到 `Storage`。输入会写回 `this.data`，点保存才持久化。任务脚本用同一 key 去 `Storage.get`。可调节数值必须用 `slider`，不要用只读的 `progress`。
 
 相关：[`Storage.md`](../02-script/api/Storage.md)、[`run-task-from-ui.md`](./run-task-from-ui.md)。
 
@@ -35,7 +35,7 @@
         },
         { "type": "switch", "name": "notify", "label": "完成通知" },
         {
-          "type": "progress",
+          "type": "slider",
           "name": "like_rate",
           "label": "点赞概率",
           "min": 0,
@@ -113,4 +113,5 @@ let rate = Storage.getInteger('demo.like_rate');
 
 - `name` 必须和 `data` 键一致。
 - `range` 左右是两个 `name`，不要写成一个字段。
-- 布尔用 `putBoolean` / `getBoolean`，整数进度用 `putInteger` / `getInteger`。
+- 布尔用 `putBoolean` / `getBoolean`，整数滑动值用 `putInteger` / `getInteger`。
+- 点赞概率 / 运行速度用 `"type": "slider"`，不要 `"type": "progress"`。

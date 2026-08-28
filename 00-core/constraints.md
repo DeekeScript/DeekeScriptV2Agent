@@ -31,6 +31,7 @@
 | 8 | 禁止用 `navigate` 切底栏 Tab；禁止在底栏根页用 `back` 退出应用（根页 `back` 不会退出）。 |
 | 9 | 禁止把 `UiSelector` 主流程写进 `page.js` 的 `onTap` 并长时间阻塞。找节点、循环等待放 `tasks/*.js`。 |
 | 11 | 禁止 Auto.js 式全局选择器 `text()` / `id()` / `desc()`。必须 `UiSelector().text('发送').findOne()`。 |
+| 12 | 禁止把可调节数值写成 `progress` / `progressBar`。运行速度、点赞概率、间隔必须用 `slider`。 |
 
 ## 快速对照
 
@@ -40,4 +41,5 @@
 | 打开二级页 | `navigate` / `this.navigate` | 底栏项用 `navigate` |
 | 切底栏 | `switchTab` / `this.switchTab` | `this.navigate('home')` |
 | 读表单 | `this.data.task_name`；脚本 `Storage.get*` | 任务脚本读 `Page.data` |
+| 可调节数值 | `"type": "slider"` | `"type": "progress"` 当滑动条 |
 | 复用 UI | `components/choose` + `"component": true` | 复制整页 JSON、或组件互相循环嵌套 |

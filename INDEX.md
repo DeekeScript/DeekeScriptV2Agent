@@ -25,7 +25,7 @@
 | [01-ui/data-binding.md](./01-ui/data-binding.md) | `{{}}`、`showIf`、`name`、`bind` |
 | [01-ui/navigate.md](./01-ui/navigate.md) | `action` 与 `this.navigate` 等 |
 | [01-ui/component-custom.md](./01-ui/component-custom.md) | 自定义组件 |
-| [01-ui/components/INDEX.md](./01-ui/components/INDEX.md) | 内置 type 清单，再打开单篇 |
+| [01-ui/components/INDEX.md](./01-ui/components/INDEX.md) | 内置 type 清单，再打开单篇。**slider 可拖，progress 只读** |
 | [01-ui/components/_common.md](./01-ui/components/_common.md) | 通用字段和 Style |
 | [01-ui/capabilities/](./01-ui/capabilities/) | 下拉刷新、底栏、悬浮球、弹层 |
 

@@ -55,7 +55,7 @@ Page({
 }
 ```
 
-弹层同样用 `showIf` 控制显示，见 [popup](./capabilities/popup.md)。
+弹层、对话框、动作面板、气泡、看图同样用 `showIf` 控制显示，见 [popup](./capabilities/popup.md) 与 overlay 组件。
 
 ## 表单 name 双向绑定
 
@@ -66,8 +66,9 @@ Page({
 | input / textarea / search | 字符串 |
 | switch | 布尔 |
 | select / radio / tabs | 选中 `value` |
-| checkbox | 按组件约定写入 `data` |
-| progress | 数字 |
+| checkbox | 无 options 为布尔；有则为选中值数组 |
+| stepper / rate / slider | 数字（可编辑） |
+| progress / progressBar / progressCircle | 数字（只读展示） |
 | range | `start.name` / `end.name` 两个键 |
 
 保存后任务脚本用 `Storage` 读，不要在任务里访问 `Page.data`。

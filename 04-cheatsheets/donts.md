@@ -21,5 +21,8 @@
 | `executeScript` 写成相对当前文件的 `./tasks` | 路径相对**项目根**：`tasks/sample.js` |
 | 底栏根页 `back` 指望退出 App | `back` 只关二级页 |
 | 找节点写成 Auto.js 的 `text('发送').findOnce()` | 必须 `UiSelector().text('发送').findOne()`。没有全局 `text()` / `id()` |
+| 把可调节数值写成 `progress` / `progressBar`（运行速度、点赞概率） | 用 `"type": "slider"`。`progress` 只能展示、不能拖。见 [`slider.md`](../01-ui/components/slider.md) |
+| 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |
+| 用页面根 `title` 同时又放 `navBar` 画两套顶栏 | 自制顶栏时 `"title": { "hidden": true }`，再写 `type: navBar` |
 
 Rhino 其它限制见 [`00-core/constraints.md`](../00-core/constraints.md)。配方入口：[`scaffold.md`](../03-recipes/scaffold.md)。

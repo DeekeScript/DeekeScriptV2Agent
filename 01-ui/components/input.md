@@ -2,7 +2,7 @@
 
 单行输入。`name` 对应 `data` 中的键，`value` 为默认值。`name` 也会做 `{{path}}` 替换，所以 list 里可以写 `{{item.key}}`。
 
-默认是底部一条横线。需要网页式圆角边框时写 `variant: "box"`，或直接在 `style` 里写 `radius` / `borderColor` / `borderWidth`。
+默认是底部一条横线。需要网页式圆角边框时写 `variant: "box"`，或直接在 `style` 里写 `radius` / `borderColor` / `borderWidth`。无边框、只有背景写 `variant: "plain"`。
 
 通用字段见 [通用字段](./_common.md)。
 
@@ -15,7 +15,7 @@
 | password | Boolean | 等价于 `inputType: password` |
 | passwordToggle | Boolean | 密码框自动在右侧显示眼睛：闭眼为密文，睁眼为明文 |
 | inputType | String | `text`（默认）/ `password` / `number`（小数）/ `digit`（整数）/ `email` / `phone` / `url` |
-| variant | String | `line` / `下划线`（默认）；`box` / `边框` 为圆角边框 |
+| variant | String | `line` / `下划线`（默认）；`box` / `边框` 为圆角边框；`plain` / `无边框` 为无描边纯背景 |
 | size | String | 仅边框样式生效。`sm` / `小`、`md`（默认）、`lg` / `大` |
 | style.radius | Number | 边框圆角 dp；写出后自动切到边框样式。`sm` 默认 4，`md` 默认 6，`lg` 默认 8 |
 | style.borderWidth | Number | 描边宽度 dp，默认 1 |
@@ -40,7 +40,7 @@
 
 ## 别名
 
-- `variant`：`line` / `下划线`；`box` / `边框` / `outline` / `outlined` / `border` / `filled` / `框`
+- `variant`：`line` / `下划线`；`box` / `边框` / `outline` / `outlined` / `border` / `filled` / `框`；`plain` / `无边框` / `纯背景` / `fill` / `soft`
 - `inputType` 中文：`密码`、`数字`、`整数`、`邮箱`、`手机`、`网址`
 - `passwordToggle`：`togglePassword`、`明文`、`可见`
 - `icon`：`prefixIcon`、`startIcon`、`prefix`、`前图标`
