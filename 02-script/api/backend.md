@@ -23,6 +23,6 @@
 
 ## 生成时注意
 
-- 不要在 `deekeScript-v2.json` 里编造后台地址字段。域名用 `host`。
+- 页面请求用 `Http` 写完整 URL。
 - 卡密期限与 `payList.day` / `money` 对应关系见 [`activation.md`](./activation.md) 的 `config` 接口。
 - 没有公开的「后台 SDK」对象，不要生成 `Backend.xxx()`。

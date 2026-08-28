@@ -10,8 +10,7 @@
 | packageName | String | 否（打包建议写） | cn.deeke.demo | 包名，不要用默认包名 |
 | versionCode | String | 否（打包建议写） | 100 | 版本号，升级凭证 |
 | versionName | String | 否（打包建议写） | 1.0.0 | 版本名称 |
-| host | String | 否（打包建议写） | https://example.com | 接口域名 |
-| icon | String | 否 | logo/dke.png | 图标，建议 200×200 |
+| icon | String | 是 | img/xhs.svg | 工程图标。路径相对项目根，文件必须存在（png / jpg / svg）。首页、悬浮球、打包都会用 |
 | homePage | String | 做界面时是 | pages/home | 入口页面文件夹，加载该目录 `page.json` / `page.js`。无需再放入 `pages`。只跑脚本时可不写 |
 | window | Object | 否 | 见下表 | 全局窗口。先应用，再由当前页面覆盖 |
 | pages | Array | 否 | 见下表 | 页面别名。跳转也可直接写文件夹 |
@@ -113,12 +112,12 @@
 {
   "name": "Deeke",
   "packageName": "cn.deeke.demo",
-  "host": "https://example.com",
+  "icon": "img/xhs.svg",
   "homePage": "pages/home"
 }
 ```
 
-做界面时有这一份就能进首页。只跑脚本时，这个文件用来识别工程。
+入口必须含 `icon`，且工程内该文件存在。做界面时有这一份就能进首页。只跑脚本时，这个文件用来识别工程。
 
 ## 完整示例
 
@@ -128,7 +127,7 @@
   "packageName": "cn.deeke.demo",
   "versionCode": "100",
   "versionName": "1.0.0",
-  "host": "https://example.com",
+  "icon": "img/xhs.svg",
   "homePage": "pages/home",
   "window": {
     "style": {

@@ -2,7 +2,7 @@
 
 激活码由 DeekeScript 客户端请求你的后端。开发者实现接口即可。请求会带校验字段。
 
-V2 入口 `deekeScript-v2.json` 写 `host`（以及 `name` / `packageName` 等打包字段）。接口 path 仍按下面 `type` 配置（V1 写在 `apis` 数组；打包时 `host` + `url` 拼接）。
+脚本里用 `Http` 请求完整 URL。下面接口说明留给自建后端参考。
 
 ## 上下文
 
@@ -52,6 +52,5 @@ console.log(res);
 
 ## 注意
 
-- `debug` 为 `true`（默认）时不填激活码也能跑；要强制激活把 `debug` 设为 `false`。
 - 不要在客户端伪造 `secret`。
 - 相关：[`backend.md`](./backend.md)、[`apk.md`](./apk.md)、[`Storage.md`](./Storage.md)。

@@ -36,6 +36,7 @@ DeekeScript V2 做两件事，彼此解耦：
 ## 生成时必须遵守
 
 - 每个页面：`pages/<id>/page.json` + `page.js` 成对。`homePage` 目录可不再放入入口 `pages`。
+- 入口 JSON 必须写 `icon`（相对项目根的路径），且该文件必须存在，例如 `"icon": "img/xhs.svg"`。
 - 自定义组件 JSON 必须 `"component": true`。
 - **禁止**在 JSON `action` 里执行脚本。按钮写 `onTap`，在 `page.js` 里 `Engines.executeScript('tasks/xxx.js')`（或 `permission.runScript`）。
 - `action` 只允许：`navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl`。

@@ -17,7 +17,7 @@
 {
   "name": "Demo",
   "packageName": "cn.deeke.demo",
-  "host": "https://example.com",
+  "icon": "img/xhs.svg",
   "homePage": "pages/home",
   "pages": [
     { "id": "stats", "file": "pages/stats", "title": "统计" },

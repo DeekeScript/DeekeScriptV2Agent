@@ -16,6 +16,7 @@
 | 8 | `require` 路径：`./`、`../` 相对当前文件，否则相对项目根。被引入文件用 `module.exports`。 |
 | 9 | 改 `page.json` / `page.js` 后必须项目同步，并在手机端点刷新，界面才会更新。 |
 | 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。运行中若没有 `stop`，框架会自动补一个。 |
+| 11 | 入口 JSON 必须写 `icon`，且该路径相对项目根的文件真实存在（如 `"icon": "img/xhs.svg"`）。首页、悬浮球、打包都读这个字段。 |
 
 ## MUST NOT
 
@@ -38,6 +39,7 @@
 | 场景 | 正确 | 错误 |
 |------|------|------|
 | 跑自动化 | `tasks/sample.js` +「仅当前文件执行」或 `Engines.executeScript` | JSON `"action": { "type": "runScript" }` |
+| 入口图标 | `"icon": "img/xhs.svg"` 且文件存在 | 漏 `icon`，或只写字段不放文件 |
 | 打开二级页 | `navigate` / `this.navigate` | 底栏项用 `navigate` |
 | 切底栏 | `switchTab` / `this.switchTab` | `this.navigate('home')` |
 | 读表单 | `this.data.task_name`；脚本 `Storage.get*` | 任务脚本读 `Page.data` |

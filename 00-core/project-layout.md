@@ -27,6 +27,7 @@ your-project/
   tasks/
     sample.js
   img/
+    xhs.svg
     home.svg
   html/
     help.html
@@ -34,14 +35,14 @@ your-project/
 
 | 路径 | 必须 | 作用 |
 |------|------|------|
-| `deekeScript-v2.json` | 是 | 识别工程；做界面时写首页、底栏、全局窗口、组件注册 |
+| `deekeScript-v2.json` | 是 | 识别工程；必须含 `icon`（文件相对项目根存在）；做界面时写首页、底栏、全局窗口、组件注册 |
+| `img/` | 是（至少 `icon` 指向的那张） | 工程图标、底栏 `icon`、组件 `src`。路径相对项目根 |
 | `tasks/*.js` | 自动化时是 | 无障碍任务。VSCode「仅当前文件执行」，或页面 `Engines.executeScript` |
 | `pages/<id>/page.json` | 做界面时是 | 这一页的结构 |
 | `pages/<id>/page.js` | 做界面时是 | `Page({})`：数据、生命周期、点击 |
 | `components/<id>/component.json` | 用自定义组件时是 | 必须含 `"component": true` |
 | `components/<id>/component.js` | 用自定义组件时是 | `Component({})` |
 | `common/*.js` | 否 | 公共模块，`require('common/xxx.js')` |
-| `img/` | 否 | 图标、图片。底栏 `icon`、组件 `src` 写相对项目根的路径 |
 | `html/` | 否 | 本地 HTML，给 `webview` 的 `src` 用 |
 
 `homePage` 指向的目录（如 `pages/home`）**不必**再写入入口的 `pages` 数组。其它要跳转的页必须成对存在，并在 `pages` 里注册（或跳转时直接写文件夹路径）。

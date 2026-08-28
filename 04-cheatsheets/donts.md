@@ -15,7 +15,8 @@
 | 列表 `bind` 空数组指望自动 Empty | 自己放 `"type": "empty"` + `showIf`。list 空数组不渲染行，也不自动占位 |
 | `webview` 不写 `style.height` | 必须写高度，否则默认 240dp，布局会乱 |
 | 组件 JSON 漏 `"component": true` | 自定义组件根必须 `"component": true`，否则不能当组件加载 |
-| 在 `deekeScript-v2.json` 写 V1 `groups` / `hooks` 当界面 | V2 界面是 `pages/*/page.json`。打包字段只抄 `name` `packageName` `host` `icon` 等 |
+| 入口 JSON 漏 `icon`，或路径文件不存在 | 必须 `"icon": "img/xhs.svg"` 这类相对项目根的路径，且把文件放进工程。首页、悬浮球、打包都依赖它 |
+| 在 `deekeScript-v2.json` 写 V1 `groups` / `hooks` 当界面 | V2 界面是 `pages/*/page.json` |
 | HID / 图色 / 媒体不申请权限 | 图色：`Access.isMediaProjectionEnable`；媒体：`hasMediaReadPermission`；HID：蓝牙权限。见对应 API 卡 |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
 | `executeScript` 写成相对当前文件的 `./tasks` | 路径相对**项目根**：`tasks/sample.js` |

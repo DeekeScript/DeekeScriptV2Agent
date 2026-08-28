@@ -10,6 +10,7 @@
 
 ```
 deekeScript-v2.json
+img/xhs.svg
 tasks/sample.js
 ```
 
@@ -21,12 +22,11 @@ tasks/sample.js
   "packageName": "cn.deeke.demo",
   "versionCode": "100",
   "versionName": "1.0.0",
-  "icon": "logo/dke.png",
-  "host": "https://example.com"
+  "icon": "img/xhs.svg"
 }
 ```
 
-只跑脚本不必写 `homePage`。打包字段含义见 [`apk.md`](../02-script/api/apk.md)。
+`icon` 必填，且 `img/xhs.svg`（或你写的路径）必须在工程里。只跑脚本不必写 `homePage`。打包字段含义见 [`apk.md`](../02-script/api/apk.md)。
 
 ### `tasks/sample.js`
 
@@ -55,12 +55,13 @@ if (!Access.isAccessibilityServiceEnabled()) {
 
 ```
 deekeScript-v2.json
+img/xhs.svg
 pages/home/page.json
 pages/home/page.js
 tasks/sample.js
 ```
 
-需要图标时再加 `logo/dke.png`、`img/home.png`（路径与 JSON 一致即可）。
+必须带上 `icon` 指向的文件。底栏再用到的 `img/home.png` 等按需添加。
 
 ### `deekeScript-v2.json`
 
@@ -70,8 +71,7 @@ tasks/sample.js
   "packageName": "cn.deeke.demo",
   "versionCode": "100",
   "versionName": "1.0.0",
-  "icon": "logo/dke.png",
-  "host": "https://example.com",
+  "icon": "img/xhs.svg",
   "homePage": "pages/home",
   "window": {
     "style": {
