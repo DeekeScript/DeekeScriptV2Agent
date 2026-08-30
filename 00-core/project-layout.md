@@ -1,6 +1,6 @@
 # 工程目录
 
-新建工程、移动文件、注册页面或组件时读这篇。根目录必须有 `deekeScript-v2.json`，否则 VSCode 插件无法同步、无法执行 JS。每个页面是一个文件夹，内含成对的 `page.json` + `page.js`；自定义组件同理，且 JSON 必须 `"component": true`。命名与 Demo 保持一致：目录名即路径，入口用 `id` 做别名。
+新建工程、移动文件、注册页面或组件时读这篇。根目录必须有 `deekeScript.json`，否则 VSCode 插件无法同步、无法执行 JS。每个页面是一个文件夹，内含成对的 `page.json` + `page.js`；自定义组件同理，且 JSON 必须 `"component": true`。命名与 Demo 保持一致：目录名即路径，入口用 `id` 做别名。
 
 ## 完整目录树
 
@@ -8,7 +8,7 @@
 
 ```
 your-project/
-  deekeScript-v2.json
+  deekeScript.json
   pages/
     home/
       page.json
@@ -35,7 +35,7 @@ your-project/
 
 | 路径 | 必须 | 作用 |
 |------|------|------|
-| `deekeScript-v2.json` | 是 | 识别工程；必须含 `icon`（文件相对项目根存在）；做界面时写首页、底栏、全局窗口、组件注册 |
+| `deekeScript.json` | 是 | 识别工程；必须含 `icon`（文件相对项目根存在）；做界面时写首页、底栏、全局窗口、组件注册 |
 | `img/` | 是（至少 `icon` 指向的那张） | 工程图标、底栏 `icon`、组件 `src`。路径相对项目根 |
 | `tasks/*.js` | 自动化时是 | 无障碍任务。VSCode「仅当前文件执行」，或页面 `Engines.executeScript` |
 | `pages/<id>/page.json` | 做界面时是 | 这一页的结构 |

@@ -4,7 +4,7 @@
 
 ## 上下文
 
-打包是客户端流程，不是运行时 API。生成工程时把打包字段写进 `deekeScript-v2.json`。
+打包是客户端流程，不是运行时 API。生成工程时把打包字段写进 `deekeScript.json`。
 
 ## 操作流程
 
@@ -17,9 +17,9 @@
 
 产物在手机 `DCIM/DeekeScript/包名/`，含签名和说明文件。
 
-## 打包字段（V2 入口也可写）
+## 打包字段
 
-`deekeScript-v2.json` 可写这些字段（含义与 V1 `deekeScript.json` 相同）：
+`deekeScript.json` 可写这些字段：
 
 | 字段 | 类型 | 必填 | 说明 |
 |------|------|------|------|
@@ -29,7 +29,7 @@
 | `versionName` | String | 是 | 如 `1.0.0` |
 | `icon` | String | 是 | 相对项目根的图标文件，必须存在。建议 200×200，可用 svg 如 `img/xhs.svg` |
 
-V2 界面入口另需 `homePage`。只跑脚本可以不配页面，但仍要有 `deekeScript-v2.json`。完整字段见官方配置；不要把 V1 的 `hooks` 写进 V2。
+V2 界面入口另需 `homePage`。只跑脚本可以不配页面，但仍要有 `deekeScript.json`。完整字段见官方配置；不要把 V1 的 `hooks` 写进 V2。
 
 ## 最小入口示例
 

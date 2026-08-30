@@ -2,7 +2,7 @@
 
 这份文档给 **AI** 读。读完后应能生成可运行的 DeekeScript V2 工程：
 
-- 界面：`deekeScript-v2.json` + `pages/*/page.json` + `pages/*/page.js`
+- 界面：`deekeScript.json` + `pages/*/page.json` + `pages/*/page.js`
 - 自动化：`tasks/*.js` 以及权限、悬浮球等公共模块
 
 不是给人浏览的官网。人读文档见 [doc.deeke.cn](https://doc.deeke.cn)。

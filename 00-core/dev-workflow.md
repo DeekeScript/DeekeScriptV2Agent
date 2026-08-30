@@ -1,6 +1,6 @@
 # 开发流程
 
-连接手机、同步工程、执行任务脚本时读这篇。日常操作以 VSCode 的 DeekeScript 插件为准。自动化打开 `tasks/*.js` 用「仅当前文件执行」，不需要界面。`page.js` 不是任务脚本，打开对应页面时才加载。根目录没有 `deekeScript-v2.json` 时，插件无法同步、无法运行 JS。
+连接手机、同步工程、执行任务脚本时读这篇。日常操作以 VSCode 的 DeekeScript 插件为准。自动化打开 `tasks/*.js` 用「仅当前文件执行」，不需要界面。`page.js` 不是任务脚本，打开对应页面时才加载。根目录没有 `deekeScript.json` 时，插件无法同步、无法运行 JS。
 
 ## 准备
 
@@ -11,7 +11,7 @@
 | 手机 | 与电脑同一局域网；电脑 VPN 关掉 |
 | App | DeekeScript V2；侧边栏开启：无障碍、悬浮窗、图色查找、节点查看、开发模式 |
 
-命令入口：编辑器右上角图标（打开 `deekeScript-v2.json` 或任意 `page.js` / 任务 `js`），或「查看 → 命令面板」搜 DeekeScript。
+命令入口：编辑器右上角图标（打开 `deekeScript.json` 或任意 `page.js` / 任务 `js`），或「查看 → 命令面板」搜 DeekeScript。
 
 ## 连接与同步
 
@@ -28,7 +28,7 @@
 
 ## 执行任务（无界面）
 
-1. 根目录放好 `deekeScript-v2.json`。
+1. 根目录放好 `deekeScript.json`。
 2. 写 `tasks/sample.js`。
 3. 用 VSCode 打开该文件，点「仅当前文件执行」。
 4. 没有 `pages/`、不打开 `homePage` 也可以。

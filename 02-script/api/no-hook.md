@@ -14,7 +14,7 @@ Hook 只存在于 **V1** 的 `deekeScript.json`：
 }
 ```
 
-V2 工程入口是 `deekeScript-v2.json`。把启动逻辑放在：
+V2 工程入口是 `deekeScript.json`。把启动逻辑放在：
 
 - 首页 `pages/*/page.js` 的 `onLoad` / `onShow`
 - 任务脚本 `tasks/*.js`，由按钮 `onTap` 里 `Engines.executeScript` 启动

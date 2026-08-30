@@ -19,7 +19,7 @@
 
 | 文件 | 解决什么 |
 |------|----------|
-| [01-ui/entry-json.md](./01-ui/entry-json.md) | `deekeScript-v2.json` |
+| [01-ui/entry-json.md](./01-ui/entry-json.md) | `deekeScript.json` |
 | [01-ui/page-json.md](./01-ui/page-json.md) | `page.json` 结构 |
 | [01-ui/page-js.md](./01-ui/page-js.md) | `Page({})` 生命周期、事件、方法 |
 | [01-ui/data-binding.md](./01-ui/data-binding.md) | `{{}}`、`showIf`、`name`、`bind` |

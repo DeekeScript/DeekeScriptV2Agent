@@ -17,7 +17,7 @@
 
 ## 覆盖 window 的规则
 
-1. 先加载 `deekeScript-v2.json` 的 `window`。
+1. 先加载 `deekeScript.json` 的 `window`。
 2. 再加载当前目录 `page.json`。
 3. 同名字段由页面覆盖（`style` / `title` / `statusBar` 等）。
 

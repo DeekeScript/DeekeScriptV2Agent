@@ -6,7 +6,7 @@
 
 | # | 规则 |
 |---|------|
-| 1 | 项目根目录必须有 `deekeScript-v2.json`，否则 VSCode 的 DeekeScript 插件无法同步、无法运行 JS。 |
+| 1 | 项目根目录必须有 `deekeScript.json`，否则 VSCode 的 DeekeScript 插件无法同步、无法运行 JS。 |
 | 2 | 每个页面必须是 `page.json` + `page.js` 成对，并在入口 `pages` 注册（`id` + `file`）。`homePage` 指向的目录可以不再放入 `pages`。 |
 | 3 | 自定义组件 JSON 必须含 `"component": true`，目录为 `component.json` + `component.js`，并在入口 `components` 注册（或不写数组、按 `components/<id>` 加载）。 |
 | 4 | 无障碍长任务写在 `tasks/*.js`。从页面启动用 `Engines.executeScript('tasks/xxx.js')`（可先 `permission.ensureRun()` / `permission.runScript`）。 |

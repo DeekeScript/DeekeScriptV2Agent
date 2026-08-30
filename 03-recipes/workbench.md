@@ -6,7 +6,7 @@
 
 ## 文件
 
-- `deekeScript-v2.json`（含 `homePage` 与 `bottomMenus`）
+- `deekeScript.json`（含 `homePage` 与 `bottomMenus`）
 - `pages/home/page.json`
 - `pages/home/page.js`
 - 另配 `pages/stats`、`pages/settings` 作底栏目标（可先放空页 `Page({})`）

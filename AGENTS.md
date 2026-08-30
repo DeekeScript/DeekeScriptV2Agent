@@ -11,7 +11,7 @@ DeekeScript V2 做两件事，彼此解耦：
 1. **自动化脚本**：`tasks/*.js`，无障碍找节点、点击、滑动。
 2. **可选界面**：`page.json` 描述结构，`page.js` 填数据和响应点击。没有 `pages/` 也能跑脚本。
 
-根目录必须有 `deekeScript-v2.json`，否则 VSCode 插件无法识别工程。
+根目录必须有 `deekeScript.json`，否则 VSCode 插件无法识别工程。
 
 ## 固定读取顺序
 

@@ -16,7 +16,7 @@
 
 ## menus 字段
 
-写在 `deekeScript-v2.json` 的 `floatWindow.menus`。
+写在 `deekeScript.json` 的 `floatWindow.menus`。
 
 | 参数 | 类型 | 说明 |
 |------|------|------|

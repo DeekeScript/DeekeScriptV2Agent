@@ -22,7 +22,7 @@ Device Owner（设备所有者）是 Android 最高级管理权限：静默安�
 
 Receiver（打包 App 把包名换成自己的，Receiver 类名不变）：
 
-- 包名示例：`com.android.deeke.script`（开发器）或 `deekeScript-v2.json` 里的 `packageName`
+- 包名示例：`com.android.deeke.script`（开发器）或 `deekeScript.json` 里的 `packageName`
 - Receiver：`top.deeke.script.service.AdminReceiver`
 
 ```bash

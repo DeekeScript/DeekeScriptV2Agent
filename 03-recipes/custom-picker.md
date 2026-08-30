@@ -5,7 +5,7 @@
 ## 文件清单
 
 ```
-deekeScript-v2.json          （components 注册）
+deekeScript.json          （components 注册）
 components/choose/component.json
 components/choose/component.js
 pages/home/page.json

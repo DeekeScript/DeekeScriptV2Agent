@@ -1,6 +1,6 @@
 # 从 0 搭最小工程
 
-两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。项目根必须有 `deekeScript-v2.json`，否则 VS Code 插件无法同步。
+两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。项目根必须有 `deekeScript.json`，否则 VS Code 插件无法同步。
 
 生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要写 `hooks`，不要漏 `page.js`。
 
@@ -9,12 +9,12 @@
 ### 文件清单
 
 ```
-deekeScript-v2.json
+deekeScript.json
 img/xhs.svg
 tasks/sample.js
 ```
 
-### `deekeScript-v2.json`
+### `deekeScript.json`
 
 ```json
 {
@@ -54,7 +54,7 @@ if (!Access.isAccessibilityServiceEnabled()) {
 ### 文件清单
 
 ```
-deekeScript-v2.json
+deekeScript.json
 img/xhs.svg
 pages/home/page.json
 pages/home/page.js
@@ -63,7 +63,7 @@ tasks/sample.js
 
 必须带上 `icon` 指向的文件。底栏再用到的 `img/home.png` 等按需添加。
 
-### `deekeScript-v2.json`
+### `deekeScript.json`
 
 ```json
 {

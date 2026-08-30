@@ -8,7 +8,7 @@ d.ts 未声明 `FloatWindow`；方法以[官方 V2 文档](https://doc.deeke.cn)
 
 - **page.js** 与 **tasks.js** 都能 `on` / `setMenus` / `update` / `collapse`。
 
-JSON 配在 `deekeScript-v2.json` 的 `floatWindow.menus`，默认最多展示 5 个（含运行中框架补的停止）。
+JSON 配在 `deekeScript.json` 的 `floatWindow.menus`，默认最多展示 5 个（含运行中框架补的停止）。
 
 ## 方法
 
