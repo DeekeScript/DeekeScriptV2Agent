@@ -1,6 +1,6 @@
 # 心智模型
 
-生成任何 V2 工程前先读这篇。DeekeScript V2 做两件事：跑无障碍脚本，以及（可选）用 JSON 做界面。界面不是前提；没有 `pages/` 也能跑任务。长任务、找节点、点击滑动只写在 `tasks/*.js`，不要写进 JSON 的 `action`。
+生成任何 Pro 工程前先读这篇。DeekeScript Pro 做两件事：跑无障碍脚本，以及（可选）用 JSON 做界面。界面不是前提；没有 `pages/` 也能跑任务。长任务、找节点、点击滑动只写在 `tasks/*.js`，不要写进 JSON 的 `action`。
 
 ## 两层
 

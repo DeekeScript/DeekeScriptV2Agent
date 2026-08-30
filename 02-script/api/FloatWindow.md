@@ -2,7 +2,7 @@
 
 **项目**悬浮球的展开菜单。`floatWindow.menus` 与 `FloatWindow` 只作用于点「运行」之后（以及打包 App）的那颗球，不改变开发器里的球。
 
-d.ts 未声明 `FloatWindow`；方法以[官方 V2 文档](https://doc.deeke.cn)为准。显隐这颗球用 [`FloatDialogs.setFloatWindowVisible`](FloatDialogs.md)。
+d.ts 未声明 `FloatWindow`；方法以[官方文档](https://script.deeke.cn)为准。显隐这颗球用 [`FloatDialogs.setFloatWindowVisible`](FloatDialogs.md)。
 
 ## 可用上下文
 

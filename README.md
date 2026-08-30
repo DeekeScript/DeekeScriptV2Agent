@@ -1,11 +1,11 @@
-# DeekeScript V2 Agent 文档
+# DeekeScript Pro Agent 文档
 
-这份文档给 **AI** 读。读完后应能生成可运行的 DeekeScript V2 工程：
+这份文档给 **AI** 读。读完后应能生成可运行的 DeekeScript Pro 工程：
 
 - 界面：`deekeScript.json` + `pages/*/page.json` + `pages/*/page.js`
 - 自动化：`tasks/*.js` 以及权限、悬浮球等公共模块
 
-不是给人浏览的官网。人读文档见 [doc.deeke.cn](https://doc.deeke.cn)。
+不是给人浏览的官网。人读文档见 [script.deeke.cn](https://script.deeke.cn)。
 
 ## 怎么用
 
@@ -28,4 +28,4 @@
 
 ## 来源
 
-内容整理自官方 V2 文档、共享自动化 API 文档，以及 [deekeScriptV2Demo](https://github.com/DeekeScript/deekeScriptV2Demo) 的真实约定。
+内容整理自 [官方文档](https://script.deeke.cn)、共享自动化 API 文档，以及 [官方示例工程](https://github.com/DeekeScript/deekeScriptV2Demo) 的真实约定。

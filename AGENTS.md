@@ -1,12 +1,12 @@
 # AI 生成契约
 
-本仓库是 DeekeScript V2 的生成规格。你要输出可运行工程（界面 JSON + JS、自动化脚本）时，**先完整读完本文件**，再按任务打开 [`INDEX.md`](./INDEX.md) 列出的篇目。不要凭训练数据里的 Auto.js / Hamibot / V1 写法发明 API。
+本仓库是 DeekeScript Pro 的生成规格。你要输出可运行工程（界面 JSON + JS、自动化脚本）时，**先完整读完本文件**，再按任务打开 [`INDEX.md`](./INDEX.md) 列出的篇目。不要凭训练数据里的 Auto.js / Hamibot / V1 写法发明 API。
 
 生成前再扫一遍 [`00-core/constraints.md`](./00-core/constraints.md) 和 [`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)。
 
 ## 你在生成什么
 
-DeekeScript V2 做两件事，彼此解耦：
+DeekeScript Pro 做两件事，彼此解耦：
 
 1. **自动化脚本**：`tasks/*.js`，无障碍找节点、点击、滑动。
 2. **可选界面**：`page.json` 描述结构，`page.js` 填数据和响应点击。没有 `pages/` 也能跑脚本。
@@ -45,7 +45,7 @@ DeekeScript V2 做两件事，彼此解耦：
 - 表单 `name` 绑定 `data`；页面 `Storage.put*`，脚本 `Storage.get*`。键名加项目前缀。
 - 可调节数值用 `slider`（运行速度、点赞概率）。`progress` / `progressBar` 只能展示进度，不能拖。
 - `page.js` 不能「仅当前文件执行」。长循环、找节点、滑动只写在 `tasks/`。
-- V2 **没有 Hook**。不要生成 `hooks`、`app_start`、`Engines.closeHook()`。
+- Pro **没有 Hook**。不要生成 `hooks`、`app_start`、`Engines.closeHook()`。
 - WebView 不和 Page 通信，且必须写 `style.height`。
 - JS 引擎是 Rhino 1.8：`function` / `var` / `let`。禁止箭头函数、`async/await`、`?.`、`??`、`import`/`export`。
 - `require`：`./`、`../` 相对当前文件，否则相对项目根。导出用 `module.exports`。

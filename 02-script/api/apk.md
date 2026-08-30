@@ -1,6 +1,6 @@
 # apk
 
-把工程打成独立 APK。开发完同步到手机，在 DeekeScript 里能看到项目后操作。
+把工程打成独立 APK。开发完同步到手机，在 Pro 里能看到项目后操作。
 
 ## 上下文
 
@@ -29,7 +29,7 @@
 | `versionName` | String | 是 | 如 `1.0.0` |
 | `icon` | String | 是 | 相对项目根的图标文件，必须存在。建议 200×200，可用 svg 如 `img/xhs.svg` |
 
-V2 界面入口另需 `homePage`。只跑脚本可以不配页面，但仍要有 `deekeScript.json`。完整字段见官方配置；不要把 V1 的 `hooks` 写进 V2。
+界面入口另需 `homePage`。只跑脚本可以不配页面，但仍要有 `deekeScript.json`。完整字段见官方配置；不要把 V1 的 `hooks` 写进 Pro。
 
 ## 最小入口示例
 

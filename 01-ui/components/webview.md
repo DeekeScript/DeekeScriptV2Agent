@@ -19,7 +19,7 @@
 ```json
 {
   "type": "webview",
-  "src": "https://doc.deeke.cn",
+  "src": "https://script.deeke.cn",
   "style": { "height": 360, "radius": 8 }
 }
 ```

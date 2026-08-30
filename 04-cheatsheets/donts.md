@@ -6,7 +6,7 @@
 |------|----------|
 | 在 JSON `action` 里执行脚本、编造 `executeScript` action | 按钮写 `onTap`，在 `page.js` 里 `Engines.executeScript('tasks/xxx.js')`。见 [`run-task-from-ui.md`](../03-recipes/run-task-from-ui.md) |
 | 把找节点、循环任务写在 `page.js` | `page.js` 只做界面和启动；业务在 `tasks/*.js` |
-| 生成 V1 `hooks`、`app_start`、`Engines.closeHook` 当初始化 | **V2 没有 Hook**。逻辑放 `onLoad` / 任务脚本。见 [`no-hook.md`](../02-script/api/no-hook.md) |
+| 生成 V1 `hooks`、`app_start`、`Engines.closeHook` 当初始化 | **Pro 没有 Hook**。逻辑放 `onLoad` / 任务脚本。见 [`no-hook.md`](../02-script/api/no-hook.md) |
 | WebView 与 Page 互调、`javascript:` 桥、读本地文件 | WebView 不和 Page 通信。外链用 `openUrl`。见组件 `webview` |
 | 箭头函数、`async` / `await`、`?.`、`??` | 只用 `function` / `var` / `let`。异步用回调或 `then` |
 | 有 `page.json` 却不写同目录 `page.js` | 每个页面都要 `Page({})`，哪怕是空的 |
@@ -16,7 +16,7 @@
 | `webview` 不写 `style.height` | 必须写高度，否则默认 240dp，布局会乱 |
 | 组件 JSON 漏 `"component": true` | 自定义组件根必须 `"component": true`，否则不能当组件加载 |
 | 入口 JSON 漏 `icon`，或路径文件不存在 | 必须 `"icon": "img/xhs.svg"` 这类相对项目根的路径，且把文件放进工程。首页、悬浮球、打包都依赖它 |
-| 在 `deekeScript.json` 写 V1 `groups` / `hooks` 当界面 | V2 界面是 `pages/*/page.json` |
+| 在 `deekeScript.json` 写 V1 `groups` / `hooks` 当界面 | 界面是 `pages/*/page.json` |
 | HID / 图色 / 媒体不申请权限 | 图色：`Access.isMediaProjectionEnable`；媒体：`hasMediaReadPermission`；HID：蓝牙权限。见对应 API 卡 |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
 | `executeScript` 写成相对当前文件的 `./tasks` | 路径相对**项目根**：`tasks/sample.js` |

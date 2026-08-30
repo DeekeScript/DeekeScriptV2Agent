@@ -24,7 +24,7 @@
 |---|------|
 | 1 | 禁止在 JSON 的 `action` 里执行脚本或写长任务。`action` 只允许 `navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl`。 |
 | 2 | 禁止对 `page.js` 点「仅当前文件执行」。它只在打开对应页面时由引擎加载。 |
-| 3 | V2 没有 Hook。不要写 `deekeScript.json` 的 `hooks`，不要调用 `Engines.closeHook()`。 |
+| 3 | Pro 没有 Hook。不要写 `deekeScript.json` 的 `hooks`，不要调用 `Engines.closeHook()`。 |
 | 4 | WebView 不和 `Page` 通信：没有桥、没有 `postMessage`。页内 `javascript` 默认 true，但不能读本地文件、不能调 `Page` 方法。整页开外链用 `openUrl`。 |
 | 5 | 自定义组件禁止成环引用（A 嵌 B、B 再嵌 A），引擎会拒绝加载。 |
 | 6 | 禁止 `async/await`、箭头函数、`?.`、`??`、`import` / `export`。 |

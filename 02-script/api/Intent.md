@@ -39,5 +39,5 @@ App.gotoIntent('snssdk1128://user/profile/' + user_id);
 
 - 生成代码优先 `App.gotoIntent`，URI 由目标 App 文档提供。
 - 不要把 `startActivity` 当成稳定公开 API 去拼复杂 extras。
-- 页面跳转用 `this.navigate` / `switchTab`，不要用 Intent 打开自己的 V2 页面。
+- 页面跳转用 `this.navigate` / `switchTab`，不要用 Intent 打开自己的页面。
 - 相关：[`App.md`](./App.md)。

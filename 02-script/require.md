@@ -57,5 +57,5 @@ System.toast(hello.text);
 ## 注意
 
 - 必须带 `.js` 后缀，与工程里真实文件名一致。
-- 导出用 `module.exports`。不要依赖未在 V2 页面示例中出现的其它导出写法。
+- 导出用 `module.exports`。不要依赖未在页面示例中出现的其它导出写法。
 - 被 `require` 的文件里同样可以使用 `Storage`、`UiSelector` 等全局 API，上下文仍是调用方（页面或任务）。

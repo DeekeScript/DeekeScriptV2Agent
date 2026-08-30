@@ -2,7 +2,7 @@
 
 JavaScript 运行时管理器。在当前环境中再开一个**完全独立**的运行时去执行其它脚本（不阻塞当前代码），或关闭运行时。
 
-V2 **没有 Hook**。`closeHook()` 只用于关掉 V1 Hook 拉起的脚本，V2 工程不必调用。
+Pro **没有 Hook**。`closeHook()` 只用于关掉 V1 Hook 拉起的脚本，Pro 工程不必调用。
 
 运行时由**线程池**实现，**有数量限制**，不能无限同时持续执行，否则会报错。
 
@@ -21,7 +21,7 @@ V2 **没有 Hook**。`closeHook()` 只用于关掉 V1 Hook 拉起的脚本，V2 
 | executeScriptStr | `executeScriptStr(name: string, content: string)` | 任务名（排障用）、脚本源码 | `void` | 在新堆栈执行字符串。与当前脚本无共享 |
 | closeAll | `closeAll()` | 无 | `void` | 关闭所有正在运行的脚本（含子脚本、定时器、socket）。**包括当前**。不含 V1 Hook 脚本 |
 | closeOther | `closeOther()` | 无 | `void` | 关闭除当前之外的其它脚本及其子脚本/定时器/socket |
-| closeHook | `closeHook()` | 无 | `void` | 关闭 V1 Hook 启动的脚本。V2 无 Hook，不必使用 |
+| closeHook | `closeHook()` | 无 | `void` | 关闭 V1 Hook 启动的脚本。Pro 无 Hook，不必使用 |
 | childScriptCount | `childScriptCount()` | 无 | `number` | 通过 Engines 手动启动的子脚本总数 |
 
 ## 最小片段

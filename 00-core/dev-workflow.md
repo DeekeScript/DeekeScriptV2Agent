@@ -9,7 +9,7 @@
 | VSCode | 最新版 |
 | 插件 | 安装 DeekeScript 开发插件 |
 | 手机 | 与电脑同一局域网；电脑 VPN 关掉 |
-| App | DeekeScript V2；侧边栏开启：无障碍、悬浮窗、图色查找、节点查看、开发模式 |
+| App | DeekeScript Pro；侧边栏开启：无障碍、悬浮窗、图色查找、节点查看、开发模式 |
 
 命令入口：编辑器右上角图标（打开 `deekeScript.json` 或任意 `page.js` / 任务 `js`），或「查看 → 命令面板」搜 DeekeScript。
 
