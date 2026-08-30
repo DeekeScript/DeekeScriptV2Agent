@@ -7,7 +7,11 @@
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
 | text / title / label | String | 角标数字或文字；不写则显示红点 |
-| style.background | String | 自定义底色 |
+| max / overflowCount | Number | 数字超过该值显示 `N+` |
+| variant | String | `dot` 红点；`ribbon` 小飘带；默认胶囊 |
+| color | String | `danger`（默认）/ `primary` / `warning` / `info` / `neutral`，或 `#RRGGBB` |
+| style.background | String | 自定义底色，优先于 `color` 命名色 |
+| children | Array | 有则叠在子节点右上角 |
 
 ```json
 {
