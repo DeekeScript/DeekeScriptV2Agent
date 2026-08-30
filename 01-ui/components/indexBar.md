@@ -13,6 +13,7 @@
 | item | Object | 每一项的组件模板 |
 | items | Array | 未写 `bind` 时的静态数据 |
 | railMargin | Number | 字母轨距右边缘的 dp，默认 `6`。也可写 `style.marginRight` / `style.right` |
+| style.color | String | 当前字母高亮色。不写则跟 `window.theme.primary` |
 
 ```json
 {
