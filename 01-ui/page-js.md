@@ -106,7 +106,7 @@ Page({
 | `this.stopPullDownRefresh()` | 结束下拉刷新转圈 |
 | `this.setTabBar(items\|{ items, ... })` | 创建底栏。无参数则恢复入口 `bottomMenus` |
 | `this.setTabBarItem({ page, ... })` | 改某一项的角标、隐藏、文字、图标 |
-| `this.setTabBarStyle({ ... })` | 改整栏文字色、图标色、背景、隐藏 |
+| `this.setTabBarStyle({ ... })` | 改整栏。只传要改的字段：`color` 只动文字，图标用 `iconColor` |
 | `this.selectComponent(id)` | 按节点 `id` 找子组件，找不到返回 `null` |
 
 ```javascript

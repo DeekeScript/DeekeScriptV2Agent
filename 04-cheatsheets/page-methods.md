@@ -21,7 +21,7 @@
 | `this.stopPullDownRefresh()` | 结束下拉刷新转圈 |
 | `this.setTabBar(items\|{ items, ... })` | 创建底栏。无参数则恢复入口 `bottomMenus` |
 | `this.setTabBarItem({ page, badge, hidden, title, icon })` | 改某一项。`badge` 为 `0` 或 `''` 去掉 |
-| `this.setTabBarStyle({ color, selectedColor, iconColor, selectedIconColor, background, borderColor, fontSize, hidden })` | 改整栏 |
+| `this.setTabBarStyle({ color, selectedColor, iconColor, selectedIconColor, background, borderColor, fontSize, hidden })` | 改整栏。只传要改的字段，`color` 不动图标 |
 | `this.selectComponent(id)` | 取自定义组件实例 |
 
 生命周期（未声明不调用）：`onLoad(params)` `onShow` `onReady` `onHide` `onUnload`。

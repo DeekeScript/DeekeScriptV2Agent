@@ -53,7 +53,7 @@ this.setTabBar();
 | title | 改文字 |
 | icon / selectedIcon | 改图标路径 |
 
-颜色是整栏一起改的，不能只改某一项的图标色。某一项的文字用 `title`。
+颜色是整栏一起改的，不能只改某一项的图标色。某一项的文字用 `title`。`setTabBarStyle` 只覆盖传入的字段：改文字色不会动图标色，改背景也不会把颜色改回去。
 
 ```javascript
 this.setTabBarItem({ page: 'pages/components', badge: 9 });
@@ -63,14 +63,14 @@ this.setTabBarItem({ page: 'pages/components', hidden: true });
 
 ## setTabBarStyle
 
-只覆盖传入的字段：改文字色不会动已单独设置的图标色，改背景也不会把颜色改回去。
+只覆盖传入的字段。改 `color` / `selectedColor` 只动文字，图标保持入口原色；要改图标必须传 `iconColor` / `selectedIconColor`。
 
 | 参数 | 说明 |
 |------|------|
-| color | 未选中文字色。未单独写图标色时，图标也用这个 |
-| selectedColor | 选中文字色。未单独写图标色时，图标也用这个 |
-| iconColor | 未选中图标色。不写则跟 `color` |
-| selectedIconColor | 选中图标色。不写则跟 `selectedColor` |
+| color | 未选中文字色。只改这一项时，图标保持原色 |
+| selectedColor | 选中文字色。只改这一项时，图标保持原色 |
+| iconColor | 未选中图标色。入口未写时初始跟 `color` |
+| selectedIconColor | 选中图标色。入口未写时初始跟 `selectedColor` |
 | background | 底栏背景 |
 | borderColor | 顶部分割线 |
 | fontSize | 文字大小（sp） |

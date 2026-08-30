@@ -73,10 +73,10 @@
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
-| color | String | 未选中文字色，默认 `#6F7978`。未写 `iconColor` 时图标也用这个 |
+| color | String | 未选中文字色，默认 `#6F7978`。入口未写 `iconColor` 时，初始图标也用这个 |
 | selectedColor | String | 选中文字色，默认 `#006A65`。也可用 `activeColor` |
-| iconColor | String | 未选中图标色。不写则跟 `color` |
-| selectedIconColor | String | 选中图标色。不写则跟 `selectedColor` |
+| iconColor | String | 未选中图标色。不写则初始跟 `color`。运行时只改 `color` 不会改图标 |
+| selectedIconColor | String | 选中图标色。不写则初始跟 `selectedColor` |
 | background | String | 底栏背景，默认 `#FFFFFF`。也可用 `backgroundColor` |
 | borderColor | String | 顶部分割线，默认 `#EEEEEE` |
 | fontSize | Number | 文字大小（sp） |
