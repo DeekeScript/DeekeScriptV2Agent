@@ -13,7 +13,12 @@
 | columns | Number | 每行列数，默认 3 |
 | addText | String | 加号格文案，默认 `+` |
 | onChange | String | 增删后调用，`e.value` 为路径数组 |
+| style.color | String | 加号颜色。不写则为灰色 |
 
 ```json
 { "type": "imageUploader", "name": "photos", "label": "凭证图", "max": 6 }
+```
+
+```json
+{ "type": "imageUploader", "name": "blue_photos", "label": "蓝色加号", "max": 4, "style": { "color": "#1565C0" } }
 ```

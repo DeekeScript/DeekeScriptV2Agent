@@ -11,6 +11,7 @@
 | value | String | 默认选中项 |
 | options | Array | 选项 |
 | onChange | String | 切换时调用，`e.value` 为当前值 |
+| style.color | String | 选中项 / 下拉高亮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {
@@ -27,3 +28,7 @@
 ## 注意
 
 `options` 也可写字符串数组：`["高", "中", "低"]`。
+
+```json
+{ "type": "select", "name": "tone", "label": "蓝色下拉", "style": { "color": "#1565C0" }, "options": ["抖音", "小红书"] }
+```

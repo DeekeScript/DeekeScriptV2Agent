@@ -12,6 +12,7 @@
 | hint | String | 未选时的占位 |
 | position | String | 同 Menu：`bottom`（默认）/ `top` |
 | min / max | String | 可选，限制范围，格式 `yyyy-MM-dd` |
+| style.color | String | 确定按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "date", "name": "day", "label": "日期", "value": "2026-08-24" }

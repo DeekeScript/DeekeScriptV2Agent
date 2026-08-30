@@ -11,6 +11,7 @@
 | icon / src / url | String | 图标路径，支持 `http(s)` 或项目内图片 |
 | text / title / label | String | 提示文案，可省略。支持 `{{path}}` |
 | iconSize | Number | 图标边长 dp，默认 48。也可写在 `style.iconSize` |
+| style.color | String | 文案颜色。不写则为灰色 `#9AA8A6` |
 
 ```json
 {
@@ -19,4 +20,8 @@
   "text": "暂无记录",
   "showIf": "empty"
 }
+```
+
+```json
+{ "type": "empty", "text": "蓝色空状态", "style": { "color": "#1565C0" } }
 ```

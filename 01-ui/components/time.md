@@ -12,6 +12,7 @@
 | hint | String | 未选时的占位 |
 | position | String | `bottom`（默认）/ `top` |
 | min / max | String | 可选，限制范围，格式 `HH:mm` |
+| style.color | String | 确定按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "time", "name": "clock", "label": "时间", "value": "09:30" }

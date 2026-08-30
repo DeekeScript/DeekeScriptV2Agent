@@ -13,9 +13,15 @@
 | text / title | String | 提示文案 |
 | position | String | `center`（默认）/ `top` / `bottom` |
 | mask | Boolean | 默认 false |
+| style.background | String | 气泡底色。不写则为深色半透明 |
+| style.color | String | 文字颜色。不写则为白色 |
 
 ```json
 { "type": "button", "text": "保存", "action": { "type": "toast", "text": "已保存" } }
+```
+
+```json
+{ "type": "toast", "showIf": "blue", "text": "style.background / color", "style": { "background": "#1565C0", "color": "#FFFFFF" } }
 ```
 
 不要用 toast 组件做确认框，确认用 [dialog](./dialog.md)。

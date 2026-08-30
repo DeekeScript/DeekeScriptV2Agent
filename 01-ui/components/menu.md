@@ -14,6 +14,7 @@
 | hint | String | 未选时的占位，默认 `请选择` |
 | position | String | `bottom`（默认）从底部弹出；`top` 从顶部弹出。也可用 `上` |
 | options / items | Array | `{ label, value, children }`。`children` 同结构，可多层 |
+| style.color | String | 确定按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {

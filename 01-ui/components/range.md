@@ -14,6 +14,7 @@
 | inputType | String | 写在外层时左右共用；也可写在 start / end 上 |
 | variant | String | 同 Input，左右共用 |
 | size | String | 同 Input，左右共用 |
+| style.focusColor | String | 聚焦时描边 / 下划线 / 光标颜色。不写则跟 `window.theme.primary`。写在 range 上会传到左右两侧 |
 
 ```json
 {
@@ -24,4 +25,8 @@
   "start": { "name": "follow_min", "hint": "最小", "value": "10" },
   "end": { "name": "follow_max", "hint": "最大", "value": "80" }
 }
+```
+
+```json
+{ "type": "range", "label": "蓝色聚焦", "separator": "~", "variant": "box", "style": { "focusColor": "#1565C0" }, "start": { "name": "blue_min", "hint": "从" }, "end": { "name": "blue_max", "hint": "到" } }
 ```

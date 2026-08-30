@@ -11,6 +11,7 @@
 | items / options | Array | `{ title, name, text, children, disabled }` |
 | value | String / Array | 默认打开的项 |
 | onChange | String | 展开变化时调用 |
+| style.color | String | 折叠箭头颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {
@@ -21,4 +22,8 @@
     { "name": "a", "title": "什么是动态页面？", "text": "用 JSON 描述界面。" }
   ]
 }
+```
+
+```json
+{ "type": "collapse", "name": "tone", "accordion": true, "style": { "color": "#1565C0" }, "items": [{ "name": "a", "title": "蓝色箭头", "text": "折叠箭头颜色写 style.color。" }] }
 ```

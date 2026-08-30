@@ -7,6 +7,7 @@
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
 | text / title / label | String | 角标数字或文字；不写则显示红点 |
+| style.background | String | 自定义底色 |
 
 ```json
 {
@@ -22,3 +23,7 @@
 ## 注意
 
 不写 `text` 时只显示红点：`{ "type": "badge" }`。
+
+```json
+{ "type": "badge", "text": "蓝", "style": { "background": "#1565C0" } }
+```

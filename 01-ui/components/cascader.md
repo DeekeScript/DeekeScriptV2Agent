@@ -13,6 +13,7 @@
 | position | String | `bottom`（默认）/ `top` |
 | options / items | Array | `{ label, value, children }`，可多层 |
 | onChange | String | 确定后调用，`e.value` 为路径 |
+| style.color | String | 确定按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {

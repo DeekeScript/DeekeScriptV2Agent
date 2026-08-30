@@ -9,7 +9,12 @@
 | text / title / label | String | 文案，支持 `{{path}}` |
 | rows / maxLines | Number | 折叠时最多几行，默认 2 |
 | expand | Boolean | 是否显示「展开 / 收起」，默认 true |
+| style.color | String | 「展开 / 收起」文字颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "ellipsis", "rows": 2, "expand": true, "text": "比较长的说明……" }
+```
+
+```json
+{ "type": "ellipsis", "rows": 2, "expand": true, "style": { "color": "#1565C0" }, "text": "展开链接为蓝色。" }
 ```
