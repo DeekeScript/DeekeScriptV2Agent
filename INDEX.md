@@ -22,12 +22,13 @@
 | [01-ui/entry-json.md](./01-ui/entry-json.md) | `deekeScript.json` |
 | [01-ui/page-json.md](./01-ui/page-json.md) | `page.json` 结构 |
 | [01-ui/page-js.md](./01-ui/page-js.md) | `Page({})` 生命周期、事件、方法 |
-| [01-ui/data-binding.md](./01-ui/data-binding.md) | `{{}}`、`showIf`、`name`、`bind` |
-| [01-ui/navigate.md](./01-ui/navigate.md) | `action` 与 `this.navigate` 等 |
+| [01-ui/components/_common.md](./01-ui/components/_common.md) | **必读。** 所有组件的 `style`（`background` / `color` / 宽高）。换主题色看这篇 |
+| [01-ui/data-binding.md](./01-ui/data-binding.md) | **必读。** `{{}}`、`showIf`、表单 `name`、list `bind` |
+| [01-ui/navigate.md](./01-ui/navigate.md) | **必读。** `action` 与 `this.navigate` / `switchTab`。底栏用 `switchTab` |
 | [01-ui/component-custom.md](./01-ui/component-custom.md) | 自定义组件 |
 | [01-ui/components/INDEX.md](./01-ui/components/INDEX.md) | 内置 type 清单，再打开单篇。**slider 可拖，progress 只读** |
-| [01-ui/components/_common.md](./01-ui/components/_common.md) | 通用字段和 Style |
-| [01-ui/capabilities/](./01-ui/capabilities/) | 下拉刷新、底栏、悬浮球、弹层 |
+| [01-ui/capabilities/tabBar.md](./01-ui/capabilities/tabBar.md) | **有底栏时必读。** `bottomMenus` + `switchTab` |
+| [01-ui/capabilities/](./01-ui/capabilities/) | 按需：下拉刷新、悬浮球、弹层 |
 
 速查：[组件 type](./04-cheatsheets/component-types.md)、[action](./04-cheatsheets/action-types.md)、[页面方法](./04-cheatsheets/page-methods.md)。
 
@@ -36,9 +37,10 @@
 | 文件 | 解决什么 |
 |------|----------|
 | [02-script/task-template.md](./02-script/task-template.md) | 任务骨架 |
-| [02-script/permission.md](./02-script/permission.md) | 权限检查与 `runScript` |
+| [02-script/permission.md](./02-script/permission.md) | **必读。** 权限检查与 `runScript`，可复制 `common/permission.js` |
+| [02-script/require.md](./02-script/require.md) | **必读。** 模块路径，必须带 `.js` |
 | [02-script/ui-and-task.md](./02-script/ui-and-task.md) | Storage 与启动路径 |
-| [02-script/require.md](./02-script/require.md) | 模块路径 |
+| [02-script/api/UiSelector.md](./02-script/api/UiSelector.md) | **找节点必读。** `UiSelector().text('发送').findOne()`，不要 Auto.js 全局 `text()` |
 | [02-script/api/INDEX.md](./02-script/api/INDEX.md) | 运行时 API 清单，再打开单篇 |
 | [02-script/api/no-hook.md](./02-script/api/no-hook.md) | Pro 无 Hook |
 

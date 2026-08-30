@@ -35,7 +35,7 @@ Page({
     task_name: '早间养号'
   },
   onSave: function () {
-    Storage.put('task_name', this.data.task_name);
+    Storage.put('demo.task_name', this.data.task_name);
   },
   onRun: function () {
     Engines.executeScript('tasks/sample.js');
@@ -49,7 +49,7 @@ let permission = require('common/permission.js');
 if (!permission.ensureRun()) {
   // 无障碍 / 悬浮窗未开，已弹窗引导
 } else {
-  var name = Storage.getString('task_name');
+  var name = Storage.getString('demo.task_name');
   System.toast(name);
 }
 ```

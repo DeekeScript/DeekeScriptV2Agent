@@ -36,6 +36,7 @@
 {
   "type": "button",
   "text": "保存设置",
+  "style": { "background": "#006A65", "color": "#FFFFFF" },
   "onTap": "onSave",
   "action": { "type": "save", "toast": "已保存" }
 }
@@ -49,6 +50,7 @@
 {
   "type": "button",
   "text": "打开详情",
+  "style": { "background": "#006A65", "color": "#FFFFFF" },
   "action": {
     "type": "navigate",
     "page": "detail",

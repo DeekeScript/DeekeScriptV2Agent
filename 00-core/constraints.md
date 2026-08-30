@@ -16,7 +16,9 @@
 | 8 | `require` 路径：`./`、`../` 相对当前文件，否则相对项目根。被引入文件用 `module.exports`。 |
 | 9 | 改 `page.json` / `page.js` 后必须项目同步，并在手机端点刷新，界面才会更新。 |
 | 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。运行中若没有 `stop`，框架会自动补一个。 |
-| 11 | 入口 JSON 必须写 `icon`，且该路径相对项目根的文件真实存在（如 `"icon": "img/xhs.svg"`）。首页、悬浮球、打包都读这个字段。 |
+| 11 | 入口 JSON 必须写 `icon`，且该路径相对项目根的**文件必须作为工程文件生成**（如 `"icon": "img/xhs.svg"` 就要写出 svg 内容）。首页、悬浮球、打包都读这个字段。 |
+| 12 | 组件的颜色、背景、圆角、宽高写在 `style` 对象里。`button` 换色用 `style.background`。见 [`_common.md`](../01-ui/components/_common.md)。 |
+| 13 | 用户指定主题色时，导航栏 `title.background`、状态栏、底栏 `selectedColor`、所有 `button` 的 `style.background` 都换成该色，不要沿用默认绿 `#006A65`。 |
 
 ## MUST NOT
 
@@ -33,6 +35,8 @@
 | 9 | 禁止把 `UiSelector` 主流程写进 `page.js` 的 `onTap` 并长时间阻塞。找节点、循环等待放 `tasks/*.js`。 |
 | 11 | 禁止 Auto.js 式全局选择器 `text()` / `id()` / `desc()`。必须 `UiSelector().text('发送').findOne()`。 |
 | 12 | 禁止把可调节数值写成 `progress` / `progressBar`。运行速度、点赞概率、间隔必须用 `slider`。 |
+| 13 | 禁止把 `background` / `color` / `width` / `height` 写在组件根上（和 `type` 同级）。必须写在 `style` 里。 |
+| 15 | 禁止写 `host` / `debug` / `apis`，禁止生成 `deekeScript-v2.json`。 |
 
 ## 快速对照
 
@@ -45,3 +49,5 @@
 | 读表单 | `this.data.task_name`；脚本 `Storage.get*` | 任务脚本读 `Page.data` |
 | 可调节数值 | `"type": "slider"` | `"type": "progress"` 当滑动条 |
 | 复用 UI | `components/choose` + `"component": true` | 复制整页 JSON、或组件互相循环嵌套 |
+| 按钮换色 | `"style": { "background": "#1565C0" }` | 根上写 `"background"`，或不写 style 却指望不是绿 |
+| 整站主题 | 导航栏 + 状态栏 + 底栏 + 每个 button 的 `style` | 只改 `title.background`，按钮仍默认绿 |

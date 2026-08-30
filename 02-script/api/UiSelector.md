@@ -66,7 +66,8 @@ if (sendButton) {
 
 ## 注意
 
-- 先判断节点存在再操作。`findOne()` 找不到时不要对其调用 `click`。
+- 生成代码用 `findOne()`。`findOnce()` 与它等价，但容易和 Auto.js 的 `findOnce` 混在一起，不要写。
+- 禁止全局 `text('发送')`，必须 `UiSelector().text('发送')`。
 - `waitFindOne()` 会一直阻塞，任务里慎用；需要超时用 `findOneBy(timeout)` / `findBy(timeout)`。
 - 需要系统节点时：`UiSelector(false)`。
 - 节点操作见 [`UiObject.md`](UiObject.md)。索引见 [`INDEX.md`](INDEX.md)。

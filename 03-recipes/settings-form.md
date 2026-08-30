@@ -45,7 +45,7 @@
       ]
     },
     { "type": "space", "height": 8 },
-    { "type": "button", "text": "保存", "onTap": "onSave", "action": { "type": "save", "toast": "已保存" } }
+    { "type": "button", "text": "保存", "onTap": "onSave", "action": { "type": "save", "toast": "已保存" }, "style": { "background": "#006A65", "color": "#FFFFFF" } }
   ]
 }
 ```

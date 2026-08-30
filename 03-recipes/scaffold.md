@@ -2,7 +2,7 @@
 
 两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。项目根必须有 `deekeScript.json`，否则 VS Code 插件无法同步。
 
-生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要写 `hooks`，不要漏 `page.js`。
+生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要写 `hooks`，不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
 
 ## A. 无 UI（只有入口 + 任务）
 
@@ -31,13 +31,11 @@ tasks/sample.js
 ### `tasks/sample.js`
 
 ```javascript
-if (!Access.isAccessibilityServiceEnabled()) {
-  Access.openAccessibilityServiceSetting();
-} else if (!Access.isFloatWindowsEnabled()) {
-  Access.openFloatWindowsSetting();
+let permission = require('common/permission.js');
+if (!permission.ensureRun()) {
 } else {
   console.log('sample 开始');
-  let node = UiSelector().text('按钮').findOnce();
+  let node = UiSelector().text('按钮').findOne();
   if (node) {
     node.click();
   }
@@ -45,7 +43,17 @@ if (!Access.isAccessibilityServiceEnabled()) {
 }
 ```
 
+权限模块从 [`permission.md`](../02-script/permission.md) 整份复制到 `common/permission.js`。找节点用 `findOne()`，不要 Auto.js 的 `findOnce()` 或全局 `text()`。
+
 在开发器里直接运行该 JS。不要生成 `pages/`。
+
+### `img/xhs.svg`
+
+必须生成这个文件，不能只在 JSON 里写路径：
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#006A65"/></svg>
+```
 
 ---
 
@@ -58,10 +66,11 @@ deekeScript.json
 img/xhs.svg
 pages/home/page.json
 pages/home/page.js
+common/permission.js
 tasks/sample.js
 ```
 
-必须带上 `icon` 指向的文件。底栏再用到的 `img/home.png` 等按需添加。
+必须带上 `icon` 指向的文件（内容见方案 A）。一页不必配底栏；要底栏再读 [`tabBar.md`](../01-ui/capabilities/tabBar.md)，并生成底栏图标文件。
 
 ### `deekeScript.json`
 
@@ -87,18 +96,11 @@ tasks/sample.js
       "background": "#006A65",
       "color": "light"
     }
-  },
-  "bottomMenus": [
-    {
-      "title": "{NAME}",
-      "icon": "img/home.png",
-      "page": "pages/home"
-    }
-  ]
+  }
 }
 ```
 
-`homePage` 写目录，不必再放进 `pages`。只有一页也可以配一项 `bottomMenus`；不配则隐藏底栏。
+`homePage` 写目录，不必再放进 `pages`。不配 `bottomMenus` 则隐藏底栏。
 
 ### `pages/home/page.json`
 
@@ -117,7 +119,7 @@ tasks/sample.js
   "body": [
     { "type": "title", "text": "{{hello}}" },
     { "type": "notice", "text": "点按钮运行 tasks/sample.js" },
-    { "type": "button", "text": "运行示例", "onTap": "onRun" }
+    { "type": "button", "text": "运行示例", "style": { "background": "#006A65", "color": "#FFFFFF" }, "onTap": "onRun" }
   ]
 }
 ```
@@ -127,20 +129,14 @@ tasks/sample.js
 每个页面目录都要有 `page.js`，即使几乎是空的也要 `Page({})`。
 
 ```javascript
+let permission = require('common/permission.js');
+
 Page({
   data: {
     hello: 'DeekeScript'
   },
-  onRun() {
-    if (!Access.isAccessibilityServiceEnabled()) {
-      Access.openAccessibilityServiceSetting();
-      return;
-    }
-    if (!Access.isFloatWindowsEnabled()) {
-      Access.openFloatWindowsSetting();
-      return;
-    }
-    Engines.executeScript('tasks/sample.js');
+  onRun: function () {
+    permission.runScript('tasks/sample.js');
   }
 });
 ```

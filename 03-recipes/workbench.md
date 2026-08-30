@@ -6,10 +6,10 @@
 
 ## 文件
 
-- `deekeScript.json`（含 `homePage` 与 `bottomMenus`）
-- `pages/home/page.json`
-- `pages/home/page.js`
+- `deekeScript.json`（含 `icon`、`homePage`、`bottomMenus`，以及 `icon` / 底栏用到的图片文件）
+- `pages/home/page.json` + `page.js`
 - 另配 `pages/stats`、`pages/settings` 作底栏目标（可先放空页 `Page({})`）
+- 底栏图标如 `img/home.svg`、`img/statistics.svg`、`img/setting.svg` 必须真实存在，宫格 `img/dy.png` 等也要生成
 
 ## 入口 `bottomMenus`
 
@@ -66,7 +66,7 @@
       "columns": 3,
       "item": {
         "type": "card",
-        "action": { "type": "navigate", "page": "pages/settings" },
+        "action": { "type": "switchTab", "page": "pages/settings" },
         "style": { "padding": 8, "gap": 8 },
         "children": [
           { "type": "image", "src": "{{item.icon}}", "style": { "width": "50%" } },
@@ -135,4 +135,4 @@ Page({
 
 - 指标用 `card` 放在 `grid` 里，不要用 HTML。
 - 列表为空不会自动 Empty，需要空态时另写 `"type": "empty"` + `showIf`。
-- 底栏根页之间用 `this.switchTab('stats')`，不要 `navigate`。
+- 底栏根页之间用 `this.switchTab('stats')` 或 JSON `action.switchTab`，不要 `navigate`。宫格入口如果指向底栏页，也要用 `switchTab`。

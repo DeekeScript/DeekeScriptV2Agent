@@ -76,6 +76,7 @@
     {
       "type": "button",
       "text": "打开官网",
+      "style": { "background": "#006A65", "color": "#FFFFFF" },
       "action": { "type": "openUrl", "url": "https://deeke.cn" }
     }
   ]

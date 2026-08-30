@@ -32,7 +32,7 @@
           "action": { "type": "save", "toast": "已保存" },
           "style": { "weight": 1, "background": "#EEF2F1", "color": "#006A65" }
         },
-        { "type": "button", "text": "立即运行", "onTap": "onRun", "style": { "weight": 1 } }
+        { "type": "button", "text": "立即运行", "onTap": "onRun", "style": { "weight": 1, "background": "#006A65", "color": "#FFFFFF" } }
       ]
     }
   ]
@@ -50,12 +50,14 @@
 ## `pages/task/page.js`
 
 ```javascript
+let permission = require('common/permission.js');
+
 Page({
   data: {
     task_name: '示例任务',
     lastFile: ''
   },
-  onLoad() {
+  onLoad: function () {
     let name = Storage.get('demo.task_name');
     if (name) {
       this.setData({ task_name: name });
@@ -65,22 +67,14 @@ Page({
       this.setData({ lastFile: lastFile });
     }
   },
-  onSave() {
+  onSave: function () {
     Storage.put('demo.task_name', this.data.task_name);
   },
-  onRun() {
-    if (!Access.isAccessibilityServiceEnabled()) {
-      Access.openAccessibilityServiceSetting();
-      return;
-    }
-    if (!Access.isFloatWindowsEnabled()) {
-      Access.openFloatWindowsSetting();
-      return;
-    }
+  onRun: function () {
     Storage.put('demo.task_name', this.data.task_name);
     Storage.put('demo.last_task', 'tasks/sample.js');
     this.setData({ lastFile: 'tasks/sample.js' });
-    Engines.executeScript('tasks/sample.js');
+    permission.runScript('tasks/sample.js');
   }
 });
 ```
@@ -90,8 +84,8 @@ Page({
 ## `tasks/sample.js`
 
 ```javascript
-if (!Access.isAccessibilityServiceEnabled() || !Access.isFloatWindowsEnabled()) {
-  console.log('权限不足');
+let permission = require('common/permission.js');
+if (!permission.ensureRun()) {
 } else {
   let name = Storage.get('demo.task_name');
   console.log('运行任务', name);

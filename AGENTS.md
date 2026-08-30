@@ -17,26 +17,29 @@ DeekeScript Pro 做两件事，彼此解耦：
 
 1. 本文件
 2. [`00-core/mental-model.md`](./00-core/mental-model.md)
-3. [`00-core/constraints.md`](./00-core/constraints.md)
-4. [`00-core/rhino.md`](./00-core/rhino.md)
-5. [`00-core/context-split.md`](./00-core/context-split.md)
-6. 按用户需求打开 [`INDEX.md`](./INDEX.md) 对应章节（只打开用到的组件和 API 文件）
-7. 整包工程优先抄 [`03-recipes/`](./03-recipes/) 的文件清单和片段
+3. [`00-core/project-layout.md`](./00-core/project-layout.md)
+4. [`00-core/constraints.md`](./00-core/constraints.md)
+5. [`00-core/rhino.md`](./00-core/rhino.md)
+6. [`00-core/context-split.md`](./00-core/context-split.md)
+7. [`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)
+8. 按用户需求打开 [`INDEX.md`](./INDEX.md) 对应章节（只打开用到的组件和 API 文件）
+9. 整包工程优先抄 [`03-recipes/`](./03-recipes/) 的文件清单和片段
 
 ## 按任务加载
 
 | 用户要什么 | 接着读 |
 |------------|--------|
-| 只跑脚本、不要界面 | [`03-recipes/scaffold.md`](./03-recipes/scaffold.md) 方案 A；[`02-script/task-template.md`](./02-script/task-template.md)；用到的 [`02-script/api/`](./02-script/api/) |
-| 只要界面 | [`01-ui/entry-json.md`](./01-ui/entry-json.md)、[`page-json.md`](./01-ui/page-json.md)、[`page-js.md`](./01-ui/page-js.md)；[`01-ui/components/INDEX.md`](./01-ui/components/INDEX.md) 后只打开用到的 type |
-| 界面 + 脚本 | 上面两套 + [`02-script/ui-and-task.md`](./02-script/ui-and-task.md) + [`03-recipes/run-task-from-ui.md`](./03-recipes/run-task-from-ui.md) |
+| 只跑脚本、不要界面 | [`03-recipes/scaffold.md`](./03-recipes/scaffold.md) 方案 A；[`02-script/permission.md`](./02-script/permission.md)；[`02-script/task-template.md`](./02-script/task-template.md)；[`02-script/api/UiSelector.md`](./02-script/api/UiSelector.md) |
+| 只要界面 | [`01-ui/entry-json.md`](./01-ui/entry-json.md)、[`page-json.md`](./01-ui/page-json.md)、[`page-js.md`](./01-ui/page-js.md)、**[`_common.md`](./01-ui/components/_common.md)**、[`data-binding.md`](./01-ui/data-binding.md)、[`navigate.md`](./01-ui/navigate.md)；[`01-ui/components/INDEX.md`](./01-ui/components/INDEX.md) 后只打开用到的 type。有底栏再读 [`tabBar.md`](./01-ui/capabilities/tabBar.md) |
+| 界面 + 脚本 | 上面两套 + [`02-script/permission.md`](./02-script/permission.md) + [`require.md`](./02-script/require.md) + [`ui-and-task.md`](./02-script/ui-and-task.md) + [`03-recipes/run-task-from-ui.md`](./03-recipes/run-task-from-ui.md) |
 | 自定义组件 | [`01-ui/component-custom.md`](./01-ui/component-custom.md) + [`03-recipes/custom-picker.md`](./03-recipes/custom-picker.md) |
 | HID / 图色 / DO / 打包 | 对应 [`02-script/api/INDEX.md`](./02-script/api/INDEX.md) 里的扩展卡片，先读权限 |
 
 ## 生成时必须遵守
 
 - 每个页面：`pages/<id>/page.json` + `page.js` 成对。`homePage` 目录可不再放入入口 `pages`。
-- 入口 JSON 必须写 `icon`（相对项目根的路径），且该文件必须存在，例如 `"icon": "img/xhs.svg"`。
+- 入口 JSON 必须写 `icon`（相对项目根的路径），**并且把该图片文件一并生成**（svg/png/jpg 真实内容），不要只写路径。
+- 不要写 `host` / `debug` / `apis`，不要生成 `deekeScript-v2.json`。不要抄 V1 的 `groups` / `hooks`。
 - 自定义组件 JSON 必须 `"component": true`。
 - **禁止**在 JSON `action` 里执行脚本。按钮写 `onTap`，在 `page.js` 里 `Engines.executeScript('tasks/xxx.js')`（或 `permission.runScript`）。
 - `action` 只允许：`navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl`。
@@ -50,6 +53,8 @@ DeekeScript Pro 做两件事，彼此解耦：
 - JS 引擎是 Rhino 1.8：`function` / `var` / `let`。禁止箭头函数、`async/await`、`?.`、`??`、`import`/`export`。
 - `require`：`./`、`../` 相对当前文件，否则相对项目根。导出用 `module.exports`。
 - 不要把 Demo 的 `permission.hint('请在文件 xxx 编写业务')` 写进产物。
+- 颜色、背景、圆角、宽高只写在 `style` 里，不要写在组件根上。`button` 换色用 `style.background`，不写就是默认绿 `#006A65`。禁止声称 button 没有 background。
+- 用户指定主题色时：`title.background`、`statusBar.background`、`tabBar.selectedColor`、**每个 button 的 `style.background`** 都改成该色。不要照抄配方里的 `#006A65`。
 
 ## 输出形态
 

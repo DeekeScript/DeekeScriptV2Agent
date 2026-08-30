@@ -15,7 +15,8 @@
 | 列表 `bind` 空数组指望自动 Empty | 自己放 `"type": "empty"` + `showIf`。list 空数组不渲染行，也不自动占位 |
 | `webview` 不写 `style.height` | 必须写高度，否则默认 240dp，布局会乱 |
 | 组件 JSON 漏 `"component": true` | 自定义组件根必须 `"component": true`，否则不能当组件加载 |
-| 入口 JSON 漏 `icon`，或路径文件不存在 | 必须 `"icon": "img/xhs.svg"` 这类相对项目根的路径，且把文件放进工程。首页、悬浮球、打包都依赖它 |
+| 入口 JSON 漏 `icon`，或只写路径不生成图片文件 | 必须 `"icon": "img/xhs.svg"`，并把 svg/png 文件一并写入工程 |
+| 写 `host` / `debug` / `apis`，或生成 `deekeScript-v2.json` | 入口只有 `deekeScript.json`，字段见 [`entry-json.md`](../01-ui/entry-json.md) |
 | 在 `deekeScript.json` 写 V1 `groups` / `hooks` 当界面 | 界面是 `pages/*/page.json` |
 | HID / 图色 / 媒体不申请权限 | 图色：`Access.isMediaProjectionEnable`；媒体：`hasMediaReadPermission`；HID：蓝牙权限。见对应 API 卡 |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
@@ -25,5 +26,7 @@
 | 把可调节数值写成 `progress` / `progressBar`（运行速度、点赞概率） | 用 `"type": "slider"`。`progress` 只能展示、不能拖。见 [`slider.md`](../01-ui/components/slider.md) |
 | 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |
 | 用页面根 `title` 同时又放 `navBar` 画两套顶栏 | 自制顶栏时 `"title": { "hidden": true }`，再写 `type: navBar` |
+| 把 `background` / `color` / `width` 写在组件根上 | 写进 `style`。见 [`_common.md`](../01-ui/components/_common.md) |
+| 用户要蓝色，按钮仍是默认绿，或声称 button 没有 background | `button` 必须写 `style.background`。不写就是 `#006A65`。导航栏、状态栏、底栏 `selectedColor` 也要一起改 |
 
 Rhino 其它限制见 [`00-core/constraints.md`](../00-core/constraints.md)。配方入口：[`scaffold.md`](../03-recipes/scaffold.md)。

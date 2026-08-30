@@ -16,6 +16,9 @@ pages/home/page.js
 
 ```json
 {
+  "name": "Demo",
+  "packageName": "cn.deeke.demo",
+  "icon": "img/xhs.svg",
   "homePage": "pages/home",
   "components": [
     { "id": "choose", "file": "components/choose" }
@@ -42,7 +45,7 @@ pages/home/page.js
       ]
     },
     { "type": "input", "name": "keyword", "label": "关键词", "hint": "例如：美食" },
-    { "type": "button", "text": "确定选用", "onTap": "onOk" }
+    { "type": "button", "text": "确定选用", "onTap": "onOk", "style": { "background": "#006A65", "color": "#FFFFFF" } }
   ]
 }
 ```
@@ -84,7 +87,7 @@ Component({
   "body": [
     { "type": "choose", "id": "inline", "onConfirm": "onPicked" },
     { "type": "title", "text": "{{picked}}" },
-    { "type": "button", "text": "弹窗选择", "onTap": "onOpen" }
+    { "type": "button", "text": "弹窗选择", "onTap": "onOpen", "style": { "background": "#006A65", "color": "#FFFFFF" } }
   ],
   "popups": [
     {

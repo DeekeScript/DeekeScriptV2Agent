@@ -17,10 +17,23 @@
   "type": "radio",
   "name": "mode",
   "label": "运行模式",
-  "value": "safe",
   "options": [
     { "label": "稳妥", "value": "safe" },
     { "label": "均衡", "value": "normal" }
   ]
 }
 ```
+
+```json
+{ "type": "text", "text": "当前：{{mode}}" }
+```
+
+```javascript
+Page({
+  data: {
+    mode: 'safe'
+  }
+});
+```
+
+`name` 必须出现在 `Page.data` 里。当前项用 `{{mode}}` 展示。

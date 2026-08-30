@@ -68,21 +68,23 @@ Page({
       return;
     }
     this.setData({ loading: true });
-    System.sleep(500);
-    let next = this.data.page + 1;
-    if (next >= 3) {
-      this.setData({
-        loading: false,
-        noMore: true,
-        footer: '—— 我是有底线的 ——'
-      });
-      return;
-    }
-    this.appendData('tasks', [
-      { title: '第 ' + next + ' 页记录 A', time: '12:00' },
-      { title: '第 ' + next + ' 页记录 B', time: '12:01' }
-    ]);
-    this.setData({ loading: false, page: next });
+    var that = this;
+    setTimeout(function () {
+      let next = that.data.page + 1;
+      if (next >= 3) {
+        that.setData({
+          loading: false,
+          noMore: true,
+          footer: '—— 我是有底线的 ——'
+        });
+        return;
+      }
+      that.appendData('tasks', [
+        { title: '第 ' + next + ' 页记录 A', time: '12:00' },
+        { title: '第 ' + next + ' 页记录 B', time: '12:01' }
+      ]);
+      that.setData({ loading: false, page: next });
+    }, 500);
   }
 });
 ```
@@ -96,4 +98,5 @@ Page({
 - 先判 `loading` / `noMore`，防止重复请求。
 - `this.showLoading()` 是整页遮罩，和 JSON 里的 `loading` 组件不是同一个。列表触底用 `showIf`。
 - `empty` 要自己 `setData({ empty: list.length === 0 })`。
+- 页面里不要 `System.sleep`（会卡住界面），短等待用 `setTimeout`。任务脚本里等待才用 `System.sleep`。
 - 真实接口用 `Http.get` 再 `JSON.parse`，不要 `async/await`。

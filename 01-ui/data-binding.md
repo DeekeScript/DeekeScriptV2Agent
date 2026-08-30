@@ -11,7 +11,7 @@
 | `{{item.title}}` | 列表当前项 |
 | `{{index}}` | 列表下标，从 0 开始 |
 | `{{params.id}}` | 跳转参数（`navigate` 的 `params`，`onLoad(params)` 也能读） |
-| `{{storage.task_name}}` | 本地 Storage |
+| `{{storage.task_name}}` | 本地 Storage，键名不能含点（含点的键用 `data` + `setData` 展示） |
 | `{{item.tags.0}}` | 数组下标 |
 | `{{item.user.name}}` | 嵌套字段 |
 
@@ -71,14 +71,14 @@ Page({
 | progress / progressBar / progressCircle | 数字（只读展示） |
 | range | `start.name` / `end.name` 两个键 |
 
-保存后任务脚本用 `Storage` 读，不要在任务里访问 `Page.data`。
+保存后任务脚本用 `Storage` 读，不要在任务里访问 `Page.data`。键名建议加项目前缀（如 `demo.task_name`）。带点的键不能用 `{{storage.demo.task_name}}` 展示，页面侧先 `get` 再 `setData`。
 
 ```json
 {
   "body": [
     { "type": "input", "name": "task_name", "label": "任务名", "hint": "请输入" },
     { "type": "switch", "name": "notify", "label": "完成通知" },
-    { "type": "button", "text": "保存", "onTap": "onSave", "action": { "type": "save" } }
+    { "type": "button", "text": "保存", "onTap": "onSave", "action": { "type": "save" }, "style": { "background": "#006A65", "color": "#FFFFFF" } }
   ]
 }
 ```
@@ -90,16 +90,16 @@ Page({
     notify: true
   },
   onSave: function () {
-    Storage.put('task_name', this.data.task_name);
-    Storage.putBoolean('notify', this.data.notify);
+    Storage.put('demo.task_name', this.data.task_name);
+    Storage.putBoolean('demo.notify', this.data.notify);
   }
 });
 ```
 
 ```javascript
 // tasks/sample.js
-var name = Storage.getString('task_name');
-var notify = Storage.getBoolean('notify');
+var name = Storage.getString('demo.task_name');
+var notify = Storage.getBoolean('demo.notify');
 ```
 
 ## list / grid 的 bind

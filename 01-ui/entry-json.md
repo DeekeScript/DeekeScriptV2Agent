@@ -1,6 +1,6 @@
 # 入口 deekeScript.json
 
-创建工程或改首页、底栏、全局窗口、页面/组件注册时读这篇。这个文件必须在项目根目录。只跑脚本时用它识别工程，不必打开 `homePage`。做界面时启动经过 Splash 后进入 `homePage`。字段一律按下表写，不要抄 V1 的 `groups` / `hooks`。
+创建工程或改首页、底栏、全局窗口、页面/组件注册时读这篇。这个文件必须在项目根目录。只跑脚本时用它识别工程，不必打开 `homePage`。做界面时启动经过 Splash 后进入 `homePage`。字段一律按下表写。不要抄 V1 的 `groups` / `hooks`。不要写 `host` / `debug` / `apis`。不要生成 `deekeScript-v2.json`。
 
 ## 主体参数
 

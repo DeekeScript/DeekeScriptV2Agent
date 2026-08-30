@@ -13,8 +13,30 @@
 | onChange | String | 变化时调用 |
 
 ```json
-{ "type": "checkbox", "name": "agree", "label": "已阅读并同意协议", "value": true }
+{
+  "type": "checkbox",
+  "name": "agree",
+  "label": "已阅读并同意协议"
+}
 ```
+
+```json
+{
+  "type": "text",
+  "text": "同意：{{agree}}"
+}
+```
+
+```javascript
+Page({
+  data: {
+    agree: false,
+    platforms: ['xhs']
+  }
+});
+```
+
+`name` 必须和 `data` 里的键一致。勾选后 `this.data.agree` 会变；旁边用 `{{agree}}` 展示时，引擎会刷新这段文案。不要把 `agree` 只写在 JSON `value` 里却不放进 `data`。
 
 ```json
 {
