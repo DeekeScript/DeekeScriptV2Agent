@@ -11,6 +11,7 @@
 | value | String | 默认选中项 |
 | options | Array | 选项：字符串，或 `{ "label", "value" }` |
 | onChange | String | 切换时调用，`e.value` 为当前值 |
+| style.color | String | 选中按钮颜色。不写则跟 `window.theme.primary`。不要写 `style.background` |
 
 ```json
 {
@@ -37,3 +38,7 @@ Page({
 ```
 
 `name` 必须出现在 `Page.data` 里。当前项用 `{{mode}}` 展示。
+
+```json
+{ "type": "radio", "name": "tone", "label": "蓝色单选", "value": "blue", "style": { "color": "#1565C0" }, "options": [{ "label": "蓝", "value": "blue" }, { "label": "对照", "value": "other" }] }
+```

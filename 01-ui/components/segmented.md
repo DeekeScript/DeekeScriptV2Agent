@@ -10,6 +10,7 @@
 | value | String | 当前选中项 |
 | options / items | Array | 字符串，或 `{ label, value }`。`text` 也可用 |
 | onChange | String | 切换时调用，`e.value` 为当前值 |
+| style.color | String | 选中段背景色。不写则跟 `window.theme.primary` |
 
 ```json
 {
@@ -22,4 +23,8 @@
     { "label": "月", "value": "month" }
   ]
 }
+```
+
+```json
+{ "type": "segmented", "name": "tone", "value": "blue", "style": { "color": "#1565C0" }, "options": [{ "label": "蓝", "value": "blue" }, { "label": "对照", "value": "other" }] }
 ```

@@ -11,6 +11,7 @@
 | items / options | Array | `{ text, value }` 或字符串 |
 | onChange | String | 切换时调用，`e.value` 为当前值 |
 | style.width | Number | 轨宽 dp，默认 88 |
+| style.color | String | 选中项颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {
@@ -20,6 +21,7 @@
       "type": "sideBar",
       "name": "cat",
       "value": "follow",
+      "style": { "color": "#1565C0" },
       "items": [
         { "text": "关注", "value": "follow" },
         { "text": "点赞", "value": "like" }

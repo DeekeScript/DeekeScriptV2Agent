@@ -12,9 +12,14 @@
 | mode | String | `row` 横向转圈（默认）；`column` 转圈在上；`dots` 三点跳动 |
 | size | Number | 转圈边长，默认 18；`column` 时默认 28 |
 | showIf | String | 为真时显示。不要默认常显 |
+| style.color | String | 转圈 / 三点颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "loading", "text": "加载中", "showIf": "loading" }
+```
+
+```json
+{ "type": "loading", "text": "蓝色加载", "style": { "color": "#1565C0" } }
 ```
 
 ```json

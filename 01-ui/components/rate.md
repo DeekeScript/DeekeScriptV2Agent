@@ -13,9 +13,14 @@
 | allowHalf | Boolean | 是否允许半星，默认 `false`。别名 `half`、`半星`。也可写 `step: 0.5` |
 | size / iconSize | Number | 星星边长 dp，默认 32 |
 | onChange | String | 变化时调用，`e.value` 为星数 |
+| style.color | String | 星星颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "rate", "name": "score", "label": "任务完成度", "value": 4, "count": 5 }
+```
+
+```json
+{ "type": "rate", "name": "tone", "label": "蓝色星星", "value": 4, "style": { "color": "#1565C0" } }
 ```
 
 ```json

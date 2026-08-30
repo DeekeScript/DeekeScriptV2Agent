@@ -2,7 +2,7 @@
 
 两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。项目根必须有 `deekeScript.json`，否则 VS Code 插件无法同步。
 
-生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要写 `hooks`，不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
+生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要写 `hooks`，不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，入口写 `window.theme.primary`，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
 
 ## A. 无 UI（只有入口 + 任务）
 

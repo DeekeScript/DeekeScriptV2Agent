@@ -15,6 +15,7 @@
 | position | String | `bottom`（默认）/ `top` |
 | options | Array | 选项，字符串或 `{ text, value, children }` |
 | onChange | String | 确定后调用，`e.value` 为当前值 |
+| style.color | String | 确定按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {
@@ -31,6 +32,10 @@
 
 ```json
 { "type": "picker", "name": "ampm", "label": "时段", "options": ["上午", "下午"] }
+```
+
+```json
+{ "type": "picker", "name": "blue_ampm", "label": "蓝色确定", "options": ["上午", "下午"], "style": { "color": "#1565C0" } }
 ```
 
 兼容：`"type": "picker", "mode": "date"` 等同 `type: date`，但新代码请直接写 `date` / `time` / `datetime`。

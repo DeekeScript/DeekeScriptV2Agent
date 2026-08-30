@@ -11,6 +11,7 @@
 | size | Number | 边长 dp，默认 40。也可写在 `style.size` |
 | shape | String | `circle`（默认）、`square`、`rounded` / `圆角` |
 | style.borderWidth / borderColor | Number / String | 描边 |
+| style.color | String | 文字头像的字色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "avatar", "src": "img/avatar-1.svg", "size": 48 }
@@ -18,4 +19,8 @@
 
 ```json
 { "type": "avatar", "text": "运", "size": 40, "shape": "square" }
+```
+
+```json
+{ "type": "avatar", "text": "蓝", "size": 40, "style": { "color": "#1565C0" } }
 ```

@@ -18,7 +18,7 @@
 | 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。运行中若没有 `stop`，框架会自动补一个。 |
 | 11 | 入口 JSON 必须写 `icon`，且该路径相对项目根的**文件必须作为工程文件生成**（如 `"icon": "img/xhs.svg"` 就要写出 svg 内容）。首页、悬浮球、打包都读这个字段。 |
 | 12 | 组件的颜色、背景、圆角、宽高写在 `style` 对象里。`button` 换色用 `style.background`。见 [`_common.md`](../01-ui/components/_common.md)。 |
-| 13 | 用户指定主题色时，导航栏 `title.background`、状态栏、底栏 `selectedColor`、所有 `button` 的 `style.background` 都换成该色，不要沿用默认绿 `#006A65`。 |
+| 13 | 用户指定主题色时，入口写 `window.theme.primary`，再改导航栏 `title.background`、状态栏、底栏 `selectedColor`。所有 `button` 建议写 `style.background`。不要沿用默认绿 `#006A65`。 |
 
 ## MUST NOT
 

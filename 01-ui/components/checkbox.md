@@ -11,6 +11,7 @@
 | value | Boolean / Array | 单个为布尔；多选项为选中值数组 |
 | options | Array | 多选项：字符串，或 `{ "label", "value" }` |
 | onChange | String | 变化时调用 |
+| style.color | String | 勾选按钮颜色。不写则跟 `window.theme.primary`。不要写 `style.background` |
 
 ```json
 {
@@ -49,4 +50,8 @@ Page({
   ],
   "value": ["xhs"]
 }
+```
+
+```json
+{ "type": "checkbox", "name": "blue_agree", "label": "蓝色勾选", "value": true, "style": { "color": "#1565C0" } }
 ```

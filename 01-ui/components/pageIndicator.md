@@ -12,9 +12,14 @@
 | variant | String | `dot`（默认）/ `line` 短条 |
 | direction | String | `row`（默认）横排；`column` / `vertical` 竖排 |
 | onChange | String | 点选后调用，`e.value` 为下标 |
+| style.color | String | 当前点 / 短条颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "pageIndicator", "name": "page", "count": 5, "value": 1 }
+```
+
+```json
+{ "type": "pageIndicator", "name": "blue_page", "count": 5, "value": 2, "style": { "color": "#1565C0" } }
 ```
 
 ```json

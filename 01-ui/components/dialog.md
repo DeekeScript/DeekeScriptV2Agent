@@ -15,6 +15,7 @@
 | closeOnMask | Boolean | 点遮罩关闭，默认 true |
 | onConfirm | String | 点确定 |
 | onCancel | String | 点取消或点遮罩 |
+| style.color | String | 确定按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {
@@ -24,4 +25,8 @@
   "text": "删除后无法恢复",
   "onConfirm": "onOk"
 }
+```
+
+```json
+{ "type": "dialog", "showIf": "open", "title": "确认", "text": "确定按钮用 style.color", "style": { "color": "#1565C0" } }
 ```

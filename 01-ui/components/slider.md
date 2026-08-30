@@ -17,6 +17,9 @@
 | markCount | Number | `marks: true` 时均分点数，默认 5 |
 | disabled / readonly | Boolean | 不可拖动 |
 | onChange | String | 变化时调用，`e.value` 为数字 |
+| style.color | String | 左侧已走完轨道颜色。不写则跟 `window.theme.primary` |
+| style.thumbColor | String | 滑块圆点颜色。不写则跟 `style.color` |
+| style.trackColor | String | 未走完轨道颜色，默认 `#E3EBEA` |
 
 ```json
 {
@@ -33,6 +36,10 @@
 
 ```json
 { "type": "slider", "name": "delay", "label": "间隔", "value": 1500, "min": 500, "max": 3000, "step": 500, "unit": "ms" }
+```
+
+```json
+{ "type": "slider", "name": "tone", "label": "蓝色滑条", "value": 60, "style": { "color": "#1565C0" } }
 ```
 
 ## 注意

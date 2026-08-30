@@ -13,7 +13,7 @@
 | minLines | Number | 最少行数，默认 3 |
 | variant | String | 同 Input：`line`（默认）/ `box` / `plain` |
 | size | String | 同 Input，仅边框样式生效 |
-| style.radius / borderWidth / borderColor / background | — | 同 Input |
+| style.radius / borderWidth / borderColor / background / focusColor | — | 同 Input |
 
 ```json
 {
@@ -24,4 +24,8 @@
   "minLines": 3,
   "variant": "box"
 }
+```
+
+```json
+{ "type": "textarea", "name": "blue", "label": "蓝色聚焦", "hint": "focusColor", "variant": "box", "style": { "focusColor": "#1565C0" } }
 ```

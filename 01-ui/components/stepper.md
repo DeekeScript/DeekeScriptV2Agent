@@ -13,7 +13,12 @@
 | max | Number | 最大值，默认 99 |
 | step | Number | 每次加减，默认 1 |
 | onChange | String | 变化时调用，`e.value` 为数字 |
+| style.color | String | 加减按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "stepper", "name": "count", "label": "关注数量", "value": 3, "min": 1, "max": 20 }
+```
+
+```json
+{ "type": "stepper", "name": "blue_count", "label": "蓝色加减", "value": 5, "style": { "color": "#1565C0" } }
 ```

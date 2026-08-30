@@ -2,7 +2,7 @@
 
 主操作按钮。`size` 缺省为**大**（48dp）。可写 `onTap` 或 `action`（先调 JS 再执行动作）。`loading` 显示转圈；默认有按压涟漪。
 
-**换颜色写 `style.background`，不是根上的 `background`。** 不写 `style.background` 就是默认绿 `#006A65`。通用字段见 [通用字段](./_common.md)。
+**换颜色写 `style.background`，不是根上的 `background`。** 不写 `style.background` 则跟 `window.theme.primary`（未配置为 `#006A65`）。通用字段见 [通用字段](./_common.md)。
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
@@ -10,7 +10,7 @@
 | size | String | `sm` / `小` 高 32dp；`md` / `中` 高 40dp；`lg` / `大` 高 48dp（默认） |
 | onTap | String | 轻触一次时调用的 `Page` 方法 |
 | action | Object | 点击动作，见 [通用字段](./_common.md) 的 `action` |
-| style.background | String | 背景色，默认 `#006A65`。用户指定主题色时必须改这里 |
+| style.background | String | 背景色，默认跟 `window.theme.primary`。用户指定主题色时建议改这里 |
 | style.color | String | 文字颜色，实心按钮建议 `#FFFFFF`。支持 `{{path}}` |
 | variant | String | `outline` / `描边`：白底、描边和文字同色 |
 | style.borderColor / borderWidth | String / Number | 描边色和宽度。outline 时默认跟 `style.color` |

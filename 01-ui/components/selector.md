@@ -12,7 +12,12 @@
 | options / items | Array | `{ label, value }` 或字符串 |
 | value | String / Array | 默认选中 |
 | onChange | String | 变化时调用，`e.value` 为当前值 |
+| style.color | String | 选中胶囊颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "selector", "name": "tags", "multiple": true, "options": ["获客", "养号", "评论"] }
+```
+
+```json
+{ "type": "selector", "name": "tone", "label": "蓝色胶囊", "style": { "color": "#1565C0" }, "options": ["抖音", "小红书"] }
 ```

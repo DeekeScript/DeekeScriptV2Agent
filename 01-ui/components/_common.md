@@ -6,17 +6,28 @@
 
 ## 主题色
 
-配方和示例里的 `#006A65` 只是默认绿。用户指定蓝色、橙色等主题时，**不要照抄默认绿**。至少改这些地方：
+配方和示例里的 `#006A65` 只是默认绿。用户指定蓝色、橙色等主题时，**不要照抄默认绿**。
+
+先在入口写全局强调色，slider / switch / 输入框焦点 / checkbox / radio / 默认按钮 / 加载圈 / 分段选中等会一起变：
+
+```json
+"window": {
+  "theme": { "primary": "#1565C0" }
+}
+```
+
+导航栏、状态栏、底栏仍要单独写（它们不是控件强调色）：
 
 | 位置 | 字段 |
 |------|------|
+| 全局控件 | `window.theme.primary`（也可用 `window.primary`） |
 | 导航栏 | `title.background`（文字用浅色如 `#FFFFFF`） |
 | 状态栏 | `statusBar.background` |
 | 底栏 | `window.tabBar.selectedColor` |
-| **每个 button** | `style.background`（实心按钮文字再写 `style.color: "#FFFFFF"`） |
-| tag / 强调文字 | `style.color` 或 `style.background` |
+| **每个 button** | `style.background`（实心按钮文字再写 `style.color: "#FFFFFF"`）。不写则跟 `theme.primary` |
+| 单个控件覆盖 | slider / switch / checkbox 等写 `style.color`（**Switch 不要写 `style.background`**）；输入框聚焦写 `style.focusColor`；滑块圆点写 `style.thumbColor` |
 
-`button` **不写** `style.background` 时，引擎填默认绿 `#006A65`。所以只改导航栏、不改按钮，按钮仍是绿的。
+`button` **不写** `style.background` 时，引擎填 `window.theme.primary`（未配置则为 `#006A65`）。所以只改导航栏、不改 `theme.primary` 也不改按钮，按钮仍是绿的。
 
 正确：
 
@@ -68,7 +79,7 @@
 | paddingTop / paddingRight / paddingBottom / paddingLeft | Number | 单边内边距 |
 | margin | Number | 四边外边距 dp |
 | marginTop / marginRight / marginBottom / marginLeft | Number | 单边外边距 |
-| background | String | 背景色。button 不写则默认 `#006A65` |
+| background | String | 背景色。button 不写则跟 `window.theme.primary` |
 | radius | Number | 圆角 dp |
 | fontSize | Number | 字号 sp |
 | color | String | 文字颜色 |

@@ -11,6 +11,7 @@
 | items / options | Array | 步骤文案，字符串或 `{ text }` |
 | direction | String | `row`（默认）横排；`column` / `vertical` 竖排 |
 | onChange | String | 值变化时调用 |
+| style.color | String | 已完成步骤颜色。不写则跟 `window.theme.primary` |
 
 ```json
 {
@@ -19,4 +20,8 @@
   "value": 1,
   "items": [{ "text": "提交" }, { "text": "审核" }, { "text": "完成" }]
 }
+```
+
+```json
+{ "type": "steps", "name": "tone", "value": 1, "style": { "color": "#1565C0" }, "items": [{ "text": "提交" }, { "text": "审核" }, { "text": "完成" }] }
 ```

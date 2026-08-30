@@ -10,6 +10,8 @@
 | label | String | 开关说明 |
 | value | Boolean | 默认值 |
 | onChange | String | 切换时调用，`e.value` 为布尔 |
+| style.color | String | 打开后轨道和滑块颜色。不写则跟 `window.theme.primary`。**不要写 `style.background`**，否则会给整行刷底 |
+| style.trackColor | String | 关闭时轨道颜色 |
 
 ```json
 {
@@ -18,4 +20,8 @@
   "label": "自动开始",
   "value": false
 }
+```
+
+```json
+{ "type": "switch", "name": "blue", "label": "蓝色开关", "value": true, "style": { "color": "#1565C0" } }
 ```

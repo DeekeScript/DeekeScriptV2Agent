@@ -12,6 +12,20 @@
 | value | String | 默认选中项 |
 | items / options | Array | `{ text, value, badge, children }`。`text` 也可用 `label` |
 | onChange | String | 切换时调用的 `Page` 方法 |
+| style.color / selectedColor | String | 选中文字和下划线颜色。不写则跟 `window.theme.primary` |
+
+```json
+{
+  "type": "tabs",
+  "name": "tab_blue",
+  "value": "a",
+  "style": { "color": "#1565C0" },
+  "items": [
+    { "text": "蓝色", "value": "a", "children": [{ "type": "notice", "text": "选中色" }] },
+    { "text": "对照", "value": "b" }
+  ]
+}
+```
 
 ```json
 {

@@ -20,6 +20,9 @@
 | style.radius | Number | 边框圆角 dp；写出后自动切到边框样式。`sm` 默认 4，`md` 默认 6，`lg` 默认 8 |
 | style.borderWidth | Number | 描边宽度 dp，默认 1 |
 | style.borderColor | String | 描边颜色，默认 `#DAE5E3` |
+| style.focusColor | String | 聚焦时描边 / 下划线 / 光标颜色。不写则跟 `window.theme.primary` |
+| style.cursorColor | String | 光标颜色。不写则跟 `focusColor` |
+| style.hintColor | String | 占位文字颜色 |
 | style.background | String | 输入区背景，默认 `#FFFFFF` |
 | icon / prefixIcon | String | 左侧图标，项目内图片或 `http(s)` |
 | iconSize | Number | 左侧图标边长 dp，默认 18。也可写在 `style.iconSize` |
@@ -36,6 +39,10 @@
   "passwordToggle": true,
   "icon": "img/user.svg"
 }
+```
+
+```json
+{ "type": "input", "name": "focus_blue", "label": "蓝色聚焦", "hint": "focusColor", "variant": "box", "style": { "focusColor": "#1565C0" } }
 ```
 
 ## 别名

@@ -18,6 +18,7 @@
 | onChange | String | 内容变化时调用，`e.value` 是关键字 |
 | onSearch | String | 键盘搜索键，`e.value` 是关键字 |
 | onCancel | String | 点取消时调用，并清空输入 |
+| style.color | String | 取消按钮文字颜色。不写则跟 `window.theme.primary` |
 
 ```json
 { "type": "searchBar", "name": "keyword", "hint": "搜索任务" }
@@ -25,6 +26,10 @@
 
 ```json
 { "type": "searchBar", "name": "q", "hint": "搜索", "showCancel": true, "onSearch": "onQuery" }
+```
+
+```json
+{ "type": "searchBar", "name": "blueQ", "hint": "蓝色取消", "showCancel": true, "style": { "color": "#1565C0" } }
 ```
 
 键盘搜索键走 `onSearch`（没有则走 `onChange`）。

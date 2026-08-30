@@ -20,6 +20,10 @@
 { "type": "navBar", "title": "详情", "leftText": "返回", "rightText": "更多", "onRight": "onMore" }
 ```
 
+```json
+{ "type": "navBar", "title": "蓝色返回", "leftText": "返回", "style": { "color": "#1565C0" } }
+```
+
 ## 注意
 
 - 隐藏系统顶栏：页面 `"title": { "hidden": true }`，再用本组件。
