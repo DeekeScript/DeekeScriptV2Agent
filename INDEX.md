@@ -13,6 +13,7 @@
 | [00-core/rhino.md](./00-core/rhino.md) | JS 能写 / 不能写 |
 | [00-core/context-split.md](./00-core/context-split.md) | page.js vs tasks.js 的 API 边界 |
 | [00-core/dev-workflow.md](./00-core/dev-workflow.md) | 同步、执行、刷新 |
+| [00-core/ai-device-debug.md](./00-core/ai-device-debug.md) | **AI 连手机、扫描局域网、自动调试脚本** |
 | [04-cheatsheets/donts.md](./04-cheatsheets/donts.md) | 生成前自检 |
 
 ## 生成界面时
@@ -43,6 +44,9 @@
 | [02-script/api/UiSelector.md](./02-script/api/UiSelector.md) | **找节点必读。** `UiSelector().text('发送').findOne()`，不要 Auto.js 全局 `text()` |
 | [02-script/api/INDEX.md](./02-script/api/INDEX.md) | 运行时 API 清单，再打开单篇 |
 | [02-script/api/no-hook.md](./02-script/api/no-hook.md) | Pro 无 Hook |
+| [02-script/ai-http-api.md](./02-script/ai-http-api.md) | **手机 HTTP `/ai` 接口（8080），AI 调试必读** |
+
+工具：[`tools/deeke-device.ps1`](./tools/deeke-device.ps1)（Windows）、[`tools/deeke-device.sh`](./tools/deeke-device.sh)（macOS/Linux）。
 
 常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`System`、`Storage`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`。
 

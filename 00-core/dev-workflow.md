@@ -53,3 +53,13 @@
 | `component.js` | 随页面/弹层里的组件实例加载 |
 
 死循环或不想再跑时用「停止所有脚本」。工程结构见 [目录](./project-layout.md)，语法见 [Rhino](./rhino.md)。
+
+## AI 自动调试（Cursor / Agent）
+
+不依赖 VSCode 插件时，AI 可通过手机 **8080 `/ai` HTTP 接口** 实机跑脚本、看 `console.log`。
+
+1. 读 [ai-device-debug.md](./ai-device-debug.md) 和 [ai-http-api.md](../02-script/ai-http-api.md)。
+2. 按平台运行设备发现：Windows 用 `tools/deeke-device.ps1 discover`；macOS/Linux 用 `tools/deeke-device.sh discover`（本机须为 `192.168.*` 才扫描；否则让用户手填地址）。
+3. 用 `run` / `snapshot` / `status` 调试 `tasks/*.js`，根据返回的 `logs` 改代码。
+
+手机侧至少开启：**节点查看**（8080）、**无障碍**、**悬浮窗**（执行脚本时）。

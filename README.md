@@ -25,6 +25,7 @@
 | [`02-script/`](./02-script/) | 生成自动化脚本与运行时 API |
 | [`03-recipes/`](./03-recipes/) | 端到端最小配方，优先抄结构 |
 | [`04-cheatsheets/`](./04-cheatsheets/) | 极短速查 |
+| [`tools/`](./tools/) | AI 发现手机、调用 `/ai` 接口（`deeke-device.ps1` / `deeke-device.sh`） |
 
 ## 来源
 
