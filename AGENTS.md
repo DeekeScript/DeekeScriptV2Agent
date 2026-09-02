@@ -58,7 +58,7 @@ DeekeScript Pro 做两件事，彼此解耦：
 - 颜色、背景、圆角、宽高只写在 `style` 里，不要写在组件根上。`button` 换色用 `style.background`，不写则跟 `window.theme.primary`（默认 `#006A65`）。禁止声称 button 没有 background。
 - 用户指定主题色时：入口 `window.theme.primary`、`title.background`、`statusBar.background`、`tabBar.selectedColor`、**每个 button 的 `style.background`** 都改成该色。不要照抄配方里的 `#006A65`。
 - **编写或调试 `tasks/*.js` 时**：先读 [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)。Windows 用 `tools/deeke-device.ps1 discover`；macOS/Linux 用 `tools/deeke-device.sh discover`（仅当本机 IP 为 `192.168.*` 才扫描）；扫不到则让用户填写 `http://IP:8080` 并 `set`。连上后用 `/ai/run` 实机验证，根据 `logs` 迭代修复后再交付。
-- **生成 `floatWindow.menus` 时**：必读 [`01-ui/capabilities/floatWindow.md`](./01-ui/capabilities/floatWindow.md) 与 [`03-recipes/float-window.md`](./03-recipes/float-window.md)。**没有内置 `action`**；每项点击须在 `FloatWindow.on` 里自定义（停止示例 `Engines.closeAll()`，隐藏示例 `FloatDialogs.setFloatWindowVisible(false)`）。**同一轮**写出 JSON + JS 绑定，禁止只给 menus。
+- **生成 `floatWindow.menus` 时**：必读 [`floatWindow.md`](./01-ui/capabilities/floatWindow.md) 的 **关闭任务底层逻辑** + [`float-window.md`](./03-recipes/float-window.md)。手动停 → `FloatWindow.stopTask()`；自动停 → `tasks/*.js` 里 `Engines.closeAll()`。**同一轮**写出 JSON + JS 绑定。
 
 ## 输出形态
 

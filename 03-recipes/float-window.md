@@ -4,7 +4,7 @@
 
 框架**没有**内置 `action: "start"` / `"stop"` 等；开始、停止、隐藏、跑脚本都在回调里自己写（见下方示例）。
 
-先读 [`01-ui/capabilities/floatWindow.md`](../01-ui/capabilities/floatWindow.md)。
+先读 [`01-ui/capabilities/floatWindow.md`](../01-ui/capabilities/floatWindow.md) 的 **「关闭任务：底层逻辑」**（手动停 vs 自动停、`stopTask` vs `Engines.closeAll`）。
 
 ## 何时需要配 floatWindow
 
@@ -18,7 +18,7 @@
 
 - [ ] `deekeScript.json` → `floatWindow.menus`（每项 `id`、`icon`、`label`、`show` 写全）
 - [ ] **`FloatWindow.on({ ... })`** 与 menus **同一轮**出现在 `tasks/*.js` 或 `common/floatMenu.js`
-- [ ] 停止示例：`Engines.closeAll()`；隐藏：`FloatDialogs.setFloatWindowVisible(false)`
+- [ ] 停止示例：`FloatWindow.stopTask()`；隐藏：`FloatDialogs.setFloatWindowVisible(false)`
 - [ ] 任务脚本里 `FloatWindow.on` 与 `while` 循环共用同一套标志（如 `skipped`）
 
 **禁止**：只生成 `menus` 不写 `FloatWindow.on`；禁止写 `"action": "stop"` 等已废弃字段。
@@ -78,7 +78,7 @@ if (!permission.ensureRun()) {
       Engines.executeScript('tasks/sample.js');
     },
     stop: function () {
-      Engines.closeAll();
+      FloatWindow.stopTask();
     },
     hide: function () {
       FloatDialogs.setFloatWindowVisible(false);
@@ -122,7 +122,7 @@ Page({
 
 | 用户要什么 | JSON | JS（FloatWindow.on） |
 |------------|------|----------------------|
-| 停止任务 | `id: "stop"`, `onTap: "onStop"`, `show: "running"` | `stop: function () { Engines.closeAll(); }` |
+| 停止任务 | `id: "stop"`, `onTap: "onStop"`, `show: "running"` | `stop: function () { FloatWindow.stopTask(); }` |
 | 隐藏悬浮球 | `id: "hide"`, `onTap: "onHide"` | `hide: function () { FloatDialogs.setFloatWindowVisible(false); }` |
 | 运行脚本 | `id: "start"`, `show: "idle"` | `start: function () { Engines.executeScript('tasks/foo.js'); }` |
 | 跳过 | `id: "skip"`, `onTap: "onSkip"`, `show: "running"` | 设 `skipped = true` + `FloatWindow.update` |

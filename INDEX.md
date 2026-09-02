@@ -30,7 +30,7 @@
 | [01-ui/components/INDEX.md](./01-ui/components/INDEX.md) | 内置 type 清单，再打开单篇。**slider 可拖，progress 只读** |
 | [01-ui/capabilities/tabBar.md](./01-ui/capabilities/tabBar.md) | **有底栏时必读。** `bottomMenus` + `switchTab` |
 | [01-ui/capabilities/](./01-ui/capabilities/) | 按需：下拉刷新、悬浮球、弹层 |
-| [01-ui/capabilities/floatWindow.md](./01-ui/capabilities/floatWindow.md) | **悬浮球必读**：无内置 action；JSON + `FloatWindow.on` 一次交付 |
+| [01-ui/capabilities/floatWindow.md](./01-ui/capabilities/floatWindow.md) | **悬浮球必读**：关闭任务底层逻辑、JSON + `FloatWindow.on` |
 
 速查：[组件 type](./04-cheatsheets/component-types.md)、[action](./04-cheatsheets/action-types.md)、[页面方法](./04-cheatsheets/page-methods.md)。
 

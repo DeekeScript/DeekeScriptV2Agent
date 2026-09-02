@@ -45,5 +45,5 @@ console.log('1秒钟后输出');
 ## 注意
 
 - 任务循环里用 `System.sleep` 让出时间，不要空转。
-- 停止整段脚本：悬浮球 `stop` 或 `Engines.closeAll()`；`System.exit()` 关当前引擎。
+- 停止整段脚本：`FloatWindow.stopTask()`（手动/非脚本线程）或任务内 `Engines.closeAll()`（自动）；`System.exit()` 关当前引擎。见 [`FloatWindow.md`](FloatWindow.md)。
 - 索引见 [`INDEX.md`](INDEX.md)。

@@ -67,7 +67,7 @@ FloatWindow.on({
     Engines.executeScript('tasks/xxx.js');
   },
   stop: function () {
-    Engines.closeAll();
+    FloatWindow.stopTask();
   },
   hide: function () {
     FloatDialogs.setFloatWindowVisible(false);
