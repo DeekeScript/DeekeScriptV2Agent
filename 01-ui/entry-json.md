@@ -90,7 +90,7 @@
 
 **AI 生成规则**：若用户要菜单（开始/停止/跳过等），必须同一轮输出 `floatWindow.menus` **和** `FloatWindow.on`。详见 [悬浮球](./capabilities/floatWindow.md) 与 [配方 `float-window.md`](../03-recipes/float-window.md)。
 
-未配置 `menus` 时，项目球与开发器一致：**连点两次停止**，不展开菜单。
+未配置 `menus` 时，项目球与开发器一致：**连点两次停止**（第一次变关闭图标，3 秒内再点），不展开菜单。
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|

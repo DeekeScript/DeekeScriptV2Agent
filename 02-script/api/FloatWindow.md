@@ -2,9 +2,16 @@
 
 
 
-**项目**悬浮球的展开菜单。`floatWindow.menus` 与 `FloatWindow` 只作用于点「运行」之后（以及打包 App）的那颗球。
+**项目**悬浮球的展开菜单。`floatWindow.menus` 与 `FloatWindow` 只作用于点「运行」之后（以及打包 App）的那颗球。DeekeScript 开发器那颗球不读 `floatWindow` 配置。
 
+## 默认行为（未配 menus）
 
+| | 开发器球 | 项目球（未写 `floatWindow.menus`） |
+|--|---------|-----------------------------------|
+| 停止任务 | 第一次变成关闭图标，**3 秒内**再点才停止 | 与开发器一致 |
+| 任务运行中 | 悬浮球旋转 | 悬浮球旋转 |
+
+配置了 `floatWindow.menus` 或调用了 `FloatWindow.setMenus` 后，点球展开扇形菜单，停止等操作在 `FloatWindow.on` 里写。完整对比见 [`floatWindow.md`](../../01-ui/capabilities/floatWindow.md#两种球不要混)。
 
 **生成时必读** [`01-ui/capabilities/floatWindow.md`](../../01-ui/capabilities/floatWindow.md) 与 [`03-recipes/float-window.md`](../../03-recipes/float-window.md)：**menus 与 `FloatWindow.on` 必须同一轮交付**。每项点击在 `FloatWindow.on` 里绑定。
 
