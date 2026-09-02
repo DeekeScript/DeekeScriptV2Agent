@@ -15,8 +15,8 @@
 | 7 | JS 按 Rhino 1.8：`function` / `var` / `let`。颜色 `#RRGGBB`；尺寸数字是 dp，字号是 sp。 |
 | 8 | `require` 路径：`./`、`../` 相对当前文件，否则相对项目根。被引入文件用 `module.exports`。 |
 | 9 | 改 `page.json` / `page.js` 后必须项目同步，并在手机端点刷新，界面才会更新。 |
-| 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。运行中若没有 `stop`，框架会自动补一个。 |
-| 10b | 悬浮球 `action` **仅** `stop` / `hide` / `start` / `executeScript`。自定义点击用 `onTap` + `FloatWindow.on`，且与 JSON **同一轮**生成。见 [`float-window.md`](../03-recipes/float-window.md)。 |
+| 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。 |
+| 10b | 悬浮球菜单**无内置 action**。每项须在 `FloatWindow.on` 里绑定；JSON 可写 `onTap` 作函数名。与 JSON **同一轮**生成 JS。见 [`float-window.md`](../03-recipes/float-window.md)。 |
 | 11 | 入口 JSON 必须写 `icon`，且该路径相对项目根的**文件必须作为工程文件生成**（如 `"icon": "img/xhs.svg"` 就要写出 svg 内容）。首页、悬浮球、打包都读这个字段。 |
 | 12 | 组件的颜色、背景、圆角、宽高写在 `style` 对象里。`button` 换色用 `style.background`。见 [`_common.md`](../01-ui/components/_common.md)。 |
 | 13 | 用户指定主题色时，入口写 `window.theme.primary`，再改导航栏 `title.background`、状态栏、底栏 `selectedColor`。所有 `button` 建议写 `style.background`。不要沿用默认绿 `#006A65`。 |

@@ -33,5 +33,5 @@ Engines.executeScript('tasks/xxx.js');
 ## 注意
 
 - 子脚本依赖父脚本还活着：父脚本立刻结束，子脚本也会停。页面启动任务后页面可以停；任务脚本若还要保活子任务，自己的 `while` / 休眠不能马上结束。
-- 悬浮球 `action: "stop"` 等同 `closeAll()`。不要把脚本路径塞进 `action`，见 [`ui-and-task.md`](../ui-and-task.md)。
+- 悬浮球「停止」在 `FloatWindow.on` 里调 `Engines.closeAll()`，见 [`ui-and-task.md`](../ui-and-task.md)。
 - 索引见 [`INDEX.md`](INDEX.md)。

@@ -53,20 +53,11 @@ Engines.executeScript('tasks/xxx.js');
 
 不以 `./`、`../` 开头时，相对**项目根**。不要写磁盘绝对路径。完整规则见 [`require.md`](require.md) 与 [`api/Engines.md`](api/Engines.md)。
 
-## 不要把脚本塞进 `action`
+## 不要把脚本塞进页面 `action`
 
-这里指 **两类 action，不要混**：
+页面 `page.json` 的 `action` 是 navigate / toast / save 等界面动作，**不能**跑脚本。
 
-| 位置 | 合法 action |
-|------|-------------|
-| 页面 `page.json` | `navigate` / `switchTab` / `toast` / `save` / … |
-| 悬浮球 `floatWindow.menus` | **仅** `stop` / `hide` / `start` / `executeScript` |
-
-悬浮球不要把脚本路径、函数名、JS 代码写进 `action`。
-
-- 跑固定脚本：`"action": "executeScript", "file": "tasks/xxx.js"`
-- 停止：`"action": "stop"`（不要用 `onTap` 替代）
-- 跳过 / 自定义开始：`onTap` + **`tasks/*.js` 里** `FloatWindow.on`（与 JSON **同一轮**生成）
+悬浮球 `floatWindow.menus` **没有 action 字段**。开始、停止、隐藏、跑脚本都在 `FloatWindow.on` 里写（与 JSON **同一轮**生成）。
 
 完整清单见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。
 
@@ -74,9 +65,16 @@ Engines.executeScript('tasks/xxx.js');
 FloatWindow.on({
   start: function () {
     Engines.executeScript('tasks/xxx.js');
+  },
+  stop: function () {
+    Engines.closeAll();
+  },
+  hide: function () {
+    FloatDialogs.setFloatWindowVisible(false);
   }
 });
 ```
+
 
 ## 注意
 

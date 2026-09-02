@@ -27,9 +27,9 @@
 | 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |
 | 用页面根 `title` 同时又放 `navBar` 画两套顶栏 | 自制顶栏时 `"title": { "hidden": true }`，再写 `type: navBar` |
 | 把 `background` / `color` / `width` 写在组件根上 | 写进 `style`。见 [`_common.md`](../01-ui/components/_common.md) |
-| 只写 `floatWindow.menus` 不写 `FloatWindow.on`（onTap / 跳过 / 自定义开始） | 同一轮输出 JSON + `tasks/*.js` 里的 `FloatWindow.on`。见 [`float-window.md`](../03-recipes/float-window.md) |
-| 把脚本路径或函数名写进悬浮球 `action` | `action` 仅 `stop`/`hide`/`start`/`executeScript`；路径放 `file`；自定义放 `onTap` |
-| 混淆页面 `action` 与悬浮球 `action` | 页面：`navigate`/`toast`/…；悬浮球：四个内置名。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md) |
+| 只写 `floatWindow.menus` 不写 `FloatWindow.on` | 同一轮输出 JSON + `tasks/*.js` 或 `common/*.js` 里的 `FloatWindow.on`。见 [`float-window.md`](../03-recipes/float-window.md) |
+| 写悬浮球 `"action": "stop"` / `"start"` 等 | 已废弃；在 `FloatWindow.on` 里写 `Engines.closeAll()` 等示例逻辑 |
+| 混淆页面 `action` 与悬浮球菜单 | 页面：`navigate`/`toast`/…；悬浮球：只有 `onTap` + `FloatWindow.on`，无内置 action |
 | 用户要蓝色，按钮仍是默认绿，或声称 button 没有 background | 入口写 `window.theme.primary`。`button` 建议写 `style.background`。导航栏、状态栏、底栏 `selectedColor` 也要一起改 |
 | Switch 写 `style.background` 给整行刷底 | Switch / checkbox / radio 换色只写 `style.color`，不要写 `background` |
 
