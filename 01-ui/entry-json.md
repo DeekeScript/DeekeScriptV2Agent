@@ -88,7 +88,7 @@
 
 只作用于**项目悬浮窗**（点「运行」进入项目后，或打包 App）。`menus` 最多 5 个。
 
-**AI 生成规则**：若用户要菜单（开始/停止/跳过等），必须同一轮输出 `floatWindow.menus` **和** `FloatWindow.on`（无内置 action）。详见 [悬浮球](./capabilities/floatWindow.md) 与 [配方 `float-window.md`](../03-recipes/float-window.md)。
+**AI 生成规则**：若用户要菜单（开始/停止/跳过等），必须同一轮输出 `floatWindow.menus` **和** `FloatWindow.on`。详见 [悬浮球](./capabilities/floatWindow.md) 与 [配方 `float-window.md`](../03-recipes/float-window.md)。
 
 未配置 `menus` 时，项目球与开发器一致：**连点两次停止**，不展开菜单。
 

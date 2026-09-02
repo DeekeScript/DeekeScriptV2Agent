@@ -2,8 +2,6 @@
 
 用户要「悬浮球 / 悬浮窗菜单 / 跳过 / 停止」时，**不要只写 `deekeScript.json` 里的 `menus`**。每一项点击都必须在 JS 里用 `FloatWindow.on` 绑定——**缺 JS 就点不动**。
 
-框架**没有**内置 `action: "start"` / `"stop"` 等；开始、停止、隐藏、跑脚本都在回调里自己写（见下方示例）。
-
 先读 [`01-ui/capabilities/floatWindow.md`](../01-ui/capabilities/floatWindow.md) 的 **「关闭任务：底层逻辑」**（手动停 vs 自动停、`stopTask` vs `Engines.closeAll`）。
 
 ## 何时需要配 floatWindow
@@ -21,7 +19,7 @@
 - [ ] 停止示例：`FloatWindow.stopTask()`；隐藏：`FloatDialogs.setFloatWindowVisible(false)`
 - [ ] 任务脚本里 `FloatWindow.on` 与 `while` 循环共用同一套标志（如 `skipped`）
 
-**禁止**：只生成 `menus` 不写 `FloatWindow.on`；禁止写 `"action": "stop"` 等已废弃字段。
+**禁止**：只生成 `menus` 不写 `FloatWindow.on`。
 
 ## 标准四键菜单（复制改 id 即可）
 
@@ -146,4 +144,4 @@ Page({
 
 ## 与页面 `action` 的区别
 
-页面 `page.json` 的 `action` 是 navigate / toast / save 等界面动作；**与悬浮球 menus 无关**。悬浮球没有 `action` 字段，只有 `onTap` + `FloatWindow.on`。
+页面 `page.json` 的 `action` 是 navigate / toast / save 等界面动作，与悬浮球 menus 无关。悬浮球菜单用 `onTap` + `FloatWindow.on`。

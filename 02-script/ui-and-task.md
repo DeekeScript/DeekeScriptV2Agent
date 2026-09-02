@@ -57,7 +57,7 @@ Engines.executeScript('tasks/xxx.js');
 
 页面 `page.json` 的 `action` 是 navigate / toast / save 等界面动作，**不能**跑脚本。
 
-悬浮球 `floatWindow.menus` **没有 action 字段**。开始、停止、隐藏、跑脚本都在 `FloatWindow.on` 里写（与 JSON **同一轮**生成）。
+悬浮球菜单的开始、停止、隐藏、跑脚本都在 `FloatWindow.on` 里写（与 JSON **同一轮**生成）。
 
 完整清单见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。
 

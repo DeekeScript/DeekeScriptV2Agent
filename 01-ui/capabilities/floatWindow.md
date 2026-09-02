@@ -118,10 +118,6 @@ Engines 侧说明见 [`02-script/api/Engines.md`](../../02-script/api/Engines.md
 
 
 
-**没有内置 action**：不要写 `"action": "stop"` / `"start"` / `"hide"` / `"executeScript"`，框架不会代执行。
-
-
-
 ## menus 字段
 
 
@@ -150,9 +146,7 @@ Engines 侧说明见 [`02-script/api/Engines.md`](../../02-script/api/Engines.md
 
 ## 点击行为（用户自定义）
 
-
-
-框架**只负责展开菜单、回调 JS**，不内置开始/停止/隐藏/跑脚本。在 `FloatWindow.on` 里写：
+在 `FloatWindow.on` 里写开始、停止、隐藏、跑脚本等逻辑：
 
 
 

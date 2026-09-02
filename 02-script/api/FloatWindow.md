@@ -6,11 +6,7 @@
 
 
 
-**生成时必读** [`01-ui/capabilities/floatWindow.md`](../../01-ui/capabilities/floatWindow.md) 与 [`03-recipes/float-window.md`](../../03-recipes/float-window.md)：**menus 与 `FloatWindow.on` 必须同一轮交付**。
-
-
-
-框架**没有内置 action**（无 `stop` / `start` / `hide` / `executeScript`）。每项点击在 `FloatWindow.on` 里自定义。
+**生成时必读** [`01-ui/capabilities/floatWindow.md`](../../01-ui/capabilities/floatWindow.md) 与 [`03-recipes/float-window.md`](../../03-recipes/float-window.md)：**menus 与 `FloatWindow.on` 必须同一轮交付**。每项点击在 `FloatWindow.on` 里绑定。
 
 
 
@@ -106,8 +102,6 @@ FloatWindow.on({
 
 
 - 未开悬浮窗权限球不会出现 → [`Access.md`](Access.md)
-
-- 不要写废弃字段 `action` / `file` → [`ui-and-task.md`](../ui-and-task.md)
 
 - 索引见 [`INDEX.md`](INDEX.md)
 

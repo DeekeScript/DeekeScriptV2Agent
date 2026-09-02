@@ -33,7 +33,7 @@ DeekeScript Pro 做两件事，彼此解耦：
 | **编写/调试自动化脚本（需连手机）** | **必读** [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)；[`02-script/ai-http-api.md`](./02-script/ai-http-api.md)；Windows 用 [`tools/deeke-device.ps1`](./tools/deeke-device.ps1)，macOS/Linux 用 [`tools/deeke-device.sh`](./tools/deeke-device.sh) |
 | 只要界面 | [`01-ui/entry-json.md`](./01-ui/entry-json.md)、[`page-json.md`](./01-ui/page-json.md)、[`page-js.md`](./01-ui/page-js.md)、**[`_common.md`](./01-ui/components/_common.md)**、[`data-binding.md`](./01-ui/data-binding.md)、[`navigate.md`](./01-ui/navigate.md)；[`01-ui/components/INDEX.md`](./01-ui/components/INDEX.md) 后只打开用到的 type。有底栏再读 [`tabBar.md`](./01-ui/capabilities/tabBar.md) |
 | 界面 + 脚本 | 上面两套 + [`02-script/permission.md`](./02-script/permission.md) + [`require.md`](./02-script/require.md) + [`ui-and-task.md`](./02-script/ui-and-task.md) + [`03-recipes/run-task-from-ui.md`](./03-recipes/run-task-from-ui.md) |
-| **悬浮球 / 悬浮窗菜单** | **必读** [`01-ui/capabilities/floatWindow.md`](./01-ui/capabilities/floatWindow.md) + [`03-recipes/float-window.md`](./03-recipes/float-window.md)；**无内置 action**；**同一轮输出 JSON menus + `FloatWindow.on`** |
+| **悬浮球 / 悬浮窗菜单** | **必读** [`01-ui/capabilities/floatWindow.md`](./01-ui/capabilities/floatWindow.md) + [`03-recipes/float-window.md`](./03-recipes/float-window.md)；**同一轮输出 JSON menus + `FloatWindow.on`** |
 | 自定义组件 | [`01-ui/component-custom.md`](./01-ui/component-custom.md) + [`03-recipes/custom-picker.md`](./03-recipes/custom-picker.md) |
 | HID / 图色 / DO / 打包 | 对应 [`02-script/api/INDEX.md`](./02-script/api/INDEX.md) 里的扩展卡片，先读权限 |
 
