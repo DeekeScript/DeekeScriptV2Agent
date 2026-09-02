@@ -30,6 +30,7 @@
 | [01-ui/components/INDEX.md](./01-ui/components/INDEX.md) | 内置 type 清单，再打开单篇。**slider 可拖，progress 只读** |
 | [01-ui/capabilities/tabBar.md](./01-ui/capabilities/tabBar.md) | **有底栏时必读。** `bottomMenus` + `switchTab` |
 | [01-ui/capabilities/](./01-ui/capabilities/) | 按需：下拉刷新、悬浮球、弹层 |
+| [01-ui/capabilities/floatWindow.md](./01-ui/capabilities/floatWindow.md) | **悬浮球必读**：action 定义、JSON+JS 一次交付 |
 
 速查：[组件 type](./04-cheatsheets/component-types.md)、[action](./04-cheatsheets/action-types.md)、[页面方法](./04-cheatsheets/page-methods.md)。
 
@@ -58,6 +59,7 @@
 | [03-recipes/workbench.md](./03-recipes/workbench.md) | 首页工作台 |
 | [03-recipes/settings-form.md](./03-recipes/settings-form.md) | 配置页 + Storage |
 | [03-recipes/run-task-from-ui.md](./03-recipes/run-task-from-ui.md) | 按钮启动任务 |
+| [03-recipes/float-window.md](./03-recipes/float-window.md) | **悬浮球：menus + FloatWindow.on 一次交付** |
 | [03-recipes/list-load-more.md](./03-recipes/list-load-more.md) | 列表触底加载 |
 | [03-recipes/custom-picker.md](./03-recipes/custom-picker.md) | 自定义选择组件 |
 

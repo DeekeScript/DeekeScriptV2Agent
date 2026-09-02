@@ -55,9 +55,20 @@ Engines.executeScript('tasks/xxx.js');
 
 ## 不要把脚本塞进 `action`
 
-悬浮球 `floatWindow.menus` 的 `action` 只能是内置名：`start`、`stop`、`hide`、`executeScript`。不要写成脚本路径或一段 JS。
+这里指 **两类 action，不要混**：
 
-启动任务：在 `FloatWindow.on` 的 `start` 里调用 `Engines.executeScript`，或 JSON 里 `action: "executeScript"` 并设 `file`。`stop` 由框架执行（等同 `Engines.closeAll()`），不要用自定义 `onTap` 替换。
+| 位置 | 合法 action |
+|------|-------------|
+| 页面 `page.json` | `navigate` / `switchTab` / `toast` / `save` / … |
+| 悬浮球 `floatWindow.menus` | **仅** `stop` / `hide` / `start` / `executeScript` |
+
+悬浮球不要把脚本路径、函数名、JS 代码写进 `action`。
+
+- 跑固定脚本：`"action": "executeScript", "file": "tasks/xxx.js"`
+- 停止：`"action": "stop"`（不要用 `onTap` 替代）
+- 跳过 / 自定义开始：`onTap` + **`tasks/*.js` 里** `FloatWindow.on`（与 JSON **同一轮**生成）
+
+完整清单见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。
 
 ```javascript
 FloatWindow.on({

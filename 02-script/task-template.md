@@ -8,7 +8,7 @@
 
 1. `require('common/permission.js')`，调用 `ensureRun()`。默认检查无障碍 + 悬浮窗；未开则弹窗引导并结束。
 2. 用 `Storage.get` / `getInteger` 等读取页面写入的配置。键名加项目前缀，见 [`ui-and-task.md`](ui-and-task.md)。
-3. （可选）`FloatWindow.on` 绑定跳过等回调。开始任务请在页面或悬浮球回调里 `Engines.executeScript`，不要把脚本路径塞进 `action`。
+3. （可选）`FloatWindow.on` 绑定跳过等回调——**若 JSON 里写了 `onTap` 或跳过项，必须与第 4 步同一文件**。开始任务请在页面 `permission.runScript` 或菜单 `action: "start"` / `on` 里 `Engines.executeScript`。完整菜单见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。
 4. `while` 里找节点、点击、休眠。循环条件同时看次数和跳过标志。点悬浮球「停止」会关掉整个运行时，循环自然结束。
 
 ## 完整最小 `tasks/xxx.js`
