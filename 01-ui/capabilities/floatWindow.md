@@ -30,7 +30,7 @@
 
 
 
-未配置 `floatWindow.menus`（且未调用 `FloatWindow.setMenus`）时，不要生成空菜单占位；默认交互就是连点两次停止（第一次变关闭图标，3 秒内再点）。
+未配置 `floatWindow.menus`（且未调用 `FloatWindow.setMenus`）时，不要生成空菜单占位；默认交互就是连点两次停止（第一次变关闭图标，3 秒内再点）。**用户未点名要菜单时，不要在工程里写 `floatWindow`。**
 
 
 

@@ -45,6 +45,7 @@ console.log(myUser);
 - 读写类型必须成对，否则会读错。
 - 键名加项目前缀，例如 `myapp.keyword`。
 - 页面和脚本要么都不 `create`，要么 `create` 同一个 db。
+- 对象数组 CRUD：读写后建议拷成纯 JS 对象再改再存（`putObj` / `getObj` 或 `putArray` / `getArray`），避免 Rhino 包装对象往返异常。
 - 索引见 [`INDEX.md`](INDEX.md)。
 
 ## 对象数组

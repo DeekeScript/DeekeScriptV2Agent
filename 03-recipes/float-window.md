@@ -1,6 +1,8 @@
 # 悬浮球完整配方（JSON + 事件一次交付）
 
-用户要「悬浮球 / 悬浮窗菜单 / 跳过 / 停止」时，**不要只写 `deekeScript.json` 里的 `menus`**。每一项点击都必须在 JS 里用 `FloatWindow.on` 绑定——**缺 JS 就点不动**。
+**默认情况：用户没提悬浮窗菜单 / 跳过 / 自定义停止 → 不要写 `floatWindow`。** 未配 `menus` 时，项目球与开发器球一样：连点两次停止（第一次变关闭图标，**3 秒内**再点）。不要为此再生成 stop 菜单。
+
+仅当用户明确要「悬浮球菜单 / 跳过 / 自定义停止」时，才用本配方。**不要只写 `deekeScript.json` 里的 `menus`**——每一项点击都必须在 JS 里用 `FloatWindow.on` 绑定，**缺 JS 就点不动**。
 
 先读 [`01-ui/capabilities/floatWindow.md`](../01-ui/capabilities/floatWindow.md) 的 **「关闭任务：底层逻辑」**（手动停 vs 自动停、`stopTask` vs `Engines.closeAll`）。
 
@@ -8,18 +10,19 @@
 
 | 用户需求 | 是否写 `floatWindow.menus` |
 |----------|---------------------------|
+| 未提及悬浮窗，或只要能停任务 | **不写**（默认连点两次即可） |
 | 只要连点两次停止（默认） | **不写**（或不用 `FloatWindow.setMenus`） |
 | 展开菜单：开始 / 停止 / 隐藏 / 跳过 等 | **必须写** `menus` + `FloatWindow.on` |
 | 任务里要「跳过当前步骤」 | `menus` + `tasks/*.js` 里标志位与 `FloatWindow.on` |
 
-## 一次交付清单（AI 必做）
+## 一次交付清单（仅在需要配 menus 时）
 
 - [ ] `deekeScript.json` → `floatWindow.menus`（每项 `id`、`icon`、`label`、`show` 写全）
 - [ ] **`FloatWindow.on({ ... })`** 与 menus **同一轮**出现在 `tasks/*.js` 或 `common/floatMenu.js`
 - [ ] 停止示例：`FloatWindow.stopTask()`；隐藏：`FloatDialogs.setFloatWindowVisible(false)`
 - [ ] 任务脚本里 `FloatWindow.on` 与 `while` 循环共用同一套标志（如 `skipped`）
 
-**禁止**：只生成 `menus` 不写 `FloatWindow.on`。
+**禁止**：只生成 `menus` 不写 `FloatWindow.on`。**也禁止**：用户没要求菜单时主动生成 stop 菜单。
 
 ## 标准四键菜单（复制改 id 即可）
 

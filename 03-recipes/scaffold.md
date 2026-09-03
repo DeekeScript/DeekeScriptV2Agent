@@ -43,7 +43,7 @@ if (!permission.ensureRun()) {
 }
 ```
 
-权限模块从 [`permission.md`](../02-script/permission.md) 整份复制到 `common/permission.js`。找节点用 `findOne()`，不要 Auto.js 的 `findOnce()` 或全局 `text()`。
+权限模块从 [`permission.md`](../02-script/permission.md) 整份复制到 `common/permission.js`。找节点用 `UiSelector` + `findOne()`；点击前一般先 `filter` 屏内。
 
 在开发器里直接运行该 JS。不要生成 `pages/`。
 

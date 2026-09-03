@@ -1,6 +1,14 @@
 # KeyBoards
 
-DeekeScript 输入法。比无障碍 `setText` 更接近真人输入，适合微信、抖音等会检测改文本的场景。可与 [`Hid.md`](./Hid.md) 点击滑动配合。
+DeekeScript 输入法。这是**可选增强**，不是默认输入方案。可与 [`Hid.md`](./Hid.md) 点击滑动配合。
+
+## 默认输入顺序（生成代码必遵）
+
+1. 无障碍 [`UiObject.setText`](UiObject.md)
+2. 不行再用剪贴板：`System.setClip` + [`paste`](UiObject.md)
+3. **仅当业务明确需要输入法**时再用 `KeyBoards`，并且：
+   - 先 `canInput()`（可先看 `isEnabled()`）
+   - 状态不对 → `FloatDialogs.toast` / `show` 提示用户启用并设为默认，不要静默继续
 
 ## 上下文
 
@@ -38,12 +46,10 @@ DeekeScript 输入法。比无障碍 `setText` 更接近真人输入，适合微
 ## 最小片段
 
 ```javascript
-if (!KeyBoards.showInputMethodPicker()) {
-  console.log('需要用户手动设置输入法为默认');
-  System.sleep(2000);
-}
-
-if (KeyBoards.canInput()) {
+if (!KeyBoards.canInput()) {
+  FloatDialogs.toast('请将 DeekeScript 输入法设为默认后再试');
+  KeyBoards.showInputMethodPicker();
+} else {
   KeyBoards.input('文本框新增内容');
   KeyBoards.pressEnter();
 }
@@ -51,6 +57,7 @@ if (KeyBoards.canInput()) {
 
 ## 注意
 
+- 不要默认生成 KeyBoards 流程；优先 `setText` / 剪贴板。
 - 不可编辑或非标准节点仍用无障碍，不要硬用输入法。
 - 系统级按键走 [`Gesture.md`](./Gesture.md) 或 [`Hid.md`](./Hid.md)，不要 `pressKey("HOME")`。
 - 先点输入框拿焦点，再 `input`。
