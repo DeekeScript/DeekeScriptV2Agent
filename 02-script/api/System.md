@@ -15,7 +15,7 @@
 | gc | `gc()` | 无 | `void` | d.ts 有此方法；官方文档未单独说明 |
 | time | `time()` | 无 | `string` | 当前系统时间，如 `2024-03-07 12:12:12` |
 | currentActivity | `currentActivity()` | 无 | `string` | 最近监测到的 Activity。依赖无障碍，未开则抛错并提示 |
-| currentPackage | `currentPackage()` | 无 | `string` | 最近监测到的前台包名。依赖无障碍 |
+| currentPackage | `currentPackage()` | 无 | `string` | 最近监测到的前台包名。依赖无障碍。详见下方说明 |
 | setClip | `setClip(text: string)` | 文本 | `void` | 写入剪贴板 |
 | getClip | `getClip()` | 无 | `string` | 剪贴板内容。官方说明失败可为 null |
 | toast | `toast(text: string)` | 文案 | `void` | 短 toast，异步，不等待消失。后台请用 `FloatDialogs.toast` |
@@ -33,6 +33,15 @@
 | getLocaleInfo | `getLocaleInfo()` | 无 | `{ language, country, tag }` | 系统语言区域。需 Android 7.0+ |
 
 d.ts 还列出与 locale 返回字段同名的属性 `language` / `country` / `tag`。请以 `getLocaleInfo()` 为准。
+
+### currentPackage
+
+返回最近监测到的前台应用包名。与 [`App.currentPackageName()`](App.md) 不同：后者是**当前 DeekeScript 工程 App** 的包名，不是屏幕上其它 App。
+
+从本项目点「运行」或 `permission.runScript` 启动 `tasks/*.js` 后，即使用户屏幕上是第三方 App（如抖音推荐页），`currentPackage()` **也可能仍返回 DeekeScript 包名**（如 `com.android.deeke.script.pro`）。因此：
+
+- **不要**用 `currentPackage() !== TARGET_PKG` 判断是否在目标 App，也不要据此弹「请切回…」并 `continue`——会误判且可能死循环。
+- **应**用 [`UiSelector`](UiSelector.md) 检测目标 App 界面特征节点，例如 `UiSelector().id('com.example:id/desc').exists()`。
 
 ## 最小片段
 

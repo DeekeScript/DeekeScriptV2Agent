@@ -17,9 +17,9 @@
 | putInteger | `putInteger(key: string, value: number)` | 键、整数 | `boolean` | |
 | putBoolean | `putBoolean(key: string, value: boolean)` | 键、布尔 | `boolean` | |
 | putDouble | `putDouble(key: string, value: number)` | 键、浮点 | `boolean` | |
-| putObj | `putObj(key: string, obj: object)` | 键、对象 | `boolean` | 仅标准 JSON 对象，不能含 function |
-| putArray | `putArray(key: string, arr: Array)` | 键、数组 | `boolean` | 改 checkbox 等表单时，元素须都是字符串 |
-| getArray | `getArray(key: string)` | 键 | `Array` | |
+| putObj | `putObj(key: string, obj: object \| Array)` | 键、对象或数组 | `boolean` | JSON 值，支持嵌套；不能含 function |
+| putArray | `putArray(key: string, arr: Array)` | 键、数组 | `boolean` | 与 `putObj` 写数组等价 |
+| getArray | `getArray(key: string)` | 键 | `Array` | 与 `getObj` 读同一键；不存在时为 `[]` |
 | get | `get(key: string)` | 键 | `string` | 官方：不存在时返回 null |
 | getString | `getString(key: string)` | 键 | `string` | d.ts 有此方法；官方文档未单独说明 |
 | getBoolean | `getBoolean(key: string)` | 键 | `boolean` | |
@@ -46,3 +46,32 @@ console.log(myUser);
 - 键名加项目前缀，例如 `myapp.keyword`。
 - 页面和脚本要么都不 `create`，要么 `create` 同一个 db。
 - 索引见 [`INDEX.md`](INDEX.md)。
+
+## 对象数组
+
+`putObj` 与 `putArray` 都可以写数组：
+
+```javascript
+var comments = [
+  { id: 'c_1', content: '很棒', enabled: true },
+  { id: 'c_2', content: '支持', enabled: true }
+];
+Storage.putObj('dylc.comments', comments);
+var saved = Storage.getObj('dylc.comments');
+console.log(saved[0].content);
+```
+
+## 嵌套对象
+
+单个配置对象（含嵌套数组 / 对象）用 `putObj` / `getObj`：
+
+```javascript
+Storage.putObj('dylc.config', {
+  autoStart: true,
+  comments: comments
+});
+var cfg = Storage.getObj('dylc.config');
+console.log(cfg.autoStart);
+```
+
+`Storage.put(key, value)` 在 value 为对象或数组时会自动走 `putObj` / `putArray`。

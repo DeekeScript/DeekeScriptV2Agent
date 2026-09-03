@@ -77,3 +77,4 @@ Page({
 - `Engines.executeScript('tasks/xxx.js')` 路径相对**项目根**。规则见 [`require.md`](require.md) 与 [`api/Engines.md`](api/Engines.md)。
 - 后台 toast / 弹窗用 [`FloatDialogs`](api/FloatDialogs.md)，不要用 `Dialogs` / `System.toast`。
 - 找节点、点击用 [`UiSelector`](api/UiSelector.md) 与 [`UiObject`](api/UiObject.md)。坐标手势用 [`Gesture`](api/Gesture.md)。
+- **`while` 里 `continue` 必须递增循环变量或设 retry 上限**，否则检测失败时会无限弹 toast、脚本像卡死。

@@ -34,6 +34,7 @@ DeekeScript Pro 做两件事，彼此解耦：
 | 界面 + 脚本 | 上面两套 + [`02-script/permission.md`](./02-script/permission.md) + [`require.md`](./02-script/require.md) + [`ui-and-task.md`](./02-script/ui-and-task.md) + [`03-recipes/run-task-from-ui.md`](./03-recipes/run-task-from-ui.md) |
 | 自定义组件 | [`01-ui/component-custom.md`](./01-ui/component-custom.md) + [`03-recipes/custom-picker.md`](./03-recipes/custom-picker.md) |
 | HID / 图色 / DO / 打包 | 对应 [`02-script/api/INDEX.md`](./02-script/api/INDEX.md) 里的扩展卡片，先读权限 |
+| 操作第三方 App（抖音 / 微信等） | [`02-script/task-template.md`](./02-script/task-template.md)；[`api/App.md`](./02-script/api/App.md)、[`api/UiSelector.md`](./02-script/api/UiSelector.md)、[`api/Gesture.md`](./02-script/api/Gesture.md)、[`api/System.md`](./02-script/api/System.md)（读 `currentPackage`） |
 
 ## 生成时必须遵守
 
