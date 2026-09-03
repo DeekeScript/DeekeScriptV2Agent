@@ -11,7 +11,7 @@ Pro **没有 Hook**。`closeHook()` 只用于关掉 V1 Hook 拉起的脚本，Pr
 - **page.js**：点按钮启动 `tasks/*.js`。
 - **tasks.js**：拉起子脚本（如心跳），或 `closeOther` / `closeAll`。
 
-路径规则与 [`require`](../require.md) 相同：`./` `../` 相对当前文件，否则相对项目根。
+`executeScript` 的路径**相对项目根**（如 `'tasks/xxx.js'`），不要写成 `./tasks/...`。这与 [`require`](../require.md) 不同：`require` **优先**用 `./`、`../` 相对当前文件。
 
 ## 方法
 

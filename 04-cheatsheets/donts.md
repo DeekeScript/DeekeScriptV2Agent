@@ -20,7 +20,8 @@
 | 在 `deekeScript.json` 写 V1 `groups` / `hooks` 当界面 | 界面是 `pages/*/page.json` |
 | HID / 图色 / 媒体不申请权限 | 图色：`Access.isMediaProjectionEnable`；媒体：`hasMediaReadPermission`；HID：蓝牙权限。见对应 API 卡 |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
-| `executeScript` 写成相对当前文件的 `./tasks` | 路径相对**项目根**：`tasks/sample.js` |
+| `executeScript` 写成相对当前文件的 `./tasks` | `Engines.executeScript` 路径相对**项目根**：`tasks/sample.js`（与 `require` 不同） |
+| `require` 默认写项目根或磁盘绝对路径 | **优先相对路径**：`tasks` 用 `require('../common/x.js')`，`pages/home` 用 `require('../../common/x.js')`。见 [`require.md`](../02-script/require.md) |
 | 底栏根页 `back` 指望退出 App | `back` 只关二级页 |
 | 找节点写成 Auto.js 的 `text('发送').findOnce()` | 必须 `UiSelector().text('发送').findOne()`。没有全局 `text()` / `id()` |
 | 把可调节数值写成 `progress` / `progressBar`（运行速度、点赞概率） | 用 `"type": "slider"`。`progress` 只能展示、不能拖。见 [`slider.md`](../01-ui/components/slider.md) |

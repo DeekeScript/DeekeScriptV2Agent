@@ -53,7 +53,7 @@ DeekeScript Pro 做两件事，彼此解耦：
 - Pro **没有 Hook**。不要生成 `hooks`、`app_start`、`Engines.closeHook()`。
 - WebView 不和 Page 通信，且必须写 `style.height`。
 - JS 引擎是 Rhino 1.8：`function` / `var` / `let`。禁止箭头函数、`async/await`、`?.`、`??`、`import`/`export`。
-- `require`：`./`、`../` 相对当前文件，否则相对项目根。导出用 `module.exports`。
+- `require`：**优先** `./`、`../` 相对当前文件（如 `tasks` 里 `require('../common/permission.js')`，`pages/home` 里 `require('../../common/permission.js')`）。不以 `./`/`../` 开头时才相对项目根。禁止磁盘绝对路径。导出用 `module.exports`。
 - 不要把 Demo 的 `permission.hint('请在文件 xxx 编写业务')` 写进产物。
 - 颜色、背景、圆角、宽高只写在 `style` 里，不要写在组件根上。`button` 换色用 `style.background`，不写则跟 `window.theme.primary`（默认 `#006A65`）。禁止声称 button 没有 background。
 - 用户指定主题色时：入口 `window.theme.primary`、`title.background`、`statusBar.background`、`tabBar.selectedColor`、**每个 button 的 `style.background`** 都改成该色。不要照抄配方里的 `#006A65`。

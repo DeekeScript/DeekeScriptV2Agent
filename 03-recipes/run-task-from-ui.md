@@ -50,7 +50,7 @@
 ## `pages/task/page.js`
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../../common/permission.js');
 
 Page({
   data: {
@@ -79,12 +79,12 @@ Page({
 });
 ```
 
-路径相对**项目根**，不要写成 `./tasks/sample.js`（`require` 规则和 `executeScript` 不同）。
+`Engines.executeScript` / `runScript` 的路径相对**项目根**，不要写成 `./tasks/sample.js`。`require` **优先**相对当前文件，见 [`require.md`](../02-script/require.md)。
 
 ## `tasks/sample.js`
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 if (!permission.ensureRun()) {
 } else {
   let name = Storage.get('demo.task_name');

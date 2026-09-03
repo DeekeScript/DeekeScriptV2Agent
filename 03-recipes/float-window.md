@@ -65,7 +65,7 @@
 ### 2. `tasks/sample.js`（与菜单同一轮给出）
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 
 if (!permission.ensureRun()) {
 } else {
@@ -107,7 +107,7 @@ if (!permission.ensureRun()) {
 `pages/home/page.js`：
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../../common/permission.js');
 
 Page({
   onRun() {

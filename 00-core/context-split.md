@@ -45,7 +45,7 @@ Page({
 路径相对项目根。需要先检查无障碍和悬浮窗时：
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../../common/permission.js');
 
 Page({
   onRun: function () {
@@ -58,7 +58,7 @@ Page({
 
 ```javascript
 // tasks/sample.js
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 if (!permission.ensureRun()) {
   // 已弹窗引导
 } else {

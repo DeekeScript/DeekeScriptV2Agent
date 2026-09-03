@@ -7,7 +7,7 @@ API 见 [`api/Access.md`](api/Access.md)、[`api/Dialogs.md`](api/Dialogs.md)、
 ## 从页面启动
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../../common/permission.js');
 
 Page({
   onRun() {
@@ -21,7 +21,7 @@ Page({
 ## 脚本内自检
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 
 if (!permission.ensureRun()) {
   // 未开启，已弹窗引导，结束本次执行
