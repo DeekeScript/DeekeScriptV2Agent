@@ -86,11 +86,7 @@
 
 ## floatWindow
 
-只作用于**项目悬浮窗**（点「运行」进入项目后，或打包 App）。`menus` 最多 5 个。
-
-**AI 生成规则**：若用户要菜单（开始/停止/跳过等），必须同一轮输出 `floatWindow.menus` **和** `FloatWindow.on`。详见 [悬浮球](./capabilities/floatWindow.md) 与 [配方 `float-window.md`](../03-recipes/float-window.md)。
-
-未配置 `menus` 时，项目球与开发器一致：**连点两次停止**（第一次变关闭图标，3 秒内再点），不展开菜单。
+只作用于**项目悬浮窗**（点「运行」进入项目后，或打包 App）。`menus` 默认约 3 个，最多 5 个，超过只展示前 5 个。
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
@@ -100,14 +96,16 @@
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
-| id | String | `FloatWindow.on` / `update` 的键 |
-| icon | String | 内置 `close` / `play` / `hide`，或工程内图片 |
+| id | String | 给 `FloatWindow.on` / `update` 用 |
+| icon | String | 内置名 `close` / `play` / `hide`，或工程内图片 |
 | label | String | 图标下方短文案 |
-| onTap | String | 点击函数名；**须**在 JS 里 `FloatWindow.on` 绑定 |
+| action | String | 内置：`stop` / `hide` / `start` / `executeScript` |
+| file | String | `action` 为 `executeScript` 时的脚本路径 |
+| onTap | String | 点击时调用的 JS 函数名 |
 | show | String | `always`（默认）、`running`、`idle` |
-| background | String | 圆形底色，如 `#FFFFFF`、`#FFE8E6` |
+| background | String | 圆形底色，如 `#FFFFFF` |
 
-完整示例见 [悬浮球](./capabilities/floatWindow.md)。
+完整方法见 [悬浮球](./capabilities/floatWindow.md)。
 
 ## 最小配置
 
@@ -171,7 +169,7 @@
   ],
   "floatWindow": {
     "menus": [
-      { "id": "stop", "icon": "close", "label": "停止", "onTap": "onStop", "show": "running", "background": "#FFE8E6" }
+      { "id": "stop", "icon": "close", "label": "停止", "action": "stop", "show": "running" }
     ]
   }
 }
