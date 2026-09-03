@@ -21,10 +21,11 @@
 3. 明确让用户填写手机地址（http://IP:8080），写入 .deeke-device.local.json
       ↓ 连上后
 4. GET /ai/status 检查权限
-5. 写/改脚本 → POST /ai/run 执行 → 看 logs 调试 → 重复直到通过
+5. 写/改工程文件（电脑工作区）→ **write 同步到手机** → POST /ai/run 或 run-file → 看 logs 调试 → 重复直到通过
 6. 需要看界面时 `GET /ai/snapshot?type=0`（简单+快速；节点难分再升复杂或非快速，见 [`ai-http-api.md`](../02-script/ai-http-api.md)）
 ```
 
+**必须同步**：只改电脑上的 `tasks/*.js` / `page.js` 等，手机不会自动更新。交付或 `run-file` 前，用 `POST /ai/project/write`（或工具 `write`）把改过的文件推到手机。短验证可用 `run` 直接传代码字符串，不必先落盘同步。
 ## 第一步：发现设备
 
 在工作区根目录执行：
@@ -111,21 +112,37 @@ bash tools/deeke-device.sh status
 
 权限不齐时先指导用户开启，不要硬跑脚本。
 
-## 第三步：自动调试循环
+## 第三步：同步文件到手机，再调试
 
-编写或修改 `tasks/*.js` 后：
+在电脑工作区新建或修改任何工程文件后，**先同步再执行**：
 
 ```powershell
-# Windows — 方式 A：短代码
+# Windows — 同步单个文件到手机（路径相对项目根）
+powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 write -File "tasks/sample.js"
+```
+
+```bash
+# macOS / Linux
+bash tools/deeke-device.sh write --file "tasks/sample.js"
+```
+
+改了多个文件就逐个 `write`（或至少同步本次改动相关的全部文件）。界面相关文件同步后，还需用户在手机端点刷新。
+
+## 第四步：自动调试循环
+
+编写或修改 `tasks/*.js` 并 **write 同步** 后：
+
+```powershell
+# Windows — 方式 A：短代码（不必同步，代码经 HTTP 直接执行）
 powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 run -Script "console.log('test'); let n = UiSelector().find(); console.log('nodes', n.length);"
-# Windows — 方式 B：任务文件
+# Windows — 方式 B：任务文件（须已 write 到手机）
 powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 run-file -ScriptFile "tasks/sample.js"
 ```
 
 ```bash
 # macOS / Linux — 方式 A：短代码
 bash tools/deeke-device.sh run --script "console.log('test'); let n = UiSelector().find(); console.log('nodes', n.length);"
-# macOS / Linux — 方式 B：任务文件
+# macOS / Linux — 方式 B：任务文件（须已 write）
 bash tools/deeke-device.sh run-file --script-file "tasks/sample.js"
 ```
 
@@ -137,7 +154,7 @@ bash tools/deeke-device.sh run-file --script-file "tasks/sample.js"
 2. 报错看 `data.error` 和 `logs` 里 `code` 为错误的项
 3. 界面不对时 `snapshot` 拿节点树 + 截图对照
 4. 脚本卡死用 `stop`
-5. 修代码后重复 `run`，直到 logs 符合预期
+5. 修代码 → **再次 `write` 同步** → 再 `run` / `run-file`，直到 logs 符合预期
 
 ```powershell
 # Windows
@@ -168,13 +185,14 @@ bash tools/deeke-device.sh stop
 | 方式 | 适用 |
 |------|------|
 | VSCode DeekeScript 插件 + WebSocket 8088 | 人手动开发、项目同步 |
-| HTTP `/ai` + 本工具 | **AI 自动写脚本、自动调试** |
+| HTTP `/ai` + 本工具（含 `write`） | **AI 自动写脚本、同步到手机、自动调试** |
 
-AI 调试时不要依赖用户已开「开发模式」；只需手机开启「节点查看」（8080）和脚本所需权限。
+AI 调试时不要依赖用户已开「开发模式」；只需手机开启「节点查看」（8080）和脚本所需权限。改文件后用 `write`（`POST /ai/project/write`），不要假设 VSCode 插件已同步。
 
 ## 交付前自检
 
 - [ ] 已连接设备（`status` 返回 `code: 0`）
-- [ ] 关键逻辑已在真机 `run` 过，`logs` 无未处理错误
+- [ ] 本次改动的工程文件已 `write` 同步到手机（若用了 `run-file` 或交付给用户在手机执行）
+- [ ] 关键逻辑已在真机 `run` / `run-file` 过，`logs` 无未处理错误
 - [ ] 找节点类脚本至少验证过一次 `UiSelector` 结果
 - [ ] 若用户环境无法连接，已说明需开启的权限，并仍交付完整代码

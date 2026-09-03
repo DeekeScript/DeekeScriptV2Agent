@@ -57,7 +57,7 @@ DeekeScript Pro 做两件事，彼此解耦：
 - 不要把 Demo 的 `permission.hint('请在文件 xxx 编写业务')` 写进产物。
 - 颜色、背景、圆角、宽高只写在 `style` 里，不要写在组件根上。`button` 换色用 `style.background`，不写则跟 `window.theme.primary`（默认 `#006A65`）。禁止声称 button 没有 background。
 - 用户指定主题色时：入口 `window.theme.primary`、`title.background`、`statusBar.background`、`tabBar.selectedColor`、**每个 button 的 `style.background`** 都改成该色。不要照抄配方里的 `#006A65`。
-- **编写或调试 `tasks/*.js` 时**：先读 [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)。Windows 用 `tools/deeke-device.ps1 discover`；macOS/Linux 用 `tools/deeke-device.sh discover`（仅当本机 IP 为 `192.168.*` 才扫描）；扫不到则让用户填写 `http://IP:8080` 并 `set`。连上后用 `/ai/run` 实机验证，根据 `logs` 迭代修复后再交付。
+- **编写或调试 `tasks/*.js` 时**：先读 [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)。Windows 用 `tools/deeke-device.ps1 discover`；macOS/Linux 用 `tools/deeke-device.sh discover`（仅当本机 IP 为 `192.168.*` 才扫描）；扫不到则让用户填写 `http://IP:8080` 并 `set`。**修改或新建工程文件后，必须用 `write`（`POST /ai/project/write`）同步到手机**，再用 `/ai/run` 或 `run-file` 实机验证，根据 `logs` 迭代修复后再交付。短片段验证可用 `run` 直接传代码，不必先同步。
 - **生成 `floatWindow.menus` 时**：必读 [`floatWindow.md`](./01-ui/capabilities/floatWindow.md) 的 **关闭任务底层逻辑** + [`float-window.md`](./03-recipes/float-window.md)。手动停 → `FloatWindow.stopTask()`；自动停 → `tasks/*.js` 里 `Engines.closeAll()`。**同一轮**写出 JSON + JS 绑定。
 
 ## 输出形态

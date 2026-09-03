@@ -4,12 +4,13 @@
 #            (or pwsh tools/deeke-device.ps1 discover if PowerShell 7+ is installed)
 param(
     [Parameter(Position = 0)]
-    [ValidateSet('discover', 'set', 'status', 'snapshot', 'run', 'run-file', 'stop', 'help')]
+    [ValidateSet('discover', 'set', 'status', 'snapshot', 'run', 'run-file', 'write', 'stop', 'help')]
     [string]$Command = 'help',
 
     [string]$BaseUrl,
     [string]$Script,
     [string]$ScriptFile,
+    [string]$File,
     [int]$Type = 0,
     [switch]$Image,
     [int]$Timeout = 60000,
@@ -120,8 +121,9 @@ switch ($Command) {
                 'set -BaseUrl [url]  - save device URL',
                 'status    - device status and permissions',
                 'snapshot  - UI nodes and screenshot',
+                'write -File tasks/x.js  - sync local file to phone (POST /ai/project/write)',
                 'run -Script "..."  - execute DeekeScript code',
-                'run-file -ScriptFile tasks/x.js  - execute project file',
+                'run-file -ScriptFile tasks/x.js  - execute project file (must write first)',
                 'stop      - stop running script'
             )
             macHint  = 'On macOS without pwsh, use: bash tools/deeke-device.sh discover'
@@ -252,6 +254,22 @@ switch ($Command) {
         Write-Json (Invoke-DeekeApi -Method Post -Path '/ai/run-file' -Body @{
                 file    = $ScriptFile
                 timeout = $Timeout
+            })
+    }
+
+    'write' {
+        $localPath = if ($File) { $File } elseif ($ScriptFile) { $ScriptFile } else { $null }
+        if (-not $localPath) { throw 'Missing -File, e.g. write -File tasks/sample.js' }
+        if (-not (Test-Path -LiteralPath $localPath -PathType Leaf)) {
+            throw "Local file not found: $localPath"
+        }
+        $remotePath = ($localPath -replace '\\', '/').TrimStart('./')
+        $bytes = [System.IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $localPath))
+        $b64 = [Convert]::ToBase64String($bytes)
+        Write-Json (Invoke-DeekeApi -Method Post -Path '/ai/project/write' -Body @{
+                file    = $remotePath
+                content = $b64
+                isDir   = $false
             })
     }
 

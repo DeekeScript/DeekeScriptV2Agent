@@ -166,11 +166,39 @@ UI 节点树。`type` 控制**简单 / 复杂模式**（窗口范围），与脚
 
 ### POST `/ai/project/write`
 
-写入文件（`content` 为 Base64 编码）。
+**把电脑侧写好的文件同步到手机项目目录**（与 VSCode 插件「文件同步」等价，走 HTTP）。
+
+请求：
 
 ```json
-{ "file": "tasks/test.js", "content": "Y29uc29sZS5sb2coJ3Rlc3QnKTs=" }
+{
+  "file": "tasks/test.js",
+  "content": "Y29uc29sZS5sb2coJ3Rlc3QnKTs=",
+  "isDir": false
+}
 ```
+
+| 字段 | 说明 |
+|------|------|
+| `file` | 相对项目根的路径，如 `tasks/douyin_like.js`、`pages/home/page.js` |
+| `content` | 文件内容的 **Base64**（UTF-8 文本先编码再 Base64） |
+| `isDir` | 可选；`true` 时只创建目录，可省略 `content` |
+
+响应：`{ "file", "isDir", "message": "写入成功" }`。
+
+命令行（推荐）：
+
+```powershell
+# Windows — 把本地文件同步到手机同名路径
+powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 write -File "tasks/test.js"
+```
+
+```bash
+# macOS / Linux
+bash tools/deeke-device.sh write --file "tasks/test.js"
+```
+
+**硬规则**：在电脑上新建或修改工程文件后，若要用手机执行 / 看界面，**必须先** `write` 同步到手机，再 `run-file` 或让用户刷新页面。只改电脑磁盘、不同步，手机仍是旧文件。
 
 ## AI 调试推荐组合
 
@@ -178,8 +206,9 @@ UI 节点树。`type` 控制**简单 / 复杂模式**（窗口范围），与脚
 |------|------|
 | 连上设备 | `GET /ai/status`（看 `accessibilityQuick`） |
 | 看界面 | `GET /ai/snapshot?type=0&image=1`（不够再升 `type` 或切换快速模式） |
+| **同步文件** | `POST /ai/project/write`（或工具 `write`） |
 | 验证选择器 | `POST /ai/run` 短脚本 + `console.log` |
-| 跑完整任务 | `POST /ai/run-file` 或同步后执行 |
+| 跑完整任务 | `POST /ai/run-file`（须已同步该文件） |
 | 中断 | `POST /ai/stop` |
 
 ## curl 示例
@@ -188,6 +217,9 @@ UI 节点树。`type` 控制**简单 / 复杂模式**（窗口范围），与脚
 curl -s "http://192.168.1.113:8080/ai/status"
 curl -s "http://192.168.1.113:8080/ai/snapshot?type=0&image=1"
 curl -s -X POST "http://192.168.1.113:8080/ai/run" -H "Content-Type: application/json" -d "{\"script\":\"console.log(123);\",\"timeout\":30000}"
+# 同步文件（content 为 Base64）
+curl -s -X POST "http://192.168.1.113:8080/ai/project/write" -H "Content-Type: application/json" \
+  -d "{\"file\":\"tasks/test.js\",\"content\":\"Y29uc29sZS5sb2coMTIzKTs=\"}"
 ```
 
 完整流程见 [`00-core/ai-device-debug.md`](../00-core/ai-device-debug.md)。
