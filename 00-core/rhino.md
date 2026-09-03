@@ -8,7 +8,7 @@
 |------|------|
 | 函数 | `function foo() {}`；对象方法 `onLoad: function (params) {}`。Demo 里的方法简写 `onLoad() {}` 也可以 |
 | 变量 | `var`、`let` |
-| 模块 | `require('common/hello.js')`、`module.exports = { ... }` |
+| 模块 | `require('../common/hello.js')`（优先相对路径）、`module.exports = { ... }` |
 | 控制流 | `if` / `for` / `while` / `switch` / `try/catch` |
 | 逻辑 | `===`、`\|\|`、`&&`、三元 `a ? b : c` |
 | 定时 | `setTimeout`、`setInterval`、`clearTimeout`、`clearInterval` |
@@ -29,7 +29,7 @@ module.exports = {
 
 ```javascript
 // pages/home/page.js
-let hello = require('common/hello.js');
+let hello = require('../../common/hello.js');
 
 Page({
   data: {

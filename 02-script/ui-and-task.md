@@ -7,7 +7,7 @@
 `pages/*/page.js`：
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../../common/permission.js');
 
 Page({
   data: {
@@ -28,7 +28,7 @@ Page({
 `tasks/xxx.js`：
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 if (!permission.ensureRun()) {
 } else {
   let keyword = Storage.get('myapp.keyword');
@@ -51,7 +51,7 @@ if (!permission.ensureRun()) {
 Engines.executeScript('tasks/xxx.js');
 ```
 
-不以 `./`、`../` 开头时，相对**项目根**。不要写磁盘绝对路径。完整规则见 [`require.md`](require.md) 与 [`api/Engines.md`](api/Engines.md)。
+不以 `./`、`../` 开头时，相对**项目根**。不要写磁盘绝对路径。`require` 优先相对当前文件，见 [`require.md`](require.md)；`executeScript` 见 [`api/Engines.md`](api/Engines.md)。
 
 ## 不要把脚本塞进页面 `action`
 

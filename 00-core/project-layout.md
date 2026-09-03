@@ -42,7 +42,7 @@ your-project/
 | `pages/<id>/page.js` | 做界面时是 | `Page({})`：数据、生命周期、点击 |
 | `components/<id>/component.json` | 用自定义组件时是 | 必须含 `"component": true` |
 | `components/<id>/component.js` | 用自定义组件时是 | `Component({})` |
-| `common/*.js` | 否 | 公共模块，`require('common/xxx.js')` |
+| `common/*.js` | 否 | 公共模块；`require` **优先相对路径**，如 `tasks` 里 `require('../common/xxx.js')` |
 | `html/` | 否 | 本地 HTML，给 `webview` 的 `src` 用 |
 
 `homePage` 指向的目录（如 `pages/home`）**不必**再写入入口的 `pages` 数组。其它要跳转的页必须成对存在，并在 `pages` 里注册（或跳转时直接写文件夹路径）。

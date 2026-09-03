@@ -6,7 +6,7 @@
 
 ## 流程
 
-1. `require('common/permission.js')`，调用 `ensureRun()`。默认检查无障碍 + 悬浮窗；未开则弹窗引导并结束。
+1. `require('../common/permission.js')`，调用 `ensureRun()`。默认检查无障碍 + 悬浮窗；未开则弹窗引导并结束。
 2. 用 `Storage.get` / `getInteger` 等读取页面写入的配置。键名加项目前缀，见 [`ui-and-task.md`](ui-and-task.md)。
 3. （可选）`FloatWindow.on` 绑定开始/停止/跳过等——**与 JSON menus 同一轮、同一文件**。示例：`stop` → `FloatWindow.stopTask()`。完整菜单见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。
 4. `while` 里找节点、点击、休眠。循环条件同时看次数和跳过标志。点悬浮球「停止」会关掉整个运行时，循环自然结束。
@@ -14,7 +14,7 @@
 ## 完整最小 `tasks/xxx.js`
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 
 if (!permission.ensureRun()) {
   // 无障碍或悬浮窗未开启，ensureRun 已弹窗引导
@@ -54,7 +54,7 @@ if (!permission.ensureRun()) {
 页面侧保存配置并启动（`pages/*/page.js`）：
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../../common/permission.js');
 
 Page({
   data: {

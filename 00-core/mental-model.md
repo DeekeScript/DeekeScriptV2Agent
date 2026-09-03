@@ -45,7 +45,7 @@ Page({
 
 ```javascript
 // tasks/sample.js
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 if (!permission.ensureRun()) {
   // 无障碍 / 悬浮窗未开，已弹窗引导
 } else {

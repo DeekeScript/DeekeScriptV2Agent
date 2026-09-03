@@ -13,6 +13,7 @@ TYPE="${DEEKE_SNAPSHOT_TYPE:-0}"
 BASE_URL=""
 SCRIPT=""
 SCRIPT_FILE=""
+FILE=""
 
 shift || true
 while [[ $# -gt 0 ]]; do
@@ -20,6 +21,7 @@ while [[ $# -gt 0 ]]; do
     -BaseUrl|--base-url) BASE_URL="${2:-}"; shift 2 ;;
     -Script|--script) SCRIPT="${2:-}"; shift 2 ;;
     -ScriptFile|--script-file) SCRIPT_FILE="${2:-}"; shift 2 ;;
+    -File|--file) FILE="${2:-}"; shift 2 ;;
     -Timeout|--timeout) TIMEOUT_MS="${2:-60000}"; shift 2 ;;
     -Type|--type) TYPE="${2:-1}"; shift 2 ;;
     *) echo "Unknown option: $1" >&2; exit 1 ;;
@@ -151,8 +153,9 @@ cmd_help() {
     "set --base-url [url]  - save device URL",
     "status    - device status and permissions",
     "snapshot  - UI nodes and screenshot",
+    "write --file tasks/x.js  - sync local file to phone (POST /ai/project/write)",
     "run --script \"...\"  - execute DeekeScript code",
-    "run-file --script-file tasks/x.js  - execute project file",
+    "run-file --script-file tasks/x.js  - execute project file (must write first)",
     "stop      - stop running script"
   ]
 }
@@ -297,6 +300,34 @@ PY
   api_request POST "/ai/run-file" "$body" | pretty_json
 }
 
+cmd_write() {
+  local local_path remote_path body
+  local_path="${FILE:-$SCRIPT_FILE}"
+  if [[ -z "$local_path" ]]; then
+    echo "Missing --file, e.g. write --file tasks/sample.js" >&2
+    exit 1
+  fi
+  if [[ ! -f "$local_path" ]]; then
+    echo "Local file not found: $local_path" >&2
+    exit 1
+  fi
+  remote_path="${local_path#./}"
+  remote_path="${remote_path//\\//}"
+  body="$(python3 - "$remote_path" "$local_path" <<'PY'
+import json, sys, base64
+remote, path = sys.argv[1], sys.argv[2]
+with open(path, "rb") as f:
+    content = base64.b64encode(f.read()).decode("ascii")
+print(json.dumps({
+    "file": remote,
+    "content": content,
+    "isDir": False,
+}))
+PY
+)"
+  api_request POST "/ai/project/write" "$body" | pretty_json
+}
+
 cmd_stop() {
   api_request POST "/ai/stop" "{}" | pretty_json
 }
@@ -309,6 +340,7 @@ case "$COMMAND" in
   snapshot) cmd_snapshot ;;
   run) cmd_run ;;
   run-file) cmd_run_file ;;
+  write) cmd_write ;;
   stop) cmd_stop ;;
   *)
     echo "Unknown command: $COMMAND" >&2

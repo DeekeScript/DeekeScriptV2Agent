@@ -13,9 +13,12 @@
 | 5 | 表单用 `name` 绑定 `Page.data`；任务脚本用 `Storage` 读已保存的配置。 |
 | 6 | 底栏 Tab 切换用 `switchTab`，不要用 `navigate`。 |
 | 7 | JS 按 Rhino 1.8：`function` / `var` / `let`。颜色 `#RRGGBB`；尺寸数字是 dp，字号是 sp。 |
-| 8 | `require` 路径：`./`、`../` 相对当前文件，否则相对项目根。被引入文件用 `module.exports`。 |
-| 9 | 改 `page.json` / `page.js` 后必须项目同步，并在手机端点刷新，界面才会更新。 |
-| 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。运行中若没有 `stop`，框架会自动补一个。 |
+| 8 | `require` **优先** `./`、`../` 相对当前文件（`tasks` → `../common/xxx.js`；`pages/home` → `../../common/xxx.js`）。不以 `./`/`../` 开头时相对项目根。禁止磁盘绝对路径。被引入文件用 `module.exports`。 |
+| 9 | 改 `page.json` / `page.js` 后必须同步到手机，并在手机端点刷新，界面才会更新。人用 VSCode 插件同步；**AI 用** `POST /ai/project/write` 或 `tools/deeke-device.* write`（见 [`ai-device-debug.md`](./ai-device-debug.md)）。 |
+| 9b | 改 `tasks/*.js` 等脚本后，若要用 `run-file` 或交付给用户在手机执行，必须先 `write` 同步；仅用 `run` 传代码字符串时可跳过。 |
+| 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。 |
+| 10b | 悬浮球菜单每项须在 `FloatWindow.on` 里绑定；与 JSON **同一轮**生成 JS。见 [`float-window.md`](../03-recipes/float-window.md)。 |
+| 10c | 手动停：悬浮窗菜单 `FloatWindow.stopTask()`。自动停：在 `tasks/*.js` 里 `Engines.closeAll()`（须在任务脚本线程）。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#关闭任务底层逻辑必读)。 |
 | 11 | 入口 JSON 必须写 `icon`，且该路径相对项目根的**文件必须作为工程文件生成**（如 `"icon": "img/xhs.svg"` 就要写出 svg 内容）。首页、悬浮球、打包都读这个字段。 |
 | 12 | 组件的颜色、背景、圆角、宽高写在 `style` 对象里。`button` 换色用 `style.background`。见 [`_common.md`](../01-ui/components/_common.md)。 |
 | 13 | 用户指定主题色时，入口写 `window.theme.primary`，再改导航栏 `title.background`、状态栏、底栏 `selectedColor`。所有 `button` 建议写 `style.background`。不要沿用默认绿 `#006A65`。 |

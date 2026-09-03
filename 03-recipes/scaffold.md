@@ -31,7 +31,7 @@ tasks/sample.js
 ### `tasks/sample.js`
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../common/permission.js');
 if (!permission.ensureRun()) {
 } else {
   console.log('sample 开始');
@@ -129,7 +129,7 @@ tasks/sample.js
 每个页面目录都要有 `page.js`，即使几乎是空的也要 `Page({})`。
 
 ```javascript
-let permission = require('common/permission.js');
+let permission = require('../../common/permission.js');
 
 Page({
   data: {
