@@ -21,6 +21,7 @@
 | [00-core/automation-loop.md](./00-core/automation-loop.md) | 编写或调试 `tasks/*.js`（闭环与何时问用户） |
 | [00-core/ai-device-debug.md](./00-core/ai-device-debug.md) | 连手机、`discover` / `write` / `run` 命令 |
 | [02-script/ai-http-api.md](./02-script/ai-http-api.md) | 查 HTTP `/ai` 接口字段 |
+| [00-core/demo-gallery.md](./00-core/demo-gallery.md) | 展厅 Demo 与生成产物：勿抄清单 |
 | [00-core/dev-workflow.md](./00-core/dev-workflow.md) | 用户明确问 VSCode 插件如何连接 / 同步 / 执行时 |
 | [tools/](./tools/) | 需要本机脚本发现设备、调用 `/ai` 时 |
 

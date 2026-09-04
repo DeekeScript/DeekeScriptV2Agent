@@ -42,8 +42,8 @@
 - 页面成对：`pages/<id>/page.json` + `page.js`。`homePage` 目录可不再放入入口 `pages`。
 - 入口必须写 `icon`，并**生成**该图片文件。不要写 `host` / `debug` / `apis` / `deekeScript-v2.json` / V1 `groups` / `hooks`。
 - **页面** JSON `action` 只允许：`navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl`。禁止在页面 action 里跑脚本。按钮用 `onTap` → `page.js` 里 `Engines.executeScript('tasks/xxx.js')`（或 `permission.runScript`）。
-- **悬浮窗** `menus[].action` 是另一套（`stop` / `hide` / `start` / `executeScript`），仅用户要自定义菜单时才写；与 `FloatWindow.on` **同一轮**生成。默认不写 `floatWindow`。
-- 停任务：菜单手动 → `FloatWindow.stopTask()`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`。未配 menus 时连点两次即可。
+- **悬浮窗** `menus[].action` 是另一套（`stop` / `hide` / `start` / `executeScript` 由框架处理）；自定义 `onTap` 项须与 `FloatWindow.on` **同一轮**生成。默认不写 `floatWindow`。
+- 停任务：菜单手动 → `FloatWindow.stopTask()` 或内置 `action:stop`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`。未配 menus 时连点两次即可。
 - 找节点：`UiSelector().text('发送').findOne()`；点击前一般先 `filter` 屏内。
 - 页面等待用 `setTimeout`；任务等待用 `System.sleep`。不要在 `page.js` 里 `System.sleep` 堵 UI。
 - 切 App 后台后的提示用 `FloatDialogs`；页面短提示用 `this.toast`；任务前台短提示可用 `System.toast`。

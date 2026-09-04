@@ -33,10 +33,10 @@ Engines.executeScript('tasks/xxx.js');
 | 场景 | API |
 |------|-----|
 | 任务内自动结束 | `Engines.closeAll()`（写在 `tasks/*.js`） |
-| 用户点菜单停止 | `FloatWindow.stopTask()` |
+| 用户点菜单停止 | `FloatWindow.stopTask()`，或 menus 内置 `"action":"stop"` |
 | 未配 menus | 连点悬浮球两次（不必再写 stop） |
 
-菜单回调里 `Engines.closeAll()` **无效**。
+菜单回调 / 页面按钮里 `Engines.closeAll()` **无效**。
 
 ## 注意
 

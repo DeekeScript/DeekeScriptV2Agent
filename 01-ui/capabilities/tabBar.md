@@ -85,7 +85,7 @@ this.setTabBarStyle({ hidden: true });
 
 ## 离开页恢复
 
-Demo 进入独立页时 `setTabBar({ items })` 创建底栏，离开时 `this.setTabBar()` 写回入口配置。
+进入独立页时可 `setTabBar({ items })` 创建底栏，离开时 `this.setTabBar()` 写回入口配置。
 
 ```javascript
 Page({

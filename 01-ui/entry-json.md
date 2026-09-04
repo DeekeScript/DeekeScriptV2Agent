@@ -99,11 +99,13 @@
 | id | String | 给 `FloatWindow.on` / `update` 用 |
 | icon | String | 内置名 `close` / `play` / `hide`，或工程内图片 |
 | label | String | 图标下方短文案 |
-| action | String | 内置：`stop` / `hide` / `start` / `executeScript` |
+| action | String | 内置：`stop` / `hide` / `start` / `executeScript`（框架处理，不必再 `on`） |
 | file | String | `action` 为 `executeScript` 时的脚本路径 |
-| onTap | String | 点击时调用的 JS 函数名 |
+| onTap | String | 自定义点击；**必须**在 JS 里 `FloatWindow.on` 绑定 |
 | show | String | `always`（默认）、`running`、`idle` |
 | background | String | 圆形底色，如 `#FFFFFF` |
+
+`action: "stop"` 等同手动停整项任务（≈ `FloatWindow.stopTask()`）。自定义项不要只写 `onTap` 不绑 `on`。
 
 完整方法见 [悬浮球](./capabilities/floatWindow.md)。
 

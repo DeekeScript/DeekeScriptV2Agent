@@ -2,7 +2,16 @@
 
 **用户没提悬浮窗菜单 / 跳过 / 自定义停止 → 不要写 `floatWindow`。** 未配 menus 时连点两次即可停。
 
-仅当用户明确要菜单时用本配方。`menus` 与 `FloatWindow.on` **同一轮**交付，缺 JS 就点不动。停任务规则见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#停任务权威)。
+仅当用户明确要菜单时用本配方。停任务规则见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#停任务权威)。
+
+两种停法任选其一（不要混用 closeAll）：
+
+| 写法 | 说明 |
+|------|------|
+| `"action": "stop"` | 框架内置，不必 `FloatWindow.on` |
+| `"onTap": "onStop"` + `FloatWindow.on({ stop: … stopTask() })` | 自定义回调 |
+
+带 `onTap` 的自定义项必须与 `FloatWindow.on` **同一轮**交付，缺 JS 就点不动。
 
 ## 何时需要配 floatWindow
 
