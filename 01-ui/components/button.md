@@ -19,6 +19,16 @@
 | loadingText | String | 加载时替换按钮文案，不写则保留原文字 |
 | ripple | Boolean | 按压涟漪，默认 `true` |
 
+## 什么时候用大 / 小
+
+| 场景 | size | 说明 |
+|------|------|------|
+| 页内唯一主 CTA（保存、开始任务、添加） | 默认大 / `lg` | 一页通常 **最多 1 个** 大实心主按钮 |
+| 列表行、卡片内次要操作（删除、编辑、更多） | **必须 `sm`** | 禁止一行两个默认大按钮并排 `weight: 1` 撑满 |
+| 次要但独立成行 | `sm` 或 `md` + `outline` | 弱于主 CTA |
+
+启停开关用 [`switch`](./switch.md)，不要用「启用 / 停用」按钮。列表管理见 [`list-manage.md`](../../03-recipes/list-manage.md)。
+
 默认绿（未指定主题时）：
 
 ```json
@@ -31,8 +41,15 @@
 { "type": "button", "text": "保存", "style": { "background": "#1565C0", "color": "#FFFFFF" }, "onTap": "onSave" }
 ```
 
+列表内删除（小按钮）：
+
+```json
+{ "type": "button", "text": "删除", "size": "sm", "onTap": "onDelete", "style": { "background": "#FFE8EC", "color": "#C62828" } }
+```
+
 ## 注意
 
 - `onTap` 与 `onClick` 是同一事件。同时写 `onTap` 和 `action` 时：**先执行 JS，再执行 action**。细节见 [`events.md`](../events.md)、[`page-json.md`](../page-json.md#json-action)。
 - `size` 中英文别名：`sm`=`小`，`md`=`中`，`lg`=`大`。不写即为大按钮。
 - 禁止 `{ "type": "button", "background": "#1565C0" }`。根上的 `background` 无效。
+- 列表 / 工具行次要操作不写 `size` 会默认变大、显得又挤又丑——生成时主动写 `"size": "sm"`。

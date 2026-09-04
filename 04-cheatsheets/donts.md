@@ -36,6 +36,9 @@
 | 把 `background` / `color` / `width` 写在组件根上 | 写进 `style`。见 [`_common.md`](../01-ui/components/_common.md) |
 | 用户要蓝色，按钮仍是默认绿，或声称 button 没有 background | 入口写 `window.theme.primary`。`button` 建议写 `style.background`。导航栏、状态栏、底栏 `selectedColor` 也要一起改 |
 | 把搜索框点击变红当成组件自带红底 | 多为 `theme.primary` 继承到聚焦色。艳色品牌 primary 时给 search / input 单独写 `style.focusColor`（中性色）。见 [`search.md`](../01-ui/components/search.md)、[`_common.md`](../01-ui/components/_common.md) |
+| **用「启用/停用」大按钮做布尔开关** | 用 `"type": "switch"`（含 list 行内）。见 [`switch.md`](../01-ui/components/switch.md)、[`list-manage.md`](../03-recipes/list-manage.md) |
+| **列表行次要操作用默认大按钮**（删除、编辑并排撑满） | 必须 `"size": "sm"`。一页最多一个大实心主 CTA。见 [`button.md`](../01-ui/components/button.md) |
+| **底栏已有的页，首页再放「去配置/去评论」等跳转** | 首页只留摘要 + 主操作；宫格仅留给不在 `bottomMenus` 的二级页。见 [`workbench.md`](../03-recipes/workbench.md) |
 | Switch 写 `style.background` 给整行刷底 | Switch / checkbox / radio 换色只写 `style.color`，不要写 `background` |
 | 检测失败时 `continue` 但不递增计数、不设 retry 上限 | 加 `retryCount` 或 `processed++`，超过 N 次 `break`，避免无限 toast |
 | **同一条视频/帖子失败后不前进**（进主页弹窗、读不到抖音号又重进） | 以内容条为进度：失败也 `processed++` 并划走下一条；进主页单次尝试。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md) |

@@ -66,11 +66,12 @@
 | 文件 | 产物 |
 |------|------|
 | [03-recipes/scaffold.md](./03-recipes/scaffold.md) | 从 0 最小工程 |
-| [03-recipes/workbench.md](./03-recipes/workbench.md) | 首页工作台 |
+| [03-recipes/workbench.md](./03-recipes/workbench.md) | 首页工作台（反冗余：底栏页不重复入口） |
 | [03-recipes/settings-form.md](./03-recipes/settings-form.md) | 配置页 + Storage |
 | [03-recipes/run-task-from-ui.md](./03-recipes/run-task-from-ui.md) | 按钮启动任务 |
 | [03-recipes/float-window.md](./03-recipes/float-window.md) | 悬浮球 menus + on（仅需要时） |
 | [03-recipes/list-load-more.md](./03-recipes/list-load-more.md) | 列表触底加载 |
+| [03-recipes/list-manage.md](./03-recipes/list-manage.md) | 列表启停（switch）+ 小删除按钮 |
 | [03-recipes/custom-picker.md](./03-recipes/custom-picker.md) | 自定义选择组件 |
 | [03-recipes/comment-input.md](./03-recipes/comment-input.md) | 评论/发帖输入（点击后重取） |
 

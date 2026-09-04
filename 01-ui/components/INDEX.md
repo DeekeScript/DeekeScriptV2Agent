@@ -33,14 +33,14 @@ overlay（`popup` / `actionSheet` / `dialog` / `modal` / `popover` / `toast` / `
 
 | type | 一句话 | 链接 |
 |------|--------|------|
-| button | 主操作按钮 | [button](./button.md) |
+| button | 主操作；列表次要用 size sm | [button](./button.md) |
 | input | 单行输入 | [input](./input.md) |
 | textarea | 多行输入 | [textarea](./textarea.md) |
 | search / searchBar | 圆角搜索框 | [search](./search.md) |
 | range | 最小值～最大值双输入 | [range](./range.md) |
 | stepper | 加减数字 | [stepper](./stepper.md) |
 | slider | **可拖**滑动条（运行速度、概率） | [slider](./slider.md) |
-| switch | 布尔开关 | [switch](./switch.md) |
+| switch | 布尔开关；列表启停用它 | [switch](./switch.md) |
 | select | 单选下拉 | [select](./select.md) |
 | checkbox | 单勾选为布尔，带 options 为数组 | [checkbox](./checkbox.md) |
 | radio | 一组里只能选一项 | [radio](./radio.md) |

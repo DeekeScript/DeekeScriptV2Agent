@@ -20,7 +20,7 @@
 | `swiper` | `bind` `item` `height` `autoplay` | 走马灯 |
 | `imageViewer` | `showIf` `urls` `index` | 全屏看图 overlay |
 | `skeleton` | `rows` `avatar` `showIf` | 骨架屏 |
-| `button` | `text` `size` `onTap` `action` `loading` | 主操作。跑脚本用 `onTap` |
+| `button` | `text` `size` `onTap` `action` `loading` | 主操作。列表次要必须 `sm`；跑脚本用 `onTap` |
 | `input` | `name` `label` `hint` `variant` `inputType` `password` | 单行。`name` 对应 `data` |
 | `textarea` | `name` `minLines` `variant` | 多行 |
 | `search` / `searchBar` | `name` `hint` `onChange` `onSearch` | 搜索框 |
@@ -29,7 +29,7 @@
 | `slider` | `name` `min` `max` `unit` `marks` | **可拖**数值。运行速度、概率 |
 | `progress` / `progressBar` | `name` `value` `unit` | **只读**进度，不能拖 |
 | `progressCircle` | `name` `value` `size` | **只读**圆环 |
-| `switch` | `name` `label` | 布尔开关 |
+| `switch` | `name` `label` | 布尔开关；启停用它，不要用启用/停用按钮 |
 | `select` | `name` `options` | 下拉单选 |
 | `checkbox` | `name` `options?` | 无 options 为布尔；有则为多选数组 |
 | `radio` | `name` `options` | 一组单选 |
