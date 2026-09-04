@@ -2,7 +2,7 @@
 
 用「某个通用 id / 文案存在」判断当前是否在目标页，容易误判。评论列表、个人页、半屏面板里常复用与推荐流相同的 `title`、昵称、`赞` 等节点。
 
-相关：[`stale-node-after-click.md`](./stale-node-after-click.md)、[`skip-on-item-failure.md`](./skip-on-item-failure.md)、[`automation-loop.md`](../../00-core/automation-loop.md)、[`UiSelector.md`](../api/UiSelector.md)。
+相关：[`stale-node-after-click.md`](./stale-node-after-click.md)、[`skip-on-item-failure.md`](./skip-on-item-failure.md)、[`device.md`](../../00-core/device.md)、[`UiSelector.md`](../api/UiSelector.md)。
 
 ## 硬规则
 

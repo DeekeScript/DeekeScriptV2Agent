@@ -64,7 +64,7 @@ Page({
 });
 ```
 
-`Engines.executeScript` 路径相对**项目根**。完整配方见 [`run-task-from-ui.md`](../03-recipes/run-task-from-ui.md)。
+`Engines.executeScript` 路径相对**项目根**。完整写法见 [`ui-and-task.md`](../02-script/ui-and-task.md)。
 
 **禁止**：在 `onTap` 里写长时间无障碍循环；业务放 `tasks/*.js`。
 
@@ -85,4 +85,4 @@ Page({
 ## 相关
 
 - 按钮样式：[`button.md`](./components/button.md)
-- 页面方法全集：[`page-js.md`](./page-js.md)、速查 [`page-methods.md`](../04-cheatsheets/page-methods.md)
+- 页面方法全集：[`page-js.md`](./page-js.md)、速查 [`ui.md`](../04-cheatsheets/ui.md#页面-this-方法)

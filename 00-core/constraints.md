@@ -2,7 +2,7 @@
 
 生成或修改任何文件前对照这篇。违反则无法同步、页面无法加载、或任务跑不起来。
 
-细节：[心智模型](./mental-model.md)、[目录](./project-layout.md)、[Rhino](./rhino.md)、[上下文边界](./context-split.md)。连机、同步、验证守 [`automation-loop.md`](./automation-loop.md)。展厅 Demo 勿抄清单：[`demo-gallery.md`](./demo-gallery.md)。
+细节：[运行时](./runtime.md)、[目录](./project-layout.md)。连机、同步、验证守 [`device.md`](./device.md)。展厅 Demo 勿抄清单：[`demo-gallery.md`](./demo-gallery.md)。
 
 ## MUST
 
@@ -16,16 +16,16 @@
 | 6 | 底栏 Tab 用 `switchTab`，不要用 `navigate`。 |
 | 7 | Rhino 1.8：可用 `function` / 箭头 / `var` / `let`。颜色 `#RRGGBB`；尺寸 dp，字号 sp。 |
 | 8 | `require` **优先** `./`、`../` 相对当前文件。不以 `./`/`../` 开头时相对项目根。禁止磁盘绝对路径。导出用 `module.exports`。 |
-| 9 | **先连手机，再编写**。改完文件就 **`write` 同步**到手机；写完后必须按 [`automation-loop.md`](./automation-loop.md) 调试验证再交付。仅 `run` 传代码字符串做短验证时可跳过本次 `write`。 |
-| 10 | **默认不写** `floatWindow` / `menus`。未配时连点两次停止（第一次变关闭图标，**3 秒内**再点）。用户要自定义菜单时：`menus` 最多 5 个；每项用 `onTap`，与 `FloatWindow.on` **同一轮**交付。停止回调写 `FloatWindow.stopTask()`。见 [`float-window.md`](../03-recipes/float-window.md)。 |
+| 9 | **先连手机，再编写**。改完文件就 **`write` 同步**到手机；写完后必须按 [`device.md`](./device.md) 调试验证再交付。仅 `run` 传代码字符串做短验证时可跳过本次 `write`。 |
+| 10 | **默认不写** `floatWindow` / `menus`。未配时连点两次停止（第一次变关闭图标，**3 秒内**再点）。用户要自定义菜单时：`menus` 最多 5 个；每项用 `onTap`，与 `FloatWindow.on` **同一轮**交付。停止回调写 `FloatWindow.stopTask()`。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md)。 |
 | 11 | 停任务：菜单手动 → `FloatWindow.stopTask()`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`（须在任务脚本线程）。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#停任务权威)。 |
 | 12 | 入口必须写 `icon`，且该路径的**文件必须生成**。 |
 | 13 | 颜色、背景、圆角、宽高写在 `style`。`button` 换色用 `style.background`。见 [`_common.md`](../01-ui/components/_common.md)。 |
 | 14 | 用户指定主题色时：入口 `window.theme.primary`、导航栏、状态栏、底栏 `selectedColor`、各 `button` 的 `style.background` 一并改。不要沿用默认 `#006A65`。 |
 | 15 | 页面等待用 `setTimeout`；任务等待用 `System.sleep`。不要在 `page.js` 里用 `System.sleep` 阻塞 UI。 |
 | 16 | **任务验证完成条件**（设备 `status` 正常）：`tasks/*.js` 必须在目标 App / 目标页跑过片段 `run`，回复中须有关键节点 `text`/`desc`/`bounds` 的 logs。操作第三方 App：写选择器前必须 `snapshot`（或 `/ai/nodes`），再验证点击/输入，通过后 `run-file`（可用数量=1）。仅 `write`、仅权限、仅 `Storage` **不算**已调试。用户任务本身含搜索/点赞/评论/刷流时，启动目标 App 做片段验证**不必再问**。 |
-| 17 | **底栏根页**展示 Storage 派生数据（摘要、列表、记录）时，必须在 `onShow` 里重新读取再 `setData`。切 Tab 不走 `onLoad`。见 [`page-js.md`](../01-ui/page-js.md)、[`ui-and-a11y-app.md`](../03-recipes/ui-and-a11y-app.md)。 |
-| 18 | 操作第三方 App：用目标页互斥节点判断是否在目标界面。用户要求做完回到本 App 时，任务结束调用 `App.backApp()` 再 `Engines.closeAll()`。见 [`ui-and-a11y-app.md`](../03-recipes/ui-and-a11y-app.md)。 |
+| 17 | **底栏根页**展示 Storage 派生数据（摘要、列表、记录）时，必须在 `onShow` 里重新读取再 `setData`。切 Tab 不走 `onLoad`。见 [`page-js.md`](../01-ui/page-js.md)、[`workbench.md`](../03-recipes/workbench.md)。 |
+| 18 | 操作第三方 App：用目标页互斥节点判断是否在目标界面。用户要求做完回到本 App 时，任务结束调用 `App.backApp()` 再 `Engines.closeAll()`。见 [`workbench.md`](../03-recipes/workbench.md)、[`page-state.md`](../02-script/pitfalls/page-state.md)。 |
 | 19 | **业务代码用对象 + 方法简写**（`common/*.js`、`tasks/*.js`）：`module.exports = { like() {} }` 或 `let task = { run() {} }; task.run()`。禁止文件顶层堆 `function like() {}`。API 回调与 `.filter` 仍可用 `function`。仅 `common/permission.js` 按 snippet 整份复制除外。见 [`code-org.md`](../02-script/code-org.md)。 |
 
 ## MUST NOT

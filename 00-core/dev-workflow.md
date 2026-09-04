@@ -2,7 +2,7 @@
 
 生成代码时必须遵守下列运行边界。用户明确问 VSCode 插件怎么点时，再用文末「插件命令」回答。
 
-自动调试、写文件到手机：优先 [`ai-device-debug.md`](./ai-device-debug.md)（`POST /ai/project/write` + `run` / `run-file`）。
+自动调试、写文件到手机：优先 [`device.md`](./device.md)（`POST /ai/project/write` + `run` / `run-file`）。
 
 ## 运行边界（生成时必守）
 
@@ -36,4 +36,4 @@
 
 同步后手机点 **刷新**；有界面的工程进入 `homePage`。
 
-工程结构见 [目录](./project-layout.md)，语法见 [Rhino](./rhino.md)。
+工程结构见 [目录](./project-layout.md)，语法见 [运行时](./runtime.md)。

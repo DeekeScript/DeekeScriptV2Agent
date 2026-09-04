@@ -27,4 +27,4 @@
 | `new Intent(action, uri)` | 如 `new Intent(Intent.ACTION_VIEW, Uri.parse("myapp://second_activity"))` |
 | `Intent.open()` | 无可靠参数说明，不要编造调用方式 |
 
-界面里打开外链不要自己拼 Intent，用 JSON `action: { "type": "openUrl", "url": "..." }` 或 `this.openUrl(url)`，见 [`action-types.md`](../../04-cheatsheets/action-types.md)。
+界面里打开外链不要自己拼 Intent，用 JSON `action: { "type": "openUrl", "url": "..." }` 或 `this.openUrl(url)`，见 [`ui.md`](../../04-cheatsheets/ui.md#json-action)。

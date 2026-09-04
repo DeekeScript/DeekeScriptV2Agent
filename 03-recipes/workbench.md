@@ -2,7 +2,7 @@
 
 首页结构：导航标题 + **指标摘要** +（可选）**仅不在底栏的功能宫格** + 最近记录 / 主操作。底栏用入口 `bottomMenus`，切 Tab 用 `switchTab`，不要 `navigate`。
 
-相关：[`component-types.md`](../04-cheatsheets/component-types.md)、[`action-types.md`](../04-cheatsheets/action-types.md)、[`tabBar.md`](../01-ui/capabilities/tabBar.md)、[`donts.md`](../04-cheatsheets/donts.md)。
+相关：[`ui.md`](../04-cheatsheets/ui.md)、[`tabBar.md`](../01-ui/capabilities/tabBar.md)、[`form-name.md`](../01-ui/pitfalls/form-name.md)、[`code-org.md`](../02-script/code-org.md)。
 
 ## 反冗余（必遵）
 
@@ -198,3 +198,29 @@ Page({
 - 列表为空不会自动 Empty，需要空态时另写 `"type": "empty"` + `showIf`。
 - 底栏根页之间用 `switchTab`；宫格进**非底栏**功能页用 `navigate`（`{{item.page}}`），不要一律 `switchTab` 到设置。
 - 主 CTA 用一个大按钮即可；次要操作用 `sm`，见 [`button.md`](../01-ui/components/button.md)。
+- 底栏根页展示 Storage 派生数据必须在 **`onShow` 再读**再 `setData`（切 Tab 不走 `onLoad`）。见 [`page-js.md`](../01-ui/page-js.md)。
+
+## 同时有无障碍任务
+
+常见形态：首页摘要 + 开始；设置表单；可启用列表；操作记录。任务 `launch` 目标 App，用户要求做完回本 App 时 `App.backApp()` 再 `Engines.closeAll()`。
+
+```
+pages/home      摘要 + 唯一「开始」
+pages/settings  关键词、数量、概率、休眠 → Storage
+pages/comments  话术列表 + switch 启停
+pages/logs      只展示记录
+common/store.js 所有 Storage 键（项目+模块前缀）
+common/<app>/   页面态、对象操作
+tasks/*.js      权限 → 读配置 → 有界循环 → backApp
+```
+
+| 界面 | 任务 |
+|------|------|
+| `page.js` 只存配置、刷新、`permission.runScript` | 包名常量；先 `App.isAppInstalled` 再 `launch` |
+| 开始前校验必填，用 `this.toast` | **不要** `currentPackage()` 判断是否在目标 App，用互斥节点。见 [`page-state.md`](../02-script/pitfalls/page-state.md) |
+| 列表项稳定 `id`；`e.item` / `e.index` | `waitFindOne()` 禁止用于循环；用 `findOne` / `findOneBy(timeout)` |
+| `getObj` 数组先拷成纯对象再改再 `putObj` | 写选择器前 snapshot；点击前 `filter` 屏内 |
+| `putInteger`/`getInteger` 成对；整数先 `contains` | 刷流失败 skip。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md) |
+| | 输入：click → 重 find → `setText` → 校验。屏宽高用 `Device.*` |
+| | 已切目标 App：`FloatDialogs`；坐标点击前 `setFloatWindowClickable(false)` |
+| | 业务用对象方法，禁止顶层 `function`。见 [`code-org.md`](../02-script/code-org.md) |

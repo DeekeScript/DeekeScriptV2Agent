@@ -1,6 +1,6 @@
 # 内置组件
 
-生成 UI 时**先读完** [通用字段](./_common.md)，再只打开用到的组件文件。`background` / `color` / 宽高都在 `style` 里，不是组件根字段。事件写法见 [页面 JS](../page-js.md)。
+生成 UI 时**先读完** [通用字段](./_common.md)，字段速查 [ui.md](../../04-cheatsheets/ui.md)，再只打开用到的组件文件。`background` / `color` / 宽高都在 `style` 里，不是组件根字段。事件写法见 [页面 JS](../page-js.md)。
 
 底部 TabBar **不是** `body` 里的 `type`，写在入口 `bottomMenus`，见 [tabBar](../capabilities/tabBar.md)。
 

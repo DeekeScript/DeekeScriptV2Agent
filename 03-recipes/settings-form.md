@@ -2,7 +2,7 @@
 
 一页：`input` / `textarea` / `range` / `switch` / `slider`，保存到 `Storage`。输入会写回 `this.data`，点保存才持久化。任务脚本用同一 key 去 `Storage.get`。可调节数值必须用 `slider`，不要用只读的 `progress`。
 
-相关：[`Storage.md`](../02-script/api/Storage.md)、[`run-task-from-ui.md`](./run-task-from-ui.md)。
+相关：[`Storage.md`](../02-script/api/Storage.md)、[`ui-and-task.md`](../02-script/ui-and-task.md)。
 
 ## `pages/settings/page.json`
 

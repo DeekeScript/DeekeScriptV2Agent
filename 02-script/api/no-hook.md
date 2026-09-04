@@ -10,4 +10,4 @@
 
 动态改界面用 `setData`、Storage、Http。
 
-自检见 [`donts.md`](../../04-cheatsheets/donts.md)。
+硬规则见 [`constraints.md`](../../00-core/constraints.md)。

@@ -1,85 +1,50 @@
 # AI 生成契约
 
-本仓库是 DeekeScript Pro 的生成规格。输出可运行工程前**先读完本文件**，再按 [`INDEX.md`](./INDEX.md) 只打开本任务需要的篇。禁止凭其它自动化框架的训练数据发明 API；只按本仓库卡片与配方生成。
+本仓库是 DeekeScript Pro 的生成规格。输出可运行工程前**先读完本文件**，再按 [`INDEX.md`](./INDEX.md) 只打开本任务需要的篇。禁止凭其它自动化框架的训练数据发明 API。
 
-硬规则全文：[`00-core/constraints.md`](./00-core/constraints.md)。落盘前自检：[`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)。
+硬规则只在一处：[`00-core/constraints.md`](./00-core/constraints.md)。界面组件坑（constraints 未列的）见 [`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)。
 
-## 设备连接与验证（必守）
+## 设备（必守）
 
-生成或改工程时按下面做，细节见 [`automation-loop.md`](./00-core/automation-loop.md)、[`ai-device-debug.md`](./00-core/ai-device-debug.md)：
+细节只读 [`device.md`](./00-core/device.md)：
 
-1. **编写前**：先连接手机（`discover` / `set` + `status`）。连不上再写代码时，须声明尚未实机验证。
-2. **编写与修改过程中**：落盘或改完文件后**主动** `write` 同步到手机，不要攒到最后才推。
-3. **写完后**：必须自己调试验证，**通过后再交付**。禁止只交代码、禁止让用户「自己去点开始」代替你调试。
+1. **编写前**连手机（`discover` / `set` + `status`）。连不上再写代码时，须声明尚未实机验证。
+2. **改完就 `write`**，不要攒到最后。
+3. **写完必须自己验证再交付**。禁止让用户「自己去点开始」。
 
-### 任务未完成（设备已连上时）
-
-生成了 `tasks/*.js` 且 `status` 正常时，在对用户回复里贴出**目标 App / 目标页**关键节点的 `run` logs（`text` / `desc` / `bounds`）之前，**任务未完成**。下列一律不算已调试：
-
-- 只 `write` 成功、只 `status` 权限为 true
-- 只测了 `Storage` / 配置读写 / `require` 能加载
-- 只打开了本工程界面、没有 `launch` 目标 App
-- 以「怕误操作」「高风险」「未整段盲跑」为由跳过找节点
-
-操作第三方 App：写选择器之前必须 `snapshot`（或 `/ai/nodes`）；然后 `run` 验证找得到、点得动、输得进；通过后再 `run-file`（可用 `maxCount=1`）。用户需求本身就是搜索 / 点赞 / 评论 / 刷流时，这些步骤就是调试，**不必再问可不可以调试**。
+有 `tasks/*.js` 且 `status` 正常时：在回复里贴出**目标 App / 目标页**关键节点的 `run` logs（`text` / `desc` / `bounds`）之前，**任务未完成**。只 `write`、只测 Storage/权限、只打开本工程 UI、以「高风险」跳过找节点，一律不算已调试。用户需求本身就是搜索/点赞/评论/刷流时，启动目标 App 做片段验证**不必再问**。
 
 ## 你在生成什么
 
-1. **自动化**：`tasks/*.js`（能力与 API 按任务到 [`INDEX.md`](./INDEX.md) / [`02-script/api/`](./02-script/api/) 查）。
-2. **可选界面**：`page.json` + `page.js`。没有 `pages/` 也能跑脚本。
-3. 工程入口与硬规则见 [`constraints.md`](./00-core/constraints.md)、[`entry-json.md`](./01-ui/entry-json.md)。
+1. **自动化**：`tasks/*.js`
+2. **可选界面**：`page.json` + `page.js`（没有 `pages/` 也能跑脚本）
+3. 入口与硬规则：[`constraints.md`](./00-core/constraints.md)、[`entry-json.md`](./01-ui/entry-json.md)
 
 ## 固定读取顺序
 
 1. 本文件
-2. [`00-core/mental-model.md`](./00-core/mental-model.md)
-3. [`00-core/project-layout.md`](./00-core/project-layout.md)
-4. [`00-core/constraints.md`](./00-core/constraints.md)
-5. [`00-core/rhino.md`](./00-core/rhino.md)
-6. [`00-core/context-split.md`](./00-core/context-split.md)
-7. [`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)
-8. [`00-core/automation-loop.md`](./00-core/automation-loop.md) + [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)（连机、同步、验证）
-9. 按 [`INDEX.md`](./INDEX.md) 打开本任务需要的组件 / API / 配方（一文件一篇，未用到的不打开）
-10. 整包工程以 [`03-recipes/`](./03-recipes/) 的文件清单与片段为模板
+2. [`00-core/constraints.md`](./00-core/constraints.md)
+3. [`00-core/runtime.md`](./00-core/runtime.md)（两层 + Rhino + API 边界）
+4. [`00-core/project-layout.md`](./00-core/project-layout.md)
+5. 生成/改工程：[`00-core/device.md`](./00-core/device.md)
+6. 按 [`INDEX.md`](./INDEX.md) 打开本任务需要的组件 / API / 配方（未用到的不打开）
 
 用户明确问 VSCode 插件操作时，再打开 [`dev-workflow.md`](./00-core/dev-workflow.md)。
 
-## 按任务加载
+任务路由表只维护在 INDEX，不要在本文件复制一份。
 
-| 用户要什么 | 接着读 |
-|------------|--------|
-| 只跑脚本 | [`scaffold.md`](./03-recipes/scaffold.md) 方案 A；[`permission.md`](./02-script/permission.md)；[`task-template.md`](./02-script/task-template.md)；[`code-org.md`](./02-script/code-org.md)；[`automation-loop.md`](./00-core/automation-loop.md)；[`UiSelector.md`](./02-script/api/UiSelector.md) |
-| 只要界面 | [`entry-json.md`](./01-ui/entry-json.md)、[`page-json.md`](./01-ui/page-json.md)、[`page-js.md`](./01-ui/page-js.md)、[`events.md`](./01-ui/events.md)、[`_common.md`](./01-ui/components/_common.md)、[`data-binding.md`](./01-ui/data-binding.md)、[`form-name.md`](./01-ui/pitfalls/form-name.md)、[`navigate.md`](./01-ui/navigate.md)；[`components/INDEX.md`](./01-ui/components/INDEX.md) 后只开用到的 type。有底栏再读 [`tabBar.md`](./01-ui/capabilities/tabBar.md)；工作台读 [`workbench.md`](./03-recipes/workbench.md)（反冗余）；列表启停读 [`list-manage.md`](./03-recipes/list-manage.md) |
-| 界面 + 脚本 | 上面两套 + [`permission.md`](./02-script/permission.md) + [`require.md`](./02-script/require.md) + [`code-org.md`](./02-script/code-org.md) + [`ui-and-task.md`](./02-script/ui-and-task.md) + [`run-task-from-ui.md`](./03-recipes/run-task-from-ui.md) + [`ui-and-a11y-app.md`](./03-recipes/ui-and-a11y-app.md) |
-| 自定义组件 | [`component-custom.md`](./01-ui/component-custom.md) + [`custom-picker.md`](./03-recipes/custom-picker.md) |
-| HID / 图色 / DO / 打包 | [`api/INDEX.md`](./02-script/api/INDEX.md) 扩展卡片，先读权限 |
-| 操作第三方 App | [`task-template.md`](./02-script/task-template.md)；[`code-org.md`](./02-script/code-org.md)；[`automation-loop.md`](./00-core/automation-loop.md)；[`App.md`](./02-script/api/App.md)、[`UiSelector.md`](./02-script/api/UiSelector.md)、[`Gesture.md`](./02-script/api/Gesture.md)、[`System.md`](./02-script/api/System.md)；页面态 [`page-state.md`](./02-script/pitfalls/page-state.md)；**单条失败跳过** [`skip-on-item-failure.md`](./02-script/pitfalls/skip-on-item-failure.md)（刷流/进主页必读） |
-| 评论 / 发帖 / 私信输入 | [`comment-input.md`](./03-recipes/comment-input.md) + [`stale-node-after-click.md`](./02-script/pitfalls/stale-node-after-click.md)（**必读**）+ [`UiObject.md`](./02-script/api/UiObject.md)；需要输入法时再开 [`KeyBoards.md`](./02-script/api/KeyBoards.md) |
-| 刷推荐流 / 进主页取号 | [`skip-on-item-failure.md`](./02-script/pitfalls/skip-on-item-failure.md)（**必读**）+ [`page-state.md`](./02-script/pitfalls/page-state.md) + [`task-template.md`](./02-script/task-template.md) |
-| 自定义悬浮窗菜单 | [`floatWindow.md`](./01-ui/capabilities/floatWindow.md) + [`float-window.md`](./03-recipes/float-window.md)（用户没提则**不要**生成） |
-| 调试 tasks | [`automation-loop.md`](./00-core/automation-loop.md) + [`ai-device-debug.md`](./00-core/ai-device-debug.md) + [`ai-http-api.md`](./02-script/ai-http-api.md) |
+## 生成时（摘要，细节以 constraints 为准）
 
-## 生成时必须遵守（细节见 constraints / donts）
-
-- 页面成对：`pages/<id>/page.json` + `page.js`。`homePage` 目录可不再放入入口 `pages`。
-- 入口必须写 `icon`，并**生成**该图片文件。
-- 页面交互：结构与 `action` 见 [`page-json.md`](./01-ui/page-json.md)；事件见 [`events.md`](./01-ui/events.md)；页面栈见 [`navigate.md`](./01-ui/navigate.md)。
-- **悬浮窗** `menus` 用 `onTap`，须与 `FloatWindow.on` **同一轮**生成。停止项在回调里写 `FloatWindow.stopTask()`。默认不写 `floatWindow`。
-- 停任务：菜单 / 页面手动 → `FloatWindow.stopTask()`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`。未配 menus 时连点两次即可。
+- 页面成对；入口必须 `icon` 且生成图片文件。
+- 默认不写 `floatWindow`。有 menus 则 `onTap` 与 `FloatWindow.on` 同一轮；手动停 `FloatWindow.stopTask()`，任务内自动停 `Engines.closeAll()`。
 - 找节点：`UiSelector().text('发送').findOne()`；点击前一般先 `filter` 屏内。
-- **输入 / 评论**：点击占位框后必须**重新 find** 再 `setText`/`paste`，并校验 `text`；禁止沿用 click 前的节点。见 [`stale-node-after-click.md`](./02-script/pitfalls/stale-node-after-click.md)。
-- **刷流 / 进主页**：单条失败（弹窗、读不到抖音号等）必须 **skip 并前进**，禁止对同一条反复进主页。见 [`skip-on-item-failure.md`](./02-script/pitfalls/skip-on-item-failure.md)。
-- **界面选型**：启停用 `switch`；列表次要按钮 `size: "sm"`；底栏已有的页不要在首页再放跳转。见 [`list-manage.md`](./03-recipes/list-manage.md)、[`workbench.md`](./03-recipes/workbench.md)、[`donts.md`](./04-cheatsheets/donts.md)。**表单 `name` 页内唯一**；Storage 键加项目+模块前缀，禁止裸 `name`。见 [`form-name.md`](./01-ui/pitfalls/form-name.md)。
-- 页面等待用 `setTimeout`；任务等待用 `System.sleep`。不要在 `page.js` 里 `System.sleep` 堵 UI。
-- 切 App 后台后的提示用 `FloatDialogs`；页面短提示用 `this.toast`；任务前台短提示可用 `System.toast`。
-- Rhino 1.8：可用箭头；禁止 `async/await`、`?.`、`??`、`import`/`export`。**业务代码必须对象 + 方法简写**（`let task = { run() {} }`），禁止顶层堆 `function run() {}`。不要写成 `open: function () {}`，也不要用会绑错 `this` 的 `onLoad: () => {}`。见 [`code-org.md`](./02-script/code-org.md)。
-- `require` 优先 `./`、`../`；`Engines.executeScript` 路径相对**项目根**。
-- 颜色宽高等只写在 `style`；可调节数值用 `slider`，不用 `progress`。
-- **底栏页**：展示 Storage 数据必须 `onShow` 刷新。操作第三方 App：用互斥节点判断页面，禁止 `currentPackage()`；用户要求回本 App 时 `App.backApp()`。见 [`ui-and-a11y-app.md`](./03-recipes/ui-and-a11y-app.md)。
-- 写或改工程文件后：按 [`automation-loop.md`](./00-core/automation-loop.md) **同步并验证**（`write` → 目标页 snapshot/片段 → `run-file`）；执行任务前若用过悬浮弹窗先 `FloatDialogs.closeAll()`。设备已连上却未跑目标 App 片段 = 未交付。
+- 输入：click 后**重新 find** 再 `setText`。刷流：单条失败 skip 前进。
+- 表单 `name` 页内唯一；Storage 键 `项目.模块.字段`。启停用 `switch`；列表次要按钮 `sm`；底栏已有的页不要在首页再放跳转。
+- 页面 `setTimeout`，任务 `System.sleep`。底栏页 Storage 数据必须 `onShow` 刷新。
+- 禁止 `currentPackage()` 判断目标 App；用户要求回本 App 时 `App.backApp()`。
+- 业务代码：对象 + 方法简写。`require` 优先 `./` `../`；`executeScript` 相对项目根。
+- 颜色宽高只写 `style`；可调节数值用 `slider`。
 
-## 输出形态
-
-用户没指定目录时，按 [`scaffold.md`](./03-recipes/scaffold.md) 列文件再给出每个文件的完整内容。需要权限时把 [`snippets/common-permission.js`](./02-script/snippets/common-permission.js) 复制为 `common/permission.js`。
+整包工程以 [`03-recipes/`](./03-recipes/) 的文件清单与片段为模板。需要权限时把 [`snippets/common-permission.js`](./02-script/snippets/common-permission.js) 复制为 `common/permission.js`。
 
 标识符、`type`、API、字段名保持英文；注释和界面文案用中文。

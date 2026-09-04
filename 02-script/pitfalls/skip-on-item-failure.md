@@ -2,7 +2,7 @@
 
 刷推荐流、列表、搜索结果时：以**一条内容**（视频 / 帖子 / 用户）为进度单位。进主页弹窗、读不到抖音号、半屏卡住等，**默认跳过本条、前进到下一条**。禁止对同一条反复进主页 / 反复恢复 / 不划走。
 
-相关：[`page-state.md`](./page-state.md)、[`stale-node-after-click.md`](./stale-node-after-click.md)、[`task-template.md`](../task-template.md)、[`automation-loop.md`](../../00-core/automation-loop.md)、[`donts.md`](../../04-cheatsheets/donts.md)。
+相关：[`page-state.md`](./page-state.md)、[`stale-node-after-click.md`](./stale-node-after-click.md)、[`task-template.md`](../task-template.md)、[`device.md`](../../00-core/device.md)。
 
 ## 硬规则（MUST）
 

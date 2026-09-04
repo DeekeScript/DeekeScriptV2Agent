@@ -2,7 +2,7 @@
 
 `list` + `bind` + 页面 `onReachBottom` + `loading` 的 `showIf` + `appendData`。数组为空不会自动 Empty，自己摆。
 
-相关：[`component-types.md`](../04-cheatsheets/component-types.md)、[`page-methods.md`](../04-cheatsheets/page-methods.md)。
+相关：[`ui.md`](../04-cheatsheets/ui.md)。
 
 ## `pages/list/page.json`
 

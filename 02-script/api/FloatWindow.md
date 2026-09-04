@@ -2,7 +2,7 @@
 
 **项目**悬浮球菜单 API。用户未要求菜单时：**不要**写 `floatWindow` / `menus` / `FloatWindow.on`。默认连点两次停任务。
 
-权威说明：[`floatWindow.md`](../../01-ui/capabilities/floatWindow.md)（停任务、menus 字段）。配方：[`float-window.md`](../../03-recipes/float-window.md)。硬规则：[`constraints.md`](../../00-core/constraints.md) MUST 10–11。
+权威说明：[`floatWindow.md`](../../01-ui/capabilities/floatWindow.md)。硬规则：[`constraints.md`](../../00-core/constraints.md) MUST 10–11。
 
 | 方法 | 说明 |
 |------|------|

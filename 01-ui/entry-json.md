@@ -170,4 +170,4 @@
 }
 ```
 
-**不要**在完整示例里默认抄 `floatWindow`。用户未要求自定义菜单时不要写该字段（默认连点两次即可停）。需要菜单时见 [floatWindow](./capabilities/floatWindow.md) 与配方 [float-window.md](../03-recipes/float-window.md)。写好入口后给 `homePage` 目录写 [页面 JSON](./page-json.md)。
+**不要**在完整示例里默认抄 `floatWindow`。用户未要求自定义菜单时不要写该字段（默认连点两次即可停）。需要菜单时见 [floatWindow](./capabilities/floatWindow.md)。写好入口后给 `homePage` 目录写 [页面 JSON](./page-json.md)。

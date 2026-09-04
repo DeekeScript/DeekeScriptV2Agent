@@ -2,7 +2,7 @@
 
 评论框、搜索框、半屏面板、键盘弹起后，**点击前拿到的节点常常作废**。占位输入框与聚焦后的真实输入框往往不是同一个节点（bounds / 是否 focused / 能否 `setText` 都可能不同）。
 
-相关：[`comment-input.md`](../../03-recipes/comment-input.md)、[`UiObject.md`](../api/UiObject.md)、[`donts.md`](../../04-cheatsheets/donts.md)。
+相关：[`comment-input.md`](../../03-recipes/comment-input.md)、[`UiObject.md`](../api/UiObject.md)、[`constraints.md`](../../00-core/constraints.md) MUST NOT 12。
 
 ## 硬规则
 

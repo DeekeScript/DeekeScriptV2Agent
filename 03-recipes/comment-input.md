@@ -2,7 +2,7 @@
 
 第三方 App 评论、发帖、私信输入的最小可运行模式。生成前必读 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)；页面态见 [`page-state.md`](../02-script/pitfalls/page-state.md)。
 
-依赖：[`UiSelector.md`](../02-script/api/UiSelector.md)、[`UiObject.md`](../02-script/api/UiObject.md)、[`Gesture.md`](../02-script/api/Gesture.md)、[`KeyBoards.md`](../02-script/api/KeyBoards.md)、[`donts.md`](../04-cheatsheets/donts.md)。
+依赖：[`UiSelector.md`](../02-script/api/UiSelector.md)、[`UiObject.md`](../02-script/api/UiObject.md)、[`Gesture.md`](../02-script/api/Gesture.md)、[`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)。需要输入法时再开 [`KeyBoards.md`](../02-script/api/KeyBoards.md)。
 
 ## 输入优先级
 
@@ -165,4 +165,4 @@ module.exports = {
 
 - **禁止**对 click 前的变量直接 `setText`。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)。
 - bounds 校验用 `Device.width()` / `Device.height()`，不要混用 `/ai/status` 的 screenHeight（可能不一致）。
-- 调试日志把关键断言合成一条，如 `console.log('result=' + JSON.stringify(ret))`，见 [`ai-device-debug.md`](../00-core/ai-device-debug.md)。
+- 调试日志把关键断言合成一条，如 `console.log('result=' + JSON.stringify(ret))`，见 [`device.md`](../00-core/device.md)。

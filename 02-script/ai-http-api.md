@@ -136,7 +136,7 @@ UI 节点树。`type` 控制**简单 / 复杂模式**（窗口范围），与脚
 - **不是流式**；脚本跑完后一次性返回 logs
 - 默认超时 60s，最大 600s
 - 同时只能跑一个脚本；冲突时先 `POST /ai/stop`
-- 代码须符合 [Rhino 约束](../00-core/rhino.md)：无 `async/await` / `?.` / `??` / `import`/`export`
+- 代码须符合 [Rhino 约束](../00-core/runtime.md#rhino-18)：无 `async/await` / `?.` / `??` / `import`/`export`
 
 ### POST `/ai/run-file`
 
@@ -222,4 +222,4 @@ curl -s -X POST "http://192.168.1.113:8080/ai/project/write" -H "Content-Type: a
   -d "{\"file\":\"tasks/test.js\",\"content\":\"Y29uc29sZS5sb2coMTIzKTs=\"}"
 ```
 
-完整流程见 [`00-core/ai-device-debug.md`](../00-core/ai-device-debug.md)。
+完整流程见 [`00-core/device.md`](../00-core/device.md)。

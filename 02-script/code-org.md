@@ -109,18 +109,23 @@ function likeVideo() {}
 let permission = require('../common/permission.js');
 let article = require('../common/dy/article.js');
 
-if (!permission.ensureRun()) {
-} else {
-  let i = 0;
-  while (i < 10) {
-    article.open();
-    article.like();
-    article.comment('看过了');
-    System.sleep(1500);
-    i++;
+let task = {
+  run() {
+    if (!permission.ensureRun()) {
+      return;
+    }
+    let i = 0;
+    while (i < 10) {
+      article.open();
+      article.like();
+      article.comment('看过了');
+      System.sleep(1500);
+      i++;
+    }
+    Engines.closeAll();
   }
-  Engines.closeAll();
-}
+};
+task.run();
 ```
 
 刷推荐流、进主页取号时：循环须遵守 [`pitfalls/skip-on-item-failure.md`](./pitfalls/skip-on-item-failure.md)（单条失败 skip，禁止对同一条反复进主页）。

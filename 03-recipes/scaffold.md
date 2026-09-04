@@ -2,7 +2,7 @@
 
 两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。入口文件见 [`entry-json.md`](../01-ui/entry-json.md)、[`constraints.md`](../00-core/constraints.md)。
 
-生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，入口写 `window.theme.primary`，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
+生成前对照 [`constraints.md`](../00-core/constraints.md)。不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，入口写 `window.theme.primary`，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
 
 ## A. 无 UI（只有入口 + 任务）
 

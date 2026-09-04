@@ -1,6 +1,6 @@
 # 悬浮球（项目悬浮窗）
 
-配置项目悬浮窗菜单时读这篇，并与 [`03-recipes/float-window.md`](../../03-recipes/float-window.md) 一起用：JSON `menus` 与 `FloatWindow.on` **同一轮**交付。
+配置项目悬浮窗菜单时**只读这篇**：JSON `menus` 与 `FloatWindow.on` **同一轮**交付。
 
 **用户没提自定义菜单时：不要写 `floatWindow`。** 默认连点两次停止（第一次变关闭图标，3 秒内再点）。硬规则见 [`constraints.md`](../../00-core/constraints.md) MUST 10–11。
 
@@ -77,7 +77,7 @@ if (done) {
 }
 ```
 
-对应 JS 必须同时存在（见配方）。
+对应 JS 必须同时存在（见下方完整任务示例）。
 
 ## FloatWindow API
 
@@ -126,9 +126,55 @@ if (!Access.isFloatWindowsEnabled()) {
 }
 ```
 
+## 完整任务示例（与 menus 同一轮）
+
+```javascript
+let permission = require('../common/permission.js');
+let skipped = false;
+
+let task = {
+  run() {
+    if (!permission.ensureRun()) {
+      return;
+    }
+    FloatWindow.on({
+      start: function () {
+        Engines.executeScript('tasks/sample.js');
+      },
+      stop: function () {
+        FloatWindow.stopTask();
+      },
+      hide: function () {
+        FloatDialogs.setFloatWindowVisible(false);
+      },
+      skip: function () {
+        skipped = true;
+        FloatWindow.update('skip', { label: '已跳过', background: '#E8F5E9' });
+      }
+    });
+    var i = 0;
+    while (i < 20 && !skipped) {
+      var btn = UiSelector().text('发送').findOne();
+      if (btn) {
+        btn.click();
+      }
+      System.sleep(1000);
+      i++;
+    }
+  }
+};
+task.run();
+```
+
+`FloatWindow.on` 写在 `tasks/*.js` 开头或 `common/floatMenu.js`，不要只写在 `page.js`。页面「运行」仍用 `permission.runScript`。页面 JSON `action` 与悬浮球 menus 无关。
+
+| 用户要什么 | 是否写 `floatWindow.menus` |
+|----------|---------------------------|
+| 未提及，或只要能停 | **不写**（连点两次，3 秒内） |
+| 展开：开始 / 停止 / 隐藏 / 跳过 | **必须** menus + `FloatWindow.on` |
+
 ## 相关
 
-- 配方：[`float-window.md`](../../03-recipes/float-window.md)
 - 任务骨架：[`task-template.md`](../../02-script/task-template.md)
 - API 卡：[`FloatWindow.md`](../../02-script/api/FloatWindow.md)
 - 入口字段：[`entry-json.md`](../entry-json.md)

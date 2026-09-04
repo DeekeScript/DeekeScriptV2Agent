@@ -39,4 +39,4 @@ promise.then(function (value) {
 - 禁止 `async function`、`await`。生成代码用 `then` 或直接同步写法。
 - executor 和 `then` 回调可用 `function` 或箭头。
 - `page.js` 里不要用 `System.sleep` 堵 UI；延时用 `setTimeout`。任务脚本里同步 `System.sleep` 更常见。
-- 相关：[`timer.md`](./timer.md)、[`donts.md`](../../04-cheatsheets/donts.md)。
+- 相关：[`timer.md`](./timer.md)、[`runtime.md`](../../00-core/runtime.md)。

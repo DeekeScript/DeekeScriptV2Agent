@@ -2,7 +2,7 @@
 
 自动化脚本放在 `tasks/*.js`。入口顺序：权限 → 读配置 → 循环。**默认不要**绑 `FloatWindow.on`（用户没提悬浮窗菜单时）。多功能 / 多对象 App 自动化须按 [`code-org.md`](code-org.md) 按操作对象拆到 `common/`，任务里组合调用。
 
-依赖：[`permission.md`](permission.md)、[`code-org.md`](code-org.md)、[`ui-and-task.md`](ui-and-task.md)、[`require.md`](require.md)、[`UiSelector.md`](api/UiSelector.md)、[`automation-loop.md`](../00-core/automation-loop.md)。刷推荐流 / 进主页取号时再读 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)。
+依赖：[`permission.md`](permission.md)、[`code-org.md`](code-org.md)、[`ui-and-task.md`](ui-and-task.md)、[`require.md`](require.md)、[`UiSelector.md`](api/UiSelector.md)、[`device.md`](../00-core/device.md)。刷推荐流 / 进主页取号时再读 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)。
 
 ## 默认骨架（无悬浮菜单）
 
@@ -90,7 +90,7 @@ if (!permission.ensureRun()) {
 
 ## 仅当用户要悬浮窗菜单时
 
-与 JSON `menus` **同一轮**生成。完整示例见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。要点：
+与 JSON `menus` **同一轮**生成。完整示例见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md)。要点：
 
 - 手动停：`FloatWindow.stopTask()`（不要在菜单里 `Engines.closeAll()`）
 - 跳过等自定义项：在循环外设标志，`FloatWindow.on({ skip: ... })`
