@@ -33,5 +33,5 @@ console.log(res);
 
 - 返回值按字符串处理，需要对象时再 `JSON.parse`。先判断非 `null`。
 - 下载路径可用 [`Files.getCachePath()`](Files.md) 等应用目录。
-- 回调写成 `function`，不要用箭头函数。
+- 回调写成 `function` 或箭头均可。
 - 索引见 [`INDEX.md`](INDEX.md)。

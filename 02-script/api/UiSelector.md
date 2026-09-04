@@ -91,7 +91,7 @@ if (likeBtn) {
 }
 ```
 
-只要右侧操作栏时，可在 `filter` 里再加 `b.left > Device.width() * 0.7`。回调必须用 `function`，禁止箭头函数。
+只要右侧操作栏时，可在 `filter` 里再加 `b.left > Device.width() * 0.7`。回调可用 `function` 或箭头。
 
 ## 注意
 

@@ -1,6 +1,6 @@
 # 通用字段
 
-**生成任何界面前必读。** 所有内置组件（含 `button`）都能写这些字段和 `style`。组件自己的字段见各篇。事件方法写在 [页面 JS](../page-js.md)。
+**生成任何界面前必读。** 所有内置组件（含 `button`）都能写这些字段和 `style`。组件自己的字段见各篇。事件方法写在 [页面 JS](../page-js.md)；JSON 事件字段与按钮跑脚本见 [events](../events.md)；`action` 见 [page-json](../page-json.md#json-action)。
 
 颜色、背景、圆角、宽高、字号**只写在 `style` 里**。写在组件根上（和 `type` 同级）引擎会忽略，看起来就像「这个组件不支持 background」。
 
@@ -49,8 +49,8 @@
 | id | String | 可选。列表用 `bind`，文案用 `{{字段}}` |
 | hidden | Boolean | 隐藏 |
 | showIf | String | 条件显示，值为作用域路径 |
-| action | Object | 轻触后的动作。`type` 为 `navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl` |
-| onTap | String | 轻触一次时调用的方法名。`onClick` 视为同一事件 |
+| action | Object | 轻触后的动作。支持的 `type` 见 [`page-json.md`](../page-json.md#json-action) |
+| onTap | String | 轻触一次时调用的方法名。`onClick` 视为同一事件。事件说明见 [`events.md`](../events.md) |
 | onClick | String | `onTap` 的别名 |
 | onDoubleTap | String | 连续轻触两次 |
 | onLongPress | String | 按住不放 |

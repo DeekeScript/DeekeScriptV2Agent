@@ -1,8 +1,8 @@
 # 从 0 搭最小工程
 
-两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。项目根必须有 `deekeScript.json`，否则无法识别工程、无法同步。
+两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。入口文件见 [`entry-json.md`](../01-ui/entry-json.md)、[`constraints.md`](../00-core/constraints.md)。
 
-生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要写 `hooks`，不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，入口写 `window.theme.primary`，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
+生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，入口写 `window.theme.primary`，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
 
 ## A. 无 UI（只有入口 + 任务）
 
@@ -150,6 +150,5 @@ Page({
 
 ## 注意
 
-- 脚本不要写在 JSON `action` 里。见 [`run-task-from-ui.md`](./run-task-from-ui.md)。
 - 初始化放 `onLoad` / 任务脚本：[`no-hook.md`](../02-script/api/no-hook.md)。
 - 多页时在入口 `pages` 注册别名；自定义组件要注册且 JSON 写 `"component": true`。

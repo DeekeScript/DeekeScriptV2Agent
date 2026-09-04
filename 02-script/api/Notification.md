@@ -53,5 +53,5 @@ setInterval(function () {
 
 - 先申请权限，再 `startService` + `startListening`。
 - 主线程退出监听也会停，用 `setInterval` 保活。
-- 回调用 `function`，不要箭头函数。
+- 回调用 `function` 或箭头均可。
 - 相关：[`Access.md`](./Access.md)、[`timer.md`](./timer.md)。

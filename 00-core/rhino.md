@@ -1,12 +1,12 @@
 # Rhino 1.8
 
-写任何 JS（`page.js`、`component.js`、`tasks/*.js`、`common/*.js`）时读这篇。引擎是 Rhino 1.8，三处脚本同一套语法。可以直接调 Java。`setTimeout` / `setInterval` / `console` / `Promise` 可用。生成代码只用 `function` / `var` / `let`，不要用浏览器或 Node 的现代语法。
+写任何 JS（`page.js`、`component.js`、`tasks/*.js`、`common/*.js`）时读这篇。引擎是 Rhino 1.8，三处脚本同一套语法。可以直接调 Java。`setTimeout` / `setInterval` / `console` / `Promise` 可用。箭头函数可用。不要用 `async/await`、可选链、空值合并、`import` / `export`。
 
 ## 能写
 
 | 类别 | 写法 |
 |------|------|
-| 函数 | `function foo() {}`；对象方法 `onLoad: function (params) {}`。Demo 里的方法简写 `onLoad() {}` 也可以 |
+| 函数 | `function foo() {}`、箭头 `() => {}`；对象方法可用 `onLoad: function (params) {}` 或简写 `onLoad() {}` |
 | 变量 | `var`、`let` |
 | 模块 | `require('../common/hello.js')`（优先相对路径）、`module.exports = { ... }` |
 | 控制流 | `if` / `for` / `while` / `switch` / `try/catch` |
@@ -49,7 +49,6 @@ Page({
 
 | 语法 | 替代 |
 |------|------|
-| 箭头函数 `() => {}` | `function () {}` |
 | `async` / `await` | `Promise` + `.then`，或同步 `Http.get` / `System.sleep` |
 | 可选链 `e?.detail` | `e && e.detail` |
 | 空值合并 `a ?? b` | `a != null ? a : b` 或 `a \|\| b`（注意 `0` / `''`） |
@@ -58,7 +57,7 @@ Page({
 
 ```javascript
 // 错误
-onPicked: (e) => {
+onPicked: function (e) {
   const keyword = e?.detail?.keyword ?? '';
 };
 
@@ -74,11 +73,12 @@ onPicked: function (e) {
 
 | 场景 | 推荐 |
 |------|------|
-| 页面 / 组件方法 | `onLoad: function (params) { ... }` |
-| 回调里保存 `this` | `var that = this;` 再进 `setTimeout` / `Dialogs.confirm` |
+| 页面 / 组件方法（需要 `this`） | 用 `function`，不要写成 `onLoad: () => {}`（箭头会绑错 `this`） |
+| 普通回调 | `function` 或 `=>` 均可 |
+| 回调里保存 `this` | `var that = this;` 再进 `setTimeout` / `Dialogs.confirm`（或箭头回调直接用外层 `this`） |
 | 空判断 | `if (!node) { return; }` |
 | 字符串拼接 | `'已保存：' + name`（少用模板字符串，避免混入不受支持的写法） |
 | 延时 | 页面短延时用 `setTimeout`；任务里等待用 `System.sleep` |
-| 导出 | 一个 `module.exports` 对象，方法都写成 `name: function () {}` |
+| 导出 | 一个 `module.exports` 对象 |
 
 `Page({})` / `Component({})` 里未声明的生命周期不会调用。`this` 就是传入的那个对象。

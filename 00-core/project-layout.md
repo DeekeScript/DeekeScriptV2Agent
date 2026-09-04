@@ -1,6 +1,6 @@
 # 工程目录
 
-新建工程、移动文件、注册页面或组件时读这篇。根目录必须有 `deekeScript.json`，否则无法同步、无法执行 JS。每个页面是一个文件夹，内含成对的 `page.json` + `page.js`；自定义组件同理，且 JSON 必须 `"component": true`。目录命名可与展厅一致（如 `pages/floatWindow`）；**不要**把展厅工程当生成模板，见 [`demo-gallery.md`](./demo-gallery.md)。
+新建工程、移动文件、注册页面或组件时读这篇。根目录放入口 `deekeScript.json`（硬规则见 [`constraints.md`](./constraints.md)）。每个页面是一个文件夹，内含成对的 `page.json` + `page.js`；自定义组件同理，且 JSON 必须 `"component": true`。目录命名可与展厅一致（如 `pages/floatWindow`）；**不要**把展厅工程当生成模板，见 [`demo-gallery.md`](./demo-gallery.md)。
 
 ## 完整目录树
 

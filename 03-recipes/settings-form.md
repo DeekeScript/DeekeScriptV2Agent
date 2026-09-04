@@ -50,7 +50,7 @@
 }
 ```
 
-`action.save` 只弹提示，真正写入在 `onTap`。不要在 `action` 里跑任务。
+`action.save` 只弹提示，真正写入在 `onTap`。
 
 ## `pages/settings/page.js`
 

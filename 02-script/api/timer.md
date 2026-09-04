@@ -35,4 +35,4 @@ setTimeout(function () {
 - 不用时手动 `clearTimeout` / `clearInterval`。未手动关闭时，`Engines.closeAll()` 会关掉当前线程和子线程的定时器。
 - 主脚本关闭后，该脚本上的定时器会自动关闭。
 - 长连接（WebSocket、通知监听、前台服务）常靠 `setInterval` 保持线程不退出。
-- 回调写成 `function`，不要用箭头函数。
+- 回调写成 `function` 或箭头均可。

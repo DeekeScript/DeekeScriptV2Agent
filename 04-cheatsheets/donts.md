@@ -4,11 +4,9 @@
 
 | 禁止 | 正确做法 |
 |------|----------|
-| 在**页面** JSON `action` 里执行脚本、编造页面级 `executeScript` action | 按钮写 `onTap`，在 `page.js` 里 `Engines.executeScript('tasks/xxx.js')`。悬浮窗 `menus[].action` 可含 `executeScript`，那是另一套字段，见 [`entry-json.md`](../01-ui/entry-json.md) |
 | 把找节点、循环任务写在 `page.js` | `page.js` 只做界面和启动；业务在 `tasks/*.js` |
-| 生成 `hooks`、`app_start`，或调用 `Engines.closeHook` 当初始化 | 逻辑放 `onLoad` / 任务脚本。见 [`no-hook.md`](../02-script/api/no-hook.md) |
 | WebView 与 Page 互调、`javascript:` 桥、读本地文件 | WebView 不和 Page 通信。外链用 `openUrl`。见组件 `webview` |
-| 箭头函数、`async` / `await`、`?.`、`??` | 只用 `function` / `var` / `let`。异步用回调或 `then` |
+| `async` / `await`、`?.`、`??` | 用回调或 `then`；空判断写 `e && e.detail`。箭头可用，见 [`rhino.md`](../00-core/rhino.md) |
 | 有 `page.json` 却不写同目录 `page.js` | 每个页面都要 `Page({})`，哪怕是空的 |
 | 多页不注册、自定义组件不注册 | 入口 `pages` / `components`；`homePage` 目录本身不必再放入 `pages` |
 | 底栏切页用 `navigate` | 用 `switchTab` 或 `bottomMenus` 的 `page` |
@@ -16,8 +14,6 @@
 | `webview` 不写 `style.height` | 必须写高度，否则默认 240dp，布局会乱 |
 | 组件 JSON 漏 `"component": true` | 自定义组件根必须 `"component": true`，否则不能当组件加载 |
 | 入口 JSON 漏 `icon`，或只写路径不生成图片文件 | 必须 `"icon": "img/xhs.svg"`，并把 svg/png 文件一并写入工程 |
-| 入口文件名不是 `deekeScript.json` | 入口只有 `deekeScript.json`，字段见 [`entry-json.md`](../01-ui/entry-json.md) |
-| 在 `deekeScript.json` 写 `groups` / `hooks` 当界面 | 界面是 `pages/*/page.json` |
 | HID / 图色 / 媒体不申请权限 | 图色：`Access.isMediaProjectionEnable`；媒体：`hasMediaReadPermission`；HID：蓝牙权限。见对应 API 卡 |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
 | `executeScript` 写成相对当前文件的 `./tasks` | `Engines.executeScript` 路径相对**项目根**：`tasks/sample.js`（与 `require` 不同） |
@@ -28,8 +24,8 @@
 | 默认用 KeyBoards 输入、且不检查状态 | 优先 `setText` / 剪贴板；要用输入法时先 `KeyBoards.canInput()`，不行就提示用户 |
 | 有 `FloatDialogs.show` 却不关弹窗就继续点节点 | 任务或调试开始前 `FloatDialogs.closeAll()` |
 | 用户没提悬浮窗菜单却写了 `floatWindow.menus` / 空 menus | **默认不写**。连点两次停止（3 秒内）。细节见 [`constraints.md`](../00-core/constraints.md) MUST 10 |
-| 悬浮窗菜单 / 页面按钮用 `Engines.closeAll()` 停任务 | 内置 `"action":"stop"` 或 `FloatWindow.stopTask()`；自动停才在 `tasks/*.js` 里 `Engines.closeAll()`。见 [`constraints.md`](../00-core/constraints.md) MUST 11 |
-| 照抄展厅 Demo 的 `hint` / 默认 menus / 错误入口文件名 | 见 [`demo-gallery.md`](../00-core/demo-gallery.md) |
+| 悬浮窗菜单 / 页面按钮用 `Engines.closeAll()` 停任务 | 菜单写 `onTap` + `FloatWindow.on` 里 `FloatWindow.stopTask()`；自动停才在 `tasks/*.js` 里 `Engines.closeAll()`。见 [`constraints.md`](../00-core/constraints.md) MUST 11 |
+| 照抄展厅 Demo 的 `hint` / 默认 menus | 见 [`demo-gallery.md`](../00-core/demo-gallery.md) |
 | 在 `page.js` 里用 `System.sleep` 等待 | 页面用 `setTimeout`；任务用 `System.sleep` |
 | 把可调节数值写成 `progress` / `progressBar`（运行速度、点赞概率） | 用 `"type": "slider"`。`progress` 只能展示、不能拖。见 [`slider.md`](../01-ui/components/slider.md) |
 | 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |

@@ -1,6 +1,6 @@
 # 从界面运行任务
 
-按钮 `onTap` → 检查权限 → `Engines.executeScript`。**不要把脚本写在 JSON `action` 里。** `page.js` 只负责启动，业务写在 `tasks/*.js`。
+按钮 `onTap` → 检查权限 → `Engines.executeScript`。`page.js` 只负责启动，业务写在 `tasks/*.js`。见 [`events.md`](../01-ui/events.md)、[`page-json.md`](../01-ui/page-json.md#json-action)。
 
 相关：[`Engines.md`](../02-script/api/Engines.md)、[`Access.md`](../02-script/api/Access.md)、[`Storage.md`](../02-script/api/Storage.md)、[`donts.md`](../04-cheatsheets/donts.md)。
 
@@ -38,14 +38,6 @@
   ]
 }
 ```
-
-错误示例（不要生成）：
-
-```json
-{ "type": "button", "text": "运行", "action": { "type": "executeScript", "file": "tasks/sample.js" } }
-```
-
-没有这种 `action` 类型。
 
 ## `pages/task/page.js`
 

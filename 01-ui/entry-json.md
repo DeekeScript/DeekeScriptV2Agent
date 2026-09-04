@@ -1,6 +1,6 @@
 # 入口 deekeScript.json
 
-创建工程或改首页、底栏、全局窗口、页面/组件注册时读这篇。这个文件必须在项目根目录，文件名只能是 `deekeScript.json`。只跑脚本时用它识别工程，不必打开 `homePage`。做界面时启动经过 Splash 后进入 `homePage`。字段一律按下表写。不要写 `hooks` / `groups`。
+创建工程或改首页、底栏、全局窗口、页面/组件注册时读这篇。只跑脚本时用它识别工程，不必打开 `homePage`。做界面时启动经过 Splash 后进入 `homePage`。字段一律按下表写。
 
 ## 主体参数
 
@@ -99,13 +99,11 @@
 | id | String | 给 `FloatWindow.on` / `update` 用 |
 | icon | String | 内置名 `close` / `play` / `hide`，或工程内图片 |
 | label | String | 图标下方短文案 |
-| action | String | 内置：`stop` / `hide` / `start` / `executeScript`（框架处理，不必再 `on`） |
-| file | String | `action` 为 `executeScript` 时的脚本路径 |
-| onTap | String | 自定义点击；**必须**在 JS 里 `FloatWindow.on` 绑定 |
+| onTap | String | 点击函数名；**必须**在 JS 里 `FloatWindow.on` 绑定 |
 | show | String | `always`（默认）、`running`、`idle` |
 | background | String | 圆形底色，如 `#FFFFFF` |
 
-`action: "stop"` 等同手动停整项任务（≈ `FloatWindow.stopTask()`）。自定义项不要只写 `onTap` 不绑 `on`。
+停止、隐藏、启动都在 `FloatWindow.on` 里写代码（停止用 `FloatWindow.stopTask()`）。不要只写 `onTap` 不绑 `on`。
 
 完整方法见 [悬浮球](./capabilities/floatWindow.md)。
 

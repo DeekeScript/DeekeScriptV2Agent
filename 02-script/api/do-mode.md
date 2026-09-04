@@ -60,4 +60,4 @@ if (DevicePolicy.isDeviceOwner()) {
 
 - 生成脚本前先判断 `isDeviceOwner()`，不要对普通用户设备默认调用 DO API。
 - 测试机上做。不要在个人主力机开启。
-- 这不是无障碍自动化。工程不要写 `hooks`，见 [`no-hook.md`](./no-hook.md)。
+- 这不是无障碍自动化。初始化放页面 / 任务脚本，见 [`no-hook.md`](./no-hook.md)。

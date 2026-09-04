@@ -12,9 +12,9 @@
 | `page.js` | 只在打开对应页面时由引擎加载；**禁止**当任务脚本执行 |
 | `component.js` | 随页面/弹层里的组件实例加载 |
 
-- 根目录没有 `deekeScript.json`：无法同步、无法运行 JS。
+- 没有入口文件 / 同步失败：见 [`constraints.md`](./constraints.md) MUST 1。
 - 改 `page.json` / `page.js` / 组件后须同步到手机；当前页打开时会热更新，否则手机端点刷新。
-- 页面按钮启动任务：`Engines.executeScript('tasks/xxx.js')`，不要写在 JSON `action` 里。
+- 页面按钮启动任务：`Engines.executeScript('tasks/xxx.js')`（见 [`events.md`](../01-ui/events.md)）。
 - 死循环或不想再跑：停掉手机上正在执行的脚本（插件「停止所有脚本」，或 `/ai` 的 stop）。
 
 ## 手机侧开关

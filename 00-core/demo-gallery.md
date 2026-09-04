@@ -6,13 +6,12 @@
 
 | 展厅里可能看到 | 生成时 |
 |----------------|--------|
-| 非 `deekeScript.json` 的入口文件名 | 只用 `deekeScript.json` |
 | 默认就配了 `floatWindow.menus` | 用户没提菜单就不要写 `floatWindow` |
 | `permission.hint('请在文件…')` | 不要写进产物 |
 | `page.js` 里 `System.sleep` | 用 `setTimeout` |
 | 页面按钮 `Engines.closeAll()` 停任务 | 用 `FloatWindow.stopTask()`；任务内自动停才 `Engines.closeAll()` |
 | `require('common/xxx.js')`（相对项目根） | **优先** `require('../common/xxx.js')` 等相对当前文件 |
 
-展厅可以保留：大量组件示例页、自定义菜单的 `FloatWindow.setMenus` / `update` / `collapse` 演示、内置 `"action": "stop"` 菜单项。
+展厅可以保留：大量组件示例页、自定义菜单的 `FloatWindow.setMenus` / `update` / `collapse` 演示、停止项用 `onTap` + `stopTask()`。
 
 目录命名习惯（`pages/floatWindow`、`pages/tabBar`）可与展厅一致。

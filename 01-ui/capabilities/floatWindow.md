@@ -12,9 +12,8 @@
 |--------|----------|--------|
 | `Engines.closeAll()` | 当前任务脚本 + 其子脚本 | **仅** `tasks/*.js` 执行线程 |
 | `FloatWindow.stopTask()` | 整项项目任务 + 恢复球 UI | 菜单回调 / 页面等 |
-| menus `"action":"stop"` | 同 `stopTask`（框架内置） | 入口 JSON，不必再 `on` |
 
-菜单 / 页面里 `Engines.closeAll()` **无效**。手动停 → `stopTask` 或内置 `action:stop`；自动停 → 任务内 `closeAll`。
+菜单 / 页面里 `Engines.closeAll()` **无效**。手动停 → `stopTask`；自动停 → 任务内 `closeAll`。
 
 ```javascript
 FloatWindow.on({
@@ -36,10 +35,9 @@ if (done) {
 用户要悬浮球菜单？
 ├─ 否 → 不写 floatWindow
 └─ 是 → 同一轮输出：
-       ① deekeScript.json → floatWindow.menus
-       ② 内置 action（stop/hide/start）可不再 on
-       ③ 自定义 onTap 项 → FloatWindow.on 绑定
-       ④ 页面按钮停任务 → FloatWindow.stopTask()（禁止 Engines.closeAll）
+       ① deekeScript.json → floatWindow.menus（每项 onTap）
+       ② FloatWindow.on 绑定全部菜单项
+       ③ 停止 → FloatWindow.stopTask()；页面按钮同理（禁止 Engines.closeAll）
 ```
 
 典型错误：只写 `"onTap": "onSkip"` 却不写 `FloatWindow.on({ skip: ... })` → 点击无反应。

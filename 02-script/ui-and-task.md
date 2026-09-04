@@ -53,13 +53,7 @@ Engines.executeScript('tasks/xxx.js');
 
 不以 `./`、`../` 开头时，相对**项目根**。不要写磁盘绝对路径。`require` 优先相对当前文件，见 [`require.md`](require.md)；`executeScript` 见 [`api/Engines.md`](api/Engines.md)。
 
-## 不要把脚本塞进页面 `action`
-
-页面 `page.json` 的 `action` 是 navigate / toast / save 等界面动作，**不能**跑脚本。
-
-悬浮球菜单的开始、停止、隐藏、跑脚本都在 `FloatWindow.on` 里写（与 JSON **同一轮**生成）。
-
-完整清单见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。
+悬浮球菜单的开始、停止、隐藏、跑脚本都在 `FloatWindow.on` 里写（与 JSON **同一轮**生成）。完整清单见 [`03-recipes/float-window.md`](../03-recipes/float-window.md)。
 
 ```javascript
 FloatWindow.on({

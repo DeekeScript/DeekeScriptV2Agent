@@ -8,8 +8,8 @@
 |--------|------|------|
 | text / title / label | String | 按钮文案 |
 | size | String | `sm` / `小` 高 32dp；`md` / `中` 高 40dp；`lg` / `大` 高 48dp（默认） |
-| onTap | String | 轻触一次时调用的 `Page` 方法 |
-| action | Object | 点击动作，见 [通用字段](./_common.md) 的 `action` |
+| onTap | String | 轻触一次时调用的 `Page` 方法，见 [`events.md`](../events.md) |
+| action | Object | 点击动作，见 [`page-json.md`](../page-json.md#json-action) |
 | style.background | String | 背景色，默认跟 `window.theme.primary`。用户指定主题色时建议改这里 |
 | style.color | String | 文字颜色，实心按钮建议 `#FFFFFF`。支持 `{{path}}` |
 | variant | String | `outline` / `描边`：白底、描边和文字同色 |
@@ -33,6 +33,6 @@
 
 ## 注意
 
-- `onTap` 与 `onClick` 是同一事件。同时写 `onTap` 和 `action` 时：**先执行 JS，再执行 action**。
+- `onTap` 与 `onClick` 是同一事件。同时写 `onTap` 和 `action` 时：**先执行 JS，再执行 action**。细节见 [`events.md`](../events.md)、[`page-json.md`](../page-json.md#json-action)。
 - `size` 中英文别名：`sm`=`小`，`md`=`中`，`lg`=`大`。不写即为大按钮。
 - 禁止 `{ "type": "button", "background": "#1565C0" }`。根上的 `background` 无效。

@@ -1,6 +1,6 @@
 # Engines
 
-在当前环境中再开一个**独立**运行时执行其它脚本，或关闭运行时。不要生成 `hooks`，不要调用 `closeHook()`。
+在当前环境中再开一个**独立**运行时执行其它脚本，或关闭运行时。
 
 ## 可用上下文
 
@@ -19,8 +19,6 @@
 | closeOther | `closeOther()` | `void` | 结束其它运行时，留下当前 |
 | childScriptCount | `childScriptCount()` | `number` | 经 Engines 拉起且未结束的脚本数 |
 
-不要调用 `closeHook()`。
-
 ## 最小片段
 
 ```javascript
@@ -34,7 +32,7 @@ Engines.executeScript('tasks/xxx.js');
 | 场景 | API |
 |------|-----|
 | 任务内自动结束 | `Engines.closeAll()`（写在 `tasks/*.js`） |
-| 用户点菜单停止 | `FloatWindow.stopTask()`，或 menus 内置 `"action":"stop"` |
+| 用户点菜单停止 | `FloatWindow.stopTask()`（`onTap` + `FloatWindow.on`） |
 | 未配 menus | 连点悬浮球两次（不必再写 stop） |
 
 菜单回调 / 页面按钮里 `Engines.closeAll()` **无效**。

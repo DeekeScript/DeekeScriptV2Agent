@@ -127,5 +127,5 @@ Page({
 
 - 组件 JSON 不是 `page.json`，不要写页面 `title` / `popups` 当组件根字段（嵌入只用 `body`）。
 - 父页用 `this.selectComponent('inline')` 取实例（需要组件 `id`）。
-- 不要箭头函数、不要 `?.`。
+- 不要 `?.`。页面方法需要 `this` 时用 `function`。
 - 相关：[`donts.md`](../04-cheatsheets/donts.md)。

@@ -45,4 +45,4 @@ Cos.shutdown();
 - 密钥不要写进仓库明文示例以外的生产代码；用配置或后端下发。
 - 同步 `upload` 会堵住当前线程；页面里优先 `uploadAsync`。
 - 用完 `shutdown()`。
-- 回调写成 `function`，不要箭头函数。
+- 回调写成 `function` 或箭头均可。

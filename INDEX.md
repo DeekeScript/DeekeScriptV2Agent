@@ -30,11 +30,12 @@
 | 文件 | 解决什么 |
 |------|----------|
 | [01-ui/entry-json.md](./01-ui/entry-json.md) | `deekeScript.json`（完整示例不含 floatWindow） |
-| [01-ui/page-json.md](./01-ui/page-json.md) | `page.json` 结构 |
+| [01-ui/page-json.md](./01-ui/page-json.md) | `page.json` 结构与 JSON `action` |
 | [01-ui/page-js.md](./01-ui/page-js.md) | `Page({})`；页面等待用 `setTimeout` |
+| [01-ui/events.md](./01-ui/events.md) | 事件侧：组件 / 按钮 `onTap` 等与跑脚本 |
 | [01-ui/components/_common.md](./01-ui/components/_common.md) | 必读：`style` / 主题色 |
 | [01-ui/data-binding.md](./01-ui/data-binding.md) | 必读：`{{}}`、`showIf`、表单 `name`、list `bind` |
-| [01-ui/navigate.md](./01-ui/navigate.md) | 必读：页面 `action` 与跳转；底栏用 `switchTab` |
+| [01-ui/navigate.md](./01-ui/navigate.md) | 页面栈：`navigate` / `redirect` / `switchTab` / `back` |
 | [01-ui/component-custom.md](./01-ui/component-custom.md) | 自定义组件 |
 | [01-ui/components/INDEX.md](./01-ui/components/INDEX.md) | 内置 type，再开单篇 |
 | [01-ui/capabilities/tabBar.md](./01-ui/capabilities/tabBar.md) | 有底栏时 |
@@ -52,7 +53,7 @@
 | [02-script/ui-and-task.md](./02-script/ui-and-task.md) | Storage 与启动路径 |
 | [02-script/api/UiSelector.md](./02-script/api/UiSelector.md) | 找节点；点击前一般先 `filter` 屏内 |
 | [02-script/api/INDEX.md](./02-script/api/INDEX.md) | API 清单，再开单篇 |
-| [02-script/api/no-hook.md](./02-script/api/no-hook.md) | 入口与初始化：不要 hooks/groups |
+| [02-script/api/no-hook.md](./02-script/api/no-hook.md) | 入口与初始化 |
 
 常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`System`、`Storage`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`。
 

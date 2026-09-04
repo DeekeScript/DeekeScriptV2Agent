@@ -49,6 +49,6 @@ thread.join();
 ## 注意
 
 - 优先用定时器或 `Engines.executeScript`，不要默认上多线程。
-- 回调写成 `function` 或 `{ run: function () {} }`，不要箭头函数。
+- 回调写成 `function` 或 `{ run: function () {} }`；箭头也可以。
 - `Threads.sleep` 与 `System.sleep` 都是休眠，前者可被 `interrupt` 打断。
 - 也可用 Java：`new java.lang.Thread(new java.lang.Runnable(obj))`，见 [`extension.md`](./extension.md)。

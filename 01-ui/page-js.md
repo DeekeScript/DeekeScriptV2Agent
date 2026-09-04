@@ -1,6 +1,6 @@
 # 页面 page.js
 
-写 `Page({})`、生命周期、点击、改标题/弹层/加载圈、从页面拉起脚本时读这篇。`page.js` 只在打开该页时加载，不要对它点「仅当前文件执行」。未声明的方法不会调用。`this` 为传入对象。滚动/点击细节与方法全集都在本页；下拉刷新见 [refresh](./capabilities/refresh.md)。
+写 `Page({})`、生命周期、点击、改标题/弹层/加载圈、从页面拉起脚本时读这篇。`page.js` 只在打开该页时加载。未声明的方法不会调用。`this` 为传入对象。组件 JSON 事件与按钮跑脚本见 [`events.md`](./events.md)；JSON `action` 见 [`page-json.md`](./page-json.md#json-action)。下拉刷新见 [refresh](./capabilities/refresh.md)。
 
 ## 生命周期顺序
 
@@ -48,7 +48,7 @@ Page({
 
 ## 页面事件
 
-点按已经拆开。组件上写了对应 JSON 时，空白处的页面事件不会再收到。
+点按已经拆开。组件上写了对应 JSON 时，空白处的页面事件不会再收到。组件侧字段与按钮用法见 [`events.md`](./events.md)。
 
 | 时机 | 方法 |
 |------|------|
@@ -151,7 +151,7 @@ Page({
 
 ## 从页面执行脚本
 
-不要写在 JSON 的 `action` 里。路径相对项目根目录。
+路径相对项目根目录。
 
 ```json
 { "type": "button", "text": "运行示例", "onTap": "onRunSample" }
