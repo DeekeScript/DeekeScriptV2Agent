@@ -49,6 +49,8 @@ video.like();
 video.comment('不错');
 ```
 
+`comment(text)` 实现必须遵守点击后重取输入框，见 [`comment-input.md`](../03-recipes/comment-input.md)、[`pitfalls/stale-node-after-click.md`](./pitfalls/stale-node-after-click.md)。不要写成「同一 `input` 变量 click 完直接 setText」。
+
 ### 写法约定（必守）
 
 优先用对象组织能力，少堆顶层 `function`；对象方法一律简写：
@@ -107,6 +109,8 @@ if (!permission.ensureRun()) {
   Engines.closeAll();
 }
 ```
+
+刷推荐流、进主页取号时：循环须遵守 [`pitfalls/skip-on-item-failure.md`](./pitfalls/skip-on-item-failure.md)（单条失败 skip，禁止对同一条反复进主页）。
 
 ## 4. 新增功能前先查复用
 

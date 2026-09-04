@@ -42,7 +42,9 @@
 | 界面 + 脚本 | 上面两套 + [`permission.md`](./02-script/permission.md) + [`require.md`](./02-script/require.md) + [`code-org.md`](./02-script/code-org.md) + [`ui-and-task.md`](./02-script/ui-and-task.md) + [`run-task-from-ui.md`](./03-recipes/run-task-from-ui.md) |
 | 自定义组件 | [`component-custom.md`](./01-ui/component-custom.md) + [`custom-picker.md`](./03-recipes/custom-picker.md) |
 | HID / 图色 / DO / 打包 | [`api/INDEX.md`](./02-script/api/INDEX.md) 扩展卡片，先读权限 |
-| 操作第三方 App | [`task-template.md`](./02-script/task-template.md)；[`code-org.md`](./02-script/code-org.md)；[`automation-loop.md`](./00-core/automation-loop.md)；[`App.md`](./02-script/api/App.md)、[`UiSelector.md`](./02-script/api/UiSelector.md)、[`Gesture.md`](./02-script/api/Gesture.md)、[`System.md`](./02-script/api/System.md) |
+| 操作第三方 App | [`task-template.md`](./02-script/task-template.md)；[`code-org.md`](./02-script/code-org.md)；[`automation-loop.md`](./00-core/automation-loop.md)；[`App.md`](./02-script/api/App.md)、[`UiSelector.md`](./02-script/api/UiSelector.md)、[`Gesture.md`](./02-script/api/Gesture.md)、[`System.md`](./02-script/api/System.md)；页面态 [`page-state.md`](./02-script/pitfalls/page-state.md)；**单条失败跳过** [`skip-on-item-failure.md`](./02-script/pitfalls/skip-on-item-failure.md)（刷流/进主页必读） |
+| 评论 / 发帖 / 私信输入 | [`comment-input.md`](./03-recipes/comment-input.md) + [`stale-node-after-click.md`](./02-script/pitfalls/stale-node-after-click.md)（**必读**）+ [`UiObject.md`](./02-script/api/UiObject.md)；需要输入法时再开 [`KeyBoards.md`](./02-script/api/KeyBoards.md) |
+| 刷推荐流 / 进主页取号 | [`skip-on-item-failure.md`](./02-script/pitfalls/skip-on-item-failure.md)（**必读**）+ [`page-state.md`](./02-script/pitfalls/page-state.md) + [`task-template.md`](./02-script/task-template.md) |
 | 自定义悬浮窗菜单 | [`floatWindow.md`](./01-ui/capabilities/floatWindow.md) + [`float-window.md`](./03-recipes/float-window.md)（用户没提则**不要**生成） |
 | 调试 tasks | [`automation-loop.md`](./00-core/automation-loop.md) + [`ai-device-debug.md`](./00-core/ai-device-debug.md) + [`ai-http-api.md`](./02-script/ai-http-api.md) |
 
@@ -54,6 +56,8 @@
 - **悬浮窗** `menus` 用 `onTap`，须与 `FloatWindow.on` **同一轮**生成。停止项在回调里写 `FloatWindow.stopTask()`。默认不写 `floatWindow`。
 - 停任务：菜单 / 页面手动 → `FloatWindow.stopTask()`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`。未配 menus 时连点两次即可。
 - 找节点：`UiSelector().text('发送').findOne()`；点击前一般先 `filter` 屏内。
+- **输入 / 评论**：点击占位框后必须**重新 find** 再 `setText`/`paste`，并校验 `text`；禁止沿用 click 前的节点。见 [`stale-node-after-click.md`](./02-script/pitfalls/stale-node-after-click.md)。
+- **刷流 / 进主页**：单条失败（弹窗、读不到抖音号等）必须 **skip 并前进**，禁止对同一条反复进主页。见 [`skip-on-item-failure.md`](./02-script/pitfalls/skip-on-item-failure.md)。
 - 页面等待用 `setTimeout`；任务等待用 `System.sleep`。不要在 `page.js` 里 `System.sleep` 堵 UI。
 - 切 App 后台后的提示用 `FloatDialogs`；页面短提示用 `this.toast`；任务前台短提示可用 `System.toast`。
 - Rhino 1.8：可用箭头；禁止 `async/await`、`?.`、`??`、`import`/`export`。业务与页面方法用**对象 + 方法简写**（`open() {}`），不要 `open: function () {}`，也不要用会绑错 `this` 的 `onLoad: () => {}`。

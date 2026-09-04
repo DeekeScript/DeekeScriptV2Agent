@@ -39,6 +39,8 @@
 | 9 | 禁止把可调节数值写成 `progress` / `progressBar`。用 `slider`。 |
 | 10 | 禁止把 `background` / `color` / `width` / `height` 写在组件根上。必须在 `style`。 |
 | 11 | 禁止在悬浮窗菜单回调或页面按钮里用 `Engines.closeAll()` 停整项任务（无效）。手动停用 `FloatWindow.stopTask()`。 |
+| 12 | 禁止点击输入框 / 半屏 / 弹键盘后，仍用**点击前**的节点做 `setText` / `paste`。必须重新 `find`（优先 `editable(true).focused(true)`）并校验 `text`。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)。 |
+| 13 | 禁止刷流时对**同一条**内容失败后反复进主页 / 不划走。须以内容条为进度，失败 skip 前进。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md)。 |
 
 ## 快速对照
 
@@ -52,5 +54,7 @@
 | 可调节数值 | `"type": "slider"` | `"type": "progress"` 当滑动条 |
 | 按钮换色 | `"style": { "background": "#1565C0" }` | 根上写 `"background"` |
 | 手动停（有 menus） | `FloatWindow.stopTask()`（`onTap` + `FloatWindow.on`） | 菜单/页面里 `Engines.closeAll()` |
+| 评论 / 输入 | `click` → 重 find → `setText` → 校验 `text` | `var input=…; input.click(); input.setText(…)` |
+| 刷流 / 进主页失败 | skip 本条并划走下一条 | 同一条反复进主页 / `continue` 不前进 |
 | 手动停（无 menus） | 连点悬浮球两次 | 无故生成 stop 菜单 |
 | 自动停 | `tasks/*.js` 里 `Engines.closeAll()` | 只在页面回调里 closeAll |

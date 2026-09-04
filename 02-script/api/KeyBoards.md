@@ -61,3 +61,4 @@ if (!KeyBoards.canInput()) {
 - 不可编辑或非标准节点仍用无障碍，不要硬用输入法。
 - 系统级按键走 [`Gesture.md`](./Gesture.md) 或 [`Hid.md`](./Hid.md)，不要 `pressKey("HOME")`。
 - 先点输入框拿焦点，再 `input`。
+- **点完输入框后不要沿用旧节点**：占位框与聚焦后的真实框常不是同一个；即使改用 KeyBoards，也要先确认焦点在新框上。无障碍路径见 [`stale-node-after-click.md`](../pitfalls/stale-node-after-click.md)、配方 [`comment-input.md`](../../03-recipes/comment-input.md)。

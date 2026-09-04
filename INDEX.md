@@ -55,6 +55,9 @@
 | [02-script/api/UiSelector.md](./02-script/api/UiSelector.md) | 找节点；点击前一般先 `filter` 屏内 |
 | [02-script/api/INDEX.md](./02-script/api/INDEX.md) | API 清单，再开单篇 |
 | [02-script/api/no-hook.md](./02-script/api/no-hook.md) | 入口与初始化 |
+| [02-script/pitfalls/stale-node-after-click.md](./02-script/pitfalls/stale-node-after-click.md) | **评论/输入必读**：点击后重取节点 |
+| [02-script/pitfalls/page-state.md](./02-script/pitfalls/page-state.md) | 推荐页/半屏误判；互斥特征 |
+| [02-script/pitfalls/skip-on-item-failure.md](./02-script/pitfalls/skip-on-item-failure.md) | **刷流/进主页必读**：单条失败 skip，禁止死磕 |
 
 常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`System`、`Storage`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`。
 
@@ -69,6 +72,7 @@
 | [03-recipes/float-window.md](./03-recipes/float-window.md) | 悬浮球 menus + on（仅需要时） |
 | [03-recipes/list-load-more.md](./03-recipes/list-load-more.md) | 列表触底加载 |
 | [03-recipes/custom-picker.md](./03-recipes/custom-picker.md) | 自定义选择组件 |
+| [03-recipes/comment-input.md](./03-recipes/comment-input.md) | 评论/发帖输入（点击后重取） |
 
 ## 扩展能力
 

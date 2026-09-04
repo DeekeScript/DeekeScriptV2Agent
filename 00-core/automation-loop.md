@@ -29,8 +29,9 @@
 | 5 | 每次 `run` / `run-file` 前：若用过悬浮弹窗，先 `FloatDialogs.closeAll()`。 |
 | 6 | 短验证可用 `run` 传代码字符串（可不先 `write`）；`run-file` 或交付执行前必须已 `write`。 |
 | 7 | `while` / 重试必须有上限（次数或 `retryCount`），禁止无递增的 `continue`。 |
+| 7b | **刷流 / 列表**：以内容条为进度；单条失败（弹窗、读不到字段）默认 **skip 并前进**，禁止对同一条反复进主页。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md)。 |
 | 8 | 步骤之间用 `System.sleep`；关键步骤打 `console.log`，便于读 `logs`。 |
-| 9 | 已切到第三方 App 时用 `FloatDialogs` 提示，不用 `Dialogs` / 指望前台 toast。 |
+| 9 | 已切到第三方 App 时用 `FloatDialogs` 提示，不用 `Dialogs` / 指望前台 toast。目标 App 业务弹窗另用文案按钮 dismiss，勿与 `FloatDialogs` 混用。 |
 | 10 | 自动结束：在 `tasks/*.js` 里 `Engines.closeAll()`。菜单停用 `FloatWindow.stopTask()`（用户要菜单时才写）。 |
 | 11 | 同一失败模式连续修 **3 轮**仍不过 → 进入下方「请求用户协助」，不要空转猜测。 |
 
@@ -39,10 +40,12 @@
 按顺序用 `run` 短代码验证，通过一项再下一项：
 
 1. **权限**：`Access.isAccessibilityServiceEnabled()` / 悬浮窗等为 true  
-2. **在目标 App**：`App` / `System.currentPackage`（或等价）符合预期  
-3. **找得到节点**：打印 `text` / `desc` / `bounds`；确认在屏内  
-4. **点得动 / 输得进**：单独 `click` 或 `setText`（输入优先 `setText` / 剪贴板）  
-5. **再拼循环**：带上限的 `while`，再 `write` + `run-file`
+2. **在目标 App / 目标页**：用**互斥特征**判断（不要用评论列表也会出现的通用 id）。见 [`page-state.md`](../02-script/pitfalls/page-state.md)  
+3. **找得到节点**：打印 `text` / `desc` / `bounds`；确认在屏内（`filter`）  
+4. **点得动 / 输得进**：  
+   - 普通按钮：`click` 后看界面变化  
+   - **输入框 / 评论**：`click` 占位框 → `sleep` → **重新 find**（优先 `editable(true).focused(true)`）→ `setText` / 剪贴板 → **再读 `text` 校验**。禁止对 click 前的变量直接写入。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)、配方 [`comment-input.md`](../03-recipes/comment-input.md)  
+5. **再拼循环**：带上限的 `while`；刷流任务须验证「失败一条会划走、不会重进同一主页」，再 `write` + `run-file`。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md)
 
 ## 请求用户协助（必要）
 
@@ -73,6 +76,7 @@
 - [ ] 过程中改动已主动 `write`  
 - [ ] 关键逻辑 / 界面已在真机验证（或已声明未验证原因）  
 - [ ] `logs` 无未处理错误；循环有上限  
+- [ ] 刷流 / 进主页类任务：单条失败会 skip 前进，无「同一条死磕」  
 - [ ] 多对象 / 多功能时已按 [`code-org.md`](../02-script/code-org.md) 拆模块，未在各 task 里复制底层操作  
 - [ ] 若曾请求用户协助：用户完成的步骤已记入最终说明  
 

@@ -159,12 +159,21 @@ bash tools/deeke-device.sh run-file --script-file "tasks/sample.js"
 调试策略：
 
 1. **片段**：短脚本验证 `UiSelector`（含 `filter` 后）能否找到目标节点，打印 `bounds` / text / desc
-2. **片段**：单独验证点击、输入（`setText` / 剪贴板），不要先跑完整任务
+2. **片段**：单独验证点击、输入（`setText` / 剪贴板），不要先跑完整任务  
+   - 验证输入时必须走：`click` → `sleep` → **重新 find** → 写入 → 再读 `text`。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)
 3. 报错看 `data.error` 和 `logs` 里 `code` 为错误的项
 4. 界面不对时 `snapshot` 拿节点树 + 截图对照
 5. 脚本卡死用 `stop`；有残留弹窗先 `FloatDialogs.closeAll()`
 6. 修代码 → **再次 `write` 同步** → 再 `run` / `run-file`，直到 logs 符合预期
 7. **整体**：片段都通过后再 `run-file` 跑完整 `tasks/*.js`
+
+### 日志可读性
+
+`/ai/run` 返回的 `logs` 有时会丢掉靠前的若干条 `console.log`。排障时：
+
+- 把关键断言合成**一条**日志，例如 `console.log('result=' + JSON.stringify(ret))`
+- 或每条带唯一前缀：`step1_`、`step2_`，避免只靠「第一条」判断成败
+- bounds / 屏高以 `Device.width()` / `Device.height()` 为准；`/ai/status` 的 `screenHeight` 可能不一致
 
 ```powershell
 # Windows

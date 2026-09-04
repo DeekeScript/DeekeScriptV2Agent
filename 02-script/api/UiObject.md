@@ -62,5 +62,7 @@ if (sendButton) {
 
 - `click()` 返回 `true` 不代表业务已完成，只代表无障碍已发送点击。
 - `setText` / `paste` / `cut` / `copy` / `setSelection` 针对可编辑节点。
+- **点击后节点常失效**：评论占位框、搜索框、半屏面板、键盘弹起后，点击前拿到的 `UiObject` 往往不是真正可输入的那个。必须 `click` → `sleep` → **重新 find**（优先 `editable(true).focused(true)`）→ 再 `setText`/`paste` → 再读 `text()` 校验。禁止对旧变量直接写入。见 [`stale-node-after-click.md`](../pitfalls/stale-node-after-click.md)、配方 [`comment-input.md`](../../03-recipes/comment-input.md)。
+- `setText` 返回 `true` 不等于内容已进框；半屏里「发送」等文案节点可能 `isClickable() === false`，要点 `parent()` 或 [`Gesture.click`](Gesture.md) 中心。
 - 坐标点击用 [`Gesture`](Gesture.md)，不要用节点 API 去点像素。
 - 索引见 [`INDEX.md`](INDEX.md)。

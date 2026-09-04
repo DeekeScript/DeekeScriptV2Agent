@@ -93,6 +93,15 @@ if (likeBtn) {
 
 只要右侧操作栏时，可在 `filter` 里再加 `b.left > Device.width() * 0.7`。回调可用 `function` 或箭头。
 
+## 找输入框优先级（生成评论 / 发帖时）
+
+1. `UiSelector().editable(true).focused(true)`（点击并弹键盘后）
+2. `UiSelector().editable(true)` + 屏内 / 区域 `filter`
+3. hint / `textContains`（如「说点什么」）
+4. 最后才 `className('EditText')` 或全类名（短名在部分机型 / App 上找不到）
+
+点击占位输入框后必须**重新**按上表查找，见 [`stale-node-after-click.md`](../pitfalls/stale-node-after-click.md)。
+
 ## 注意
 
 - 生成代码优先 `findOne()`（`findOnce()` 与之等价，不必再写）。
@@ -100,4 +109,5 @@ if (likeBtn) {
 - 禁止全局 `text('发送')`，必须 `UiSelector().text('发送')`。
 - `waitFindOne()` 会一直阻塞，任务里慎用；需要超时用 `findOneBy(timeout)` / `findBy(timeout)`。
 - 需要系统节点时：`UiSelector(false)`。
+- bounds 与屏内判断用 `Device.width()` / `Device.height()`；不要混用 `/ai/status` 的 `screenHeight`（可能与 `Device.height()` 不一致）。
 - 节点操作见 [`UiObject.md`](UiObject.md)。索引见 [`INDEX.md`](INDEX.md)。
