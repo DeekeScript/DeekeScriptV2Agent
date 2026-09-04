@@ -45,7 +45,9 @@ DeekeScript Pro 做两件事，彼此解耦：
 - **禁止**在 JSON `action` 里执行脚本。按钮写 `onTap`，在 `page.js` 里 `Engines.executeScript('tasks/xxx.js')`（或 `permission.runScript`）。
 - `action` 只允许：`navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl`。
 - 切底栏用 `switchTab`，不要 `navigate`。
-- 找节点用 `UiSelector().text('发送').findOne()`，不要 Auto.js 的 `text('发送').findOnce()`。
+- 找节点用 `UiSelector().text('发送').findOne()`（见 [`UiSelector.md`](./02-script/api/UiSelector.md)）。**点击前一般先 `filter` 屏内**（丢掉 `bounds` 越界 / 屏幕外节点）；很少需要操作屏幕外内容。
+- 输入优先 `setText` / 剪贴板；KeyBoards 仅在明确需要时使用，且先 `canInput()`。
+- 任务或调试若用过悬浮弹窗，执行前 `FloatDialogs.closeAll()`；调试先片段后整体，见 [`ai-device-debug.md`](./00-core/ai-device-debug.md)。
 - 表单 `name` 绑定 `data`；页面 `Storage.put*`，脚本 `Storage.get*`。键名加项目前缀。
 - 可调节数值用 `slider`（运行速度、点赞概率）。`progress` / `progressBar` 只能展示进度，不能拖。
 - `page.js` 不能「仅当前文件执行」。长循环、找节点、滑动只写在 `tasks/`。
@@ -57,8 +59,9 @@ DeekeScript Pro 做两件事，彼此解耦：
 - 颜色、背景、圆角、宽高只写在 `style` 里，不要写在组件根上。`button` 换色用 `style.background`，不写则跟 `window.theme.primary`（默认 `#006A65`）。禁止声称 button 没有 background。
 - 用户指定主题色时：入口 `window.theme.primary`、`title.background`、`statusBar.background`、`tabBar.selectedColor`、**每个 button 的 `style.background`** 都改成该色。不要照抄配方里的 `#006A65`。
 
-- **编写或调试 `tasks/*.js` 时**：先读 [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)。Windows 用 `tools/deeke-device.ps1 discover`；macOS/Linux 用 `tools/deeke-device.sh discover`（仅当本机 IP 为 `192.168.*` 才扫描）；扫不到则让用户填写 `http://IP:8080` 并 `set`。**修改或新建工程文件后，必须用 `write`（`POST /ai/project/write`）同步到手机**，再用 `/ai/run` 或 `run-file` 实机验证，根据 `logs` 迭代修复后再交付。短片段验证可用 `run` 直接传代码，不必先同步。
-- **生成 `floatWindow.menus` 时**：必读 [`floatWindow.md`](./01-ui/capabilities/floatWindow.md) 的 **关闭任务底层逻辑** + [`float-window.md`](./03-recipes/float-window.md)。手动停 → `FloatWindow.stopTask()`；自动停 → `tasks/*.js` 里 `Engines.closeAll()`。**同一轮**写出 JSON + JS 绑定。
+- **编写或调试 `tasks/*.js` 时**：先读 [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)。Windows 用 `tools/deeke-device.ps1 discover`；macOS/Linux 用 `tools/deeke-device.sh discover`（仅当本机 IP 为 `192.168.*` 才扫描）；扫不到则让用户填写 `http://IP:8080` 并 `set`。**修改或新建工程文件后，必须用 `write`（`POST /ai/project/write`）同步到手机**，再用 `/ai/run` 或 `run-file` 实机验证，根据 `logs` 迭代修复后再交付。短片段验证可用 `run` 直接传代码，不必先同步。执行前若用过悬浮弹窗，先 `FloatDialogs.closeAll()`；调试先片段后整体。
+- **默认不要写 `floatWindow` / `menus`**：用户没提悬浮窗菜单、跳过、自定义停止时，**不要**在 `deekeScript.json` 配 `floatWindow`，也不要写空 `menus` 占位。系统默认已是：连点两次停止任务（第一次变关闭图标，**3 秒内**再点），与开发器球一致，无需再配 stop。
+- **仅当用户明确要悬浮窗菜单时**（开始 / 停止 / 隐藏 / 跳过等）：必读 [`floatWindow.md`](./01-ui/capabilities/floatWindow.md) 的 **关闭任务底层逻辑** + [`float-window.md`](./03-recipes/float-window.md)。手动停（菜单）→ `FloatWindow.stopTask()`；自动停 → `tasks/*.js` 里 `Engines.closeAll()`。**同一轮**写出 JSON `menus` + `FloatWindow.on` 绑定。
 
 ## 输出形态
 

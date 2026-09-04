@@ -15,7 +15,7 @@
 
 | 文件 | 职责 | 禁止 |
 |------|------|------|
-| `deekeScript.json` | 识别工程；有界面时写 `homePage`、`window`、`pages`、`bottomMenus`、`floatWindow` | 写业务循环、无障碍操作 |
+| `deekeScript.json` | 识别工程；有界面时写 `homePage`、`window`、`pages`、`bottomMenus`；`floatWindow` **仅用户要自定义悬浮菜单时再写** | 写业务循环、无障碍操作 |
 | `pages/<id>/page.json` | 这一页长什么样：`title` / `body` / `popups` | 把长任务塞进 `action` |
 | `pages/<id>/page.js` | `Page({})`：数据、生命周期、点击后跳转或拉起脚本 | 当普通脚本点「仅当前文件执行」 |
 | `tasks/*.js` | 真正的无障碍自动化 | 依赖页面已打开才能运行（无界面也应能跑） |

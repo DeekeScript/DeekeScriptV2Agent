@@ -27,7 +27,7 @@
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
-| text | String | 标题文案 |
+| text | String | 标题文案，支持 `{{path}}`（如 `{{pageTitle}}`，对应 `Page.data`） |
 | hidden | Boolean | `true` 则隐藏导航栏 |
 | fontSize | Number | 字号（sp） |
 | color | String | 文字颜色 `#RRGGBB` |
@@ -35,6 +35,17 @@
 | fontWeight | String | `bold` |
 | align | String | `left` / `center` / `right` |
 | style | Object | 也可把 fontSize / color 等写在 `style` 里 |
+
+```json
+{
+  "title": {
+    "text": "{{pageTitle}}",
+    "fontSize": 18,
+    "color": "#FFFFFF",
+    "background": "#006A65"
+  }
+}
+```
 
 ```json
 {

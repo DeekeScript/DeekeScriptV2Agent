@@ -34,4 +34,5 @@ FloatDialogs.show('温馨提示', '任务已开始');
 
 - 点坐标前可先 `setFloatWindowClickable(false)`，点完再 `true`，见 [`Gesture`](Gesture.md)。
 - `confirm` 会卡住当前线程，不要在页面 `onLoad` 里滥用。
+- 任务或调试里如果用过 `show` / `confirm`：下次找节点、点击前先 `FloatDialogs.closeAll()`，避免弹窗挡操作。短提示优先 `toast`。
 - 索引见 [`INDEX.md`](INDEX.md)。

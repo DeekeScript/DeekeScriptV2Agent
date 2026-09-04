@@ -16,9 +16,9 @@
 | 8 | `require` **优先** `./`、`../` 相对当前文件（`tasks` → `../common/xxx.js`；`pages/home` → `../../common/xxx.js`）。不以 `./`/`../` 开头时相对项目根。禁止磁盘绝对路径。被引入文件用 `module.exports`。 |
 | 9 | 改 `page.json` / `page.js` 后必须同步到手机；当前页打开时会热更新，否则需在手机端点刷新。人用 VSCode 插件同步；**AI 用** `POST /ai/project/write` 或 `tools/deeke-device.* write`（见 [`ai-device-debug.md`](./ai-device-debug.md)）。 |
 | 9b | 改 `tasks/*.js` 等脚本后，若要用 `run-file` 或交付给用户在手机执行，必须先 `write` 同步；仅用 `run` 传代码字符串时可跳过。 |
-| 10 | 悬浮球 `floatWindow.menus` 最多 5 个（超过只展示前 5 个）。 |
-| 10b | 悬浮球菜单每项须在 `FloatWindow.on` 里绑定；与 JSON **同一轮**生成 JS。见 [`float-window.md`](../03-recipes/float-window.md)。 |
-| 10c | 手动停：悬浮窗菜单 `FloatWindow.stopTask()`。自动停：在 `tasks/*.js` 里 `Engines.closeAll()`（须在任务脚本线程）。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#关闭任务底层逻辑必读)。 |
+| 10 | 用户未点名要悬浮窗菜单时，**不要**写 `floatWindow.menus`（也勿写空 menus）。默认连点两次停止（第一次变关闭图标，3 秒内再点），与开发器一致。若配置了 `menus`：最多 5 个；运行中若没有 `stop`，框架会自动补一个。 |
+| 10b | 一旦写了 `floatWindow.menus`，每项须在 `FloatWindow.on` 里绑定；与 JSON **同一轮**生成 JS。见 [`float-window.md`](../03-recipes/float-window.md)。 |
+| 10c | 手动停（菜单）：`FloatWindow.stopTask()`。自动停：在 `tasks/*.js` 里 `Engines.closeAll()`（须在任务脚本线程）。未配 menus 时靠连点两次即可，不必再写 stop。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#关闭任务底层逻辑必读)。 |
 | 11 | 入口 JSON 必须写 `icon`，且该路径相对项目根的**文件必须作为工程文件生成**（如 `"icon": "img/xhs.svg"` 就要写出 svg 内容）。首页、悬浮球、打包都读这个字段。 |
 | 12 | 组件的颜色、背景、圆角、宽高写在 `style` 对象里。`button` 换色用 `style.background`。见 [`_common.md`](../01-ui/components/_common.md)。 |
 | 13 | 用户指定主题色时，入口写 `window.theme.primary`，再改导航栏 `title.background`、状态栏、底栏 `selectedColor`。所有 `button` 建议写 `style.background`。不要沿用默认绿 `#006A65`。 |
@@ -36,7 +36,7 @@
 | 7 | 禁止把 `permission.hint('请在文件 xxx 编写业务')` 写进生成模板。那是 Demo 教学占位，不是业务。 |
 | 8 | 禁止用 `navigate` 切底栏 Tab；禁止在底栏根页用 `back` 退出应用（根页 `back` 不会退出）。 |
 | 9 | 禁止把 `UiSelector` 主流程写进 `page.js` 的 `onTap` 并长时间阻塞。找节点、循环等待放 `tasks/*.js`。 |
-| 11 | 禁止 Auto.js 式全局选择器 `text()` / `id()` / `desc()`。必须 `UiSelector().text('发送').findOne()`。 |
+| 11 | 禁止全局选择器 `text()` / `id()` / `desc()`。必须 `UiSelector().text('发送').findOne()`。点击前一般先 `filter` 屏内（见 [`UiSelector.md`](../02-script/api/UiSelector.md)）。 |
 | 12 | 禁止把可调节数值写成 `progress` / `progressBar`。运行速度、点赞概率、间隔必须用 `slider`。 |
 | 13 | 禁止把 `background` / `color` / `width` / `height` 写在组件根上（和 `type` 同级）。必须写在 `style` 里。 |
 | 15 | 禁止写 `host` / `debug` / `apis`，禁止生成 `deekeScript-v2.json`。 |
@@ -54,3 +54,6 @@
 | 复用 UI | `components/choose` + `"component": true` | 复制整页 JSON、或组件互相循环嵌套 |
 | 按钮换色 | `"style": { "background": "#1565C0" }` | 根上写 `"background"`，或不写 style 却指望不是绿 |
 | 整站主题 | 导航栏 + 状态栏 + 底栏 + 每个 button 的 `style` | 只改 `title.background`，按钮仍默认绿 |
+| 手动停任务（有 menus） | 悬浮窗菜单里 `FloatWindow.stopTask()` | 菜单回调里 `Engines.closeAll()`（无效） |
+| 手动停任务（未配 menus） | 连点悬浮球两次（3 秒内） | 再写一套 stop 菜单重复默认行为 |
+| 自动停任务 | `tasks/*.js` 里 `Engines.closeAll()` | 只写 menus、不在任务线程结束 |

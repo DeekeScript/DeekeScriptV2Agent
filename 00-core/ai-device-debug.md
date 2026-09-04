@@ -132,6 +132,14 @@ bash tools/deeke-device.sh write --file "tasks/sample.js"
 
 编写或修改 `tasks/*.js` 并 **write 同步** 后：
 
+**先片段、再整体**：用 `run` 短代码分别验证「找节点 / 点击 / 输入」，确认无误后再 `run-file` 跑完整任务。不要一上来就整段盲跑。
+
+若工程或上次调试用过 `FloatDialogs.show` / `confirm`，**每次执行前先关弹窗**：
+
+```bash
+bash tools/deeke-device.sh run --script "FloatDialogs.closeAll(); console.log('dialogs cleared');"
+```
+
 ```powershell
 # Windows — 方式 A：短代码（不必同步，代码经 HTTP 直接执行）
 powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 run -Script "console.log('test'); let n = UiSelector().find(); console.log('nodes', n.length);"
@@ -150,11 +158,13 @@ bash tools/deeke-device.sh run-file --script-file "tasks/sample.js"
 
 调试策略：
 
-1. 先用短脚本验证 `UiSelector` 能否找到目标节点（`console.log` 打印数量、text）
-2. 报错看 `data.error` 和 `logs` 里 `code` 为错误的项
-3. 界面不对时 `snapshot` 拿节点树 + 截图对照
-4. 脚本卡死用 `stop`
-5. 修代码 → **再次 `write` 同步** → 再 `run` / `run-file`，直到 logs 符合预期
+1. **片段**：短脚本验证 `UiSelector`（含 `filter` 后）能否找到目标节点，打印 `bounds` / text / desc
+2. **片段**：单独验证点击、输入（`setText` / 剪贴板），不要先跑完整任务
+3. 报错看 `data.error` 和 `logs` 里 `code` 为错误的项
+4. 界面不对时 `snapshot` 拿节点树 + 截图对照
+5. 脚本卡死用 `stop`；有残留弹窗先 `FloatDialogs.closeAll()`
+6. 修代码 → **再次 `write` 同步** → 再 `run` / `run-file`，直到 logs 符合预期
+7. **整体**：片段都通过后再 `run-file` 跑完整 `tasks/*.js`
 
 ```powershell
 # Windows

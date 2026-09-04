@@ -23,7 +23,12 @@
 | `executeScript` 写成相对当前文件的 `./tasks` | `Engines.executeScript` 路径相对**项目根**：`tasks/sample.js`（与 `require` 不同） |
 | `require` 默认写项目根或磁盘绝对路径 | **优先相对路径**：`tasks` 用 `require('../common/x.js')`，`pages/home` 用 `require('../../common/x.js')`。见 [`require.md`](../02-script/require.md) |
 | 底栏根页 `back` 指望退出 App | `back` 只关二级页 |
-| 找节点写成 Auto.js 的 `text('发送').findOnce()` | 必须 `UiSelector().text('发送').findOne()`。没有全局 `text()` / `id()` |
+| 找节点写成全局 `text('发送')` / `id(...)` / `desc(...)` | 必须 `UiSelector().text('发送').findOne()`。没有全局 `text()` / `id()` |
+| 裸 `findOne()` / `find()` 后直接点击 | **一般先 `filter` 屏内**（丢掉屏幕外 / 越界节点），再查找并点击。很少操作屏幕外内容。见 [`UiSelector.md`](../02-script/api/UiSelector.md) |
+| 默认用 KeyBoards 输入、且不检查状态 | 优先 `setText` / 剪贴板；要用输入法时先 `KeyBoards.canInput()`，不行就提示用户 |
+| 有 `FloatDialogs.show` 却不关弹窗就继续点节点 | 任务或调试开始前 `FloatDialogs.closeAll()` |
+| 用户没提悬浮窗菜单却写了 `floatWindow.menus` / 空 menus | **默认不写**。系统已是连点两次停止（3 秒内），见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#两种球不要混) |
+| 悬浮窗菜单里用 `Engines.closeAll()` 停任务 | 菜单回调须用 `FloatWindow.stopTask()`；自动停才在 `tasks/*.js` 里 `Engines.closeAll()`。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#关闭任务底层逻辑必读) |
 | 把可调节数值写成 `progress` / `progressBar`（运行速度、点赞概率） | 用 `"type": "slider"`。`progress` 只能展示、不能拖。见 [`slider.md`](../01-ui/components/slider.md) |
 | 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |
 | 用页面根 `title` 同时又放 `navBar` 画两套顶栏 | 自制顶栏时 `"title": { "hidden": true }`，再写 `type: navBar` |

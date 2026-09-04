@@ -57,6 +57,6 @@ Page({
 
 ## 注意
 
-- `onTap` 调用 `Page` 方法时，`e` 含 `item`、`index`。
+- `onTap` 调用 `Page` 方法时，`e` 含 `item`、`index`；建议同时兼容：`e.item` 与 `this.data.list[e.index]`。
 - 内层 list 的 `bind` 可写 `item.tags`；内层循环中 `{{item}}` 为当前内层项。
 - 触底后由 JS 打开 [loading](./loading.md)；没有更多数据时关掉转圈，并用 `setData` 写下底线文案。

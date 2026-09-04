@@ -42,7 +42,7 @@
 | focused | `focused(bool: boolean)` | 是否已获焦点 | `UiSelector` | |
 | editable | `editable(bool: boolean)` | 是否可编辑 | `UiSelector` | |
 | isVisibleToUser | `isVisibleToUser(bool: boolean)` | 是否对用户可见 | `UiSelector` | |
-| filter | `filter(filter: (v: UiObject) => boolean)` | 回调；返回 false 则丢掉该节点 | `UiSelector` | 对已匹配节点再过滤 |
+| filter | `filter(filter: (v: UiObject) => boolean)` | 回调；返回 false 则丢掉该节点 | `UiSelector` | 对已匹配节点再过滤；可链式再接 `findOne` / `find` |
 | exists | `exists()` | 无 | `boolean` | 当前条件能否匹配到节点 |
 | waitFindOne | `waitFindOne()` | 无 | `UiObject` | 一直阻塞，直到节点出现 |
 | find | `find()` | 无 | `UiObject[]` | 所有匹配节点 |
@@ -62,9 +62,41 @@ if (sendButton) {
 }
 ```
 
+## 用 filter 过滤屏幕外节点（默认要做）
+
+生成点击代码时，**一般先 `filter` 再 `findOne` / `find`**：只保留屏幕内、尺寸有效的节点。很少需要操作屏幕外内容；预加载 / 列表复用等场景里，同 id 常有多份节点，裸 `findOne()` 容易先拿到屏幕外的（`bounds.top < 0`），一点击就偏。`isVisibleToUser(true)` **不能代替**几何校验。
+
+```javascript
+let likeBtn = UiSelector()
+  .id('com.ss.android.ugc.aweme:id/gpf')
+  .filter(function (node) {
+    if (!node) {
+      return false;
+    }
+    let b = node.bounds();
+    if (!b || b.width() <= 0 || b.height() <= 0) {
+      return false;
+    }
+    if (b.left < 0 || b.top < 0) {
+      return false;
+    }
+    if (b.right > Device.width() || b.bottom > Device.height()) {
+      return false;
+    }
+    return true;
+  })
+  .findOne();
+if (likeBtn) {
+  likeBtn.click();
+}
+```
+
+只要右侧操作栏时，可在 `filter` 里再加 `b.left > Device.width() * 0.7`。回调必须用 `function`，禁止箭头函数。
+
 ## 注意
 
-- 生成代码用 `findOne()`。`findOnce()` 与它等价，但容易和 Auto.js 的 `findOnce` 混在一起，不要写。
+- 生成代码优先 `findOne()`（`findOnce()` 与之等价，不必再写）。
+- **点击前一般先 `filter` 屏内**（见上），不要裸 `findOne()` 就点。
 - 禁止全局 `text('发送')`，必须 `UiSelector().text('发送')`。
 - `waitFindOne()` 会一直阻塞，任务里慎用；需要超时用 `findOneBy(timeout)` / `findBy(timeout)`。
 - 需要系统节点时：`UiSelector(false)`。
