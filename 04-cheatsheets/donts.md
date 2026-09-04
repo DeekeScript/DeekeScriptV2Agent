@@ -49,6 +49,10 @@
 | 因点赞/评论「会真实发出」而不启动目标 App | 先验证找得到、点得动；整段循环用数量=1。用户已要求的赞评不是「先问再调试」 |
 | 设备已连接却让用户自己去跑，代替 `run` / `snapshot` | 自己执行片段验证；只有扫不到设备、权限未开、要登录验证码时才打断用户 |
 | 连不上设备却声称已实机验证 | 交付代码并列出用户须开的权限与地址；不得假装已跑通 |
+| 用 `currentPackage()` 判断是否在抖音/微信等 | 用目标页互斥节点。见 [`System.md`](../02-script/api/System.md)、[`ui-and-a11y-app.md`](../03-recipes/ui-and-a11y-app.md) |
+| 底栏页只在 `onLoad` 读 Storage 做摘要/列表 | 必须 `onShow` 再读。见 [`page-js.md`](../01-ui/page-js.md) |
+| 任务循环里 `waitFindOne()` | 用 `findOne` / `findOneBy(timeout)` |
+| 业务能力写成文件顶层 `function foo() {}` | 用对象 + 方法简写：`module.exports = { foo() {} }`。`permission.js` snippet 除外。见 [`code-org.md`](../02-script/code-org.md) |
 | 同一失败修满 3 轮仍猜 | 按 automation-loop「请求用户协助」，停止空转 |
 
 Rhino 其它限制见 [`00-core/constraints.md`](../00-core/constraints.md)。配方入口：[`scaffold.md`](../03-recipes/scaffold.md)。

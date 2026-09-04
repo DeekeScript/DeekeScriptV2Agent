@@ -73,7 +73,7 @@ onPicked(e) {
 
 | 场景 | 推荐 |
 |------|------|
-| 业务 / 模块能力 | 用对象 + 方法简写组织；少堆顶层 `function`。见 [`code-org.md`](../02-script/code-org.md) |
+| 业务 / 模块能力（`common/`、`tasks/`） | **必须**对象 + 方法简写，禁止顶层业务 `function`。见 [`code-org.md`](../02-script/code-org.md) |
 | `Page` / `Component` / `module.exports` / `FloatWindow.on` | **方法简写** `onLoad() {}`、`greet(name) {}`；不要 `onLoad: function () {}` |
 | 需要 `this` 的页面方法 | 用简写或普通 `function`；**不要** `onLoad: () => {}`（箭头会绑错 `this`） |
 | API 回调（`setTimeout`、`Dialogs`、`.then` 等） | `function` 或 `=>` 均可 |

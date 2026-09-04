@@ -13,127 +13,144 @@
 
 写入顺序：优先 `setText`；不行再 `System.setClip` + `paste`；**不要默认 KeyBoards**。
 
+落到 `common/` 时必须是**对象方法**（见 [`code-org.md`](../02-script/code-org.md)），禁止顶层 `function inScreen()`。
+
 ## 完整片段（点击后重取）
 
 ```javascript
-function inScreen(node) {
-  if (!node) {
-    return false;
-  }
-  var b = node.bounds();
-  if (!b || b.width() <= 0 || b.height() <= 0) {
-    return false;
-  }
-  if (b.left < 0 || b.top < 0 || b.top >= Device.height()) {
-    return false;
-  }
-  return true;
-}
-
-function findPlaceholderInput() {
-  var nodes = UiSelector().editable(true).filter(inScreen).find();
-  var best = null;
-  var bestTop = -1;
-  var i = 0;
-  while (i < nodes.length) {
-    var top = nodes[i].bounds().top;
-    if (top > bestTop) {
-      bestTop = top;
-      best = nodes[i];
+module.exports = {
+  inScreen(node) {
+    if (!node) {
+      return false;
     }
-    i++;
-  }
-  return best;
-}
-
-function findActiveInput(oldTop) {
-  var focused = UiSelector().editable(true).focused(true).filter(inScreen).findOne();
-  if (focused) {
-    return focused;
-  }
-  var nodes = UiSelector().editable(true).filter(inScreen).find();
-  var i = 0;
-  while (i < nodes.length) {
-    var top = nodes[i].bounds().top;
-    if (oldTop < 0 || Math.abs(top - oldTop) >= 40) {
-      return nodes[i];
+    var b = node.bounds();
+    if (!b || b.width() <= 0 || b.height() <= 0) {
+      return false;
     }
-    i++;
-  }
-  return nodes.length ? nodes[0] : null;
-}
-
-function clickSend() {
-  var send = UiSelector().text('发送').filter(inScreen).findOne();
-  if (!send) {
-    send = UiSelector().descContains('发送').filter(inScreen).findOne();
-  }
-  if (!send) {
-    return false;
-  }
-  if (send.isClickable() && send.click()) {
+    if (b.left < 0 || b.top < 0 || b.top >= Device.height()) {
+      return false;
+    }
     return true;
-  }
-  var parent = send.parent();
-  if (parent && parent.isClickable() && parent.click()) {
-    return true;
-  }
-  FloatDialogs.setFloatWindowClickable(false);
-  System.sleep(300);
-  var b = send.bounds();
-  var ok = Gesture.click(b.centerX(), b.centerY());
-  FloatDialogs.setFloatWindowClickable(true);
-  return ok;
-}
+  },
 
-function comment(text) {
-  // 假设已打开评论半屏；打开半屏的按钮查找按各 App 另写
-  var placeholder = findPlaceholderInput();
-  if (!placeholder) {
-    return false;
-  }
-  var oldTop = placeholder.bounds().top;
-  placeholder.click();
-  System.sleep(1000);
+  findPlaceholderInput() {
+    var that = this;
+    var nodes = UiSelector().editable(true).filter(function (n) {
+      return that.inScreen(n);
+    }).find();
+    var best = null;
+    var bestTop = -1;
+    var i = 0;
+    while (i < nodes.length) {
+      var top = nodes[i].bounds().top;
+      if (top > bestTop) {
+        bestTop = top;
+        best = nodes[i];
+      }
+      i++;
+    }
+    return best;
+  },
 
-  // MUST：点击后重新获取
-  var input = findActiveInput(oldTop);
-  if (!input) {
-    return false;
-  }
+  findActiveInput(oldTop) {
+    var that = this;
+    var focused = UiSelector().editable(true).focused(true).filter(function (n) {
+      return that.inScreen(n);
+    }).findOne();
+    if (focused) {
+      return focused;
+    }
+    var nodes = UiSelector().editable(true).filter(function (n) {
+      return that.inScreen(n);
+    }).find();
+    var i = 0;
+    while (i < nodes.length) {
+      var top = nodes[i].bounds().top;
+      if (oldTop < 0 || Math.abs(top - oldTop) >= 40) {
+        return nodes[i];
+      }
+      i++;
+    }
+    return nodes.length ? nodes[0] : null;
+  },
 
-  var written = false;
-  try {
-    written = !!input.setText(text);
-  } catch (e1) {
-    written = false;
-  }
-  if (!written) {
-    System.setClip(text);
-    System.sleep(150);
+  clickSend() {
+    var that = this;
+    var send = UiSelector().text('发送').filter(function (n) {
+      return that.inScreen(n);
+    }).findOne();
+    if (!send) {
+      send = UiSelector().descContains('发送').filter(function (n) {
+        return that.inScreen(n);
+      }).findOne();
+    }
+    if (!send) {
+      return false;
+    }
+    if (send.isClickable() && send.click()) {
+      return true;
+    }
+    var parent = send.parent();
+    if (parent && parent.isClickable() && parent.click()) {
+      return true;
+    }
+    FloatDialogs.setFloatWindowClickable(false);
+    System.sleep(300);
+    var b = send.bounds();
+    var ok = Gesture.click(b.centerX(), b.centerY());
+    FloatDialogs.setFloatWindowClickable(true);
+    return ok;
+  },
+
+  comment(text) {
+    var placeholder = this.findPlaceholderInput();
+    if (!placeholder) {
+      return false;
+    }
+    var oldTop = placeholder.bounds().top;
+    placeholder.click();
+    System.sleep(1000);
+
+    var input = this.findActiveInput(oldTop);
+    if (!input) {
+      return false;
+    }
+
+    var written = false;
     try {
-      written = !!input.paste();
-    } catch (e2) {
+      written = !!input.setText(text);
+    } catch (e1) {
       written = false;
     }
-  }
-  System.sleep(400);
-
-  var check = UiSelector().editable(true).focused(true).filter(inScreen).findOne();
-  if (!check || String(check.text() || '').indexOf(text) < 0) {
-    // 节点可能再次刷新：再取一次重写
-    input = findActiveInput(oldTop);
-    if (input) {
+    if (!written) {
+      System.setClip(text);
+      System.sleep(150);
       try {
-        input.setText(text);
-      } catch (e3) {
+        written = !!input.paste();
+      } catch (e2) {
+        written = false;
       }
-      System.sleep(300);
     }
-  }
+    System.sleep(400);
 
-  return clickSend();
-}
+    var that = this;
+    var check = UiSelector().editable(true).focused(true).filter(function (n) {
+      return that.inScreen(n);
+    }).findOne();
+    if (!check || String(check.text() || '').indexOf(text) < 0) {
+      input = this.findActiveInput(oldTop);
+      if (input) {
+        try {
+          input.setText(text);
+        } catch (e3) {
+        }
+        System.sleep(300);
+      }
+    }
+
+    return this.clickSend();
+  }
+};
 ```
 
 ## 片段验证顺序

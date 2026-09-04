@@ -69,7 +69,7 @@
 | [03-recipes/scaffold.md](./03-recipes/scaffold.md) | 从 0 最小工程 |
 | [03-recipes/workbench.md](./03-recipes/workbench.md) | 首页工作台（反冗余：底栏页不重复入口） |
 | [03-recipes/settings-form.md](./03-recipes/settings-form.md) | 配置页 + Storage |
-| [03-recipes/run-task-from-ui.md](./03-recipes/run-task-from-ui.md) | 按钮启动任务 |
+| [03-recipes/ui-and-a11y-app.md](./03-recipes/ui-and-a11y-app.md) | 工作台 + Storage + 无障碍操作第三方 App（本形态总表） |
 | [03-recipes/float-window.md](./03-recipes/float-window.md) | 悬浮球 menus + on（仅需要时） |
 | [03-recipes/list-load-more.md](./03-recipes/list-load-more.md) | 列表触底加载 |
 | [03-recipes/list-manage.md](./03-recipes/list-manage.md) | 列表启停（switch）+ 小删除按钮 |

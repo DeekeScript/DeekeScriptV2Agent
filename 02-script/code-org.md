@@ -51,12 +51,14 @@ video.comment('不错');
 
 `comment(text)` 实现必须遵守点击后重取输入框，见 [`comment-input.md`](../03-recipes/comment-input.md)、[`pitfalls/stale-node-after-click.md`](./pitfalls/stale-node-after-click.md)。不要写成「同一 `input` 变量 click 完直接 setText」。
 
-### 写法约定（必守）
+### 写法约定（MUST）
 
-优先用对象组织能力，少堆顶层 `function`；对象方法一律简写：
+`common/*.js` 与 `tasks/*.js` 的业务能力必须放在对象上，用方法简写。禁止在文件顶层声明一串 `function openVideo() {}`。
+
+这不是「对象里请用简写」的语法偏好，而是**组织方式**：先定义对象，再往上挂方法。
 
 ```javascript
-// 推荐
+// 必须
 let video = {
   count: 0,
   open() {},
@@ -65,18 +67,29 @@ let video = {
 };
 video.open();
 
-// 不推荐：对象方法写成 function 属性
+module.exports = {
+  like() {},
+  comment(text) {}
+};
+
+// 禁止：对象方法写成 function 属性
 let video = {
   open: function () {},
   like: function () {}
 };
 
-// 不推荐：业务能力散落成一堆顶层 function
+// 禁止：业务能力散落成顶层 function
 function openVideo() {}
 function likeVideo() {}
 ```
 
-API 回调（如 `setTimeout`、`Dialogs.confirm`、`.then`）仍可传 `function` 或箭头；与「业务能力用对象方法」不矛盾。`Page({})` / `FloatWindow.on({})` 等同理：用 `onLoad() {}`、`stop() {}`，不要 `onLoad: function () {}`，也不要用会绑错 `this` 的 `onLoad: () => {}`。
+例外：
+
+- `setTimeout` / `Dialogs.confirm` / `.filter(function (n) {})` 等 API 回调
+- `Page({})` / `Component({})` / `FloatWindow.on({})` 本身已是对象，方法用简写 `onLoad() {}`
+- `common/permission.js` 必须整份复制 snippet，不要改成另一种导出结构
+
+`tasks/*.js` 入口也做成对象再调用，例如 `let task = { run() { ... } }; task.run();`，不要在任务文件顶层再写 `function hit()` / `function swipe()`。
 
 ## 2. 优先封装通用能力
 

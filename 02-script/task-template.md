@@ -9,31 +9,37 @@
 ```javascript
 let permission = require('../common/permission.js');
 
-if (!permission.ensureRun()) {
-  // 无障碍或悬浮窗未开启，ensureRun 已弹窗引导
-} else {
-  let keyword = Storage.get('myapp.keyword');
-  if (!keyword) {
-    keyword = '发送';
-  }
-  let maxCount = 20;
-  if (Storage.contains('myapp.max_count')) {
-    maxCount = Storage.getInteger('myapp.max_count');
-  }
-
-  let i = 0;
-  while (i < maxCount) {
-    let btn = UiSelector().text(keyword).findOne();
-    if (btn) {
-      btn.click();
+let task = {
+  run() {
+    if (!permission.ensureRun()) {
+      return;
     }
-    System.sleep(1000);
-    i++;
-  }
+    let keyword = Storage.get('myapp.settings.keyword');
+    if (!keyword) {
+      keyword = '发送';
+    }
+    let maxCount = 20;
+    if (Storage.contains('myapp.task.max_count')) {
+      maxCount = Storage.getInteger('myapp.task.max_count');
+    }
 
-  // 业务跑完自动停（须在本任务线程）
-  Engines.closeAll();
-}
+    let i = 0;
+    while (i < maxCount) {
+      let btn = UiSelector().text(keyword).filter(function (n) {
+        return n && n.bounds() && n.bounds().top >= 0;
+      }).findOne();
+      if (btn) {
+        btn.click();
+      }
+      System.sleep(1000);
+      i++;
+    }
+
+    Engines.closeAll();
+  }
+};
+
+task.run();
 ```
 
 ## 刷流骨架（单条失败也前进）

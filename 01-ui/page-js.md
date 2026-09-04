@@ -16,6 +16,22 @@
 
 首次进入：`onLoad(params)` → `onShow` → `onReady`。离开时 `onHide`。关掉页面才 `onUnload`。从二级页返回或切回已打开的 Tab，只走 `onShow`，不重新 `onLoad`。
 
+**底栏根页若展示 Storage 里的配置/列表/统计，必须在 `onShow` 里重新读取再 `setData`。** 只写 `onLoad` 时，用户在设置页保存再切回首页，摘要仍是旧数据。
+
+```javascript
+Page({
+  refresh() {
+    this.setData({ keyword: Storage.get('dylc.settings.keyword') || '' });
+  },
+  onLoad() {
+    this.refresh();
+  },
+  onShow() {
+    this.refresh();
+  }
+});
+```
+
 | 场景 | 行为 |
 |------|------|
 | 底部 Tab 切换 | 当前页 `onHide`，实例保留。第一次进目标 Tab：`onLoad` → `onShow` → `onReady`。再切回来只 `onShow`，数据和滚动还在。首页 `onLoad` 的 `params` 为 `{}` |

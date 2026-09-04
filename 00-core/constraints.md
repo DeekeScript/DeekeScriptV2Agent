@@ -24,6 +24,9 @@
 | 14 | 用户指定主题色时：入口 `window.theme.primary`、导航栏、状态栏、底栏 `selectedColor`、各 `button` 的 `style.background` 一并改。不要沿用默认 `#006A65`。 |
 | 15 | 页面等待用 `setTimeout`；任务等待用 `System.sleep`。不要在 `page.js` 里用 `System.sleep` 阻塞 UI。 |
 | 16 | **任务验证完成条件**（设备 `status` 正常）：`tasks/*.js` 必须在目标 App / 目标页跑过片段 `run`，回复中须有关键节点 `text`/`desc`/`bounds` 的 logs。操作第三方 App：写选择器前必须 `snapshot`（或 `/ai/nodes`），再验证点击/输入，通过后 `run-file`（可用数量=1）。仅 `write`、仅权限、仅 `Storage` **不算**已调试。用户任务本身含搜索/点赞/评论/刷流时，启动目标 App 做片段验证**不必再问**。 |
+| 17 | **底栏根页**展示 Storage 派生数据（摘要、列表、记录）时，必须在 `onShow` 里重新读取再 `setData`。切 Tab 不走 `onLoad`。见 [`page-js.md`](../01-ui/page-js.md)、[`ui-and-a11y-app.md`](../03-recipes/ui-and-a11y-app.md)。 |
+| 18 | 操作第三方 App：用目标页互斥节点判断是否在目标界面。用户要求做完回到本 App 时，任务结束调用 `App.backApp()` 再 `Engines.closeAll()`。见 [`ui-and-a11y-app.md`](../03-recipes/ui-and-a11y-app.md)。 |
+| 19 | **业务代码用对象 + 方法简写**（`common/*.js`、`tasks/*.js`）：`module.exports = { like() {} }` 或 `let task = { run() {} }; task.run()`。禁止文件顶层堆 `function like() {}`。API 回调与 `.filter` 仍可用 `function`。仅 `common/permission.js` 按 snippet 整份复制除外。见 [`code-org.md`](../02-script/code-org.md)。 |
 
 ## MUST NOT
 
@@ -45,6 +48,8 @@
 | 14 | 禁止在设备已连接时，用「怕误操作 / 高风险 / 未整段盲跑 / 请用户自己运行」跳过 `launch` 目标 App、`snapshot`、找节点片段。 |
 | 15 | 禁止把 `status`、`Storage` 读写、`require` 能加载、本工程 UI 预览当作 `tasks/*.js` 已验证。 |
 | 16 | 禁止同一页面内重复的表单 `name`。禁止用裸 `name` 当 Storage 键：默认 Storage 跨页共享，会互相覆盖。见 [`form-name.md`](../01-ui/pitfalls/form-name.md)。 |
+| 17 | 禁止用 `System.currentPackage()` 判断是否在目标 App（它常仍是本工程包名）。用互斥节点。禁止任务循环里 `waitFindOne()` 无超时。 |
+| 18 | 禁止在 `common/*.js`、`tasks/*.js` 顶层堆业务 `function foo() {}`（`permission.js` snippet 除外）。必须对象 + 方法简写。见 [`code-org.md`](../02-script/code-org.md)。 |
 
 ## 快速对照
 
@@ -65,3 +70,7 @@
 | 任务已验证 | 目标 App 上片段 `run` 打出节点 logs，再 `run-file` | 只测 Storage / 权限 / write 就交活 |
 | 点赞评论类需求 | 先找节点、点得动；整段用数量=1 | 以「会真实发出」为由不启动目标 App |
 | 表单 `name` | 同一页唯一；Storage 用 `项目.模块.字段` | 页内重名联动；两页都 `put('keyword')` 互相覆盖 |
+| 业务组织 | `let video = { like() {} }` | 文件里一堆 `function like() {}` |
+| 底栏页数据 | `onShow` 从 Storage 再读 | 只 `onLoad`，切 Tab 摘要不更新 |
+| 是否在目标 App | 互斥节点（如右侧未点赞） | `currentPackage() !== 目标包名` |
+| 做完回本 App | `App.backApp()` 再 `closeAll` | 停在抖音页 |
