@@ -166,13 +166,8 @@
     { "title": "{NAME}", "icon": "img/home.png", "page": "pages/home" },
     { "title": "统计", "icon": "img/statistics.png", "page": "pages/stats", "badge": 3 },
     { "title": "设置", "icon": "img/setting.png", "page": "pages/settings" }
-  ],
-  "floatWindow": {
-    "menus": [
-      { "id": "stop", "icon": "close", "label": "停止", "action": "stop", "show": "running" }
-    ]
-  }
+  ]
 }
 ```
 
-上面 `floatWindow` 仅作「需要自定义菜单时」的示例；**用户未要求菜单时不要写该字段**（默认连点两次即可停）。写好入口后给 `homePage` 目录写 [页面 JSON](./page-json.md)。
+**不要**在完整示例里默认抄 `floatWindow`。用户未要求自定义菜单时不要写该字段（默认连点两次即可停）。需要菜单时见 [floatWindow](./capabilities/floatWindow.md) 与配方 [float-window.md](../03-recipes/float-window.md)。写好入口后给 `homePage` 目录写 [页面 JSON](./page-json.md)。

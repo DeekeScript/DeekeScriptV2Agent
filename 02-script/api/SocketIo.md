@@ -28,12 +28,12 @@ Socket.IO 客户端。先 `getInstance`，再注册 `on`，最后 `connect()`。
 | `on(eventName, callback)` | `eventName {string}`；`callback(data)` | `void` | 监听服务端事件 |
 | `emit(eventName, msg)` | `eventName {string}`；`msg` 消息 | `void` | 向服务端发事件 |
 | `emit(eventName, msg, callback)` | 同上，带确认回调 | `void` | d.ts 重载：带 ack 回调的 emit |
-| `emitWithAck(eventName, msg, callback)` | 同上 | `void` | 官方文档：发事件并等服务器确认 |
+| `emitWithAck(eventName, msg, callback)` | 同上 | `void` | 发事件并等服务器确认 |
 | `off(eventName)` | `eventName {string}` | `void` | 移除该事件全部监听 |
 | `off(eventName, callback)` | 指定回调 | `void` | 移除指定监听 |
 | `off()` | 无 | `void` | d.ts：移除全部监听 |
 
-内置事件名（官方示例）：`connect`、`connect_error`、`connect_timeout`、`error`、`message`。
+内置事件名：`connect`、`connect_error`、`connect_timeout`、`error`、`message`。
 
 ## 最小片段
 
@@ -67,5 +67,5 @@ setInterval(function () {
 - `connect()` 写在事件定义之后。
 - 自动重连时必须手动 `disconnect()`。未关闭时，`Engines.closeAll()` 会关掉当前线程和子线程的客户端。
 - 主线程退出会导致连接断开，任务里用 `setInterval` 保活。
-- 官方 `emit` 可传对象；d.ts 将 `data` 标成 `string`。按官方对象写法即可。
+- `emit` 可传对象（勿因 d.ts 标 `string` 而只传字符串）。
 - 相关：[`WebSocket.md`](./WebSocket.md)、[`timer.md`](./timer.md)。

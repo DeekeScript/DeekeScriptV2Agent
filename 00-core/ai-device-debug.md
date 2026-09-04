@@ -1,6 +1,8 @@
 # AI 连接手机并自动调试脚本
 
-当用户让你**编写或调试自动化脚本**（`tasks/*.js`）时，在交付代码之前，应尝试连接用户手机上的 DeekeScript，用 HTTP `/ai` 接口**实机验证**。不要只生成代码就结束。
+编写或调试 `tasks/*.js` 时的**流程与何时问用户**见 [`automation-loop.md`](./automation-loop.md)。本篇只写：发现设备、权限检查、`write` / `run` / `run-file` / `snapshot` / `stop` 命令。
+
+当用户让你编写或调试自动化脚本时，在交付前应尝试连接手机并用 HTTP `/ai` **实机验证**。不要只生成代码就结束。
 
 配套工具：
 
@@ -13,16 +15,14 @@
 
 ## 固定流程
 
+本篇管命令；闭环步骤见 [`automation-loop.md`](./automation-loop.md)。
+
 ```
-1. 读取已保存地址（工作区根目录 .deeke-device.local.json）
-      ↓ 没有或连不上
-2. 运行设备发现命令扫描局域网
-      ↓ 扫不到
-3. 明确让用户填写手机地址（http://IP:8080），写入 .deeke-device.local.json
-      ↓ 连上后
-4. GET /ai/status 检查权限
-5. 写/改工程文件（电脑工作区）→ **write 同步到手机** → POST /ai/run 或 run-file → 看 logs 调试 → 重复直到通过
-6. 需要看界面时 `GET /ai/snapshot?type=0`（简单+快速；节点难分再升复杂或非快速，见 [`ai-http-api.md`](../02-script/ai-http-api.md)）
+1. 读 .deeke-device.local.json → 没有或连不上则 discover
+2. 扫不到则让用户提供 http://IP:8080 并 set
+3. status 查权限
+4. 写/改文件 → write → run / run-file → 读 logs（先片段后整体）
+5. 需要看界面时 snapshot
 ```
 
 **必须同步**：只改电脑上的 `tasks/*.js` / `page.js` 等，手机不会自动更新。交付或 `run-file` 前，用 `POST /ai/project/write`（或工具 `write`）把改过的文件推到手机。短验证可用 `run` 直接传代码字符串，不必先落盘同步。
@@ -190,19 +190,12 @@ bash tools/deeke-device.sh stop
 
 优先读此文件；`discover` 成功后会自动写入。
 
-## 与 VSCode 插件的关系
+## 同步方式
 
-| 方式 | 适用 |
-|------|------|
-| VSCode DeekeScript 插件 + WebSocket 8088 | 人手动开发、项目同步 |
-| HTTP `/ai` + 本工具（含 `write`） | **AI 自动写脚本、同步到手机、自动调试** |
+调试与交付时用本仓库的 HTTP `/ai`（含 `write`）把文件同步到手机并执行。不要假设 VSCode 插件已同步。
 
-AI 调试时不要依赖用户已开「开发模式」；只需手机开启「节点查看」（8080）和脚本所需权限。改文件后用 `write`（`POST /ai/project/write`），不要假设 VSCode 插件已同步。
+用户若只用 VSCode 插件开发：插件走 WebSocket 8088 做连接与同步；你仍应优先用 `/ai` 完成自动调试。调试不依赖用户已开「开发模式」，只需手机开启「节点查看」（8080）和脚本所需权限。
 
 ## 交付前自检
 
-- [ ] 已连接设备（`status` 返回 `code: 0`）
-- [ ] 本次改动的工程文件已 `write` 同步到手机（若用了 `run-file` 或交付给用户在手机执行）
-- [ ] 关键逻辑已在真机 `run` / `run-file` 过，`logs` 无未处理错误
-- [ ] 找节点类脚本至少验证过一次 `UiSelector` 结果
-- [ ] 若用户环境无法连接，已说明需开启的权限，并仍交付完整代码
+以 [`automation-loop.md`](./automation-loop.md) 的交付清单为准。本篇命令侧至少确认：`status` 已通；改动已 `write`；关键逻辑已 `run` / `run-file`；连不上时已说明权限与地址且未假装已验证。

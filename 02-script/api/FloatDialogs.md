@@ -22,12 +22,12 @@
 
 `FloatDialog.setContent(content: string)`：动态改确认框内容。
 
-官方：`confirm` 需要在初始化 FloatDialogs 时传入 scope 才能使用。
+`confirm` 需在初始化 FloatDialogs 时传入 scope 才能使用。
 
 ## 最小片段
 
 ```javascript
-FloatDialogs.show('温馨提示', '任务已开始');
+FloatDialogs.show('提示', '任务已开始');
 ```
 
 ## 注意

@@ -31,12 +31,14 @@ Page({
   data: {
     loading: false
   },
-  onLoadMore() {
+  onLoadMore: function () {
     this.setData({ loading: true });
-    System.sleep(1000);
-    this.setData({ loading: false });
+    var that = this;
+    setTimeout(function () {
+      that.setData({ loading: false });
+    }, 1000);
   },
-  onMask() {
+  onMask: function () {
     this.showLoading('加载中');
     var that = this;
     setTimeout(function () {

@@ -1,6 +1,6 @@
 # Dialogs
 
-APP **在前台**时的弹窗。已经到后台时 Dialogs 弹不出来，改用 [`FloatDialogs`](FloatDialogs.md)（需悬浮窗权限）。
+APP **在前台**时的弹窗。已到后台时弹不出来，改用 [`FloatDialogs`](FloatDialogs.md)（需悬浮窗权限）。
 
 ## 可用上下文
 
@@ -13,14 +13,19 @@ APP **在前台**时的弹窗。已经到后台时 Dialogs 弹不出来，改用
 |------|------|------|--------|------|
 | show | `show(title: string, content: string)` | 标题、内容 | `void` | 弹出提示 |
 | show | `show(title: string)` | 仅标题 | `void` | 内容可省略 |
-| confirm | `confirm(title, content, callback)` | 标题、说明、回调 `(result: boolean) => void` | `void` | 确定/取消后执行回调。`result === true` 为确定 |
-| input | `input(title: string)` | 标题 | `string` | 输入框弹窗 |
-| input | `input(title: string, value: object)` | 标题、默认值 | `string` | 官方示例默认值可为字符串或数字。d.ts 第二参类型为 `object` |
+| confirm | `confirm(title, content, callback)` | 标题、说明、回调 | `void` | 确定/取消后执行回调。`result === true` 为确定 |
+| input | `input(title: string, value?)` | 标题、可选默认值 | `string` | 输入框；默认值可传字符串或数字 |
 
 ## 最小片段
 
 ```javascript
-Dialogs.show('温馨提示', '恭喜你，弹窗成功弹出');
+Dialogs.show('提示', '恭喜你，弹窗成功弹出');
+
+Dialogs.confirm('提示', '确定执行吗？', function (result) {
+  if (result) {
+    console.log('确定');
+  }
+});
 ```
 
 ## 注意

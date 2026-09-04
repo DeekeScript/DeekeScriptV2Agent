@@ -15,7 +15,7 @@
 
 ```javascript
 if (!Access.isMediaProjectionEnable()) {
-  Dialogs.confirm('温馨提示', '请开启屏幕截图权限', function (result) {
+  Dialogs.confirm('提示', '请开启屏幕截图权限', function (result) {
     Access.openMediaProjectionSetting();
     System.exit();
   });

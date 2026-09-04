@@ -34,7 +34,7 @@ var path = Packages.java.nio.file.Paths.get('example.txt');
 console.log(NioFiles.exists(path));
 ```
 
-`JavaImporter` 示例（官方线程写法，谨慎使用）：
+`JavaImporter` 示例（谨慎使用）：
 
 ```javascript
 let obj = {

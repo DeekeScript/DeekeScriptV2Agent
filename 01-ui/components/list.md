@@ -44,13 +44,15 @@ Page({
     noMore: false,
     footer: ''
   },
-  onReachBottom() {
+  onReachBottom: function () {
     if (this.data.loading || this.data.noMore) {
       return;
     }
     this.setData({ loading: true });
-    System.sleep(2000);
-    this.setData({ loading: false, noMore: true, footer: '—— 我是有底线的 ——' });
+    var that = this;
+    setTimeout(function () {
+      that.setData({ loading: false, noMore: true, footer: '—— 我是有底线的 ——' });
+    }, 2000);
   }
 });
 ```

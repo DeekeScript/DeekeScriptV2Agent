@@ -1,6 +1,6 @@
 # 从 0 搭最小工程
 
-两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。项目根必须有 `deekeScript.json`，否则 VS Code 插件无法同步。
+两种骨架：**只跑脚本（无 UI）**，和 **带一页界面**。项目根必须有 `deekeScript.json`，否则无法识别工程、无法同步。
 
 生成前对照 [`donts.md`](../04-cheatsheets/donts.md)。不要写 `hooks`，不要漏 `page.js`。下面示例用默认绿 `#006A65`；用户指定其它主题色时，入口写 `window.theme.primary`，导航栏、状态栏、底栏和 **button 的 `style.background`** 都要改，见 [`_common.md`](../01-ui/components/_common.md)。
 
@@ -11,6 +11,7 @@
 ```
 deekeScript.json
 img/xhs.svg
+common/permission.js
 tasks/sample.js
 ```
 
@@ -28,6 +29,10 @@ tasks/sample.js
 
 `icon` 必填，且 `img/xhs.svg`（或你写的路径）必须在工程里。只跑脚本不必写 `homePage`。打包字段含义见 [`apk.md`](../02-script/api/apk.md)。
 
+### `common/permission.js`
+
+权限模块：把 [`snippets/common-permission.js`](../02-script/snippets/common-permission.js) 整份复制为 `common/permission.js`。不要漏这个文件。
+
 ### `tasks/sample.js`
 
 ```javascript
@@ -43,9 +48,7 @@ if (!permission.ensureRun()) {
 }
 ```
 
-权限模块从 [`permission.md`](../02-script/permission.md) 整份复制到 `common/permission.js`。找节点用 `UiSelector` + `findOne()`；点击前一般先 `filter` 屏内。
-
-在开发器里直接运行该 JS。不要生成 `pages/`。
+找节点用 `UiSelector` + `findOne()`；点击前一般先 `filter` 屏内。在开发器里直接运行该 JS。不要生成 `pages/`。
 
 ### `img/xhs.svg`
 

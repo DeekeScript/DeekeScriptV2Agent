@@ -15,7 +15,7 @@
 | error | `error(...message: any[])` | 任意参数 | `void` | 错误 |
 | info | `info(...message: any[])` | 任意参数 | `void` | 重要信息，优先级高于 log |
 | debug | `debug(...message: any[])` | 任意参数 | `void` | 调试输出 |
-| trace | `trace(...message: any[])` | 任意参数 | `void` | d.ts 有此方法；官方文档未展开说明 |
+| trace | `trace(...message: any[])` | 任意参数 | `void` | 可用 |
 | show | `show()` | 无 | `void` | 显示日志窗口 |
 | hide | `hide()` | 无 | `void` | 隐藏日志窗口 |
 | setWindowSize | `setWindowSize(width, height)` | 宽高 px | `void` | |

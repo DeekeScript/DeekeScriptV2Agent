@@ -20,8 +20,8 @@
 | putObj | `putObj(key: string, obj: object \| Array)` | 键、对象或数组 | `boolean` | JSON 值，支持嵌套；不能含 function |
 | putArray | `putArray(key: string, arr: Array)` | 键、数组 | `boolean` | 与 `putObj` 写数组等价 |
 | getArray | `getArray(key: string)` | 键 | `Array` | 与 `getObj` 读同一键；不存在时为 `[]` |
-| get | `get(key: string)` | 键 | `string` | 官方：不存在时返回 null |
-| getString | `getString(key: string)` | 键 | `string` | d.ts 有此方法；官方文档未单独说明 |
+| get | `get(key: string)` | 键 | `string` | 不存在时返回 null |
+| getString | `getString(key: string)` | 键 | `string` | 可用 |
 | getBoolean | `getBoolean(key: string)` | 键 | `boolean` | |
 | getDouble | `getDouble(key: string)` | 键 | `number` | |
 | getInteger | `getInteger(key: string)` | 键 | `number` | |

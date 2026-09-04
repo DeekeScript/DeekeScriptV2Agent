@@ -28,7 +28,7 @@
 | desc | `desc()` | 无 | `string` | 描述（contentDescription） |
 | id | `id()` | 无 | `string` | 资源 id |
 | children | `children()` | 无 | `this` | 子节点集合，可继续 `find` / `getChildren` |
-| length | `length()` | 无 | `number` | d.ts 有此方法；官方文档未单独说明 |
+| length | `length()` | 无 | `number` | 可用 |
 | getChildCount | `getChildCount()` | 无 | `number` | 子节点数量 |
 | getChildren | `getChildren(index: any)` | 子节点下标 | `UiObject` | 第 index 个子节点 |
 | parent | `parent()` | 无 | `UiObject` | 父节点 |

@@ -4,7 +4,7 @@
 
 | 禁止 | 正确做法 |
 |------|----------|
-| 在 JSON `action` 里执行脚本、编造 `executeScript` action | 按钮写 `onTap`，在 `page.js` 里 `Engines.executeScript('tasks/xxx.js')`。见 [`run-task-from-ui.md`](../03-recipes/run-task-from-ui.md) |
+| 在**页面** JSON `action` 里执行脚本、编造页面级 `executeScript` action | 按钮写 `onTap`，在 `page.js` 里 `Engines.executeScript('tasks/xxx.js')`。悬浮窗 `menus[].action` 可含 `executeScript`，那是另一套字段，见 [`entry-json.md`](../01-ui/entry-json.md) |
 | 把找节点、循环任务写在 `page.js` | `page.js` 只做界面和启动；业务在 `tasks/*.js` |
 | 生成 V1 `hooks`、`app_start`、`Engines.closeHook` 当初始化 | **Pro 没有 Hook**。逻辑放 `onLoad` / 任务脚本。见 [`no-hook.md`](../02-script/api/no-hook.md) |
 | WebView 与 Page 互调、`javascript:` 桥、读本地文件 | WebView 不和 Page 通信。外链用 `openUrl`。见组件 `webview` |
@@ -27,8 +27,9 @@
 | 裸 `findOne()` / `find()` 后直接点击 | **一般先 `filter` 屏内**（丢掉屏幕外 / 越界节点），再查找并点击。很少操作屏幕外内容。见 [`UiSelector.md`](../02-script/api/UiSelector.md) |
 | 默认用 KeyBoards 输入、且不检查状态 | 优先 `setText` / 剪贴板；要用输入法时先 `KeyBoards.canInput()`，不行就提示用户 |
 | 有 `FloatDialogs.show` 却不关弹窗就继续点节点 | 任务或调试开始前 `FloatDialogs.closeAll()` |
-| 用户没提悬浮窗菜单却写了 `floatWindow.menus` / 空 menus | **默认不写**。系统已是连点两次停止（3 秒内），见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#两种球不要混) |
-| 悬浮窗菜单里用 `Engines.closeAll()` 停任务 | 菜单回调须用 `FloatWindow.stopTask()`；自动停才在 `tasks/*.js` 里 `Engines.closeAll()`。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#关闭任务底层逻辑必读) |
+| 用户没提悬浮窗菜单却写了 `floatWindow.menus` / 空 menus | **默认不写**。连点两次停止（3 秒内）。细节见 [`constraints.md`](../00-core/constraints.md) MUST 10 |
+| 悬浮窗菜单里用 `Engines.closeAll()` 停任务 | 菜单用 `FloatWindow.stopTask()`；自动停才在 `tasks/*.js` 里 `Engines.closeAll()`。见 [`constraints.md`](../00-core/constraints.md) MUST 11 |
+| 在 `page.js` 里用 `System.sleep` 等待 | 页面用 `setTimeout`；任务用 `System.sleep` |
 | 把可调节数值写成 `progress` / `progressBar`（运行速度、点赞概率） | 用 `"type": "slider"`。`progress` 只能展示、不能拖。见 [`slider.md`](../01-ui/components/slider.md) |
 | 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |
 | 用页面根 `title` 同时又放 `navBar` 画两套顶栏 | 自制顶栏时 `"title": { "hidden": true }`，再写 `type: navBar` |
@@ -36,5 +37,8 @@
 | 用户要蓝色，按钮仍是默认绿，或声称 button 没有 background | 入口写 `window.theme.primary`。`button` 建议写 `style.background`。导航栏、状态栏、底栏 `selectedColor` 也要一起改 |
 | Switch 写 `style.background` 给整行刷底 | Switch / checkbox / radio 换色只写 `style.color`，不要写 `background` |
 | 检测失败时 `continue` 但不递增计数、不设 retry 上限 | 加 `retryCount` 或 `processed++`，超过 N 次 `break`，避免无限 toast |
+| 未片段验证就 `run-file` 整段盲跑 | 先按 [`automation-loop.md`](../00-core/automation-loop.md) 验证找节点 / 点击，再整体跑 |
+| 连不上设备却声称已实机验证 | 交付代码并列出用户须开的权限与地址；不得假装已跑通 |
+| 同一失败修满 3 轮仍猜 | 按 automation-loop「请求用户协助」，停止空转 |
 
 Rhino 其它限制见 [`00-core/constraints.md`](../00-core/constraints.md)。配方入口：[`scaffold.md`](../03-recipes/scaffold.md)。

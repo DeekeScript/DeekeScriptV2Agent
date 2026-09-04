@@ -19,14 +19,16 @@
 | `onLoad` / `onShow` / `onReady` / `onHide` / `onUnload` | 是 | 否 | 否 | 页面生命周期 |
 | `created` / `attached` / `detached` | 否 | 是 | 否 | 组件生命周期 |
 | `Engines.executeScript` | 是 | 是 | 是 | 从页面启动任务；任务里也可拉子脚本 |
-| `Engines.closeAll` | 是 | 是 | 是 | 停全部脚本 |
+| `Engines.closeAll` | 勿用（无效） | 勿用（无效） | 是 | **仅任务脚本线程**内自动结束当前任务。菜单停用 `FloatWindow.stopTask()` |
+| `FloatWindow.stopTask` | 菜单回调 | 菜单回调 | 一般不用 | 用户手动停整项任务 |
 | `require` / `module.exports` | 是 | 是 | 是 | 路径规则相同 |
 | `Http.get` / `Http.post` | 是 | 是 | 是 | 页面和任务都能请求 |
 | `Storage.put` / `get*` | 是 | 是 | 是 | 页面写配置，任务读配置 |
-| `console` / `setTimeout` / `setInterval` / `Promise` | 是 | 是 | 是 | Rhino 全局 |
+| `console` / `setTimeout` / `setInterval` / `Promise` | 是 | 是 | 是 | 页面延时用 `setTimeout`，不要 `System.sleep` |
 | `Dialogs` / `Access` | 是 | 是 | 是 | 权限引导、确认框 |
 | `FloatWindow` / `FloatDialogs` | 是 | 是 | 是 | 项目悬浮窗；开发器球不读 `floatWindow.menus` |
-| `System.toast` / `System.sleep` | 可用 | 可用 | 是（主场） | 任务里等待用 `sleep`；页面短提示优先 `this.toast` |
+| `System.toast` | 可用 | 可用 | 前台可用 | 页面优先 `this.toast`；切到第三方 App 后用 `FloatDialogs` |
+| `System.sleep` | 禁止（堵 UI） | 禁止 | 是 | 任务里等待；页面用 `setTimeout` |
 | `UiSelector` / `UiObject` | 不要作为主流程 | 否 | 是 | 找节点、点击、输入主要在任务脚本 |
 | `App.launch` / `Gesture` / `Images` | 一般不用 | 否 | 是 | 自动化专用 |
 | WebView 与 Page 通信 | 无 | 无 | 无 | 没有桥 |

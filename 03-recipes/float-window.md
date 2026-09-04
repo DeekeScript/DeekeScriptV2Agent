@@ -1,10 +1,8 @@
 # 悬浮球完整配方（JSON + 事件一次交付）
 
-**默认情况：用户没提悬浮窗菜单 / 跳过 / 自定义停止 → 不要写 `floatWindow`。** 未配 `menus` 时，项目球与开发器球一样：连点两次停止（第一次变关闭图标，**3 秒内**再点）。不要为此再生成 stop 菜单。
+**用户没提悬浮窗菜单 / 跳过 / 自定义停止 → 不要写 `floatWindow`。** 未配 menus 时连点两次即可停。
 
-仅当用户明确要「悬浮球菜单 / 跳过 / 自定义停止」时，才用本配方。**不要只写 `deekeScript.json` 里的 `menus`**——每一项点击都必须在 JS 里用 `FloatWindow.on` 绑定，**缺 JS 就点不动**。
-
-先读 [`01-ui/capabilities/floatWindow.md`](../01-ui/capabilities/floatWindow.md) 的 **「关闭任务：底层逻辑」**（手动停 vs 自动停、`stopTask` vs `Engines.closeAll`）。
+仅当用户明确要菜单时用本配方。`menus` 与 `FloatWindow.on` **同一轮**交付，缺 JS 就点不动。停任务规则见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#停任务权威)。
 
 ## 何时需要配 floatWindow
 

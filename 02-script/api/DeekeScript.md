@@ -17,7 +17,7 @@
 | getNodeFields | `getNodeFields()` | 无 | `string[]` | 可用于 `getAllAccessibilityNodeInfo` 的字段名 |
 | getAllAccessibilityNodeInfo | `getAllAccessibilityNodeInfo(bool, fields)` | `true` 复杂模式（含全部字段语义）；`false` 简单模式。`fields` 要返回的字段名 | `{ nodes: DeekeNodeInfo[] } \| null` | 一次取当前界面节点。无障碍未开返回 null |
 
-常用节点字段（官方）：`key`、`viewIdResourceName`、`text`、`contentDescription`、`className`、`childCount`、`packageName`、`hintText`、`inputType`、`drawingOrder`、`depth`、`maxTextLength`、`isPassword`、`boundsInScreen`、`boundsInParent`、各类 `is*`、`children`。
+常用节点字段：`key`、`viewIdResourceName`、`text`、`contentDescription`、`className`、`childCount`、`packageName`、`hintText`、`inputType`、`drawingOrder`、`depth`、`maxTextLength`、`isPassword`、`boundsInScreen`、`boundsInParent`、各类 `is*`、`children`。
 
 `DeekeBounds`：`left`、`top`、`width`、`height`。
 

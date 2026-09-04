@@ -18,7 +18,7 @@
 | `sha256(input)` | `string` | `string` | SHA256 |
 | `base64Encode(input)` | `string` 或 `byte[]` | `string` | Base64 编码 |
 | `base64Decode(input)` | `string` | `string` | Base64 解码 |
-| `hmac_sha256(key, data)` | 密钥、待签名数据 | `string` | 官方文档：HMAC-SHA256，十六进制。d.ts 未列出 |
+| `hmac_sha256(key, data)` | 密钥、待签名数据 | `string` | HMAC-SHA256，十六进制（d.ts 未列出） |
 | `generateIv()` | 无 | `string` | 生成 AES IV |
 | `aesCbcEncode(key, iv, input)` | 密钥、IV、明文 | `string` | AES-CBC 加密 |
 | `aesCbcDecode(key, iv, input)` | 密钥、IV、密文 | `string` | AES-CBC 解密 |

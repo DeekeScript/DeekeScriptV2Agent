@@ -16,7 +16,7 @@
 | `load(source)` | `source {string}` | `boolean` | 载入，不自动播放 |
 | `play()` | 无 | `boolean` | 播放已加载音频 |
 | `play(source)` | `source {string}` | `boolean` | 先 load 再 play |
-| `playAndRelease(source)` | `source {string}` | `boolean` | 官方文档：播完自动释放，适合短提示音。d.ts 未列出 |
+| `playAndRelease(source)` | `source {string}` | `boolean` | 播完自动释放，适合短提示音（d.ts 未列出） |
 | `pause()` | 无 | `boolean` | 暂停 |
 | `stop()` | 无 | `boolean` | 停止并回到开头 |
 | `release()` | 无 | `void` | 释放资源；再播需重新 `load` |

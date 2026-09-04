@@ -8,8 +8,9 @@
 
 - `deekeScript.json`（含 `icon`、`homePage`、`bottomMenus`，以及 `icon` / 底栏用到的图片文件）
 - `pages/home/page.json` + `page.js`
-- 另配 `pages/stats`、`pages/settings` 作底栏目标（可先放空页 `Page({})`）
-- 底栏图标如 `img/home.svg`、`img/statistics.svg`、`img/setting.svg` 必须真实存在，宫格 `img/dy.png` 等也要生成
+- 底栏目标：`pages/stats`、`pages/settings`（可先空页 `Page({})`）
+- 宫格功能页：`pages/yanghao`、`pages/dm`、`pages/comment`（可先空页；**不要**全指到设置）
+- 底栏图标与宫格图标文件必须真实生成
 
 ## 入口 `bottomMenus`
 
@@ -21,7 +22,10 @@
   "homePage": "pages/home",
   "pages": [
     { "id": "stats", "file": "pages/stats", "title": "统计" },
-    { "id": "settings", "file": "pages/settings", "title": "设置" }
+    { "id": "settings", "file": "pages/settings", "title": "设置" },
+    { "id": "yanghao", "file": "pages/yanghao", "title": "养号" },
+    { "id": "dm", "file": "pages/dm", "title": "私信" },
+    { "id": "comment", "file": "pages/comment", "title": "评论" }
   ],
   "bottomMenus": [
     { "title": "{NAME}", "icon": "img/home.png", "page": "pages/home" },
@@ -66,7 +70,7 @@
       "columns": 3,
       "item": {
         "type": "card",
-        "action": { "type": "switchTab", "page": "pages/settings" },
+        "action": { "type": "navigate", "page": "{{item.page}}" },
         "style": { "padding": 8, "gap": 8 },
         "children": [
           { "type": "image", "src": "{{item.icon}}", "style": { "width": "50%" } },
@@ -119,9 +123,9 @@ Page({
       { label: '今日点赞', value: '36' }
     ],
     apps: [
-      { name: '养号', icon: 'img/dy.png' },
-      { name: '私信', icon: 'img/xhs.png' },
-      { name: '评论', icon: 'img/ks.png' }
+      { name: '养号', icon: 'img/dy.png', page: 'pages/yanghao' },
+      { name: '私信', icon: 'img/xhs.png', page: 'pages/dm' },
+      { name: '评论', icon: 'img/ks.png', page: 'pages/comment' }
     ],
     logs: [
       { title: '今日关注 12 人', time: '10:21', status: '完成' },
@@ -135,4 +139,4 @@ Page({
 
 - 指标用 `card` 放在 `grid` 里，不要用 HTML。
 - 列表为空不会自动 Empty，需要空态时另写 `"type": "empty"` + `showIf`。
-- 底栏根页之间用 `this.switchTab('stats')` 或 JSON `action.switchTab`，不要 `navigate`。宫格入口如果指向底栏页，也要用 `switchTab`。
+- 底栏根页之间用 `switchTab`；宫格进功能页用 `navigate`（`{{item.page}}`），不要一律 `switchTab` 到设置。

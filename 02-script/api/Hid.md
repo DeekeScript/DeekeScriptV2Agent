@@ -30,7 +30,7 @@ if (!Access.hasBluetoothConnectionPermission()) {
 }
 ```
 
-`context` 为官方示例中的 Android Context 参数，不要改成未文档化的其它对象。
+`context` 使用示例中的 Android Context 参数，不要换成未文档化的其它对象。
 
 ## 方法
 
@@ -76,7 +76,7 @@ if (!Access.hasBluetoothConnectionPermission()) {
 | `getData(time?)` | 可选等待毫秒 | `string` | 取数据 |
 | `waitFor(time?, sleep?)` | 最大等待、检查间隔 | `string` | 等待数据 |
 | `ver()` | 无 | `number` | 插件版本 |
-| `getHidZcm()` | 无 | `string` | d.ts 有，官方 md 未说明用途，不要编造 |
+| `getHidZcm()` | 无 | `string` | 用途未在本卡展开，不要编造语义 |
 | `setXY(x, y)` | 坐标 | `boolean` | 设置分辨率 |
 | `reg(key)` | 注册密钥 | `boolean` | 注册设备 |
 | `setRnd(x, y)` | 随机数 | `boolean` | 点击延时随机 |

@@ -15,10 +15,10 @@
 | currentVersionName | `currentVersionName()` | 无 | `string` | 当前 App 版本名 |
 | packageInfo | `packageInfo(packageName: string)` | 目标包名 | `any` | 包信息，可取 `versionCode` / `versionName` 等 |
 | gotoIntent | `gotoIntent(uri: string)` | URI | `void` | 按 URI 启动 Activity |
-| startActivity | `startActivity(intent: Intent)` | Intent | `void` | 按 Intent 启动 Activity。官方标明 2.0 即将上线 |
+| startActivity | `startActivity(intent: Intent)` | Intent | `void` | 按 Intent 启动 Activity；能力未就绪时不要依赖 |
 | backApp | `backApp()` | 无 | `void` | 回到执行脚本的 App |
-| startService | `startService(service: Intent)` | Intent | `any` | d.ts 有此方法；官方文档未单独说明 |
-| sendBroadcast | `sendBroadcast(intent: Intent)` | Intent | `void` | d.ts 有此方法；官方文档未单独说明 |
+| startService | `startService(service: Intent)` | Intent | `any` | 可用 |
+| sendBroadcast | `sendBroadcast(intent: Intent)` | Intent | `void` | 可用 |
 | launch | `launch(packageName: string)` | 包名 | `void` | 按包名打开应用 |
 | notifySuccess | `notifySuccess(title: string, content: string)` | 标题、内容 | `void` | 显示成功通知 |
 | getAppVersionName | `getAppVersionName(packageName: string)` | 包名 | `string` | 指定应用版本名 |

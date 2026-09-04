@@ -1,6 +1,6 @@
 # 运行时 API 索引
 
-生成脚本时**只打开用到的 API 文件**，不要整目录灌进上下文。方法表以 d.ts 为准；说明以官方文档为准。骨架与约定见 [`../task-template.md`](../task-template.md)、[`../permission.md`](../permission.md)、[`../ui-and-task.md`](../ui-and-task.md)、[`../require.md`](../require.md)。
+生成脚本时只打开用到的 API 文件。方法与说明以本仓库对应卡片为准；卡片未列的签名可对照工程内 d.ts，禁止按外部文档发明 API。骨架与约定见 [`../task-template.md`](../task-template.md)、[`../permission.md`](../permission.md)、[`../ui-and-task.md`](../ui-and-task.md)、[`../require.md`](../require.md)。
 
 | 名字 | 用途 | 主要上下文 | 链接 |
 |------|------|------------|------|

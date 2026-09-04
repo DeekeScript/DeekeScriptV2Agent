@@ -12,18 +12,18 @@
 |------|------|------|--------|------|
 | sleep | `sleep(milliSecond: number)` | 毫秒 | `void` | 休眠 |
 | preciseSleep | `preciseSleep(milliSecond: number)` | 毫秒 | `void` | 更精确的休眠（WakeLock + 循环检查）。更耗电；不要求精确用 `sleep` |
-| gc | `gc()` | 无 | `void` | d.ts 有此方法；官方文档未单独说明 |
+| gc | `gc()` | 无 | `void` | 可用 |
 | time | `time()` | 无 | `string` | 当前系统时间，如 `2024-03-07 12:12:12` |
 | currentActivity | `currentActivity()` | 无 | `string` | 最近监测到的 Activity。依赖无障碍，未开则抛错并提示 |
 | currentPackage | `currentPackage()` | 无 | `string` | 最近监测到的前台包名。依赖无障碍。详见下方说明 |
 | setClip | `setClip(text: string)` | 文本 | `void` | 写入剪贴板 |
-| getClip | `getClip()` | 无 | `string` | 剪贴板内容。官方说明失败可为 null |
+| getClip | `getClip()` | 无 | `string` | 剪贴板内容；失败可为 null |
 | toast | `toast(text: string)` | 文案 | `void` | 短 toast，异步，不等待消失。后台请用 `FloatDialogs.toast` |
 | toastLong | `toastLong(text: string)` | 文案 | `void` | 较长 toast。后台请用 `FloatDialogs.toastLong` |
 | waitForActivity | `waitForActivity(activity, period, timeout)` | Activity 名；检查间隔 ms；总超时 ms | `boolean` | 等到出现为 true，超时 false |
 | waitForPackage | `waitForPackage(packageName, period, timeout)` | 包名；间隔；总超时 | `boolean` | 等到出现为 true，超时 false |
 | exit | `exit()` | 无 | `void` | 关闭脚本引擎 |
-| cleanUp | `cleanUp()` | 无 | `void` | d.ts 有此方法；官方文档未单独说明 |
+| cleanUp | `cleanUp()` | 无 | `void` | 可用 |
 | AiSpeechToken | `AiSpeechToken(key: string, secret: string)` | key、secret | `string` | 远程 AI 话术 token（返回 body 字符串，需自行解析） |
 | generateWindowElements | `generateWindowElements()` | 无 | `void` | 把当前界面节点记入日志，便于排错 |
 | getDataFrom | `getDataFrom(key, dataForm, content)` | 配置 key、数据来源类型、内容类型 | `string \| null` | 取 dataForm 类型表单数据 |

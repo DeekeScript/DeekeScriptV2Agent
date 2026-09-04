@@ -29,7 +29,7 @@
 | `versionName` | String | 是 | 如 `1.0.0` |
 | `icon` | String | 是 | 相对项目根的图标文件，必须存在。建议 200×200，可用 svg 如 `img/xhs.svg` |
 
-界面入口另需 `homePage`。只跑脚本可以不配页面，但仍要有 `deekeScript.json`。完整字段见官方配置；不要把 V1 的 `hooks` 写进 Pro。
+界面入口另需 `homePage`。只跑脚本可以不配页面，但仍要有 `deekeScript.json`。入口字段见 [`entry-json.md`](../../01-ui/entry-json.md)；不要把 V1 的 `hooks` 写进 Pro。
 
 ## 最小入口示例
 

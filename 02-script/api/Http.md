@@ -11,7 +11,7 @@ HTTP：GET/POST、上传、下载、超时、流式 POST。POST 的 Content-Type
 | 方法 | 签名 | 参数 | 返回值 | 说明 |
 |------|------|------|--------|------|
 | post | `post(url: string, json: object, headers?: object)` | 地址、JSON 参数、可选请求头 | `string \| null` | POST JSON |
-| get | `get(url: string, headers: object)` | 地址、请求头 | `string \| null` | GET。d.ts 要求 headers；官方文档写可省略，建议传 `{}` |
+| get | `get(url: string, headers: object)` | 地址、请求头 | `string \| null` | GET。传 headers，可传 `{}` |
 | postFile | `postFile(url, files, params, httpCallback)` | 地址、文件列表、表单参数、`{ success, fail }` | `void` | 上传文件。回调里可读 `response.body().string()`、`response.code()` |
 | download | `download(url: string, destPath: string, headers?: object)` | 下载地址、本地路径、可选请求头 | `string \| null` | 下载到 destPath |
 | setConnectTimeout | `setConnectTimeout(seconds: number)` | 秒 | `void` | 连接超时，默认 10 秒 |

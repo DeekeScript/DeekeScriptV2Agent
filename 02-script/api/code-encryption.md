@@ -1,6 +1,6 @@
 # 代码加密
 
-打包 APK 时，DeekeScript **默认**用 AES + 随机 IV 加密 JavaScript。开发者不用自己跑加密工具。
+打包 APK 时，DeekeScript **默认**用 AES + 随机 IV 加密 JavaScript。生成工程时不要另写加密脚本或要求用户先加密源码。
 
 ## 上下文
 

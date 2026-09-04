@@ -138,8 +138,11 @@ Page({
       return;
     }
     this.setData({ loading: true });
-    System.sleep(2000);
-    this.setData({ loading: false, noMore: true, footer: '—— 我是有底线的 ——' });
+    var that = this;
+    // 页面用 setTimeout；不要 System.sleep（会堵 UI）
+    setTimeout(function () {
+      that.setData({ loading: false, noMore: true, footer: '—— 我是有底线的 ——' });
+    }, 2000);
   }
 });
 ```

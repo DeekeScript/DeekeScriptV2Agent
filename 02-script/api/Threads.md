@@ -1,6 +1,6 @@
 # Threads
 
-创建和管理线程。官方更推荐 [`timer.md`](./timer.md) 的 `setTimeout` / `setInterval`，或 [`Engines.md`](./Engines.md) 起子脚本；当前线程方式可能出现未知问题。
+创建和管理线程。优先用 [`timer.md`](./timer.md) 的 `setTimeout` / `setInterval`，或 [`Engines.md`](./Engines.md) 起子脚本；`Threads` 易有竞态，非必要不要生成。
 
 ## 上下文
 

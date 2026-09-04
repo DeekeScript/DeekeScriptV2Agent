@@ -34,10 +34,10 @@ Android 13+ 请求 `READ_MEDIA_IMAGES` / `READ_MEDIA_VIDEO`；10–12 请求 `RE
 | 方法 | 参数 | 返回 | 说明 |
 |------|------|------|------|
 | `getImages()` | 无 | `Array` | 相册全部图片。项含 `id` `name` `path` `uri` `size` `date` |
-| `getImagesByPath(path)` | 相对目录，如 `"Pictures/WeiXin"`、`"DCIM/Camera"` | `Array` | 官方文档：按目录取图。d.ts 未列出 |
+| `getImagesByPath(path)` | 相对目录，如 `"Pictures/WeiXin"`、`"DCIM/Camera"` | `Array` | 按目录取图（d.ts 未列出） |
 | `saveImage(sourcePath)` | 源路径 | `string\|null` | 保存到相册，返回 `content://` |
 | `saveImage(sourcePath, displayName, relativePath)` | 名称、相对目录可选 | `string\|null` | 指定名称和目录 |
-| `saveContentImageToGallery(contentUriString, displayName?, relativePath?)` | content URI | `string\|null` | 官方文档：不复制文件直接入库。d.ts 未列出 |
+| `saveContentImageToGallery(contentUriString, displayName?, relativePath?)` | content URI | `string\|null` | 不复制文件直接入库（d.ts 未列出） |
 | `deleteImage(uriString)` | `content://` | `boolean` | 删图 |
 
 视频 / 音频：

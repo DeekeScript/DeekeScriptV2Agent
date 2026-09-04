@@ -40,4 +40,4 @@ setInterval(function () {
 - `register` 必须在 `startService` 之前。
 - 主线程仍要保活，否则脚本结束服务也会停。
 - Android 9+ 后台播放等也依赖前台服务，见 [`Audio.md`](./Audio.md) 的 `hasForegroundServicePermission`。
-- 官方 `stopService` 示例误写成了 `NotificationBridge.stopService()`，实际应调用 `ForegroundServiceBridge.stopService()`。
+- 停服务调用 `ForegroundServiceBridge.stopService()`，不要写成 `NotificationBridge.stopService()`。

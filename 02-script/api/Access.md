@@ -40,7 +40,7 @@
 
 ```javascript
 if (!Access.isAccessibilityServiceEnabled()) {
-  Dialogs.confirm('温馨提示', '请开启无障碍权限', function (ok) {
+  Dialogs.confirm('提示', '请开启无障碍权限', function (ok) {
     if (ok) {
       Access.openAccessibilityServiceSetting();
     }

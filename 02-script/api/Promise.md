@@ -16,7 +16,7 @@ Rhino 环境下的 `Promise`。**没有 `async` / `await`**。用 `then` 接结�
 | `new Promise(function (resolve, reject) { ... })` | 构造。成功调 `resolve(value)`，失败调 `reject(reason)` |
 | `promise.then(onFulfilled, onRejected)` | 两个回调都是 `function` |
 
-不提供官方文档以外的 `Promise.all` / `catch` 等，不要编造。
+不要编造未在本卡列出的 Promise API（如 `Promise.all`）。
 
 ## 最小片段
 
