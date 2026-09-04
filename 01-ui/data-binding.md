@@ -57,9 +57,18 @@ Page({
 
 弹层、对话框、动作面板、气泡、看图同样用 `showIf` 控制显示，见 [popup](./capabilities/popup.md) 与 overlay 组件。
 
-## 表单 name 双向绑定
+## 表单 `name` 双向绑定
 
-`name` 对应 `data` 中的键。初始值放 `Page({ data })`，用户输入写回 `this.data`。`name` 也会做 `{{path}}` 替换，所以 list 里可以写 `{{item.key}}`。未写 `name` 时可用 `id`。
+`name` 对应 `data` 中的键。初始值放 `Page({ data })`，用户输入写回 `this.data`。未写 `name` 时可用 `id`。`name` 也会做 `{{path}}` 替换。
+
+完整硬规则见 [`form-name.md`](./pitfalls/form-name.md)。摘要：
+
+| 范围 | 规则 |
+|------|------|
+| **同一页面** | 所有 `name` 必须唯一（含 list 模板里会出现多次的控件、`range` 的 `start.name` / `end.name`、弹层）。重复则共享同一份 `data`，控件会联动。 |
+| **跨页 + Storage** | 各页的 `Page.data` 互不串。默认 `Storage` 是整应用一份：禁止用裸 `name` 当 Storage 键；用 `项目前缀.模块.字段`。两页都有 `keyword` 时，不要都存成 `dylc.keyword`。 |
+
+带点的 Storage 键不能用 `{{storage.demo.task_name}}` 展示，页面侧先 `get` 再 `setData`。
 
 | 组件 | 绑定 |
 |------|------|
@@ -71,7 +80,7 @@ Page({
 | progress / progressBar / progressCircle | 数字（只读展示） |
 | range | `start.name` / `end.name` 两个键 |
 
-保存后任务脚本用 `Storage` 读，不要在任务里访问 `Page.data`。键名建议加项目前缀（如 `demo.task_name`）。带点的键不能用 `{{storage.demo.task_name}}` 展示，页面侧先 `get` 再 `setData`。
+保存后任务脚本用 `Storage` 读，不要在任务里访问 `Page.data`。Storage 键必须加项目前缀，且**不要直接用控件 `name`**（多页可能都有 `keyword`）。见 [`form-name.md`](./pitfalls/form-name.md)。
 
 ```json
 {

@@ -43,7 +43,7 @@ console.log(myUser);
 ## 注意
 
 - 读写类型必须成对，否则会读错。
-- 键名加项目前缀，例如 `myapp.keyword`。
+- 默认库是**整应用一份**。键必须加项目前缀，且不要直接用控件 `name`。多页都有同名字段时再加页面/模块：`dylc.settings.keyword` 与 `dylc.search.keyword`。禁止两页都 `put('keyword')` 或都 `put('dylc.keyword')`。见 [`form-name.md`](../../01-ui/pitfalls/form-name.md)。
 - 页面和脚本要么都不 `create`，要么 `create` 同一个 db。
 - 对象数组 CRUD：读写后建议拷成纯 JS 对象再改再存（`putObj` / `getObj` 或 `putArray` / `getArray`），避免 Rhino 包装对象往返异常。
 - 索引见 [`INDEX.md`](INDEX.md)。

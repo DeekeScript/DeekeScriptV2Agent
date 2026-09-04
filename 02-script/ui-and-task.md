@@ -41,7 +41,9 @@ if (!permission.ensureRun()) {
 
 ## 键名
 
-建议项目前缀，避免和系统键、其它模块撞车。例如 `myapp.keyword`、`myapp.max_count`。不要用过短的全局名（如 `keyword`）。
+默认 `Storage` 跨页共享。禁止用裸字段名（`keyword`、`enabled`）当 key。用 `项目前缀.模块或页面.字段`，例如 `myapp.settings.keyword`、`myapp.task.max_count`。两个页面都可以有控件 `name: "keyword"`，但存盘键不能相同，除非你有意共享同一份配置。
+
+见 [`form-name.md`](../../01-ui/pitfalls/form-name.md)。不要用过短的全局名。
 
 `Storage.create('其它库名')` 会换一套库；页面和脚本必须 `create` 同一个名字才能读到。不调用 `create` 时走默认库，页面表单与 `Storage.put` 默认也在这套库。
 

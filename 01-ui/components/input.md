@@ -1,6 +1,8 @@
 # input
 
-单行输入。`name` 对应 `data` 中的键，`value` 为默认值。`name` 也会做 `{{path}}` 替换，所以 list 里可以写 `{{item.key}}`。
+单行输入。`name` 对应 `data` 中的键，`value` 为默认值。`name` 也会做 `{{path}}` 替换。
+
+**同一页面内 `name` 必须唯一**。列表模板里的 `name` 会随每一行重复，因此要么不写 `name`，要么写成 `{{item.id}}`。存盘见 [`form-name.md`](../pitfalls/form-name.md)。
 
 默认是底部一条横线。需要网页式圆角边框时写 `variant: "box"`，或直接在 `style` 里写 `radius` / `borderColor` / `borderWidth`。无边框、只有背景写 `variant: "plain"`。
 

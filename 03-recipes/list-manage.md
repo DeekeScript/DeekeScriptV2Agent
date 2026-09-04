@@ -61,7 +61,6 @@
               },
               {
                 "type": "switch",
-                "name": "enabled",
                 "value": "{{item.enabled}}",
                 "onChange": "onToggle"
               },
@@ -82,7 +81,7 @@
 }
 ```
 
-列表里 `switch` 的 `onChange` / 删除的 `onTap` 都会带 `e.item`（见 [`events.md`](../01-ui/events.md)）。
+列表里 `switch` 的 `onChange` / 删除的 `onTap` 都会带 `e.item` / `e.index`（见 [`events.md`](../01-ui/events.md)）。`name` 规则见 [`form-name.md`](../01-ui/pitfalls/form-name.md)。
 
 ## `page.js` 片段
 
@@ -159,5 +158,6 @@ Page({
 ## 自检
 
 - [ ] 启停是 `switch`，不是「启用/停用」按钮  
+- [ ] 本页 `name` 唯一（见 [`form-name.md`](../01-ui/pitfalls/form-name.md)）  
 - [ ] 删除等次要操作为 `size: "sm"`  
 - [ ] 一页最多一个大实心主按钮（添加 / 开始任务）

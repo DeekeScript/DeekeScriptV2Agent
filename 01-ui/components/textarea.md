@@ -6,7 +6,7 @@
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
-| name | String | 对应 `data` 中的键 |
+| name | String | 对应 `data` 中的键；**本页内必须唯一**。规则见 [`form-name.md`](../pitfalls/form-name.md) |
 | label | String | 字段标题 |
 | value | String | 默认值 |
 | hint | String | 占位 |

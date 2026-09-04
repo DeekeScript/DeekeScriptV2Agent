@@ -38,7 +38,6 @@
     { "type": "text", "text": "{{item.content}}", "style": { "weight": 1 } },
     {
       "type": "switch",
-      "name": "enabled",
       "value": "{{item.enabled}}",
       "onChange": "onToggle"
     },
@@ -73,3 +72,4 @@ onDelete(e) {
 
 - 布尔态用 `switch` / `checkbox`，不要做成两个互相切换的大 `button`。
 - 列表次要 `button` 必须 `"size": "sm"`，见 [`button.md`](./button.md)。
+- `name` 与其它表单相同：页内必须唯一，Storage 键加前缀。见 [`form-name.md`](../pitfalls/form-name.md)。

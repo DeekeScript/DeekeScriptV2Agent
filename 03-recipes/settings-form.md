@@ -54,7 +54,7 @@
 
 ## `pages/settings/page.js`
 
-键名加项目前缀，避免和系统 `deekeScript:important` 冲突。
+键名加**项目 + 页面/模块**前缀，避免和系统键、其它页面撞车。同一页里每个控件 `name` 必须不同。`range` 的 `start.name` / `end.name` 也算两个 `name`。见 [`form-name.md`](../01-ui/pitfalls/form-name.md)。
 
 ```javascript
 Page({
@@ -111,7 +111,8 @@ let rate = Storage.getInteger('demo.like_rate');
 
 ## 注意
 
-- `name` 必须和 `data` 键一致。
-- `range` 左右是两个 `name`，不要写成一个字段。
+- `name` 必须和本页 `data` 键一致，且**本页所有 `name` 不重复**。
+- `range` 左右是两个 `name`，不要写成一个字段，也不要和页内其它控件重名。
 - 布尔用 `putBoolean` / `getBoolean`，整数滑动值用 `putInteger` / `getInteger`。
+- Storage 键用 `demo.settings.xxx` 这类前缀，不要 `Storage.put('keyword', …)`。
 - 点赞概率 / 运行速度用 `"type": "slider"`，不要 `"type": "progress"`。

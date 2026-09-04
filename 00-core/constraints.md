@@ -12,7 +12,7 @@
 | 2 | 每个页面 `page.json` + `page.js` 成对，并在入口 `pages` 注册（`id` + `file`）。`homePage` 指向的目录可以不再放入 `pages`。 |
 | 3 | 自定义组件 JSON 必须 `"component": true`，`component.json` + `component.js`，并在入口 `components` 注册（或不写数组、按 `components/<id>` 加载）。 |
 | 4 | 无障碍长任务写在 `tasks/*.js`。从页面启动：`Engines.executeScript('tasks/xxx.js')`（可先 `permission.runScript`）。 |
-| 5 | 表单用 `name` 绑定 `Page.data`；任务用 `Storage` 读已保存配置。 |
+| 5 | 表单用 `name` 绑定 `Page.data`；**同一页面内所有 `name` 必须唯一**（含 list 行、range 两端）。任务用 `Storage` 读配置；Storage 键加项目前缀，禁止用裸 `name`，多页同名字段再加页面/模块名。见 [`form-name.md`](../01-ui/pitfalls/form-name.md)。 |
 | 6 | 底栏 Tab 用 `switchTab`，不要用 `navigate`。 |
 | 7 | Rhino 1.8：可用 `function` / 箭头 / `var` / `let`。颜色 `#RRGGBB`；尺寸 dp，字号 sp。 |
 | 8 | `require` **优先** `./`、`../` 相对当前文件。不以 `./`/`../` 开头时相对项目根。禁止磁盘绝对路径。导出用 `module.exports`。 |
@@ -44,6 +44,7 @@
 | 13 | 禁止刷流时对**同一条**内容失败后反复进主页 / 不划走。须以内容条为进度，失败 skip 前进。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md)。 |
 | 14 | 禁止在设备已连接时，用「怕误操作 / 高风险 / 未整段盲跑 / 请用户自己运行」跳过 `launch` 目标 App、`snapshot`、找节点片段。 |
 | 15 | 禁止把 `status`、`Storage` 读写、`require` 能加载、本工程 UI 预览当作 `tasks/*.js` 已验证。 |
+| 16 | 禁止同一页面内重复的表单 `name`。禁止用裸 `name` 当 Storage 键：默认 Storage 跨页共享，会互相覆盖。见 [`form-name.md`](../01-ui/pitfalls/form-name.md)。 |
 
 ## 快速对照
 
@@ -63,3 +64,4 @@
 | 自动停 | `tasks/*.js` 里 `Engines.closeAll()` | 只在页面回调里 closeAll |
 | 任务已验证 | 目标 App 上片段 `run` 打出节点 logs，再 `run-file` | 只测 Storage / 权限 / write 就交活 |
 | 点赞评论类需求 | 先找节点、点得动；整段用数量=1 | 以「会真实发出」为由不启动目标 App |
+| 表单 `name` | 同一页唯一；Storage 用 `项目.模块.字段` | 页内重名联动；两页都 `put('keyword')` 互相覆盖 |

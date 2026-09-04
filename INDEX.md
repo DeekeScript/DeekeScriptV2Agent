@@ -35,6 +35,7 @@
 | [01-ui/events.md](./01-ui/events.md) | 事件侧：组件 / 按钮 `onTap` 等与跑脚本 |
 | [01-ui/components/_common.md](./01-ui/components/_common.md) | 必读：`style` / 主题色 |
 | [01-ui/data-binding.md](./01-ui/data-binding.md) | 必读：`{{}}`、`showIf`、表单 `name`、list `bind` |
+| [01-ui/pitfalls/form-name.md](./01-ui/pitfalls/form-name.md) | **必读**：页内 `name` 唯一；Storage 防跨页撞键 |
 | [01-ui/navigate.md](./01-ui/navigate.md) | 页面栈：`navigate` / `redirect` / `switchTab` / `back` |
 | [01-ui/component-custom.md](./01-ui/component-custom.md) | 自定义组件 |
 | [01-ui/components/INDEX.md](./01-ui/components/INDEX.md) | 内置 type，再开单篇 |
