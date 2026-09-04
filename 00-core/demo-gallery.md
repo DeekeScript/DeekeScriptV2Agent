@@ -7,7 +7,6 @@
 | 展厅里可能看到 | 生成时 |
 |----------------|--------|
 | 非 `deekeScript.json` 的入口文件名 | 只用 `deekeScript.json` |
-| 入口写 `host` / `debug` / `apis` | 不要写 |
 | 默认就配了 `floatWindow.menus` | 用户没提菜单就不要写 `floatWindow` |
 | `permission.hint('请在文件…')` | 不要写进产物 |
 | `page.js` 里 `System.sleep` | 用 `setTimeout` |

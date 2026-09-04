@@ -40,7 +40,7 @@
 | 10 | 禁止全局 `text()` / `id()` / `desc()`。必须 `UiSelector().text('发送').findOne()`。点击前一般先 `filter` 屏内。 |
 | 11 | 禁止把可调节数值写成 `progress` / `progressBar`。用 `slider`。 |
 | 12 | 禁止把 `background` / `color` / `width` / `height` 写在组件根上。必须在 `style`。 |
-| 13 | 禁止写 `host` / `debug` / `apis`。入口文件名只能是 `deekeScript.json`。 |
+| 13 | 入口文件名只能是 `deekeScript.json`。 |
 | 14 | 禁止在悬浮窗菜单回调或页面按钮里用 `Engines.closeAll()` 停整项任务（无效）。手动停用 `FloatWindow.stopTask()`，或菜单内置 `"action":"stop"`。 |
 
 ## 快速对照

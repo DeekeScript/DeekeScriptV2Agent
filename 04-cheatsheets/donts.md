@@ -16,7 +16,7 @@
 | `webview` 不写 `style.height` | 必须写高度，否则默认 240dp，布局会乱 |
 | 组件 JSON 漏 `"component": true` | 自定义组件根必须 `"component": true`，否则不能当组件加载 |
 | 入口 JSON 漏 `icon`，或只写路径不生成图片文件 | 必须 `"icon": "img/xhs.svg"`，并把 svg/png 文件一并写入工程 |
-| 写 `host` / `debug` / `apis`，或入口文件名不是 `deekeScript.json` | 入口只有 `deekeScript.json`，字段见 [`entry-json.md`](../01-ui/entry-json.md) |
+| 入口文件名不是 `deekeScript.json` | 入口只有 `deekeScript.json`，字段见 [`entry-json.md`](../01-ui/entry-json.md) |
 | 在 `deekeScript.json` 写 `groups` / `hooks` 当界面 | 界面是 `pages/*/page.json` |
 | HID / 图色 / 媒体不申请权限 | 图色：`Access.isMediaProjectionEnable`；媒体：`hasMediaReadPermission`；HID：蓝牙权限。见对应 API 卡 |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
@@ -29,7 +29,7 @@
 | 有 `FloatDialogs.show` 却不关弹窗就继续点节点 | 任务或调试开始前 `FloatDialogs.closeAll()` |
 | 用户没提悬浮窗菜单却写了 `floatWindow.menus` / 空 menus | **默认不写**。连点两次停止（3 秒内）。细节见 [`constraints.md`](../00-core/constraints.md) MUST 10 |
 | 悬浮窗菜单 / 页面按钮用 `Engines.closeAll()` 停任务 | 内置 `"action":"stop"` 或 `FloatWindow.stopTask()`；自动停才在 `tasks/*.js` 里 `Engines.closeAll()`。见 [`constraints.md`](../00-core/constraints.md) MUST 11 |
-| 照抄展厅 Demo 的 `host` / `hint` / 默认 menus / 错误入口文件名 | 见 [`demo-gallery.md`](../00-core/demo-gallery.md) |
+| 照抄展厅 Demo 的 `hint` / 默认 menus / 错误入口文件名 | 见 [`demo-gallery.md`](../00-core/demo-gallery.md) |
 | 在 `page.js` 里用 `System.sleep` 等待 | 页面用 `setTimeout`；任务用 `System.sleep` |
 | 把可调节数值写成 `progress` / `progressBar`（运行速度、点赞概率） | 用 `"type": "slider"`。`progress` 只能展示、不能拖。见 [`slider.md`](../01-ui/components/slider.md) |
 | 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |
