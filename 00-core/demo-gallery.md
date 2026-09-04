@@ -1,12 +1,12 @@
 # 展厅 Demo 与生成产物
 
-官方组件展厅工程（本地常见目录名 `deekeScript-v2-demo`，包名 `cn.deeke.v2demo`）是 **UI / 能力预览**，不是生成模板。
+官方组件展厅工程是 **UI / 能力预览**，不是生成模板。包名常见为 `cn.deeke.v2demo`。
 
 生成工程以本仓库契约为准。展厅里下列写法**禁止照抄进产物**：
 
 | 展厅里可能看到 | 生成时 |
 |----------------|--------|
-| 历史文案 `deekeScript-v2.json` | 只用 `deekeScript.json` |
+| 非 `deekeScript.json` 的入口文件名 | 只用 `deekeScript.json` |
 | 入口写 `host` / `debug` / `apis` | 不要写 |
 | 默认就配了 `floatWindow.menus` | 用户没提菜单就不要写 `floatWindow` |
 | `permission.hint('请在文件…')` | 不要写进产物 |

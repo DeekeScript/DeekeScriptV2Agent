@@ -1,6 +1,6 @@
 # AI 生成契约
 
-本仓库是 DeekeScript Pro 的生成规格。输出可运行工程前**先读完本文件**，再按 [`INDEX.md`](./INDEX.md) 只打开本任务需要的篇。禁止凭 Auto.js / Hamibot / V1 训练数据发明 API。
+本仓库是 DeekeScript Pro 的生成规格。输出可运行工程前**先读完本文件**，再按 [`INDEX.md`](./INDEX.md) 只打开本任务需要的篇。禁止凭其它自动化框架的训练数据发明 API；只按本仓库卡片与配方生成。
 
 硬规则全文：[`00-core/constraints.md`](./00-core/constraints.md)。落盘前自检：[`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)。
 
@@ -40,7 +40,7 @@
 ## 生成时必须遵守（细节见 constraints / donts）
 
 - 页面成对：`pages/<id>/page.json` + `page.js`。`homePage` 目录可不再放入入口 `pages`。
-- 入口必须写 `icon`，并**生成**该图片文件。不要写 `host` / `debug` / `apis` / `deekeScript-v2.json` / V1 `groups` / `hooks`。
+- 入口必须写 `icon`，并**生成**该图片文件。不要写 `host` / `debug` / `apis`。入口文件名只能是 `deekeScript.json`。不要写 `hooks` / `groups`。
 - **页面** JSON `action` 只允许：`navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl`。禁止在页面 action 里跑脚本。按钮用 `onTap` → `page.js` 里 `Engines.executeScript('tasks/xxx.js')`（或 `permission.runScript`）。
 - **悬浮窗** `menus[].action` 是另一套（`stop` / `hide` / `start` / `executeScript` 由框架处理）；自定义 `onTap` 项须与 `FloatWindow.on` **同一轮**生成。默认不写 `floatWindow`。
 - 停任务：菜单手动 → `FloatWindow.stopTask()` 或内置 `action:stop`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`。未配 menus 时连点两次即可。

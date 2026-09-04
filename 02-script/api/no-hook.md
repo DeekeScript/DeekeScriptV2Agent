@@ -1,27 +1,13 @@
-# Pro 没有 Hook
+# 入口与初始化
 
-**DeekeScript Pro 没有 Hook。** 不要生成 `hooks` 配置，不要写 `app_start_before` / `app_start` / `app_active_after`，不要调用 `Engines.closeHook()` 当初始化手段。
+工程入口只有根目录的 `deekeScript.json`。不要写其它入口文件名，也不要在入口里写 `hooks`、`groups`。
 
-Hook 只存在于 **V1** 的 `deekeScript.json`：
+启动与业务逻辑放在：
 
-```json
-{
-  "hooks": {
-    "app_start_before": "scripts/hooks/app_start_before.js",
-    "app_start": "scripts/hooks/app_start.js",
-    "app_active_after": "scripts/hooks/app_active_after.js"
-  }
-}
-```
-
-Pro 工程入口是 `deekeScript.json`。把启动逻辑放在：
-
-- 首页 `pages/*/page.js` 的 `onLoad` / `onShow`
-- 任务脚本 `tasks/*.js`，由按钮 `onTap` 里 `Engines.executeScript` 启动
+- 页面 `pages/*/page.js` 的 `onLoad` / `onShow`
+- 任务脚本 `tasks/*.js`（由按钮 `onTap` 里 `Engines.executeScript` 启动）
 - 需要保活时用 [`timer.md`](./timer.md)、[`Foreground.md`](./Foreground.md)
 
-## 注意
+不要调用 `Engines.closeHook()`。动态改界面用 `setData`、Storage、Http。
 
-- `Engines.closeHook()` 仍出现在 d.ts 里，那是 V1 关闭 hook 脚本用的。不要为此去创建 hook 文件。
-- 动态改首页模块、功能开关：V1 靠 hook + `DeekeScriptJson`。Pro 用页面 `setData` 和自己的 Storage / Http。
-- 自检见 [`donts.md`](../../04-cheatsheets/donts.md)。
+自检见 [`donts.md`](../../04-cheatsheets/donts.md)。

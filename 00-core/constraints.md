@@ -30,7 +30,7 @@
 |---|------|
 | 1 | 禁止在**页面** JSON `action` 里执行脚本或写长任务。页面 `action` 只允许：`navigate` / `redirect` / `switchTab` / `back` / `toast` / `save` / `openUrl`。（悬浮窗 `menus[].action` 是另一套，见 entry-json。） |
 | 2 | 禁止对 `page.js` 点「仅当前文件执行」。 |
-| 3 | Pro 没有 Hook。不要写 `hooks`，不要调用 `Engines.closeHook()`。 |
+| 3 | 不要写 `hooks` / `groups`，不要调用 `Engines.closeHook()`。初始化见 [`no-hook.md`](../02-script/api/no-hook.md)。 |
 | 4 | WebView 不和 `Page` 通信。整页开外链用 `openUrl`。 |
 | 5 | 自定义组件禁止成环引用。 |
 | 6 | 禁止 `async/await`、箭头函数、`?.`、`??`、`import` / `export`。 |
@@ -40,7 +40,7 @@
 | 10 | 禁止全局 `text()` / `id()` / `desc()`。必须 `UiSelector().text('发送').findOne()`。点击前一般先 `filter` 屏内。 |
 | 11 | 禁止把可调节数值写成 `progress` / `progressBar`。用 `slider`。 |
 | 12 | 禁止把 `background` / `color` / `width` / `height` 写在组件根上。必须在 `style`。 |
-| 13 | 禁止写 `host` / `debug` / `apis`，禁止生成 `deekeScript-v2.json`。 |
+| 13 | 禁止写 `host` / `debug` / `apis`。入口文件名只能是 `deekeScript.json`。 |
 | 14 | 禁止在悬浮窗菜单回调或页面按钮里用 `Engines.closeAll()` 停整项任务（无效）。手动停用 `FloatWindow.stopTask()`，或菜单内置 `"action":"stop"`。 |
 
 ## 快速对照
