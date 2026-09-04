@@ -151,5 +151,5 @@ Page({
 ## 注意
 
 - 脚本不要写在 JSON `action` 里。见 [`run-task-from-ui.md`](./run-task-from-ui.md)。
-- Pro 无 Hook：[`no-hook.md`](../02-script/api/no-hook.md)。
+- 初始化放 `onLoad` / 任务脚本：[`no-hook.md`](../02-script/api/no-hook.md)。
 - 多页时在入口 `pages` 注册别名；自定义组件要注册且 JSON 写 `"component": true`。

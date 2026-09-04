@@ -1,6 +1,6 @@
 # Engines
 
-在当前环境中再开一个**独立**运行时执行其它脚本，或关闭运行时。Pro **没有 Hook**——不要生成 `hooks` / 调用 `closeHook()`。
+在当前环境中再开一个**独立**运行时执行其它脚本，或关闭运行时。不要生成 `hooks`，不要调用 `closeHook()`。
 
 ## 可用上下文
 
@@ -17,8 +17,9 @@
 | executeScriptStr | `executeScriptStr(name: string, content: string)` | `void` | 新运行时执行源码字符串 |
 | closeAll | `closeAll()` | `void` | 结束**当前任务脚本**（含子脚本/定时器）。**仅 tasks 线程** |
 | closeOther | `closeOther()` | `void` | 结束其它运行时，留下当前 |
-| closeHook | `closeHook()` | `void` | 仅 V1；Pro 勿用 |
 | childScriptCount | `childScriptCount()` | `number` | 经 Engines 拉起且未结束的脚本数 |
+
+不要调用 `closeHook()`。
 
 ## 最小片段
 

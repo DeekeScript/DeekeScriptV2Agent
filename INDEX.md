@@ -52,7 +52,7 @@
 | [02-script/ui-and-task.md](./02-script/ui-and-task.md) | Storage 与启动路径 |
 | [02-script/api/UiSelector.md](./02-script/api/UiSelector.md) | 找节点；点击前一般先 `filter` 屏内 |
 | [02-script/api/INDEX.md](./02-script/api/INDEX.md) | API 清单，再开单篇 |
-| [02-script/api/no-hook.md](./02-script/api/no-hook.md) | Pro 无 Hook |
+| [02-script/api/no-hook.md](./02-script/api/no-hook.md) | 入口与初始化：不要 hooks/groups |
 
 常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`System`、`Storage`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`。
 

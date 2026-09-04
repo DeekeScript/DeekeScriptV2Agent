@@ -52,5 +52,5 @@ with (javaImporterTest) {
 
 - 多线程优先 [`timer.md`](./timer.md) / [`Engines.md`](./Engines.md)，不要默认 `java.lang.Thread`。
 - `JavaImporter` 的类名外层不要加引号。
-- 不要用 Java 去实现界面或 Hook。Pro 无 Hook，见 [`no-hook.md`](./no-hook.md)。
+- 不要用 Java 去实现界面。初始化放页面 / 任务脚本，见 [`no-hook.md`](./no-hook.md)。
 - 文件读写优先 [`Files.md`](./Files.md)。

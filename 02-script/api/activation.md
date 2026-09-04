@@ -44,7 +44,7 @@ let res = Json.parse(config);
 console.log(res);
 ```
 
-`role`、`ad` 可给表单 `dataFrom` 用（V1 表单）。页面自己 `Http.get` + `setData` 即可，不要依赖 V1 `groups`。
+`role`、`ad` 可供页面拉取后 `setData` 展示。页面自己 `Http.get` + `setData` 即可。
 
 ## 升级
 

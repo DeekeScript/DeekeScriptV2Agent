@@ -35,5 +35,5 @@ U2FsdGVkX18fBheHDLwYx8ymlys2OayQV0bmWy4XRFJmDYh+...
 ## 注意
 
 - 生成工程只写明文 JS。不要把密文提交进 `tasks/` 或 `pages/`。
-- 不要为了「加密」去引入 V1 Hook 或第三方混淆，除非用户明确要求。
+- 不要为了「加密」去引入第三方混淆，除非用户明确要求。
 - 相关：[`apk.md`](./apk.md)。
