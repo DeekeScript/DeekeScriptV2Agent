@@ -11,7 +11,7 @@
 
 ## 方法
 
-筛选条件均返回选择器自身，便于链式调用。方法表以 d.ts 为准。
+筛选条件均返回选择器自身，便于链式调用。方法表与官方文档 `base/uiSelector/uiSelector.md` 对齐。
 
 | 方法 | 签名 | 参数 | 返回值 | 说明 |
 |------|------|------|--------|------|
@@ -32,8 +32,6 @@
 | descMatches | `descMatches(desc: string)` | 正则或字符串 | `UiSelector` | 描述正则匹配 |
 | descStartsWith | `descStartsWith(desc: string)` | 前缀 | `UiSelector` | d.ts 有此方法；官方文档未单独说明 |
 | descEndsWith | `descEndsWith(desc: string)` | 后缀 | `UiSelector` | d.ts 有此方法；官方文档未单独说明 |
-| packageName | `packageName(packageName: string)` | 包名 | `UiSelector` | d.ts 有此方法；官方文档未单独说明 |
-| packageNameMatches | `packageNameMatches(packageName: string)` | 正则或字符串 | `UiSelector` | d.ts 有此方法；官方文档未单独说明 |
 | clickable | `clickable(bool: boolean)` | 是否可点击 | `UiSelector` | |
 | selected | `selected(bool: boolean)` | 是否已选择 | `UiSelector` | |
 | checked | `checked(bool: boolean)` | 是否被选中 | `UiSelector` | |

@@ -28,10 +28,8 @@
 | 把 `slider` 和 `progress` 当成别名 | 两者字段相近但行为不同。只读进度才用 `progress` / `progressBar` |
 | 用页面根 `title` 同时又放 `navBar` 画两套顶栏 | 自制顶栏时 `"title": { "hidden": true }`，再写 `type: navBar` |
 | 把 `background` / `color` / `width` 写在组件根上 | 写进 `style`。见 [`_common.md`](../01-ui/components/_common.md) |
-| 只写 `floatWindow.menus` 不写 `FloatWindow.on` | 同一轮输出 JSON + `tasks/*.js` 或 `common/*.js` 里的 `FloatWindow.on`。见 [`float-window.md`](../03-recipes/float-window.md) |
-| 菜单 `FloatWindow.on` 里 `Engines.closeAll()` 停任务 | 手动停必须用 `FloatWindow.stopTask()`；自动停写在 `tasks/*.js` 里用 `Engines.closeAll()`。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#关闭任务底层逻辑必读) |
-| 混淆页面 `action` 与悬浮球菜单 | 页面按钮用 `action`（navigate / toast / …）；悬浮球用 `onTap` + `FloatWindow.on` |
 | 用户要蓝色，按钮仍是默认绿，或声称 button 没有 background | 入口写 `window.theme.primary`。`button` 建议写 `style.background`。导航栏、状态栏、底栏 `selectedColor` 也要一起改 |
 | Switch 写 `style.background` 给整行刷底 | Switch / checkbox / radio 换色只写 `style.color`，不要写 `background` |
+| 检测失败时 `continue` 但不递增计数、不设 retry 上限 | 加 `retryCount` 或 `processed++`，超过 N 次 `break`，避免无限 toast |
 
 Rhino 其它限制见 [`00-core/constraints.md`](../00-core/constraints.md)。配方入口：[`scaffold.md`](../03-recipes/scaffold.md)。
