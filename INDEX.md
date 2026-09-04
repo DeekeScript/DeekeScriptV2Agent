@@ -48,6 +48,7 @@
 | 文件 | 解决什么 |
 |------|----------|
 | [02-script/task-template.md](./02-script/task-template.md) | 默认无菜单骨架；有菜单见文内第二节 |
+| [02-script/code-org.md](./02-script/code-org.md) | 按操作对象拆模块、复用与组合 |
 | [02-script/permission.md](./02-script/permission.md) | 权限用法；实现复制 [`snippets/common-permission.js`](./02-script/snippets/common-permission.js) |
 | [02-script/require.md](./02-script/require.md) | 模块路径，须带 `.js` |
 | [02-script/ui-and-task.md](./02-script/ui-and-task.md) | Storage 与启动路径 |

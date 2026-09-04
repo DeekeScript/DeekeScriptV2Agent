@@ -6,7 +6,7 @@
 
 | 类别 | 写法 |
 |------|------|
-| 函数 | `function foo() {}`、箭头 `() => {}`；对象方法可用 `onLoad: function (params) {}` 或简写 `onLoad() {}` |
+| 函数 | `function foo() {}`、箭头 `() => {}`；**对象方法优先简写** `onLoad(params) {}` / `open() {}`，不要 `open: function () {}` |
 | 变量 | `var`、`let` |
 | 模块 | `require('../common/hello.js')`（优先相对路径）、`module.exports = { ... }` |
 | 控制流 | `if` / `for` / `while` / `switch` / `try/catch` |
@@ -21,7 +21,7 @@
 ```javascript
 // common/hello.js
 module.exports = {
-  greet: function (name) {
+  greet(name) {
     return '你好，' + (name || '用户');
   }
 };
@@ -35,7 +35,7 @@ Page({
   data: {
     text: ''
   },
-  onLoad: function () {
+  onLoad() {
     var that = this;
     this.setData({ text: hello.greet('运营A') });
     setTimeout(function () {
@@ -57,12 +57,12 @@ Page({
 
 ```javascript
 // 错误
-onPicked: function (e) {
+onPicked(e) {
   const keyword = e?.detail?.keyword ?? '';
-};
+}
 
 // 正确
-onPicked: function (e) {
+onPicked(e) {
   var d = e && e.detail ? e.detail : {};
   var keyword = d.keyword ? d.keyword : '';
   this.setData({ picked: keyword || '未选' });
@@ -73,8 +73,10 @@ onPicked: function (e) {
 
 | 场景 | 推荐 |
 |------|------|
-| 页面 / 组件方法（需要 `this`） | 用 `function`，不要写成 `onLoad: () => {}`（箭头会绑错 `this`） |
-| 普通回调 | `function` 或 `=>` 均可 |
+| 业务 / 模块能力 | 用对象 + 方法简写组织；少堆顶层 `function`。见 [`code-org.md`](../02-script/code-org.md) |
+| `Page` / `Component` / `module.exports` / `FloatWindow.on` | **方法简写** `onLoad() {}`、`greet(name) {}`；不要 `onLoad: function () {}` |
+| 需要 `this` 的页面方法 | 用简写或普通 `function`；**不要** `onLoad: () => {}`（箭头会绑错 `this`） |
+| API 回调（`setTimeout`、`Dialogs`、`.then` 等） | `function` 或 `=>` 均可 |
 | 回调里保存 `this` | `var that = this;` 再进 `setTimeout` / `Dialogs.confirm`（或箭头回调直接用外层 `this`） |
 | 空判断 | `if (!node) { return; }` |
 | 字符串拼接 | `'已保存：' + name`（少用模板字符串，避免混入不受支持的写法） |

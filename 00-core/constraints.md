@@ -31,7 +31,7 @@
 | 1 | 页面 JSON `action` 的 `type` 仅限 [`page-json.md`](../01-ui/page-json.md#json-action) 所列。 |
 | 2 | WebView 不和 `Page` 通信。整页开外链用 `openUrl`。 |
 | 3 | 自定义组件禁止成环引用。 |
-| 4 | 禁止 `async/await`、`?.`、`??`、`import` / `export`。箭头函数可用；页面方法需要 `this` 时用 `function`，不要写 `onLoad: () => {}`。 |
+| 4 | 禁止 `async/await`、`?.`、`??`、`import` / `export`。箭头可用。对象方法用简写 `onLoad() {}`，不要 `onLoad: function () {}`，也不要 `onLoad: () => {}`（绑错 `this`）。 |
 | 5 | 禁止把 Demo 的 `permission.hint('请在文件 xxx 编写业务')` 写进产物。 |
 | 6 | 禁止用 `navigate` 切底栏；禁止指望底栏根页 `back` 退出应用。 |
 | 7 | 禁止把 `UiSelector` 主流程写进 `page.js` 的 `onTap` 并长时间阻塞。 |

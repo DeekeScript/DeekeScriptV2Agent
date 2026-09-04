@@ -1,8 +1,8 @@
 # 标准任务骨架
 
-自动化脚本放在 `tasks/*.js`。入口顺序：权限 → 读配置 → 循环。**默认不要**绑 `FloatWindow.on`（用户没提悬浮窗菜单时）。
+自动化脚本放在 `tasks/*.js`。入口顺序：权限 → 读配置 → 循环。**默认不要**绑 `FloatWindow.on`（用户没提悬浮窗菜单时）。多功能 / 多对象 App 自动化须按 [`code-org.md`](code-org.md) 按操作对象拆到 `common/`，任务里组合调用。
 
-依赖：[`permission.md`](permission.md)、[`ui-and-task.md`](ui-and-task.md)、[`require.md`](require.md)、[`UiSelector.md`](api/UiSelector.md)、[`automation-loop.md`](../00-core/automation-loop.md)。
+依赖：[`permission.md`](permission.md)、[`code-org.md`](code-org.md)、[`ui-and-task.md`](ui-and-task.md)、[`require.md`](require.md)、[`UiSelector.md`](api/UiSelector.md)、[`automation-loop.md`](../00-core/automation-loop.md)。
 
 ## 默认骨架（无悬浮菜单）
 

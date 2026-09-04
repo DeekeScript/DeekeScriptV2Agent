@@ -18,7 +18,7 @@
 
 ```javascript
 const dyApp = {
-  getName: function () {
+  getName() {
     return 'appName';
   }
 };
