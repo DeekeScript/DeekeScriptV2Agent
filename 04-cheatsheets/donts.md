@@ -44,6 +44,9 @@
 | **同一条视频/帖子失败后不前进**（进主页弹窗、读不到抖音号又重进） | 以内容条为进度：失败也 `processed++` 并划走下一条；进主页单次尝试。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md) |
 | `!isFeed` 时 `continue` 且恢复成功就 `failRetry = 0`、不划走 | 会围着同一条死循环。恢复失败必须 skip 前进；见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md) |
 | 未片段验证就 `run-file` 整段盲跑 | 先按 [`automation-loop.md`](../00-core/automation-loop.md) 验证找节点 / 点击，再整体跑 |
+| 只测 Storage / 权限 / `write` 就声称脚本已验证 | 必须 `launch` 目标 App，片段 `run` 打出目标页节点 logs |
+| 因点赞/评论「会真实发出」而不启动目标 App | 先验证找得到、点得动；整段循环用数量=1。用户已要求的赞评不是「先问再调试」 |
+| 设备已连接却让用户自己去跑，代替 `run` / `snapshot` | 自己执行片段验证；只有扫不到设备、权限未开、要登录验证码时才打断用户 |
 | 连不上设备却声称已实机验证 | 交付代码并列出用户须开的权限与地址；不得假装已跑通 |
 | 同一失败修满 3 轮仍猜 | 按 automation-loop「请求用户协助」，停止空转 |
 

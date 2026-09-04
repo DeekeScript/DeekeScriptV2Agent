@@ -10,7 +10,18 @@
 
 1. **编写前**：先连接手机（`discover` / `set` + `status`）。连不上再写代码时，须声明尚未实机验证。
 2. **编写与修改过程中**：落盘或改完文件后**主动** `write` 同步到手机，不要攒到最后才推。
-3. **写完后**：**主动**调试验证（界面可预览/点测；任务按闭环片段验证再 `run-file`），通过后再交付。禁止只交代码不验证就结束。
+3. **写完后**：必须自己调试验证，**通过后再交付**。禁止只交代码、禁止让用户「自己去点开始」代替你调试。
+
+### 任务未完成（设备已连上时）
+
+生成了 `tasks/*.js` 且 `status` 正常时，在对用户回复里贴出**目标 App / 目标页**关键节点的 `run` logs（`text` / `desc` / `bounds`）之前，**任务未完成**。下列一律不算已调试：
+
+- 只 `write` 成功、只 `status` 权限为 true
+- 只测了 `Storage` / 配置读写 / `require` 能加载
+- 只打开了本工程界面、没有 `launch` 目标 App
+- 以「怕误操作」「高风险」「未整段盲跑」为由跳过找节点
+
+操作第三方 App：写选择器之前必须 `snapshot`（或 `/ai/nodes`）；然后 `run` 验证找得到、点得动、输得进；通过后再 `run-file`（可用 `maxCount=1`）。用户需求本身就是搜索 / 点赞 / 评论 / 刷流时，这些步骤就是调试，**不必再问可不可以调试**。
 
 ## 你在生成什么
 
@@ -64,7 +75,7 @@
 - Rhino 1.8：可用箭头；禁止 `async/await`、`?.`、`??`、`import`/`export`。业务与页面方法用**对象 + 方法简写**（`open() {}`），不要 `open: function () {}`，也不要用会绑错 `this` 的 `onLoad: () => {}`。
 - `require` 优先 `./`、`../`；`Engines.executeScript` 路径相对**项目根**。
 - 颜色宽高等只写在 `style`；可调节数值用 `slider`，不用 `progress`。
-- 写或改工程文件后：按 [`automation-loop.md`](./00-core/automation-loop.md) **主动同步并验证**（`write` → 预览/片段/`run-file`）；执行任务前若用过悬浮弹窗先 `FloatDialogs.closeAll()`。
+- 写或改工程文件后：按 [`automation-loop.md`](./00-core/automation-loop.md) **同步并验证**（`write` → 目标页 snapshot/片段 → `run-file`）；执行任务前若用过悬浮弹窗先 `FloatDialogs.closeAll()`。设备已连上却未跑目标 App 片段 = 未交付。
 
 ## 输出形态
 

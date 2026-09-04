@@ -2,7 +2,7 @@
 
 编写或修改工程、调试脚本时的**流程与何时问用户**见 [`automation-loop.md`](./automation-loop.md)。本篇只写：发现设备、权限检查、`write` / `run` / `run-file` / `snapshot` / `stop` 命令。
 
-**编写前先连机**；**改文件后主动 `write`**；**写完主动验证**。不要只生成代码就结束。
+**编写前先连机**；**改文件后 `write`**；**写完必须验证**。不要只生成代码就结束。仅 Storage/权限通过不算任务已验证。
 
 配套工具：
 
@@ -21,8 +21,8 @@
 1. 读 .deeke-device.local.json → 没有或连不上则 discover
 2. 扫不到则让用户提供 http://IP:8080 并 set
 3. status 查权限
-4. 写/改文件 → write → run / run-file → 读 logs（先片段后整体）
-5. 需要看界面时 snapshot
+4. 写/改文件 → write → 目标 App 上 run 片段 / run-file → 读 logs（先片段后整体）
+5. 操作第三方 App：写选择器前必须 snapshot（或 /ai/nodes），不是「需要时才拍」
 ```
 
 **必须同步**：只改电脑上的 `tasks/*.js` / `page.js` 等，手机不会自动更新。交付或 `run-file` 前，用 `POST /ai/project/write`（或工具 `write`）把改过的文件推到手机。短验证可用 `run` 直接传代码字符串，不必先落盘同步。
@@ -162,7 +162,7 @@ bash tools/deeke-device.sh run-file --script-file "tasks/sample.js"
 2. **片段**：单独验证点击、输入（`setText` / 剪贴板），不要先跑完整任务  
    - 验证输入时必须走：`click` → `sleep` → **重新 find** → 写入 → 再读 `text`。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)
 3. 报错看 `data.error` 和 `logs` 里 `code` 为错误的项
-4. 界面不对时 `snapshot` 拿节点树 + 截图对照
+4. 界面不对或写选择器前：`snapshot` 拿节点树 + 截图对照（操作第三方 App 时这是默认步骤，不是可选）
 5. 脚本卡死用 `stop`；有残留弹窗先 `FloatDialogs.closeAll()`
 6. 修代码 → **再次 `write` 同步** → 再 `run` / `run-file`，直到 logs 符合预期
 7. **整体**：片段都通过后再 `run-file` 跑完整 `tasks/*.js`
@@ -207,4 +207,4 @@ bash tools/deeke-device.sh stop
 
 ## 交付前自检
 
-以 [`automation-loop.md`](./automation-loop.md) 的交付清单为准。本篇命令侧至少确认：`status` 已通；改动已 `write`；关键逻辑已 `run` / `run-file`；连不上时已说明权限与地址且未假装已验证。
+以 [`automation-loop.md`](./automation-loop.md) 的交付清单为准。本篇命令侧至少确认：`status` 已通；改动已 `write`；目标 App 上关键逻辑已 `run` / `run-file`（有节点 logs）；连不上时已说明权限与地址且未假装已验证。禁止用「请用户自己点开始」代替本步。
