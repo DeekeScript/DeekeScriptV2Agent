@@ -126,7 +126,7 @@ powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 write -File "tas
 bash tools/deeke-device.sh write --file "tasks/sample.js"
 ```
 
-改了多个文件就逐个 `write`（或至少同步本次改动相关的全部文件）。界面相关文件同步后，还需用户在手机端点刷新。
+改了多个文件就逐个 `write`（或至少同步本次改动相关的全部文件）。同步当前打开页的 `page.json` / `page.js` 时手机会自动热更新；若页未打开或热更新失败，再让用户点刷新。
 
 ## 第四步：自动调试循环
 

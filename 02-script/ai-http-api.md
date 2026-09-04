@@ -198,7 +198,7 @@ powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 write -File "tas
 bash tools/deeke-device.sh write --file "tasks/test.js"
 ```
 
-**硬规则**：在电脑上新建或修改工程文件后，若要用手机执行 / 看界面，**必须先** `write` 同步到手机，再 `run-file` 或让用户刷新页面。只改电脑磁盘、不同步，手机仍是旧文件。
+**硬规则**：在电脑上新建或修改工程文件后，若要用手机执行 / 看界面，**必须先** `write` 同步到手机。同步 `page.json` / `page.js`（及当前页已嵌入的组件）时，若该页正打开，手机会自动热更新；`tasks/*.js` 同步后可用 `run-file` 执行。只改电脑磁盘、不同步，手机仍是旧文件。
 
 ## AI 调试推荐组合
 
