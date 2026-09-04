@@ -4,6 +4,14 @@
 
 硬规则全文：[`00-core/constraints.md`](./00-core/constraints.md)。落盘前自检：[`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)。
 
+## 设备连接与验证（必守）
+
+生成或改工程时按下面做，细节见 [`automation-loop.md`](./00-core/automation-loop.md)、[`ai-device-debug.md`](./00-core/ai-device-debug.md)：
+
+1. **编写前**：先连接手机（`discover` / `set` + `status`）。连不上再写代码时，须声明尚未实机验证。
+2. **编写与修改过程中**：落盘或改完文件后**主动** `write` 同步到手机，不要攒到最后才推。
+3. **写完后**：**主动**调试验证（界面可预览/点测；任务按闭环片段验证再 `run-file`），通过后再交付。禁止只交代码不验证就结束。
+
 ## 你在生成什么
 
 1. **自动化**：`tasks/*.js`（能力与 API 按任务到 [`INDEX.md`](./INDEX.md) / [`02-script/api/`](./02-script/api/) 查）。
@@ -19,10 +27,11 @@
 5. [`00-core/rhino.md`](./00-core/rhino.md)
 6. [`00-core/context-split.md`](./00-core/context-split.md)
 7. [`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)
-8. 按 [`INDEX.md`](./INDEX.md) 打开本任务需要的组件 / API / 配方（一文件一篇，未用到的不打开）
-9. 整包工程以 [`03-recipes/`](./03-recipes/) 的文件清单与片段为模板
+8. [`00-core/automation-loop.md`](./00-core/automation-loop.md) + [`00-core/ai-device-debug.md`](./00-core/ai-device-debug.md)（连机、同步、验证）
+9. 按 [`INDEX.md`](./INDEX.md) 打开本任务需要的组件 / API / 配方（一文件一篇，未用到的不打开）
+10. 整包工程以 [`03-recipes/`](./03-recipes/) 的文件清单与片段为模板
 
-仅在编写或调试 `tasks/*.js` 时，再打开 [`automation-loop.md`](./00-core/automation-loop.md)（闭环必守）与 [`ai-device-debug.md`](./00-core/ai-device-debug.md)。用户明确问 VSCode 插件操作时，再打开 [`dev-workflow.md`](./00-core/dev-workflow.md)。
+用户明确问 VSCode 插件操作时，再打开 [`dev-workflow.md`](./00-core/dev-workflow.md)。
 
 ## 按任务加载
 
@@ -50,7 +59,7 @@
 - Rhino 1.8：可用箭头；禁止 `async/await`、`?.`、`??`、`import`/`export`。页面方法需要 `this` 时用 `function`。
 - `require` 优先 `./`、`../`；`Engines.executeScript` 路径相对**项目根**。
 - 颜色宽高等只写在 `style`；可调节数值用 `slider`，不用 `progress`。
-- 写或改 `tasks/*.js` / 工程文件后：按 [`automation-loop.md`](./00-core/automation-loop.md) 片段验证再整体跑；`write` 同步后再 `run` / `run-file`；执行前若用过悬浮弹窗先 `FloatDialogs.closeAll()`。
+- 写或改工程文件后：按 [`automation-loop.md`](./00-core/automation-loop.md) **主动同步并验证**（`write` → 预览/片段/`run-file`）；执行任务前若用过悬浮弹窗先 `FloatDialogs.closeAll()`。
 
 ## 输出形态
 

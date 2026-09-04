@@ -1,8 +1,8 @@
 # AI 连接手机并自动调试脚本
 
-编写或调试 `tasks/*.js` 时的**流程与何时问用户**见 [`automation-loop.md`](./automation-loop.md)。本篇只写：发现设备、权限检查、`write` / `run` / `run-file` / `snapshot` / `stop` 命令。
+编写或修改工程、调试脚本时的**流程与何时问用户**见 [`automation-loop.md`](./automation-loop.md)。本篇只写：发现设备、权限检查、`write` / `run` / `run-file` / `snapshot` / `stop` 命令。
 
-当用户让你编写或调试自动化脚本时，在交付前应尝试连接手机并用 HTTP `/ai` **实机验证**。不要只生成代码就结束。
+**编写前先连机**；**改文件后主动 `write`**；**写完主动验证**。不要只生成代码就结束。
 
 配套工具：
 

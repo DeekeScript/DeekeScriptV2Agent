@@ -1,19 +1,19 @@
-# 自动化编写与调试闭环
+# 编写与调试闭环
 
-编写或调试 `tasks/*.js` 时**必须**按本篇执行。设备连接与命令细节见 [`ai-device-debug.md`](./ai-device-debug.md)；HTTP 细节见 [`ai-http-api.md`](../02-script/ai-http-api.md)。骨架见 [`task-template.md`](../02-script/task-template.md)。
+生成或修改**任何可交付工程**（界面、`tasks/*.js`、公共模块）时按本篇执行。设备命令见 [`ai-device-debug.md`](./ai-device-debug.md)；HTTP 见 [`ai-http-api.md`](../02-script/ai-http-api.md)。任务骨架见 [`task-template.md`](../02-script/task-template.md)。
 
-目标：先片段验证、再整体跑通，再交付。禁止「只生成长脚本、不验证」就结束。
+目标：先连机 → 边写边同步 → 写完主动验证。禁止「只生成代码、不验证」就结束。
 
 ## 强制流程
 
 ```
-1. 确认目标：哪个 App、关键步骤、成功/失败条件、停条件
-2. 连接设备 + status（见 ai-device-debug）
+1. 编写前：连接设备 + status（见 ai-device-debug）
+2. 确认目标：界面要什么 / 哪个 App、关键步骤、成功失败与停条件
 3. 需要时 snapshot：看清目标节点再写查找条件
-4. 落盘骨架（permission + Storage + 有界循环）
-5. 片段验证（run 短代码）：找节点 → 点击/输入 → 再拼循环
-6. write 同步 → run-file 跑完整任务 → 读 logs
-7. 失败则修代码 → 再 write → 再跑；通过后交付
+4. 落盘（入口、页面、tasks、common…）
+5. 每改一批文件：主动 write 同步到手机（不要攒到最后）
+6. 验证：界面可预览/点测；任务先 run 片段，再 write → run-file → 读 logs
+7. 失败则修代码 → 再 write → 再验；通过后交付
 ```
 
 连不上设备时：仍按契约生成完整可运行代码，并明确列出用户须开启的权限与地址；**不得假装已实机验证**。
@@ -22,17 +22,19 @@
 
 | # | 规则 |
 |---|------|
-| 1 | **先片段、后整体**。禁止一上来 `run-file` 整段盲跑。 |
-| 2 | 找节点用 `UiSelector().…`；点击前一般先 `filter` 屏内。 |
-| 3 | 每次 `run` / `run-file` 前：若用过悬浮弹窗，先 `FloatDialogs.closeAll()`。 |
-| 4 | 改文件后要交付或 `run-file`：必须先 `write` 同步到手机。短验证可用 `run` 传代码字符串。 |
-| 5 | `while` / 重试必须有上限（次数或 `retryCount`），禁止无递增的 `continue`。 |
-| 6 | 步骤之间用 `System.sleep`；关键步骤打 `console.log`，便于读 `logs`。 |
-| 7 | 已切到第三方 App 时用 `FloatDialogs` 提示，不用 `Dialogs` / 指望前台 toast。 |
-| 8 | 自动结束：在 `tasks/*.js` 里 `Engines.closeAll()`。菜单停用 `FloatWindow.stopTask()`（用户要菜单时才写）。 |
-| 9 | 同一失败模式连续修 **3 轮**仍不过 → 进入下方「请求用户协助」，不要空转猜测。 |
+| 1 | **编写前先连机**。未连机不得声称已实机验证。 |
+| 2 | **边写边 `write`**。改入口 / 页面 / `tasks` / `common` 后主动同步；禁止只改电脑文件、手机仍是旧版。 |
+| 3 | **写完主动验证**。界面与脚本都要验；任务禁止一上来整段盲跑，先片段后整体。 |
+| 4 | 找节点用 `UiSelector().…`；点击前一般先 `filter` 屏内。 |
+| 5 | 每次 `run` / `run-file` 前：若用过悬浮弹窗，先 `FloatDialogs.closeAll()`。 |
+| 6 | 短验证可用 `run` 传代码字符串（可不先 `write`）；`run-file` 或交付执行前必须已 `write`。 |
+| 7 | `while` / 重试必须有上限（次数或 `retryCount`），禁止无递增的 `continue`。 |
+| 8 | 步骤之间用 `System.sleep`；关键步骤打 `console.log`，便于读 `logs`。 |
+| 9 | 已切到第三方 App 时用 `FloatDialogs` 提示，不用 `Dialogs` / 指望前台 toast。 |
+| 10 | 自动结束：在 `tasks/*.js` 里 `Engines.closeAll()`。菜单停用 `FloatWindow.stopTask()`（用户要菜单时才写）。 |
+| 11 | 同一失败模式连续修 **3 轮**仍不过 → 进入下方「请求用户协助」，不要空转猜测。 |
 
-## 片段验证清单
+## 片段验证清单（tasks）
 
 按顺序用 `run` 短代码验证，通过一项再下一项：
 
@@ -67,10 +69,11 @@
 
 ## 交付前自检
 
-- [ ] 关键逻辑已在真机片段或 `run-file` 验证（或已声明无法连机并列出用户侧步骤）  
-- [ ] 改动文件已 `write`（若交付给用户在手机执行）  
+- [ ] 编写前已连机（或已声明无法连机并列出用户侧步骤）  
+- [ ] 过程中改动已主动 `write`  
+- [ ] 关键逻辑 / 界面已在真机验证（或已声明未验证原因）  
 - [ ] `logs` 无未处理错误；循环有上限  
-- [ ] 未在 `page.js` 里写无障碍主流程
+- [ ] 未在 `page.js` 里写无障碍主流程  
 - [ ] 若曾请求用户协助：用户完成的步骤已记入最终说明  
 
 ## 相关
@@ -78,4 +81,4 @@
 - 连接与命令：[`ai-device-debug.md`](./ai-device-debug.md)  
 - 运行边界：[`dev-workflow.md`](./dev-workflow.md)  
 - 找节点：[`UiSelector.md`](../02-script/api/UiSelector.md)  
-- 自检表：[`donts.md`](../04-cheatsheets/donts.md)  
+- HTTP：[`ai-http-api.md`](../02-script/ai-http-api.md)

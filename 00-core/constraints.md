@@ -2,7 +2,7 @@
 
 生成或修改任何文件前对照这篇。违反则无法同步、页面无法加载、或任务跑不起来。
 
-细节：[心智模型](./mental-model.md)、[目录](./project-layout.md)、[Rhino](./rhino.md)、[上下文边界](./context-split.md)。编写 `tasks/*.js` 时另守 [`automation-loop.md`](./automation-loop.md)。展厅 Demo 勿抄清单：[`demo-gallery.md`](./demo-gallery.md)。
+细节：[心智模型](./mental-model.md)、[目录](./project-layout.md)、[Rhino](./rhino.md)、[上下文边界](./context-split.md)。连机、同步、验证守 [`automation-loop.md`](./automation-loop.md)。展厅 Demo 勿抄清单：[`demo-gallery.md`](./demo-gallery.md)。
 
 ## MUST
 
@@ -16,7 +16,7 @@
 | 6 | 底栏 Tab 用 `switchTab`，不要用 `navigate`。 |
 | 7 | Rhino 1.8：可用 `function` / 箭头 / `var` / `let`。颜色 `#RRGGBB`；尺寸 dp，字号 sp。 |
 | 8 | `require` **优先** `./`、`../` 相对当前文件。不以 `./`/`../` 开头时相对项目根。禁止磁盘绝对路径。导出用 `module.exports`。 |
-| 9 | 改工程文件后须同步到手机再验证。同步用 `POST /ai/project/write` 或 `tools/deeke-device.* write`（见 [`ai-device-debug.md`](./ai-device-debug.md)）。改 `tasks/*.js` 后若要用 `run-file` 或交付执行，须先 `write`；仅 `run` 传代码字符串可跳过。 |
+| 9 | **先连手机，再编写**。编写与修改过程中改完文件就 **主动 `write` 同步**到手机；写完后 **主动调试验证**再交付。命令见 [`ai-device-debug.md`](./ai-device-debug.md)，闭环见 [`automation-loop.md`](./automation-loop.md)。仅 `run` 传代码字符串做短验证时可跳过本次 `write`。 |
 | 10 | **默认不写** `floatWindow` / `menus`。未配时连点两次停止（第一次变关闭图标，**3 秒内**再点）。用户要自定义菜单时：`menus` 最多 5 个；每项用 `onTap`，与 `FloatWindow.on` **同一轮**交付。停止回调写 `FloatWindow.stopTask()`。见 [`float-window.md`](../03-recipes/float-window.md)。 |
 | 11 | 停任务：菜单手动 → `FloatWindow.stopTask()`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`（须在任务脚本线程）。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#停任务权威)。 |
 | 12 | 入口必须写 `icon`，且该路径的**文件必须生成**。 |
