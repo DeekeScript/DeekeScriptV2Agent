@@ -16,6 +16,8 @@
 | 用户要蓝色，按钮仍默认绿 | 入口 `window.theme.primary`；`button` 写 `style.background`；导航栏/状态栏/底栏 `selectedColor` 一起改 |
 | 搜索框点击变红当成组件自带 | 多为 `theme.primary`。艳色品牌时给 search/input 写 `style.focusColor` |
 | 用「启用/停用」大按钮做布尔开关 | `"type": "switch"`。见 [`list-manage.md`](../03-recipes/list-manage.md) |
+| 列表表单不用 `e.item` / `e.index`，去编每行假 `name` | 列表里 switch / input / checkbox / radio / slider 等 `onChange` 都有 `e.value`、`e.item`、`e.index`。见 [`switch.md`](../01-ui/components/switch.md)、[`events.md`](../01-ui/events.md) |
+| 列表开关绑 `"{{item.enabled}}"` 却把字符串 `"false"` 当开 | 整段一个 `{{path}}` 会保留布尔。也可不写 `value`，Switch 默认读 `item.enabled` |
 | 列表行次要操作用默认大按钮 | 必须 `"size": "sm"`。一页最多一个大实心主 CTA |
 | 底栏已有的页，首页再放跳转 | 见 [`workbench.md`](../03-recipes/workbench.md) |
 | Switch 写 `style.background` 给整行刷底 | 只写 `style.color` |

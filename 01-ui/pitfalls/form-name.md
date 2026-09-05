@@ -6,7 +6,9 @@
 
 ## 硬规则
 
-1. **同一页面内 `name` 必须唯一。** 含：正文、弹层、`list`/`grid` 模板里的控件（模板每渲染一行都会带上这个 `name`）、`range` 的左右两个 `name`。重复则双向绑定到同一 `data` 字段，会联动或互相覆盖。列表行若需要 `name`，必须做成每行唯一（如 `"{{item.id}}"`）；否则不写 `name`，只用 `value` + `onChange`。
+1. **同一页面内 `name` 必须唯一。** 含：正文、弹层、`list`/`grid` 模板里的控件（模板每渲染一行都会带上这个 `name`）、`range` 的左右两个 `name`。重复则双向绑定到同一 `data` 字段，会联动或互相覆盖。
+   - **列表里的表单：可以不写 `name`。** switch / input / checkbox / radio / slider 等的 `onChange` 都带 `e.value` / `e.item` / `e.index`。Switch 未写 `value` 时默认读 `item.enabled`。若仍写静态 `"name": "enabled"`，引擎会自动变成 `enabled#0`、`enabled#1`。
+   - 列表里若仍要 `name` 绑 `data`：静态名会自动加 `#下标`；或写成 `"{{item.id}}"` 这种每行唯一。不要指望多行共用同一个 `data.enabled`。
 2. **默认 `Storage` 是整应用一份**，不是「一页一份」。不同页面可以都有 `name: "keyword"`（页内 `data` 不串），但若都 `Storage.put('keyword', …)` 或都 `Storage.put('dylc.keyword', …)`，后写的会盖掉先写的。保存时**禁止**用裸 `name` 当 Storage 键；必须 `项目前缀.模块或页面.字段`。
 
 ## 页内重复（错误）
@@ -29,11 +31,7 @@
 { "type": "textarea", "name": "remark", "label": "备注" }
 ```
 
-列表行：
-
-```json
-{ "type": "switch", "value": "{{item.enabled}}", "onChange": "onToggle" }
-```
+列表行开关可以不写 `name`，用 `e.item` / `e.index` 保存。页面根表单仍须每控件不同 `name`。
 
 ## Storage 跨页撞键（错误）
 

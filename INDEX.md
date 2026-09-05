@@ -30,7 +30,7 @@
 | [01-ui/entry-json.md](./01-ui/entry-json.md) | `deekeScript.json` |
 | [01-ui/page-json.md](./01-ui/page-json.md) | 页面结构与 JSON `action` |
 | [01-ui/page-js.md](./01-ui/page-js.md) | `Page({})` |
-| [01-ui/events.md](./01-ui/events.md) | `onTap` 等 |
+| [01-ui/events.md](./01-ui/events.md) | `onTap` 等。列表 `onChange` 有 `e.item` / `e.index` |
 | [01-ui/components/_common.md](./01-ui/components/_common.md) | `style` / 主题色 |
 | [01-ui/data-binding.md](./01-ui/data-binding.md) | `{{}}`、`showIf`、`name`、list `bind` |
 | [01-ui/pitfalls/form-name.md](./01-ui/pitfalls/form-name.md) | 页内 `name` 唯一；Storage 防撞键 |

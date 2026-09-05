@@ -33,9 +33,9 @@
 | `slider` | `name` `min` `max` `unit` `marks` | **可拖**数值 |
 | `progress` / `progressBar` | `name` `value` `unit` | **只读**，不能拖 |
 | `progressCircle` | `name` `value` `size` | **只读**圆环 |
-| `switch` | `name` `label` | 布尔开关，不要用启用/停用按钮 |
-| `select` | `name` `options` | 下拉单选 |
-| `checkbox` | `name` `options?` | 无 options 为布尔 |
+| `switch` | `name` `label` | 布尔开关。列表 `onChange` 有 `e.value` / `e.item` / `e.index` |
+| `select` | `name` `options` | 下拉单选。列表同样带 `e.item` / `e.index` |
+| `checkbox` | `name` `options?` | 无 options 为布尔。列表同样带 `e.item` / `e.index` |
 | `radio` | `name` `options` | 一组单选 |
 | `rate` | `name` `count` `allowHalf` | 星星 |
 | `imageUploader` | `name` `max` | 相册多图 |

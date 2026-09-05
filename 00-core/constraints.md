@@ -50,6 +50,7 @@
 | 16 | 禁止同一页面内重复的表单 `name`。禁止用裸 `name` 当 Storage 键：默认 Storage 跨页共享，会互相覆盖。见 [`form-name.md`](../01-ui/pitfalls/form-name.md)。 |
 | 17 | 禁止用 `System.currentPackage()` 判断是否在目标 App（它常仍是本工程包名）。用互斥节点。禁止任务循环里 `waitFindOne()` 无超时。 |
 | 18 | 禁止在 `common/*.js`、`tasks/*.js` 顶层堆业务 `function foo() {}`（`permission.js` snippet 除外）。必须对象 + 方法简写。见 [`code-org.md`](../02-script/code-org.md)。 |
+| 19 | 禁止给组件事件发明文档未写的字段。list / grid 行内 `onTap` / `onChange` 用 `e.item`、`e.index`、`e.value`。见 [`switch.md`](../01-ui/components/switch.md)、[`events.md`](../01-ui/events.md)。 |
 
 ## 快速对照
 
@@ -71,6 +72,7 @@
 | 点赞评论类需求 | 先找节点、点得动；整段用数量=1 | 以「会真实发出」为由不启动目标 App |
 | 表单 `name` | 同一页唯一；Storage 用 `项目.模块.字段` | 页内重名联动；两页都 `put('keyword')` 互相覆盖 |
 | 业务组织 | `let video = { like() {} }` | 文件里一堆 `function like() {}` |
+| 列表表单 | `e.value` + `e.item` / `e.index` 写回该行 | 每行编假 `name`，或只认 `e.value` |
 | 底栏页数据 | `onShow` 从 Storage 再读 | 只 `onLoad`，切 Tab 摘要不更新 |
 | 是否在目标 App | 互斥节点（如右侧未点赞） | `currentPackage() !== 目标包名` |
 | 做完回本 App | `App.backApp()` 再 `closeAll` | 停在抖音页 |

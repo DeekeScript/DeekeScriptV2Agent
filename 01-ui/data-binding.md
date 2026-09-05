@@ -70,6 +70,8 @@ Page({
 
 带点的 Storage 键不能用 `{{storage.demo.task_name}}` 展示，页面侧先 `get` 再 `setData`。
 
+列表里的表单：可以不写 `name`。`onChange` 用 `e.value` 写回 `e.item` / `this.data.comments[e.index]`。Switch 未写 `value` 时读 `item.enabled`。input / checkbox / radio / slider 等同理。
+
 | 组件 | 绑定 |
 |------|------|
 | input / textarea / search | 字符串 |

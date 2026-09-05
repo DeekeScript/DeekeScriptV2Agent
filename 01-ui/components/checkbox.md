@@ -10,7 +10,7 @@
 | label | String | 字段标题或单选项文案 |
 | value | Boolean / Array | 单个为布尔；多选项为选中值数组 |
 | options | Array | 多选项：字符串，或 `{ "label", "value" }` |
-| onChange | String | 变化时调用 |
+| onChange | String | 变化时调用。写在 list / grid 行内时还有 `e.item`、`e.index` |
 | style.color | String | 勾选按钮颜色。不写则跟 `window.theme.primary`。不要写 `style.background` |
 
 ```json

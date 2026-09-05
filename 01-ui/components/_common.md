@@ -56,7 +56,7 @@
 | onClick | String | `onTap` 的别名 |
 | onDoubleTap | String | 连续轻触两次 |
 | onLongPress | String | 按住不放 |
-| onChange | String | 值变化时调用，`e.value` 是新值。用于 input / textarea / range / slider / stepper / rate / switch / select / menu / cascader / picker / date / time / datetime / checkbox / radio / tabs / search / segmented / steps / sideBar / actionSheet / imageUploader / selector / collapse / pageIndicator |
+| onChange | String | 值变化时调用，`e.value` 是新值。写在 list / grid 行内时还有 `e.item`、`e.index`。用于 input / textarea / range / slider / stepper / rate / switch / select / menu / cascader / picker / date / time / datetime / checkbox / radio / tabs / search / segmented / steps / sideBar / actionSheet / imageUploader / selector / collapse / pageIndicator |
 | onFocus | String | 输入框获得焦点 |
 | onBlur | String | 输入框失去焦点 |
 | onScroll | String | list / grid：页面滚动且该组件在可见区域时调用 |

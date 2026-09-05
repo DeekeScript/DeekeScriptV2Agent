@@ -218,7 +218,7 @@ tasks/*.js      权限 → 读配置 → 有界循环 → backApp
 |------|------|
 | `page.js` 只存配置、刷新、`permission.runScript` | 包名常量；先 `App.isAppInstalled` 再 `launch` |
 | 开始前校验必填，用 `this.toast` | **不要** `currentPackage()` 判断是否在目标 App，用互斥节点。见 [`page-state.md`](../02-script/pitfalls/page-state.md) |
-| 列表项稳定 `id`；`e.item` / `e.index` | `waitFindOne()` 禁止用于循环；用 `findOne` / `findOneBy(timeout)` |
+| 列表项稳定 `id`；行内 `onTap` / `onChange` 用 `e.item` / `e.index` / `e.value` | `waitFindOne()` 禁止用于循环；用 `findOne` / `findOneBy(timeout)` |
 | `getObj` 数组先拷成纯对象再改再 `putObj` | 写选择器前 snapshot；点击前 `filter` 屏内 |
 | `putInteger`/`getInteger` 成对；整数先 `contains` | 刷流失败 skip。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md) |
 | | 输入：click → 重 find → `setText` → 校验。屏宽高用 `Device.*` |

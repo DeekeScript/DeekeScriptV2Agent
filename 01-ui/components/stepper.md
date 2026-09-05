@@ -12,7 +12,7 @@
 | min | Number | 最小值，默认 0 |
 | max | Number | 最大值，默认 99 |
 | step | Number | 每次加减，默认 1 |
-| onChange | String | 变化时调用，`e.value` 为数字 |
+| onChange | String | 变化时调用，`e.value` 为数字。写在 list / grid 行内时还有 `e.item`、`e.index` |
 | style.color | String | 加减按钮颜色。不写则跟 `window.theme.primary` |
 
 ```json

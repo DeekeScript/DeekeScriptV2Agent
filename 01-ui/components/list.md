@@ -59,6 +59,6 @@ Page({
 
 ## 注意
 
-- `onTap` 调用 `Page` 方法时，`e` 含 `item`、`index`；建议同时兼容：`e.item` 与 `this.data.list[e.index]`。
+- 行内 `onTap` / `onChange`（含嵌套 `switch`、input、checkbox、小按钮）：`e` 含 `item`、`index`。列表表单用 `e.value` 写回对应行，不必给每行编假 `name`。见 [`switch.md`](./switch.md)、[`list-manage.md`](../../03-recipes/list-manage.md)。
 - 内层 list 的 `bind` 可写 `item.tags`；内层循环中 `{{item}}` 为当前内层项。
 - 触底后由 JS 打开 [loading](./loading.md)；没有更多数据时关掉转圈，并用 `setData` 写下底线文案。

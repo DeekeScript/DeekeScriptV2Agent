@@ -11,7 +11,7 @@
 | `onTap` / `onClick` | 轻触一次 | 同名方法，如 `"onTap": "onSave"` → `onSave: function () {}` |
 | `onDoubleTap` | 连续轻触两次 | 同名方法 |
 | `onLongPress` | 按住不放 | 同名方法 |
-| `onChange` | 表单值变化 | `e.value` 为新值 |
+| `onChange` | 表单值变化 | `e.value` 为新值。list / grid 行内还有 `e.item`、`e.index` |
 | `onFocus` / `onBlur` | 输入框焦点 | 同名方法 |
 | `onScroll` / `onReachBottom` / `onReachTop` | list / grid 滚动 | 同名方法 |
 
@@ -70,12 +70,37 @@ Page({
 
 ## 列表项事件
 
-list / grid 行上的 `onTap`，回调可带 `e.item` / `e.index`：
+list / grid 行上、以及行内嵌套的 `button` / `switch`，`onTap` 和 `onChange` 都会带当前行：
+
+| 字段 | 含义 |
+|------|------|
+| `e.value` | 表单新值。Switch 为布尔 |
+| `e.item` | 当前行数据 |
+| `e.index` | 当前行下标，从 0 开始 |
+| `e.name` | 控件 `name`（有才给） |
 
 ```javascript
 Page({
-  onItemTap: function (e) {
-    this.navigate({ page: 'detail', params: { id: e.item.id } });
+  onItemTap(e) {
+    var item = e && e.item ? e.item : null;
+    var index = e && e.index !== undefined ? e.index : -1;
+    if (!item && index >= 0 && this.data.logs) {
+      item = this.data.logs[index];
+    }
+    if (!item) {
+      return;
+    }
+    this.navigate({ page: 'detail', params: { id: item.id } });
+  },
+  onToggle(e) {
+    var list = Storage.getObj('demo.comments') || [];
+    var i = e && e.index != null ? parseInt(e.index, 10) : -1;
+    if (isNaN(i) || i < 0 || i >= list.length) {
+      return;
+    }
+    list[i].enabled = e && e.value === true;
+    Storage.putObj('demo.comments', list);
+    this.refresh();
   }
 });
 ```

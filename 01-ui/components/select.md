@@ -10,7 +10,7 @@
 | label | String | 字段标题 |
 | value | String | 默认选中项 |
 | options | Array | 选项 |
-| onChange | String | 切换时调用，`e.value` 为当前值 |
+| onChange | String | 切换时调用，`e.value` 为当前值。写在 list / grid 行内时还有 `e.item`、`e.index` |
 | style.color | String | 选中项 / 下拉高亮颜色。不写则跟 `window.theme.primary` |
 
 ```json

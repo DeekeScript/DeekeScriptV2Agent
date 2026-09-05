@@ -16,7 +16,7 @@
 | marks / dots | Array / Number / Boolean | 轨道刻度：`[0,25,50,75,100]`；数字 `5` 均分 5 点；`true` 配合 `markCount`。不限制停靠位置 |
 | markCount | Number | `marks: true` 时均分点数，默认 5 |
 | disabled / readonly | Boolean | 不可拖动 |
-| onChange | String | 变化时调用，`e.value` 为数字 |
+| onChange | String | 变化时调用，`e.value` 为数字。写在 list / grid 行内时还有 `e.item`、`e.index` |
 | style.color | String | 左侧已走完轨道颜色。不写则跟 `window.theme.primary` |
 | style.thumbColor | String | 滑块圆点颜色。不写则跟 `style.color` |
 | style.trackColor | String | 未走完轨道颜色，默认 `#E3EBEA` |

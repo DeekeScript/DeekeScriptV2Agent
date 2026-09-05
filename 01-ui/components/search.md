@@ -15,7 +15,7 @@
 | showCancel / cancel | Boolean / String | 右侧取消按钮。`true` 文案为 `取消`；字符串则作为按钮文案 |
 | cancelText | String | 取消按钮文案 |
 | disabled | Boolean | 不可输入 |
-| onChange | String | 内容变化时调用，`e.value` 是关键字 |
+| onChange | String | 内容变化时调用，`e.value` 是关键字。写在 list / grid 行内时还有 `e.item`、`e.index` |
 | onSearch | String | 键盘搜索键，`e.value` 是关键字 |
 | onCancel | String | 点取消时调用，并清空输入 |
 | style.color | String | 取消按钮文字颜色。不写则跟 `window.theme.primary` |

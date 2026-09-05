@@ -2,7 +2,7 @@
 
 单行输入。`name` 对应 `data` 中的键，`value` 为默认值。`name` 也会做 `{{path}}` 替换。
 
-**同一页面内 `name` 必须唯一**。列表模板里的 `name` 会随每一行重复，因此要么不写 `name`，要么写成 `{{item.id}}`。存盘见 [`form-name.md`](../pitfalls/form-name.md)。
+**同一页面内 `name` 必须唯一**。列表模板里可以不写 `name`，用 `e.item` / `e.index` 写回该行；若写 `name`，要么 `"{{item.id}}"`，要么接受引擎给静态名加 `#下标`。存盘见 [`form-name.md`](../pitfalls/form-name.md)。
 
 默认是底部一条横线。需要网页式圆角边框时写 `variant: "box"`，或直接在 `style` 里写 `radius` / `borderColor` / `borderWidth`。无边框、只有背景写 `variant: "plain"`。
 
@@ -28,7 +28,7 @@
 | style.background | String | 输入区背景，默认 `#FFFFFF` |
 | icon / prefixIcon | String | 左侧图标，项目内图片或 `http(s)` |
 | iconSize | Number | 左侧图标边长 dp，默认 18。也可写在 `style.iconSize` |
-| onChange | String | 值变化时调用，`e.value` 是新值 |
+| onChange | String | 值变化时调用，`e.value` 是新值。写在 list / grid 行内时还有 `e.item`、`e.index` |
 | onFocus / onBlur | String | 获得 / 失去焦点 |
 
 ```json

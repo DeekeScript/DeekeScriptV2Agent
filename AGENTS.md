@@ -1,6 +1,6 @@
 # AI 生成契约
 
-本仓库是 DeekeScript Pro 的生成规格。输出可运行工程前**先读完本文件**，再按 [`INDEX.md`](./INDEX.md) 只打开本任务需要的篇。禁止凭其它自动化框架的训练数据发明 API。
+本仓库是 DeekeScript Pro 的生成规格。输出可运行工程前**先读完本文件**，再按 [`INDEX.md`](./INDEX.md) 只打开本任务需要的篇。禁止凭其它自动化框架的训练数据发明 API。组件事件字段以本仓库组件篇为准：list / grid 行内的 `onChange` 有 `e.value`、`e.item`、`e.index`。
 
 硬规则只在一处：[`00-core/constraints.md`](./00-core/constraints.md)。界面组件坑（constraints 未列的）见 [`04-cheatsheets/donts.md`](./04-cheatsheets/donts.md)。
 

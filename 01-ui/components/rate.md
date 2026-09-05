@@ -12,7 +12,7 @@
 | count | Number | 星星个数，默认 5 |
 | allowHalf | Boolean | 是否允许半星，默认 `false`。别名 `half`、`半星`。也可写 `step: 0.5` |
 | size / iconSize | Number | 星星边长 dp，默认 32 |
-| onChange | String | 变化时调用，`e.value` 为星数 |
+| onChange | String | 变化时调用，`e.value` 为星数。写在 list / grid 行内时还有 `e.item`、`e.index` |
 | style.color | String | 星星颜色。不写则跟 `window.theme.primary` |
 
 ```json

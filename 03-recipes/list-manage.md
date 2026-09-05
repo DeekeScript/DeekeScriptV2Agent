@@ -61,7 +61,6 @@
               },
               {
                 "type": "switch",
-                "value": "{{item.enabled}}",
                 "onChange": "onToggle"
               },
               {
@@ -81,7 +80,7 @@
 }
 ```
 
-列表里 `switch` 的 `onChange` / 删除的 `onTap` 都会带 `e.item` / `e.index`（见 [`events.md`](../01-ui/events.md)）。`name` 规则见 [`form-name.md`](../01-ui/pitfalls/form-name.md)。
+行内 `switch` 的 `onChange` 与删除按钮的 `onTap` 都有 `e.item`、`e.index`。开关再用 `e.value` 写回该行。见 [`switch.md`](../01-ui/components/switch.md)、[`events.md`](../01-ui/events.md)。
 
 ## `page.js` 片段
 
@@ -93,7 +92,17 @@ Page({
     empty: true
   },
   refresh() {
-    var list = Storage.getObj('demo.comments') || [];
+    var raw = Storage.getObj('demo.comments') || [];
+    var list = [];
+    var i = 0;
+    while (i < raw.length) {
+      list.push({
+        id: raw[i].id,
+        content: raw[i].content,
+        enabled: raw[i].enabled === true
+      });
+      i++;
+    }
     this.setData({
       comments: list,
       empty: list.length === 0
@@ -115,23 +124,23 @@ Page({
     this.refresh();
   },
   onToggle(e) {
-    if (!e || !e.item) {
+    var list = Storage.getObj('demo.comments') || [];
+    var i = e && e.index != null ? parseInt(e.index, 10) : -1;
+    if (isNaN(i) || i < 0 || i >= list.length) {
       return;
     }
-    var list = Storage.getObj('demo.comments') || [];
-    var i = 0;
-    while (i < list.length) {
-      if (list[i].id === e.item.id) {
-        list[i].enabled = !!(e.value !== undefined ? e.value : !list[i].enabled);
-        break;
-      }
-      i++;
-    }
+    list[i].enabled = e && e.value === true;
     Storage.putObj('demo.comments', list);
     this.refresh();
   },
   onDelete(e) {
-    if (!e || !e.item) {
+    var item = e && e.item ? e.item : null;
+    var index = e && e.index !== undefined ? parseInt(e.index, 10) : -1;
+    var rows = this.data.comments || [];
+    if (!item && index >= 0 && rows[index]) {
+      item = rows[index];
+    }
+    if (!item) {
       return;
     }
     var that = this;
@@ -143,7 +152,7 @@ Page({
       var next = [];
       var i = 0;
       while (i < list.length) {
-        if (list[i].id !== e.item.id) {
+        if (String(list[i].id) !== String(item.id)) {
           next.push(list[i]);
         }
         i++;
@@ -158,6 +167,7 @@ Page({
 ## 自检
 
 - [ ] 启停是 `switch`，不是「启用/停用」按钮  
+- [ ] 列表 `onToggle` 用 `e.value` + `e.index` / `e.item` 写回该行  
 - [ ] 本页 `name` 唯一（见 [`form-name.md`](../01-ui/pitfalls/form-name.md)）  
 - [ ] 删除等次要操作为 `size: "sm"`  
 - [ ] 一页最多一个大实心主按钮（添加 / 开始任务）
