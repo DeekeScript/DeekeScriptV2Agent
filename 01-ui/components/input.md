@@ -22,7 +22,7 @@
 | style.radius | Number | 边框圆角 dp；写出后自动切到边框样式。`sm` 默认 4，`md` 默认 6，`lg` 默认 8 |
 | style.borderWidth | Number | 描边宽度 dp，默认 1 |
 | style.borderColor | String | 描边颜色，默认 `#DAE5E3` |
-| style.focusColor | String | 聚焦时描边 / 下划线 / 光标颜色。不写则跟 `window.theme.primary`。主色很艳时建议单独写中性色，见 [`search.md`](./search.md)、[`_common.md`](./_common.md#主题色) |
+| style.focusColor | String | 聚焦时描边 / 下划线 / 光标颜色。不写则跟 `window.theme.primary`。主色很艳时建议单独写中性色，见 [`_common.md`](./_common.md#主题色)。搜索框默认已是灰边白底，不要和 input 混用同一套「必须写 focusColor」 |
 | style.cursorColor | String | 光标颜色。不写则跟 `focusColor` |
 | style.hintColor | String | 占位文字颜色 |
 | style.background | String | 输入区背景，默认 `#FFFFFF` |

@@ -8,7 +8,7 @@
 
 配方和示例里的 `#006A65` 只是默认绿。用户指定蓝色、橙色等主题时，**不要照抄默认绿**。
 
-先在入口写全局强调色，slider / switch / 输入框焦点 / checkbox / radio / 默认按钮 / 加载圈 / 分段选中等会一起变：
+先在入口写全局强调色，slider / switch / 输入框焦点 / checkbox / radio / 默认按钮 / 加载圈 / 分段选中等会一起变。**搜索框不跟**，默认灰边白底：
 
 ```json
 "window": {
@@ -16,7 +16,7 @@
 }
 ```
 
-**`primary` 适合按钮、底栏选中、滑块、开关等操作控件。** 搜索框 / 输入框的聚焦色也会跟 `primary`；主色很艳时，聚焦会显得「整框变红/变亮」，容易被误当成组件默认红底。需要中性表单时：按钮仍用艳色 `style.background`，搜索 / 输入单独写 `style.focusColor`（如 `#161823` 或深灰）。见 [`search.md`](./search.md)、[`input.md`](./input.md)。
+**`primary` 适合按钮、底栏选中、滑块、开关等操作控件。** 输入框聚焦色也会跟 `primary`；主色很艳时，下划线/描边会显得「整框变红/变亮」。搜索框默认灰边白底，不跟 primary 刷底。需要中性输入框时单独写 `style.focusColor`（如 `#161823` 或深灰）。见 [`search.md`](./search.md)、[`input.md`](./input.md)。
 
 导航栏、状态栏、底栏仍要单独写（它们不是控件强调色）：
 
@@ -27,7 +27,7 @@
 | 状态栏 | `statusBar.background` |
 | 底栏 | `window.tabBar.selectedColor` |
 | **每个 button** | `style.background`（实心按钮文字再写 `style.color: "#FFFFFF"`）。不写则跟 `theme.primary` |
-| 单个控件覆盖 | slider / switch / checkbox 等写 `style.color`（**Switch 不要写 `style.background`**）；**input / search 聚焦**写 `style.focusColor`；滑块圆点写 `style.thumbColor` |
+| 单个控件覆盖 | slider / switch / checkbox 等写 `style.color`（**Switch 不要写 `style.background`**）；**input 聚焦**写 `style.focusColor`；搜索框默认已是灰边白底，不必为压主题色再写 `focusColor`；滑块圆点写 `style.thumbColor` |
 
 `button` **不写** `style.background` 时，引擎填 `window.theme.primary`（未配置则为 `#006A65`）。所以只改导航栏、不改 `theme.primary` 也不改按钮，按钮仍是绿的。
 

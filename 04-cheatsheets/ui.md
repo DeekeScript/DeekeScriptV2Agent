@@ -27,7 +27,7 @@
 | `button` | `text` `size` `onTap` `action` `loading` | 列表次要必须 `sm` |
 | `input` | `name` `label` `hint` `variant` `inputType` `password` | 单行 |
 | `textarea` | `name` `minLines` `variant` | 多行 |
-| `search` / `searchBar` | `name` `hint` `onChange` `onSearch` | 搜索框 |
+| `search` / `searchBar` | `name` `hint` `onChange` `onSearch` | 搜索框。默认灰边白底，不跟 `theme.primary` 刷底 |
 | `range` | `label` `start.name` `end.name` `separator` | 两个输入 |
 | `stepper` | `name` `min` `max` `step` | 加减数字 |
 | `slider` | `name` `min` `max` `unit` `marks` | **可拖**数值 |

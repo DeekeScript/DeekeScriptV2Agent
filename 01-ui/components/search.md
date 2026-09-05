@@ -19,8 +19,8 @@
 | onSearch | String | 键盘搜索键，`e.value` 是关键字 |
 | onCancel | String | 点取消时调用，并清空输入 |
 | style.color | String | 取消按钮文字颜色。不写则跟 `window.theme.primary` |
-| style.focusColor | String | 聚焦时描边 / 光标等强调色。不写则跟 `window.theme.primary`（与 [`input`](./input.md) 相同） |
-| style.background | String | 输入区背景，默认浅底；**不要**把艳色品牌色当成搜索框默认底 |
+| style.focusColor | String | 聚焦时描边 / 光标。不写则保持灰边白底，**不会**跟 `window.theme.primary` 把输入区刷成主题色 |
+| style.background | String | 组件外层背景（如吸顶条）；输入区默认仍是白底 |
 
 ```json
 { "type": "searchBar", "name": "keyword", "hint": "搜索任务" }
@@ -34,15 +34,14 @@
 { "type": "searchBar", "name": "blueQ", "hint": "蓝色取消", "showCancel": true, "style": { "color": "#1565C0" } }
 ```
 
-主色很艳（如抖音红 `#FE2C55`）时，聚焦会跟着变艳，看起来像「点搜索框整块变红」。这不是搜索框自带红底特性，而是 **`theme.primary` 继承**。按钮 / 底栏仍可用艳色 primary；搜索框单独压成中性聚焦：
+默认灰边白底。取消按钮文字才跟主题色。不要给搜索框写艳色 `style.background`。若要聚焦描边，再写 `style.focusColor`。
 
 ```json
 {
   "type": "searchBar",
   "name": "keyword",
   "hint": "搜索",
-  "showCancel": true,
-  "style": { "focusColor": "#161823", "color": "#161823" }
+  "showCancel": true
 }
 ```
 

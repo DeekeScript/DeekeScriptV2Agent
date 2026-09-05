@@ -32,7 +32,7 @@
 | title | String / Object | 否 | 导航栏默认样式。页面未写 `title` 时不显示导航栏 |
 | statusBar | String / Object | 否 | 顶部状态栏。字符串为背景色 |
 | tabBar | Object | 否 | 底部 Tab 颜色 |
-| theme | Object | 否 | 全局强调色。`primary` 作用于 slider / switch / 输入框焦点 / checkbox / radio / 默认按钮等。也可写 `window.primary` |
+| theme | Object | 否 | 全局强调色。`primary` 作用于 slider / switch / 输入框焦点 / checkbox / radio / 默认按钮等。**搜索框不跟**，默认灰边白底。也可写 `window.primary` |
 
 `statusBar` 为对象时：
 
