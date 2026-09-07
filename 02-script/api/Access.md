@@ -14,11 +14,11 @@
 | isAccessibilityServiceEnabled | `isAccessibilityServiceEnabled()` | 无 | `boolean` | 无障碍是否已开。必须 |
 | isFloatWindowsEnabled | `isFloatWindowsEnabled()` | 无 | `boolean` | 悬浮窗是否已开。必须。未开则项目悬浮球创建不了 |
 | isBackgroundAlertEnabled | `isBackgroundAlertEnabled()` | 无 | `boolean` | 后台弹窗。部分机型从后台打开其它 App 需要 |
-| isMediaProjectionEnable | `isMediaProjectionEnable()` | 无 | `boolean` | 录屏/截图（图色） |
+| isMediaProjectionEnable | `isMediaProjectionEnable()` | 无 | `boolean` | 录屏/截图（图色与 ScreenRecord） |
 | openAccessibilityServiceSetting | `openAccessibilityServiceSetting()` | 无 | `void` | 打开无障碍设置 |
 | openFloatWindowsSetting | `openFloatWindowsSetting()` | 无 | `void` | 打开系统悬浮窗设置，用户自己开 |
 | openBackgroundAlertSetting | `openBackgroundAlertSetting()` | 无 | `void` | 打开后台弹窗设置 |
-| openMediaProjectionSetting | `openMediaProjectionSetting()` | 无 | `void` | 打开录屏/截图设置 |
+| openMediaProjectionSetting | `openMediaProjectionSetting()` | 无 | `void` | 打开录屏/截图设置（截图与屏幕录像共用） |
 | requestNotificationAccess | `requestNotificationAccess()` | 无 | `void` | 申请通知读取 |
 | hasNotificationAccess | `hasNotificationAccess()` | 无 | `boolean` | 是否有通知读取权限 |
 | hasMediaReadPermission | `hasMediaReadPermission()` | 无 | `boolean` | 是否有媒体读取（相册/视频/音频等） |

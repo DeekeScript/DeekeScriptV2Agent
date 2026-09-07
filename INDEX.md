@@ -90,6 +90,7 @@
 | 需求 | 打开 |
 |------|------|
 | 图色 / OCR | [Images.md](./02-script/api/Images.md) |
+| 屏幕录制 | [ScreenRecord.md](./02-script/api/ScreenRecord.md) |
 | 蓝牙 HID | [Hid.md](./02-script/api/Hid.md) |
 | 输入法 | [KeyBoards.md](./02-script/api/KeyBoards.md) |
 | Device Owner | [do-mode.md](./02-script/api/do-mode.md) |

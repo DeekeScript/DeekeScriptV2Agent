@@ -43,6 +43,6 @@ if (!permission.ensureRun()) {
 
 需要权限模块时：把 [`snippets/common-permission.js`](snippets/common-permission.js) **整文件复制**为工程里的 `common/permission.js`。不要改导出表结构。
 
-导出：`ensureRun`、`runScript`、`ensureAccessibility`、`ensureFloat`、`ensureScreenCapture`、`ensureBackgroundAlert`、`ensureNotification`、`ensureMedia`、`ensureStorage`、`ensureLocation`、`ensureBluetooth`。
+导出：`ensureRun`、`runScript`、`ensureAccessibility`、`ensureFloat`、`ensureScreenCapture`（截图与 ScreenRecord 共用）、`ensureBackgroundAlert`、`ensureNotification`、`ensureMedia`、`ensureStorage`、`ensureLocation`、`ensureBluetooth`。
 
 任务骨架见 [`task-template.md`](task-template.md)。

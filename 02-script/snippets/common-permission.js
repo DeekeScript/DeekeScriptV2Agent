@@ -29,7 +29,7 @@ function ensureScreenCapture() {
   if (Access.isMediaProjectionEnable()) {
     return true;
   }
-  return confirmOpen('请开启屏幕截图（录屏）权限', function () {
+  return confirmOpen('请开启屏幕截图/录屏权限（图色与 ScreenRecord）', function () {
     Access.openMediaProjectionSetting();
   });
 }

@@ -22,6 +22,7 @@
 | console | 打印调试；日志悬浮窗显示与样式 | 两者 | [console.md](console.md) |
 | Log | 把日志写入文件（不打印到控制台） | 两者 | [Log.md](Log.md) |
 | Images | 截图、找图、找色、OCR | tasks.js | [Images.md](Images.md) |
+| ScreenRecord | 屏幕录制（mp4） | 两者 | [ScreenRecord.md](ScreenRecord.md) |
 | MediaStore | 系统媒体库：图/视频/音频/下载/文档 | 两者 | [MediaStore.md](MediaStore.md) |
 | Audio | 音频播放 | 两者 | [Audio.md](Audio.md) |
 | KeyBoards | DeekeScript 输入法 | tasks.js | [KeyBoards.md](KeyBoards.md) |

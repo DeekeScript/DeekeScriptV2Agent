@@ -77,4 +77,5 @@ try {
 - 未开录屏权限不要调用 `capture()`。
 - 找图阈值常用 `0.8`。`findOne` 未找到返回 `null`，先判断再读 `point.x`。
 - 区间找色：`startColor` 与 `endColor` 的 R/G/B/A 分别构成闭区间。
-- 相关：[`Access.md`](./Access.md)、[`Hid.md`](./Hid.md)、[`MediaStore.md`](./MediaStore.md)。
+- 与 [`ScreenRecord`](./ScreenRecord.md) 同时用时：录屏中仍可 `capture()`，建议已开无障碍。
+- 相关：[`Access.md`](./Access.md)、[`Hid.md`](./Hid.md)、[`MediaStore.md`](./MediaStore.md)、[`ScreenRecord.md`](./ScreenRecord.md)。

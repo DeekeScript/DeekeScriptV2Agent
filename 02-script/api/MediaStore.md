@@ -78,4 +78,5 @@ console.log(uri);
 
 - 先申请媒体权限，再读写相册。
 - `Images.capture()` 另外需要录屏/截图权限，见 [`Images.md`](./Images.md)。
+- [`ScreenRecord`](./ScreenRecord.md) 若已写到 `/sdcard/Movies/` 等公共目录，不要再 `saveVideo`（会多一份）；仅缓存/私有路径才入库。
 - 相关权限 API：[`Access.md`](./Access.md)。

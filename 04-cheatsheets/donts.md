@@ -6,7 +6,7 @@
 |------|----------|
 | 列表 `bind` 空数组指望自动 Empty | 自己放 `"type": "empty"` + `showIf` |
 | `webview` 不写 `style.height` | 必须写高度，否则默认 240dp |
-| HID / 图色 / 媒体不申请权限 | 图色 `Access.isMediaProjectionEnable`；媒体 `hasMediaReadPermission`；HID 蓝牙。见对应 API 卡 |
+| HID / 图色 / 媒体不申请权限 | 图色与录屏 `Access.isMediaProjectionEnable`；媒体 `hasMediaReadPermission`；HID 蓝牙。见对应 API 卡 |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
 | `executeScript` 写成 `./tasks` | 相对**项目根**：`tasks/sample.js`（与 `require` 不同） |
 | 默认用 KeyBoards 输入、且不检查状态 | 优先 `setText` / 剪贴板；要用输入法先 `KeyBoards.canInput()` |
