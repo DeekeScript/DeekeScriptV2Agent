@@ -18,6 +18,7 @@
 | 8 | `require` **优先** `./`、`../` 相对当前文件。不以 `./`/`../` 开头时相对项目根。禁止磁盘绝对路径。导出用 `module.exports`。 |
 | 9 | **先连手机，再编写**。改完文件就 **`write` 同步**到手机；写完后必须按 [`device.md`](./device.md) 调试验证再交付。仅 `run` 传代码字符串做短验证时可跳过本次 `write`。 |
 | 10 | **默认不写** `floatWindow` / `menus`。未配时连点两次停止（第一次变关闭图标，**3 秒内**再点）。用户要自定义菜单时：`menus` 最多 5 个；每项用 `onTap`，与 `FloatWindow.on` **同一轮**交付。停止回调写 `FloatWindow.stopTask()`。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md)。 |
+| 10b | **默认不写** `FloatPage` / `floats/`。仅用户要悬浮窗（系统层 JSON 界面）时生成；与悬浮球 menus 分离。见 [`floatPage.md`](../01-ui/capabilities/floatPage.md)。 |
 | 11 | 停任务：菜单手动 → `FloatWindow.stopTask()`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`（须在任务脚本线程）。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#停任务权威)。 |
 | 12 | 入口必须写 `icon`，且该路径的**文件必须生成**。 |
 | 13 | 颜色、背景、圆角、宽高写在 `style`。`button` 换色用 `style.background`。见 [`_common.md`](../01-ui/components/_common.md)。 |

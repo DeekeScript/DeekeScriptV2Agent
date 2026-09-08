@@ -4,6 +4,8 @@
 
 **用户没提自定义菜单时：不要写 `floatWindow`。** 默认连点两次停止（第一次变关闭图标，3 秒内再点）。硬规则见 [`constraints.md`](../../00-core/constraints.md) MUST 10–11。
 
+需要系统悬浮层上的**悬浮窗**（进度、按钮）时用 [`floatPage.md`](./floatPage.md)，不要扩写 menus。
+
 `floatWindow.menus` / `FloatWindow` 只作用于**项目悬浮窗**（点「运行」进项目后，或打包 App）。开发器那颗球不读这份配置。
 
 ## 停任务（权威）

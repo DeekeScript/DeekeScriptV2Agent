@@ -7,6 +7,7 @@
 | 展厅里可能看到 | 生成时 |
 |----------------|--------|
 | 默认就配了 `floatWindow.menus` | 用户没提菜单就不要写 `floatWindow` |
+| 展厅有 `pages/floatPage` + `floats/` | 用户没提悬浮窗就不要写 `FloatPage` / `floats/` |
 | `permission.hint('请在文件…')` | 不要写进产物 |
 | `page.js` 里 `System.sleep` | 用 `setTimeout` |
 | 页面按钮 `Engines.closeAll()` 停任务 | 用 `FloatWindow.stopTask()`；任务内自动停才 `Engines.closeAll()` |
@@ -14,4 +15,4 @@
 
 展厅可以保留：大量组件示例页、自定义菜单的 `FloatWindow.setMenus` / `update` / `collapse` 演示、停止项用 `onTap` + `stopTask()`。
 
-目录命名习惯（`pages/floatWindow`、`pages/tabBar`）可与展厅一致。
+目录命名习惯（`pages/floatWindow`、`pages/floatPage`、`pages/tabBar`、`floats/status`）可与展厅一致。

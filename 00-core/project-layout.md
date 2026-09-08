@@ -17,6 +17,10 @@ your-project/
     task/
       page.json
       page.js
+  floats/                 # 可选：仅用户要悬浮窗时
+    status/
+      page.json
+      page.js
   components/
     choose/
       component.json
@@ -40,6 +44,7 @@ your-project/
 | `tasks/*.js` | 自动化时是 | 无障碍任务。用 `Engines.executeScript`，或「仅当前文件执行」 |
 | `pages/<id>/page.json` | 做界面时是 | 这一页的结构 |
 | `pages/<id>/page.js` | 做界面时是 | `Page({})`：数据、生命周期、点击 |
+| `floats/<id>/page.json` + `page.js` | 仅悬浮窗时 | `FloatPage.show(id)` 加载；不必写入 `pages` / `tabBar` |
 | `components/<id>/component.json` | 用自定义组件时是 | 必须含 `"component": true` |
 | `components/<id>/component.js` | 用自定义组件时是 | `Component({})` |
 | `common/*.js` | 否 | 公共模块；`require` **优先相对路径**。面向 App 的自动化按操作对象拆分，见 [`code-org.md`](../02-script/code-org.md) |

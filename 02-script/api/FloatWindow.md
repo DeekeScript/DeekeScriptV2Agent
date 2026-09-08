@@ -2,6 +2,8 @@
 
 **项目**悬浮球菜单 API。用户未要求菜单时：**不要**写 `floatWindow` / `menus` / `FloatWindow.on`。默认连点两次停任务。
 
+悬浮窗（进度 HUD 等）用 [`FloatPage`](./FloatPage.md)，不要扩写 menus。
+
 权威说明：[`floatWindow.md`](../../01-ui/capabilities/floatWindow.md)。硬规则：[`constraints.md`](../../00-core/constraints.md) MUST 10–11。
 
 | 方法 | 说明 |

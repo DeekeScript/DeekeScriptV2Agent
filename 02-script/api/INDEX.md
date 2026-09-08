@@ -15,6 +15,7 @@
 | Access | 检查与申请无障碍、悬浮窗及其它权限 | 两者 | [Access.md](Access.md) |
 | Dialogs | APP 在前台时的弹窗、输入、确认 | 两者 | [Dialogs.md](Dialogs.md) |
 | FloatWindow | 项目悬浮球菜单：绑定、更新、收起 | 两者 | [FloatWindow.md](FloatWindow.md) |
+| FloatPage | 悬浮窗（floats/ + setData） | 两者 | [FloatPage.md](FloatPage.md) |
 | FloatDialogs | 后台弹窗、toast、悬浮球显隐与可点 | 两者 | [FloatDialogs.md](FloatDialogs.md) |
 | Device | 屏幕尺寸、机型、网络、位置、已装应用 | 两者 | [Device.md](Device.md) |
 | Files | 应用私有目录文件读写与路径 | 两者 | [Files.md](Files.md) |
