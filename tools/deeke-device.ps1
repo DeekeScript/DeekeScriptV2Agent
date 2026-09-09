@@ -120,7 +120,7 @@ switch ($Command) {
                 'discover  - scan 192.168.* subnet port 8080',
                 'set -BaseUrl [url]  - save device URL',
                 'status    - device status and permissions',
-                'snapshot  - UI nodes and screenshot',
+                'snapshot  - UI nodes (default no image; add -Image only if needed)',
                 'write -File tasks/x.js  - sync local file to phone (POST /ai/project/write)',
                 'run -Script "..."  - execute DeekeScript code',
                 'run-file -ScriptFile tasks/x.js  - execute project file (must write first)',
@@ -236,7 +236,7 @@ switch ($Command) {
     }
 
     'snapshot' {
-        $imageFlag = 1
+        $imageFlag = if ($Image) { 1 } else { 0 }
         Write-Json (Invoke-DeekeApi -Method Get -Path "/ai/snapshot?type=$Type&image=$imageFlag")
     }
 

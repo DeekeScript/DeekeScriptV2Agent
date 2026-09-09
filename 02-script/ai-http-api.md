@@ -202,12 +202,15 @@ bash tools/deeke-device.sh write --file "tasks/test.js"
 
 ## AI 调试推荐组合
 
+**默认不要拉截图。** 整图 Base64 识图极耗 token；验证靠 `run` logs，拿节点用无图接口。细节见 [`device.md`](../00-core/device.md)。
+
 | 步骤 | 接口 |
 |------|------|
 | 连上设备 | `GET /ai/status`（看 `accessibilityQuick`） |
-| 看界面 | `GET /ai/snapshot?type=0&image=1`（不够再升 `type` 或切换快速模式） |
+| 拿节点（默认） | `GET /ai/nodes?type=0` 或 `GET /ai/snapshot?type=0&image=0` |
+| 看屏（最后手段） | `GET /ai/snapshot?type=0&image=1` 或 `/ai/capture`（节点为空 / 纯画布时） |
 | **同步文件** | `POST /ai/project/write`（或工具 `write`） |
-| 验证选择器 | `POST /ai/run` 短脚本 + `console.log` |
+| 验证选择器 | `POST /ai/run` 短脚本 + `console.log`（优先于识图） |
 | 跑完整任务 | `POST /ai/run-file`（须已同步该文件） |
 | 中断 | `POST /ai/stop` |
 
@@ -215,7 +218,9 @@ bash tools/deeke-device.sh write --file "tasks/test.js"
 
 ```bash
 curl -s "http://192.168.1.113:8080/ai/status"
-curl -s "http://192.168.1.113:8080/ai/snapshot?type=0&image=1"
+curl -s "http://192.168.1.113:8080/ai/nodes?type=0"
+curl -s "http://192.168.1.113:8080/ai/snapshot?type=0&image=0"
+# 确需看屏时才带 image=1
 curl -s -X POST "http://192.168.1.113:8080/ai/run" -H "Content-Type: application/json" -d "{\"script\":\"console.log(123);\",\"timeout\":30000}"
 # 同步文件（content 为 Base64）
 curl -s -X POST "http://192.168.1.113:8080/ai/project/write" -H "Content-Type: application/json" \

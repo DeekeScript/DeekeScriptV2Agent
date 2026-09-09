@@ -14,6 +14,7 @@ BASE_URL=""
 SCRIPT=""
 SCRIPT_FILE=""
 FILE=""
+IMAGE=0
 
 shift || true
 while [[ $# -gt 0 ]]; do
@@ -24,6 +25,7 @@ while [[ $# -gt 0 ]]; do
     -File|--file) FILE="${2:-}"; shift 2 ;;
     -Timeout|--timeout) TIMEOUT_MS="${2:-60000}"; shift 2 ;;
     -Type|--type) TYPE="${2:-1}"; shift 2 ;;
+    -Image|--image) IMAGE=1; shift ;;
     *) echo "Unknown option: $1" >&2; exit 1 ;;
   esac
 done
@@ -152,7 +154,7 @@ cmd_help() {
     "discover  - scan 192.168.* subnet port 8080",
     "set --base-url [url]  - save device URL",
     "status    - device status and permissions",
-    "snapshot  - UI nodes and screenshot",
+    "snapshot  - UI nodes (default no image; add --image only if needed)",
     "write --file tasks/x.js  - sync local file to phone (POST /ai/project/write)",
     "run --script \"...\"  - execute DeekeScript code",
     "run-file --script-file tasks/x.js  - execute project file (must write first)",
@@ -262,7 +264,7 @@ cmd_status() {
 }
 
 cmd_snapshot() {
-  api_request GET "/ai/snapshot?type=${TYPE}&image=1" | pretty_json
+  api_request GET "/ai/snapshot?type=${TYPE}&image=${IMAGE}" | pretty_json
 }
 
 cmd_run() {

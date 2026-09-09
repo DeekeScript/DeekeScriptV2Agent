@@ -4,22 +4,35 @@
 
 目标：先连机 → 边写边 `write` → 写完必须验证。禁止只交代码。设备已连上时，禁止用「声明未验证」代替调试。
 
+## 验证方式优先级（省 token）
+
+**默认不要用截图做视觉验证。** 整屏 PNG / Base64 识图极耗 token。能代码或图色 API 打出结果，就不要拉图给人看。
+
+| 优先 | 做法 | 说明 |
+|------|------|------|
+| 1（默认） | `run` / `run-file` + `console.log` | 打印 `text` / `desc` / `bounds` / 点击结果；回复只引用 logs |
+| 2 | `/ai/nodes` 或 `snapshot` **不带图**（`image=0`） | 写选择器前拿节点树；工具默认即无图 |
+| 3 | 任务本身要图色时：`Images.capture` + `findColor` / `findImage` / OCR，**结果打日志** | 在手机侧算完，只回坐标/是否找到，不把整图塞进对话 |
+| 4（最后） | `snapshot -Image` / `/ai/capture` | 仅当节点树为空、纯画布/游戏、或用户明确要看屏时 |
+
+禁止：用拉截图 + 识图代替「片段 `run` 出节点 logs」。无障碍能定位时，截图不算更高等级的验证。
+
 ## 什么算已验证（tasks）
 
-**算：** 已 `launch` 目标 App；写选择器前已 `snapshot`（或 `/ai/nodes`）；片段 `run` 打出目标页关键节点的 `text`/`desc`/`bounds`；点击或输入按清单验证过；再 `run-file`（可用数量=1）。回复须引用这些 logs。
+**算：** 已 `launch` 目标 App；写选择器前已拿节点（`/ai/nodes` 或无图 `snapshot`）；片段 `run` 打出目标页关键节点的 `text`/`desc`/`bounds`；点击或输入按清单验证过；再 `run-file`（可用数量=1）。回复须引用这些 logs。
 
-**不算：** 只 `status` / 只 `write` / 只 `Storage` / 只本工程页面能打开 / 只 `require` 不报错。
+**不算：** 只 `status` / 只 `write` / 只 `Storage` / 只本工程页面能打开 / 只 `require` 不报错 / 只拉截图识图而无节点 logs。
 
-连不上设备：仍生成完整可运行代码，列出用户须开的权限与地址；**不得假装已实机验证**。`status` 已通则必须 snapshot + 片段验证，不得改口「请用户自己运行」。
+连不上设备：仍生成完整可运行代码，列出用户须开的权限与地址；**不得假装已实机验证**。`status` 已通则必须节点 + 片段验证，不得改口「请用户自己运行」。
 
 ## 强制流程
 
 ```
 1. 编写前：discover / set + status
 2. 确认目标：界面要什么 / 哪个 App、步骤、停条件
-3. 操作第三方 App：写选择器前必须 snapshot，禁止凭记忆猜 desc/id
+3. 操作第三方 App：写选择器前必须 nodes / 无图 snapshot，禁止凭记忆猜 desc/id；默认不要带截图
 4. 落盘 → 每改一批就 write（不要攒到最后）
-5. 验证：界面点测；任务先 run 片段（目标 App），再 write → run-file → 读 logs
+5. 验证：优先 run 片段打 logs；界面点测；再 write → run-file → 读 logs（不要用识图代替）
 6. 失败则修 → write → 再验；通过后交付
 ```
 
@@ -66,7 +79,7 @@
 - [ ] 编写前已连机（仅连不上才声明无法验证）
 - [ ] 改动已 `write`
 - [ ] `tasks/*.js` 已在目标 App 片段验证，回复含节点 logs
-- [ ] 写选择器前已 snapshot
+- [ ] 写选择器前已 nodes / 无图 snapshot（非必要未拉截图识图）
 - [ ] 片段通过后已 `run-file`（可用数量=1）；循环有上限
 - [ ] 刷流类：单条失败会 skip
 - [ ] 多对象已按 [`code-org.md`](../02-script/code-org.md) 拆模块
@@ -109,9 +122,11 @@ powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 status
 
 `192.168.*` 扫描同网段 8080；非 `192.168` 开头放弃扫描（`skipScan: true`），必须问用户地址。找到 1 台自动选用；多台让用户选；0 台不要猜 IP。
 
-`status` 关注：`accessibility`、`floatWindow`、`capture`（snapshot 要图）、`httpServer`、`scriptRunning`（先 `stop` 再调）。`accessibilityQuick` 见 [`ai-http-api.md`](../02-script/ai-http-api.md)。
+`status` 关注：`accessibility`、`floatWindow`、`capture`（仅任务/调试真要图色时才需要）、`httpServer`、`scriptRunning`（先 `stop` 再调）。`accessibilityQuick` 见 [`ai-http-api.md`](../02-script/ai-http-api.md)。
 
 ### write / run / run-file / snapshot / stop
+
+`snapshot` **默认无图**（只要节点）。确需看屏时再加 `--image` / `-Image`。
 
 ```bash
 bash tools/deeke-device.sh write --file "tasks/sample.js"
@@ -119,6 +134,7 @@ bash tools/deeke-device.sh run --script "FloatDialogs.closeAll(); console.log('d
 bash tools/deeke-device.sh run --script "console.log('test'); let n = UiSelector().find(); console.log('nodes', n.length);"
 bash tools/deeke-device.sh run-file --script-file "tasks/sample.js"
 bash tools/deeke-device.sh snapshot
+bash tools/deeke-device.sh snapshot --image
 bash tools/deeke-device.sh stop
 ```
 
@@ -127,6 +143,7 @@ powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 write -File "tas
 powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 run -Script "console.log('test');"
 powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 run-file -ScriptFile "tasks/sample.js"
 powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 snapshot
+powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 snapshot -Image
 powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 stop
 ```
 
