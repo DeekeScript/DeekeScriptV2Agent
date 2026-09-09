@@ -28,6 +28,7 @@
 | 17 | **底栏根页**展示 Storage 派生数据（摘要、列表、记录）时，必须在 `onShow` 里重新读取再 `setData`。切 Tab 不走 `onLoad`。见 [`page-js.md`](../01-ui/page-js.md)、[`workbench.md`](../03-recipes/workbench.md)。 |
 | 18 | 操作第三方 App：用目标页互斥节点判断是否在目标界面。用户要求做完回到本 App 时，任务结束调用 `App.backApp()` 再 `Engines.closeAll()`。见 [`workbench.md`](../03-recipes/workbench.md)、[`page-state.md`](../02-script/pitfalls/page-state.md)。 |
 | 19 | **业务代码用对象 + 方法简写**（`common/*.js`、`tasks/*.js`）：`module.exports = { like() {} }` 或 `let task = { run() {} }; task.run()`。禁止文件顶层堆 `function like() {}`。API 回调与 `.filter` 仍可用 `function`。仅 `common/permission.js` 按 snippet 整份复制除外。见 [`code-org.md`](../02-script/code-org.md)。 |
+| 20 | **调试时保持 DeekeScript 进程存活**（`/ai` 跑在它里面）。`Gesture.back()` 只用于**仍在目标 App 窗口内**的 overlay，每次最多 1 次再重新看节点。误入系统设置用节点 `packageName` / `getPackageName()` 识别，然后 `App.launch(目标包名)`，不要连按返回。权限弹窗只点「关闭 / 取消 / 暂不」，不要点会跳设置的「确认 / 去开启」。宿主挂了（`floatService` false、`run` 409）必须停下来让用户重开 Deeke。见 [`keep-host-alive.md`](../02-script/pitfalls/keep-host-alive.md)。 |
 
 ## MUST NOT
 
@@ -52,6 +53,7 @@
 | 17 | 禁止用 `System.currentPackage()` 判断是否在目标 App（它常仍是本工程包名）。用互斥节点。禁止任务循环里 `waitFindOne()` 无超时。 |
 | 18 | 禁止在 `common/*.js`、`tasks/*.js` 顶层堆业务 `function foo() {}`（`permission.js` snippet 除外）。必须对象 + 方法简写。见 [`code-org.md`](../02-script/code-org.md)。 |
 | 19 | 禁止给组件事件发明文档未写的字段。list / grid 行内 `onTap` / `onChange` 用 `e.item`、`e.index`、`e.value`。见 [`switch.md`](../01-ui/components/switch.md)、[`events.md`](../01-ui/events.md)。 |
+| 20 | 禁止 `while` 里连续 `Gesture.back()` / `Gesture.home()` 来「退回目标 App」。禁止点目标 App 权限弹窗里会跳系统设置的「确认 / 允许 / 去开启 / 去设置」。误入 `com.android.settings` 时禁止再用返回键清栈。见 [`keep-host-alive.md`](../02-script/pitfalls/keep-host-alive.md)。 |
 
 ## 快速对照
 
@@ -77,3 +79,6 @@
 | 底栏页数据 | `onShow` 从 Storage 再读 | 只 `onLoad`，切 Tab 摘要不更新 |
 | 是否在目标 App | 互斥节点（如右侧未点赞） | `currentPackage() !== 目标包名` |
 | 做完回本 App | `App.backApp()` 再 `closeAll` | 停在抖音页 |
+| 前台是哪个窗口 | snapshot / `node.getPackageName()` | `System.currentPackage()`（常仍是 Deeke） |
+| 误入系统设置 | `App.launch(目标包名)`；宿主挂了问用户 | `while` 连按 `Gesture.back()` |
+| 目标 App 权限弹窗 | 「关闭 / 取消 / 暂不 / 以后再说」 | 点「确认」进设置再连按返回 |

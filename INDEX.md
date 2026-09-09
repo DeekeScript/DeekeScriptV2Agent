@@ -57,6 +57,7 @@
 | [02-script/pitfalls/stale-node-after-click.md](./02-script/pitfalls/stale-node-after-click.md) | 评论/输入：点击后重取 |
 | [02-script/pitfalls/page-state.md](./02-script/pitfalls/page-state.md) | 互斥特征判断当前页 |
 | [02-script/pitfalls/skip-on-item-failure.md](./02-script/pitfalls/skip-on-item-failure.md) | 刷流：单条失败 skip |
+| [02-script/pitfalls/keep-host-alive.md](./02-script/pitfalls/keep-host-alive.md) | 操作第三方 App：禁止连按返回把 Deeke 退出 |
 
 常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`System`、`Storage`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`、`FloatPage`。
 
@@ -81,7 +82,7 @@
 | 界面 + 脚本 | 上面两套 + permission + require + code-org + ui-and-task + workbench（无障碍一节） |
 | 自定义组件 | component-custom + custom-picker |
 | HID / 图色 / DO / 打包 | api/INDEX 扩展卡，先读权限 |
-| 操作第三方 App | task-template；code-org；device；App / UiSelector / Gesture / System；page-state；skip-on-item-failure |
+| 操作第三方 App | task-template；code-org；device；App / UiSelector / Gesture / System；page-state；skip-on-item-failure；**keep-host-alive** |
 | 评论 / 发帖 / 私信 | comment-input + stale-node + UiObject；需要输入法再开 KeyBoards |
 | 悬浮球菜单 | floatWindow（用户没提则不要生成） |
 | 悬浮窗 | floatPage / floats/（用户没提则不要生成） |

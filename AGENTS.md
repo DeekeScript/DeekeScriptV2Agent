@@ -43,6 +43,7 @@
 - 表单 `name` 页内唯一；Storage 键 `项目.模块.字段`。启停用 `switch`；列表次要按钮 `sm`；底栏已有的页不要在首页再放跳转。
 - 页面 `setTimeout`，任务 `System.sleep`。底栏页 Storage 数据必须 `onShow` 刷新。
 - 禁止 `currentPackage()` 判断目标 App；用户要求回本 App 时 `App.backApp()`。
+- 调试时保持 DeekeScript 存活：不要循环 `Gesture.back()`；误入系统设置用 `App.launch(目标)`，不要点权限弹窗的「确认」。见 [`keep-host-alive.md`](./02-script/pitfalls/keep-host-alive.md)。
 - 业务代码：对象 + 方法简写。`require` 优先 `./` `../`；`executeScript` 相对项目根。
 - 颜色宽高只写 `style`；可调节数值用 `slider`。
 

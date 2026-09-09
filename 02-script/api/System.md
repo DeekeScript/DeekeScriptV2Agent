@@ -42,6 +42,7 @@ d.ts 还列出与 locale 返回字段同名的属性 `language` / `country` / `t
 
 - **不要**用 `currentPackage() !== TARGET_PKG` 判断是否在目标 App，也不要据此弹「请切回…」并 `continue`——会误判且可能死循环。
 - **应**用 [`UiSelector`](UiSelector.md) 检测目标 App 界面特征节点，例如 `UiSelector().id('com.example:id/desc').exists()`。
+- **前台窗口是谁**（系统设置 vs 目标 App）看 snapshot 根节点 `packageName` 或 `node.getPackageName()`，不要用 `currentPackage()`。误入设置时的恢复见 [`keep-host-alive.md`](../pitfalls/keep-host-alive.md)。
 
 ## 最小片段
 
