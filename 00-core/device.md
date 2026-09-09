@@ -4,24 +4,23 @@
 
 目标：先连机 → 边写边 `write` → 写完必须验证。禁止只交代码。设备已连上时，禁止用「声明未验证」代替调试。
 
-## 验证方式优先级（省 token）
+## 节点和截图（一起用）
 
-**默认不要用截图做视觉验证。** 整屏 PNG / Base64 识图极耗 token。能代码或图色 API 打出结果，就不要拉图给人看。
+操作第三方 App 时：**看屏理解布局，用节点写选择器。** 禁止用「省 token / 能不截图就不截图」跳过截图。节点树数不出一屏几条、分不清父子层和相邻按钮。
 
-| 优先 | 做法 | 说明 |
-|------|------|------|
-| 1（默认） | `run` / `run-file` + `console.log` | 打印 `text` / `desc` / `bounds` / 点击结果；回复只引用 logs |
-| 2 | `/ai/nodes` 或 `snapshot` **不带图**（`image=0`） | 写选择器前拿节点树；工具默认即无图 |
-| 3 | 任务本身要图色时：`Images.capture` + `findColor` / `findImage` / OCR，**结果打日志** | 在手机侧算完，只回坐标/是否找到，不把整图塞进对话 |
-| 4（最后） | `snapshot -Image` / `/ai/capture` | 仅当节点树为空、纯画布/游戏、或用户明确要看屏时 |
+| 用来 | 做法 |
+|------|------|
+| 看布局、数当前屏目标、确认点的位置 | `snapshot --image` / `snapshot -Image`（或 `/ai/snapshot?image=1`） |
+| 写选择器、断言点击/输入结果 | `/ai/nodes` 或无图节点 + `run` 打印 `text` / `desc` / `bounds` |
+| 任务本身要图色 | `Images.capture` + `findColor` / `findImage` / OCR，**结果打日志**；仍要先看屏 |
 
-禁止：用拉截图 + 识图代替「片段 `run` 出节点 logs」。无障碍能定位时，截图不算更高等级的验证。
+禁止：不看屏只靠节点树猜布局；只看截图不打节点 logs。工具命令默认无图，调研和分段时必须显式加 `--image`。
 
 ## 什么算已验证（tasks）
 
-**算：** 已 `launch` 目标 App；**调研**覆盖用户点名的每种形态和列表层级（见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)）；每个动作有分段 `run` logs（见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)）；写选择器前已拿该形态的节点；再 `run-file` 做整段验收（可用数量=1，每种形态至少一条）。回复须引用这些 logs。
+**算：** 已 `launch` 目标 App；**调研**覆盖用户点名的每种形态和列表层级，且每种打开时有**带图 snapshot** + 节点 logs（见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)）；每个动作有分段 `run` logs（见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)）；再 `run-file` 做整段验收（可用数量=1，每种形态至少一条）。回复须引用 logs，并说明看屏后对布局的判断。
 
-**不算：** 只 `status` / 只 `write` / 只 `Storage` / 只本工程页面能打开 / 只 `require` 不报错 / 只拉截图识图而无节点 logs / **只在一种形态上测过** / **第一次测试就是整段 `run-file`**。
+**不算：** 只 `status` / 只 `write` / 只 `Storage` / 只本工程页面能打开 / 只 `require` 不报错 / **只拉节点不看屏** / **只看截图不打节点 logs** / **只在一种形态上测过** / **第一次测试就是整段 `run-file`**。
 
 连不上设备：仍生成完整可运行代码，列出用户须开的权限与地址；**不得假装已实机验证**。`status` 已通则必须节点 + 片段验证，不得改口「请用户自己运行」。
 
@@ -30,7 +29,7 @@
 ```
 1. 编写前：discover / set + status
 2. 确认目标：哪个 App、步骤、停条件；从用户原话拆形态 / 层级；**数当前屏可见目标，写清何时才滚动**（[`progress-model.md`](../02-script/pitfalls/progress-model.md)）
-3. 操作第三方 App：先调研（每种形态、每层列表都打开 + 拉节点），见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)。禁止只 snapshot 当前碰巧打开的那一页
+3. 操作第三方 App：先调研（每种形态、每层列表都打开：**带图 snapshot 看布局** + 拉节点），见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)。禁止只 snapshot 当前碰巧打开的那一页，也禁止不看屏
 4. 落盘 → 每改一个文件就 write（不要攒到最后；改完又改必须再 write）
 5. 分段验证：手机停在该动作所需页面，`run` 只测该动作。见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)
 6. 各分段、各形态都过 → 才 `run-file` 整段验收（数量=1；每种形态至少一条）
@@ -57,7 +56,7 @@
 分段 = 单个动作，不是整段任务。完整切分见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)。
 
 1. 权限：`Access.isAccessibilityServiceEnabled()` / 悬浮窗等为 true
-2. 调研：用户点名的形态 / 层级都打开过，有节点 logs。见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)
+2. 调研：用户点名的形态 / 层级都打开过，有**带图 snapshot** + 节点 logs。见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)
 3. 在目标页：用**互斥特征**（不要用评论列表也会出现的通用 id）。见 [`page-state.md`](../02-script/pitfalls/page-state.md)
 4. 找得到：打印 `text` / `desc` / `bounds`，确认屏内；有子层时能与父项分开
 5. 点得动 / 输得进：普通按钮看界面变化；**输入**必须 `click` → `sleep` → **重新 find**（优先 `editable(true).focused(true)`）→ `setText` → 再读 `text`。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)
@@ -83,10 +82,10 @@
 ## 交付前
 
 - [ ] 编写前已连机（仅连不上才声明无法验证）
-- [ ] 第三方 App：调研覆盖用户点名的每种形态和层级；进度模型已写（一屏几条、何时滚动），回复含节点 logs
-- [ ] 每个动作有分段 `run`（停在目标页只测该动作）；没有用整段 `run-file` 当第一次测试
+- [ ] 第三方 App：调研覆盖用户点名的每种形态和层级；每种打开时有带图 snapshot + 节点 logs；进度模型已写（一屏几条、何时滚动）
+- [ ] 每个动作有分段 `run`（停在目标页只测该动作）；分段时看过屏；没有用整段 `run-file` 当第一次测试
 - [ ] 改动已 `write`（改完又改必须再 write）
-- [ ] 写选择器前已对该形态 nodes / 无图 snapshot（非必要未拉截图识图）
+- [ ] 写选择器前已对该形态 nodes + 带图 snapshot
 - [ ] 分段通过后已 `run-file` 验收（可用数量=1；每种形态至少一条）；循环有上限
 - [ ] 刷流类：单条失败会 skip
 - [ ] 多对象已按 [`code-org.md`](../02-script/code-org.md) 拆模块
@@ -129,11 +128,11 @@ powershell -ExecutionPolicy Bypass -File tools/deeke-device.ps1 status
 
 `192.168.*` 扫描同网段 8080；非 `192.168` 开头放弃扫描（`skipScan: true`），必须问用户地址。找到 1 台自动选用；多台让用户选；0 台不要猜 IP。
 
-`status` 关注：`accessibility`、`floatWindow`、`capture`（仅任务/调试真要图色时才需要）、`httpServer`、`scriptRunning`（先 `stop` 再调）。`accessibilityQuick` 见 [`ai-http-api.md`](../02-script/ai-http-api.md)。
+`status` 关注：`accessibility`、`floatWindow`、`capture`（带图 snapshot / 图色需要为 true）、`httpServer`、`scriptRunning`（先 `stop` 再调）。`accessibilityQuick` 见 [`ai-http-api.md`](../02-script/ai-http-api.md)。
 
 ### write / run / run-file / snapshot / stop
 
-`snapshot` **默认无图**（只要节点）。确需看屏时再加 `--image` / `-Image`。
+操作第三方 App 调研 / 分段时用 **`snapshot --image`**（工具默认无图，必须显式加）。只要节点、不看屏时才用不带 `--image` 的 `snapshot`。
 
 ```bash
 bash tools/deeke-device.sh write --file "tasks/sample.js"

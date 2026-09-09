@@ -11,10 +11,10 @@
 1. **编写前**连手机（`discover` / `set` + `status`）。连不上再写代码时，须声明尚未实机验证。
 2. **改完就 `write`**，不要攒到最后。
 3. **写完必须自己验证再交付**。禁止让用户「自己去点开始」。验证分两层：分段 `run` 测单个动作；`run-file` 只做验收。见 [`segment-test.md`](./02-script/pitfalls/segment-test.md)。
-4. **验证优先代码 / 节点 logs，能不截图就不截图**（整图识图极耗 token）。默认 `snapshot` 无图；图色用 `Images.*` 打日志结果。细节见 [`device.md`](./00-core/device.md)。
-5. **操作第三方 App：写选择器前先调研，写循环前先写进度模型。** 每种形态/层级都要打开拉节点；当前屏能露出几条、何时才允许滚动，必须书面回答。见 [`app-survey.md`](./02-script/pitfalls/app-survey.md)、[`progress-model.md`](./02-script/pitfalls/progress-model.md)。
+4. **操作第三方 App 时要看屏。** 调研每种形态、分段测每个动作：`snapshot --image`（或等价带图接口）看布局，同时打节点 `text` / `desc` / `bounds`。禁止用「省 token」跳过截图。截图不能代替 `run` logs。细节见 [`device.md`](./00-core/device.md)。
+5. **操作第三方 App：写选择器前先调研，写循环前先写进度模型。** 每种形态/层级都要打开：**带图看屏** + 拉节点；当前屏能露出几条、何时才允许滚动，必须书面回答。见 [`app-survey.md`](./02-script/pitfalls/app-survey.md)、[`progress-model.md`](./02-script/pitfalls/progress-model.md)。
 
-有 `tasks/*.js` 且 `status` 正常时：在回复里贴出**目标 App / 目标页**关键节点的分段 `run` logs（`text` / `desc` / `bounds`）之前，**任务未完成**。只 `write`、只测 Storage/权限、只打开本工程 UI、只拉截图识图、只测一种形态、第一次测试就整段 `run-file`、以「高风险」跳过找节点，一律不算已调试。用户任务要操作第三方 App 时，启动目标 App 做调研和分段验证**不必再问**。
+有 `tasks/*.js` 且 `status` 正常时：在回复里贴出**目标 App / 目标页**关键节点的分段 `run` logs（`text` / `desc` / `bounds`），以及调研/分段时的看屏结论之前，**任务未完成**。只 `write`、只测 Storage/权限、只打开本工程 UI、只拉节点不看屏、只看截图不打节点 logs、只测一种形态、第一次测试就整段 `run-file`、以「高风险」跳过找节点，一律不算已调试。用户任务要操作第三方 App 时，启动目标 App 做调研和分段验证**不必再问**。
 
 ## 你在生成什么
 
