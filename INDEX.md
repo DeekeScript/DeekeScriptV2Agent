@@ -10,7 +10,7 @@
 | [00-core/constraints.md](./00-core/constraints.md) | MUST / MUST NOT 全文 |
 | [00-core/runtime.md](./00-core/runtime.md) | 两层结构、Rhino、page.js vs tasks.js |
 | [00-core/project-layout.md](./00-core/project-layout.md) | 目录和注册 |
-| [00-core/device.md](./00-core/device.md) | 连机、`write`、片段验证、命令 |
+| [00-core/device.md](./00-core/device.md) | 连机、`write`、调研、分段验证、验收、命令 |
 
 界面额外自检（constraints 未覆盖的组件坑）：[donts.md](./04-cheatsheets/donts.md)。
 
@@ -55,6 +55,9 @@
 | [02-script/api/UiSelector.md](./02-script/api/UiSelector.md) | 找节点 |
 | [02-script/api/INDEX.md](./02-script/api/INDEX.md) | API 清单，再开单篇 |
 | [02-script/pitfalls/stale-node-after-click.md](./02-script/pitfalls/stale-node-after-click.md) | 评论/输入：点击后重取 |
+| [02-script/pitfalls/app-survey.md](./02-script/pitfalls/app-survey.md) | 写代码前调研：并列形态、列表层级 |
+| [02-script/pitfalls/progress-model.md](./02-script/pitfalls/progress-model.md) | 写循环前：一屏几条、何时滚动、如何取下一条 |
+| [02-script/pitfalls/segment-test.md](./02-script/pitfalls/segment-test.md) | 分段测单个动作；整段 `run-file` 只做验收 |
 | [02-script/pitfalls/page-state.md](./02-script/pitfalls/page-state.md) | 互斥特征判断当前页 |
 | [02-script/pitfalls/skip-on-item-failure.md](./02-script/pitfalls/skip-on-item-failure.md) | 刷流：单条失败 skip |
 | [02-script/pitfalls/keep-host-alive.md](./02-script/pitfalls/keep-host-alive.md) | 操作第三方 App：禁止连按返回把 DeekeScript 退出 |
@@ -71,7 +74,7 @@
 | 列表触底加载 | [list-load-more.md](./03-recipes/list-load-more.md) |
 | 列表 + switch 启停 | [list-manage.md](./03-recipes/list-manage.md) |
 | 自定义选择组件 | [custom-picker.md](./03-recipes/custom-picker.md) |
-| 评论/发帖输入 | [comment-input.md](./03-recipes/comment-input.md) + stale-node 必读 |
+| 评论/发帖输入 | [comment-input.md](./03-recipes/comment-input.md) + stale-node 必读；有列表层级时加 app-survey |
 
 ## 按任务加载
 
@@ -82,11 +85,11 @@
 | 界面 + 脚本 | 上面两套 + permission + require + code-org + ui-and-task + workbench（无障碍一节） |
 | 自定义组件 | component-custom + custom-picker |
 | HID / 图色 / DO / 打包 | api/INDEX 扩展卡，先读权限 |
-| 操作第三方 App | task-template；code-org；device；App / UiSelector / Gesture / System；page-state；skip-on-item-failure；**keep-host-alive** |
-| 评论 / 发帖 / 私信 | comment-input + stale-node + UiObject；需要输入法再开 KeyBoards |
+| 操作第三方 App | task-template；code-org；device；App / UiSelector / Gesture / System；**app-survey**；**progress-model**；**segment-test**；page-state；skip-on-item-failure；**keep-host-alive** |
+| 评论 / 发帖 / 私信 | app-survey + comment-input + stale-node + segment-test + UiObject；需要输入法再开 KeyBoards |
 | 悬浮球菜单 | floatWindow（用户没提则不要生成） |
 | 悬浮窗 | floatPage / floats/（用户没提则不要生成） |
-| 调试 tasks | device + ai-http-api |
+| 调试 tasks | device + segment-test + ai-http-api |
 
 ## 扩展能力
 

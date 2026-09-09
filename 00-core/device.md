@@ -1,6 +1,6 @@
 # 连机、同步、调试
 
-生成或改工程时按本篇执行。HTTP 字段见 [`ai-http-api.md`](../02-script/ai-http-api.md)。硬规则见 [`constraints.md`](./constraints.md) MUST 9 / 16。
+生成或改工程时按本篇执行。HTTP 字段见 [`ai-http-api.md`](../02-script/ai-http-api.md)。硬规则见 [`constraints.md`](./constraints.md) MUST 9 / 16 / 21。分段测 vs 整段验收见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)。写代码前调研见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)。
 
 目标：先连机 → 边写边 `write` → 写完必须验证。禁止只交代码。设备已连上时，禁止用「声明未验证」代替调试。
 
@@ -19,9 +19,9 @@
 
 ## 什么算已验证（tasks）
 
-**算：** 已 `launch` 目标 App；写选择器前已拿节点（`/ai/nodes` 或无图 `snapshot`）；片段 `run` 打出目标页关键节点的 `text`/`desc`/`bounds`；点击或输入按清单验证过；再 `run-file`（可用数量=1）。回复须引用这些 logs。
+**算：** 已 `launch` 目标 App；**调研**覆盖用户点名的每种形态和列表层级（见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)）；每个动作有分段 `run` logs（见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)）；写选择器前已拿该形态的节点；再 `run-file` 做整段验收（可用数量=1，每种形态至少一条）。回复须引用这些 logs。
 
-**不算：** 只 `status` / 只 `write` / 只 `Storage` / 只本工程页面能打开 / 只 `require` 不报错 / 只拉截图识图而无节点 logs。
+**不算：** 只 `status` / 只 `write` / 只 `Storage` / 只本工程页面能打开 / 只 `require` 不报错 / 只拉截图识图而无节点 logs / **只在一种形态上测过** / **第一次测试就是整段 `run-file`**。
 
 连不上设备：仍生成完整可运行代码，列出用户须开的权限与地址；**不得假装已实机验证**。`status` 已通则必须节点 + 片段验证，不得改口「请用户自己运行」。
 
@@ -29,11 +29,12 @@
 
 ```
 1. 编写前：discover / set + status
-2. 确认目标：界面要什么 / 哪个 App、步骤、停条件
-3. 操作第三方 App：写选择器前必须 nodes / 无图 snapshot，禁止凭记忆猜 desc/id；默认不要带截图
-4. 落盘 → 每改一批就 write（不要攒到最后）
-5. 验证：优先 run 片段打 logs；界面点测；再 write → run-file → 读 logs（不要用识图代替）
-6. 失败则修 → write → 再验；通过后交付
+2. 确认目标：哪个 App、步骤、停条件；从用户原话拆形态 / 层级；**数当前屏可见目标，写清何时才滚动**（[`progress-model.md`](../02-script/pitfalls/progress-model.md)）
+3. 操作第三方 App：先调研（每种形态、每层列表都打开 + 拉节点），见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)。禁止只 snapshot 当前碰巧打开的那一页
+4. 落盘 → 每改一个文件就 write（不要攒到最后；改完又改必须再 write）
+5. 分段验证：手机停在该动作所需页面，`run` 只测该动作。见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)
+6. 各分段、各形态都过 → 才 `run-file` 整段验收（数量=1；每种形态至少一条）
+7. 失败则只修该分段 → write → 再验该分段；通过后交付
 ```
 
 短验证可用 `run` 传代码字符串（可不先 `write`）；`run-file` 或交付前必须已 `write`。
@@ -44,7 +45,7 @@
 |---|------|
 | 1 | 找节点 `UiSelector().…`；点击前一般先 `filter` 屏内 |
 | 2 | 每次 `run` / `run-file` 前：若用过悬浮弹窗，先 `FloatDialogs.closeAll()` |
-| 3 | `while` / 重试必须有上限；刷流以内容条为进度，单条失败 skip 前进。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md) |
+| 3 | `while` / 重试必须有上限；刷流以内容条为进度，单条失败 skip 到下一条未处理（同屏优先）。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md)、[`progress-model.md`](../02-script/pitfalls/progress-model.md) |
 | 4 | 步骤之间 `System.sleep`；关键步骤 `console.log` |
 | 5 | 已切第三方 App 用 `FloatDialogs` 提示。目标 App 业务弹窗点文案关掉，勿与 DeekeScript 弹窗混用 |
 | 6 | 自动结束：`tasks/*.js` 里 `Engines.closeAll()`。菜单停用 `FloatWindow.stopTask()` |
@@ -53,13 +54,16 @@
 
 ## 片段验证清单
 
-1. 权限：`Access.isAccessibilityServiceEnabled()` / 悬浮窗等为 true
-2. 在目标页：用**互斥特征**（不要用评论列表也会出现的通用 id）。见 [`page-state.md`](../02-script/pitfalls/page-state.md)
-3. 找得到：打印 `text` / `desc` / `bounds`，确认屏内
-4. 点得动 / 输得进：普通按钮看界面变化；**输入**必须 `click` → `sleep` → **重新 find**（优先 `editable(true).focused(true)`）→ `setText` → 再读 `text`。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)
-5. 再拼循环：有上限；刷流须验证「失败会划走」。再 `write` + `run-file`
+分段 = 单个动作，不是整段任务。完整切分见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)。
 
-用户需求本身就是搜索 / 点赞 / 评论 / 刷流时，这些步骤就是调试，**不必再问可不可以调试**。整段可用 `maxCount=1`。
+1. 权限：`Access.isAccessibilityServiceEnabled()` / 悬浮窗等为 true
+2. 调研：用户点名的形态 / 层级都打开过，有节点 logs。见 [`app-survey.md`](../02-script/pitfalls/app-survey.md)
+3. 在目标页：用**互斥特征**（不要用评论列表也会出现的通用 id）。见 [`page-state.md`](../02-script/pitfalls/page-state.md)
+4. 找得到：打印 `text` / `desc` / `bounds`，确认屏内；有子层时能与父项分开
+5. 点得动 / 输得进：普通按钮看界面变化；**输入**必须 `click` → `sleep` → **重新 find**（优先 `editable(true).focused(true)`）→ `setText` → 再读 `text`。见 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)
+6. 再拼循环做验收：有上限；刷流须验证「失败会划走」。再 `write` + `run-file`
+
+用户任务本身要操作第三方 App 时，调研和分段就是调试，**不必再问可不可以调试**。`run-file` 可用数量=1，但它是验收，不是某动作的第一次测试。
 
 ## 何时问用户 / 不要问
 
@@ -68,7 +72,7 @@
 | 扫不到设备 / 非 `192.168.*` | 已有 `.deeke-device.local.json` 且 `status` 正常 |
 | `status` 权限为 false（让用户开开关） | logs / snapshot 已能定位（选错节点、漏 filter/sleep/write） |
 | 多台设备选一台 | 契约内 API / 路径 / Rhino 错误 |
-| 登录 / 验证码 / 生物识别 | 用户已要求赞评刷流：自己 launch 做片段验证 |
+| 登录 / 验证码 / 生物识别 | 用户已要求操作第三方 App：自己 launch 做调研和分段验证 |
 | 连续 3 轮实机仍失败：要当前屏幕或正确节点特征 | |
 | 已进入系统设置，或 `floatService` false / `run` 409（DeekeScript 被退掉） | 仍在目标 App 内的 overlay：点「关闭/取消」或 **一次** back 后重看节点 |
 | 业务次数/间隔不清 | |
@@ -79,14 +83,15 @@
 ## 交付前
 
 - [ ] 编写前已连机（仅连不上才声明无法验证）
-- [ ] 改动已 `write`
-- [ ] `tasks/*.js` 已在目标 App 片段验证，回复含节点 logs
-- [ ] 写选择器前已 nodes / 无图 snapshot（非必要未拉截图识图）
-- [ ] 片段通过后已 `run-file`（可用数量=1）；循环有上限
+- [ ] 第三方 App：调研覆盖用户点名的每种形态和层级；进度模型已写（一屏几条、何时滚动），回复含节点 logs
+- [ ] 每个动作有分段 `run`（停在目标页只测该动作）；没有用整段 `run-file` 当第一次测试
+- [ ] 改动已 `write`（改完又改必须再 write）
+- [ ] 写选择器前已对该形态 nodes / 无图 snapshot（非必要未拉截图识图）
+- [ ] 分段通过后已 `run-file` 验收（可用数量=1；每种形态至少一条）；循环有上限
 - [ ] 刷流类：单条失败会 skip
 - [ ] 多对象已按 [`code-org.md`](../02-script/code-org.md) 拆模块
 
-设备 `status` 正常却未跑目标 App 片段 = **未完成，不得交付**。
+设备 `status` 正常却未调研、未分段 `run` = **未完成，不得交付**。
 
 用户若只用 VSCode 插件：插件走 WebSocket 8088。你仍优先用本篇 `/ai`（8080「节点查看」）自动调试。插件点法见 [`dev-workflow.md`](./dev-workflow.md)（仅用户问插件时再打开）。
 

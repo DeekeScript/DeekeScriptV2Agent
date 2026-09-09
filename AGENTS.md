@@ -10,10 +10,11 @@
 
 1. **编写前**连手机（`discover` / `set` + `status`）。连不上再写代码时，须声明尚未实机验证。
 2. **改完就 `write`**，不要攒到最后。
-3. **写完必须自己验证再交付**。禁止让用户「自己去点开始」。
+3. **写完必须自己验证再交付**。禁止让用户「自己去点开始」。验证分两层：分段 `run` 测单个动作；`run-file` 只做验收。见 [`segment-test.md`](./02-script/pitfalls/segment-test.md)。
 4. **验证优先代码 / 节点 logs，能不截图就不截图**（整图识图极耗 token）。默认 `snapshot` 无图；图色用 `Images.*` 打日志结果。细节见 [`device.md`](./00-core/device.md)。
+5. **操作第三方 App：写选择器前先调研，写循环前先写进度模型。** 每种形态/层级都要打开拉节点；当前屏能露出几条、何时才允许滚动，必须书面回答。见 [`app-survey.md`](./02-script/pitfalls/app-survey.md)、[`progress-model.md`](./02-script/pitfalls/progress-model.md)。
 
-有 `tasks/*.js` 且 `status` 正常时：在回复里贴出**目标 App / 目标页**关键节点的 `run` logs（`text` / `desc` / `bounds`）之前，**任务未完成**。只 `write`、只测 Storage/权限、只打开本工程 UI、只拉截图识图、以「高风险」跳过找节点，一律不算已调试。用户需求本身就是搜索/点赞/评论/刷流时，启动目标 App 做片段验证**不必再问**。
+有 `tasks/*.js` 且 `status` 正常时：在回复里贴出**目标 App / 目标页**关键节点的分段 `run` logs（`text` / `desc` / `bounds`）之前，**任务未完成**。只 `write`、只测 Storage/权限、只打开本工程 UI、只拉截图识图、只测一种形态、第一次测试就整段 `run-file`、以「高风险」跳过找节点，一律不算已调试。用户任务要操作第三方 App 时，启动目标 App 做调研和分段验证**不必再问**。
 
 ## 你在生成什么
 
@@ -39,7 +40,8 @@
 - 页面成对；入口必须 `icon` 且生成图片文件。
 - 默认不写 `floatWindow`。有 menus 则 `onTap` 与 `FloatWindow.on` 同一轮；手动停 `FloatWindow.stopTask()`，任务内自动停 `Engines.closeAll()`。
 - 找节点：`UiSelector().text('发送').findOne()`；点击前一般先 `filter` 屏内。
-- 输入：click 后**重新 find** 再 `setText`。刷流：单条失败 skip 前进。
+- 输入：click 后**重新 find** 再 `setText`。刷流：单条失败 skip 到下一条未处理（同屏优先，不要无条件滑动）。
+- 第三方 App：写选择器前先调研每种形态和层级；写循环前回答进度模型（一屏几条、何时滚动）；开发中分段 `run`，整段 `run-file` 只做验收。
 - 表单 `name` 页内唯一；Storage 键 `项目.模块.字段`。启停用 `switch`；列表次要按钮 `sm`；底栏已有的页不要在首页再放跳转。
 - 页面 `setTimeout`，任务 `System.sleep`。底栏页 Storage 数据必须 `onShow` 刷新。
 - 禁止 `currentPackage()` 判断目标 App；用户要求回本 App 时 `App.backApp()`。

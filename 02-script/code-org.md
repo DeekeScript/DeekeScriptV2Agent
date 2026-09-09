@@ -49,7 +49,7 @@ video.like();
 video.comment('不错');
 ```
 
-`comment(text)` 实现必须遵守点击后重取输入框，见 [`comment-input.md`](../03-recipes/comment-input.md)、[`pitfalls/stale-node-after-click.md`](./pitfalls/stale-node-after-click.md)。不要写成「同一 `input` 变量 click 完直接 setText」。
+`comment(text)` 实现必须遵守点击后重取输入框，见 [`comment-input.md`](../03-recipes/comment-input.md)、[`pitfalls/stale-node-after-click.md`](./pitfalls/stale-node-after-click.md)。不要写成「同一 `input` 变量 click 完直接 setText」。多形态或多层列表时，先按 [`pitfalls/app-survey.md`](./pitfalls/app-survey.md) 调研再拆模块；各动作按 [`pitfalls/segment-test.md`](./pitfalls/segment-test.md) 单独测。
 
 ### 写法约定（MUST）
 

@@ -2,7 +2,7 @@
 
 自动化脚本放在 `tasks/*.js`。入口顺序：权限 → 读配置 → 循环。**默认不要**绑 `FloatWindow.on`（用户没提悬浮窗菜单时）。多功能 / 多对象 App 自动化须按 [`code-org.md`](code-org.md) 按操作对象拆到 `common/`，任务里组合调用。
 
-依赖：[`permission.md`](permission.md)、[`code-org.md`](code-org.md)、[`ui-and-task.md`](ui-and-task.md)、[`require.md`](require.md)、[`UiSelector.md`](api/UiSelector.md)、[`device.md`](../00-core/device.md)。刷推荐流 / 进主页取号时再读 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)。
+依赖：[`permission.md`](permission.md)、[`code-org.md`](code-org.md)、[`ui-and-task.md`](ui-and-task.md)、[`require.md`](require.md)、[`UiSelector.md`](api/UiSelector.md)、[`device.md`](../00-core/device.md)。操作第三方 App 前先读 [`app-survey.md`](pitfalls/app-survey.md)、[`progress-model.md`](pitfalls/progress-model.md)、[`segment-test.md`](pitfalls/segment-test.md)。刷推荐流 / 进主页取号时再读 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)。
 
 ## 默认骨架（无悬浮菜单）
 
@@ -44,7 +44,7 @@ task.run();
 
 ## 刷流骨架（单条失败也前进）
 
-以「一条视频 / 帖子」为进度。进主页弹窗、读不到字段时 **skip 本条并划走**，不要对同一条反复进主页。完整规则见 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)。
+以一条内容为进度。进主页弹窗、读不到字段时 **skip 本条并前进到下一条未处理目标**。一屏一条才滑动；一屏多条时先耗尽当前屏。见 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)、[`progress-model.md`](pitfalls/progress-model.md)。
 
 ```javascript
 let permission = require('../common/permission.js');
@@ -78,7 +78,7 @@ if (!permission.ensureRun()) {
 
     processed++;
     if (processed < maxCount) {
-      page.swipeNext();
+      page.swipeNext(); // 仅一屏一条时；一屏多条见 progress-model，返回后扫同屏下一条
     }
   }
 
@@ -139,5 +139,7 @@ Page({
 - `Engines.executeScript('tasks/xxx.js')` 路径相对**项目根**。
 - **提示**：页面用 `this.toast`；任务仍在本 App 前台可用 `System.toast`；已切到抖音/微信等后台用 [`FloatDialogs`](api/FloatDialogs.md)。
 - 找节点用 [`UiSelector`](api/UiSelector.md)；点击前一般先 `filter` 屏内。
+- **写选择器前先调研**：用户原话里的每种形态、每一层列表都要打开拉节点。见 [`app-survey.md`](pitfalls/app-survey.md)。
+- **分段测**：点赞只测点赞，停在目标页 `run`；整段 `run-file` 只做验收。见 [`segment-test.md`](pitfalls/segment-test.md)。
 - **`while` 里 `continue` 必须递增计数或设 retry 上限**，否则会无限 toast。
-- **刷流**：`continue` 若未划走当前内容，须有 skip 上限并最终强制前进；进主页单次尝试。见 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)。
+- **刷流**：`continue` 若未前进到下一条未处理目标，须有 skip 上限并最终强制前进；进主页单次尝试。一屏多条时不要无条件 `swipe`。见 [`skip-on-item-failure.md`](pitfalls/skip-on-item-failure.md)、[`progress-model.md`](pitfalls/progress-model.md)。

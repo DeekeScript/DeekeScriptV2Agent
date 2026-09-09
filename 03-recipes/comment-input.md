@@ -1,6 +1,6 @@
 # 评论 / 发帖输入配方
 
-第三方 App 评论、发帖、私信输入的最小可运行模式。生成前必读 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)；页面态见 [`page-state.md`](../02-script/pitfalls/page-state.md)。
+第三方 App 评论、发帖、私信输入的最小可运行模式。生成前必读 [`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)；页面态见 [`page-state.md`](../02-script/pitfalls/page-state.md)。写选择器前先调研对象形态和列表层级：[`app-survey.md`](../02-script/pitfalls/app-survey.md)。分段测见 [`segment-test.md`](../02-script/pitfalls/segment-test.md)。
 
 依赖：[`UiSelector.md`](../02-script/api/UiSelector.md)、[`UiObject.md`](../02-script/api/UiObject.md)、[`Gesture.md`](../02-script/api/Gesture.md)、[`stale-node-after-click.md`](../02-script/pitfalls/stale-node-after-click.md)。需要输入法时再开 [`KeyBoards.md`](../02-script/api/KeyBoards.md)。
 
@@ -155,11 +155,13 @@ module.exports = {
 
 ## 片段验证顺序
 
+按 [`segment-test.md`](../02-script/pitfalls/segment-test.md) **一段只测一件事**。调研清单里的每种形态各走一遍；有子层的样本单独一段，确认不会把子项当父项。
+
 1. 能打开评论半屏 / 找到占位框（打印 `bounds.top`）
 2. click 后 `editable(true).focused(true)` 能找到，且 `top` 与占位不同（或已 focused）
 3. `setText` 后重读 `text` 含目标文案
 4. 「发送」点得动（`clickable` / parent / Gesture）
-5. 回到目标页（`ensureFeed` 一类），再拼循环
+5. 回到目标页（`ensureFeed` 一类），再拼循环做验收
 
 ## 注意
 

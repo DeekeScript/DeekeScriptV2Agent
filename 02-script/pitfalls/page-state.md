@@ -2,7 +2,7 @@
 
 用「某个通用 id / 文案存在」判断当前是否在目标页，容易误判。评论列表、个人页、半屏面板里常复用与推荐流相同的 `title`、昵称、`赞` 等节点。
 
-相关：[`stale-node-after-click.md`](./stale-node-after-click.md)、[`skip-on-item-failure.md`](./skip-on-item-failure.md)、[`keep-host-alive.md`](./keep-host-alive.md)、[`device.md`](../../00-core/device.md)、[`UiSelector.md`](../api/UiSelector.md)。
+相关：[`stale-node-after-click.md`](./stale-node-after-click.md)、[`skip-on-item-failure.md`](./skip-on-item-failure.md)、[`keep-host-alive.md`](./keep-host-alive.md)、[`app-survey.md`](./app-survey.md)、[`device.md`](../../00-core/device.md)、[`UiSelector.md`](../api/UiSelector.md)。
 
 ## 硬规则
 
@@ -98,6 +98,7 @@ function ensureFeed(targetPkg) {
 ## 自检
 
 - [ ] `isXxxPage` 不依赖评论区 / 列表里也会出现的节点
-- [ ] 「赞」类文案区分视频点赞 vs 评论点赞（区域 + desc 完整特征）
+- [ ] 同名动作按区域区分（详情操作条 vs 列表项 vs 半屏），不要全文搜到谁点谁
+- [ ] 多层列表时父项与子项能用节点分开，见 [`app-survey.md`](./app-survey.md)
 - [ ] 半屏残留有关闭 / **单次** back 恢复路径；不在目标包名时用 `App.launch`，不用连按返回
 - [ ] 进主页失败不会再次进入同一主页（见 [`skip-on-item-failure.md`](./skip-on-item-failure.md)）
