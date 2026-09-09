@@ -16,7 +16,7 @@
 | press | `press(x: number, y: number, duration: number)` | 坐标与按压毫秒 | `boolean` | 按压一段时间 |
 | swipe | `swipe(x1, y1, x2, y2, duration)` | 起点、终点、滑动毫秒 | `boolean` | 滑动手势 |
 | back | `back()` | 无 | `boolean` | 系统返回键，弹出**整机 Activity 栈**（含 DeekeScript）。只用于仍在目标 App 内的 overlay；禁止循环调用 |
-| home | `home()` | 无 | `boolean` | Home，回到桌面。调试时不要用，会把 Deeke 送走 |
+| home | `home()` | 无 | `boolean` | Home，回到桌面。调试时不要用，会把 DeekeScript 送走 |
 | recents | `recents()` | 无 | `boolean` | 最近任务。调试时不要用 |
 
 ## 最小片段

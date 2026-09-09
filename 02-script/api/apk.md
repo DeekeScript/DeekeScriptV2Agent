@@ -35,7 +35,7 @@
 
 ```json
 {
-  "name": "Deeke",
+  "name": "DeekeScript",
   "packageName": "cn.deeke.demo",
   "versionCode": "100",
   "versionName": "1.0.0",

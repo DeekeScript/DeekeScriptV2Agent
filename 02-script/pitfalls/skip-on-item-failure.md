@@ -8,7 +8,7 @@
 
 1. **进度单位是内容条目**：成功或失败，本轮结束都要让进度前进（`processed++` 且划走 / 点下一条）。  
 2. **进主页 / 打开半屏 / 读资料：单次尝试 + 超时**。拿不到字段用占位（如抖音号 `'未知'`），**禁止**失败后再点一次头像重进。  
-3. **目标 App 业务弹窗 ≠ Deeke `FloatDialogs`**：进页后先 dismiss 目标 App 弹窗（关闭 / 我知道了 / 取消 / 以后再说等），再读字段；Deeke 自己的悬浮弹窗用 `FloatDialogs.closeAll()`。**不要点「确认 / 允许 / 去开启」**——常会跳进系统设置，再 back 会把 DeekeScript 退出。见 [`keep-host-alive.md`](./keep-host-alive.md)。  
+3. **目标 App 业务弹窗 ≠ DeekeScript `FloatDialogs`**：进页后先 dismiss 目标 App 弹窗（关闭 / 我知道了 / 取消 / 以后再说等），再读字段；DeekeScript 自己的悬浮弹窗用 `FloatDialogs.closeAll()`。**不要点「确认 / 允许 / 去开启」**——常会跳进系统设置，再 back 会把 DeekeScript 退出。见 [`keep-host-alive.md`](./keep-host-alive.md)。  
 4. **`continue` 若未划走当前内容**，必须另有 `skipCount`（或等价）上限；达到后**强制前进**。禁止「恢复成功就 `failRetry = 0`」导致围着同一条转。  
 5. 兜底顺序：关弹窗 → 退回列表/推荐流 → **划走本条** → 处理下一条。不要在同一条上无限 `ensureFeed` + 重做。
 
@@ -140,7 +140,7 @@ function getAuthorOnce() {
 
 | 类型 | 例子 | 处理 |
 |------|------|------|
-| Deeke 悬浮弹窗 | `FloatDialogs.show` / `confirm` | 任务前 / 找节点前 `FloatDialogs.closeAll()` |
+| DeekeScript 悬浮弹窗 | `FloatDialogs.show` / `confirm` | 任务前 / 找节点前 `FloatDialogs.closeAll()` |
 | 目标 App 业务弹窗 | 进主页引导、青少年、店铺、直播间提示 | `dismissAppDialogs()` 点「关闭 / 取消 / 暂不」；仍在目标 App 内才可 **一次** `Gesture.back()` |
 | 目标 App 权限跳设置 | 「打开通知…确认」「去开启」 | **不要点**；已进入 `com.android.settings` 则 `App.launch(目标)`，禁止连按返回 |
 

@@ -6,7 +6,7 @@
 
 | 参数名 | 类型 | 必填 | 示例 | 说明 |
 |--------|------|------|------|------|
-| name | String | 否（打包建议写） | Deeke | 安装后手机上的名称 |
+| name | String | 否（打包建议写） | DeekeScript | 安装后手机上的名称 |
 | packageName | String | 否（打包建议写） | cn.deeke.demo | 包名，不要用默认包名 |
 | versionCode | String | 否（打包建议写） | 100 | 版本号，升级凭证 |
 | versionName | String | 否（打包建议写） | 1.0.0 | 版本名称 |
@@ -111,7 +111,7 @@
 
 ```json
 {
-  "name": "Deeke",
+  "name": "DeekeScript",
   "packageName": "cn.deeke.demo",
   "icon": "img/xhs.svg",
   "homePage": "pages/home"
@@ -124,7 +124,7 @@
 
 ```json
 {
-  "name": "Deeke",
+  "name": "DeekeScript",
   "packageName": "cn.deeke.demo",
   "versionCode": "100",
   "versionName": "1.0.0",

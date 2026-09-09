@@ -12,9 +12,9 @@ DeekeScript → 目标 App → 系统设置（应用通知 / 无障碍 / 权限�
 
 ## 硬规则（MUST）
 
-1. **调试期间禁止把 DeekeScript 退出后台。** 不要 `Gesture.home()`、不要滑掉最近任务里的 Deeke、不要对未知页面循环 `Gesture.back()`。
+1. **调试期间禁止把 DeekeScript 退出后台。** 不要 `Gesture.home()`、不要滑掉最近任务里的 DeekeScript、不要对未知页面循环 `Gesture.back()`。
 2. **`Gesture.back()` 只用于仍在目标 App 包名内的 overlay**（评论半屏、个人页、目标 App 自己的弹层）。每次最多 1 次，然后重新 `snapshot` / 找互斥节点，确认还在目标 App。
-3. **窗口包名用节点，不用 `System.currentPackage()`。** `currentPackage()` 常仍是 Deeke 包名（见 System 篇）。前台窗口看 `/ai/snapshot` 根节点 `packageName`，或 `node.getPackageName()`。
+3. **窗口包名用节点，不用 `System.currentPackage()`。** `currentPackage()` 常仍是 DeekeScript 包名（见 System 篇）。前台窗口看 `/ai/snapshot` 根节点 `packageName`，或 `node.getPackageName()`。
 4. **误入系统设置：不要 back。** 看到 `com.android.settings`、标题「应用通知 / 无障碍 / 应用信息」、`向上导航`，应 `App.launch(目标包名)` 拉回目标 App。一次 launch 回不去 → **停下来让用户打开 DeekeScript + 目标 App**，禁止再 back。
 5. **目标 App 权限弹窗不要点「确认 / 允许 / 去开启 / 去设置」。** 这类按钮会跳进系统设置。只点「关闭 / 取消 / 暂不 / 以后再说 / 我知道了」，或忽略弹窗继续找目标页互斥节点。
 

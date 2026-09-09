@@ -46,7 +46,7 @@
 | 2 | 每次 `run` / `run-file` 前：若用过悬浮弹窗，先 `FloatDialogs.closeAll()` |
 | 3 | `while` / 重试必须有上限；刷流以内容条为进度，单条失败 skip 前进。见 [`skip-on-item-failure.md`](../02-script/pitfalls/skip-on-item-failure.md) |
 | 4 | 步骤之间 `System.sleep`；关键步骤 `console.log` |
-| 5 | 已切第三方 App 用 `FloatDialogs` 提示。目标 App 业务弹窗点文案关掉，勿与 Deeke 弹窗混用 |
+| 5 | 已切第三方 App 用 `FloatDialogs` 提示。目标 App 业务弹窗点文案关掉，勿与 DeekeScript 弹窗混用 |
 | 6 | 自动结束：`tasks/*.js` 里 `Engines.closeAll()`。菜单停用 `FloatWindow.stopTask()` |
 | 7 | 同一失败模式连续修 **3 轮**仍不过 → 请求用户协助，不要空转 |
 | 8 | **不要循环 `Gesture.back()`。** 点权限「确认」会进系统设置；再连按返回会把 DeekeScript 退出，`/ai` 随之挂掉。误入设置用 `App.launch(目标)`；宿主已挂则停下来请用户重开。见 [`keep-host-alive.md`](../02-script/pitfalls/keep-host-alive.md) |
@@ -70,7 +70,7 @@
 | 多台设备选一台 | 契约内 API / 路径 / Rhino 错误 |
 | 登录 / 验证码 / 生物识别 | 用户已要求赞评刷流：自己 launch 做片段验证 |
 | 连续 3 轮实机仍失败：要当前屏幕或正确节点特征 | |
-| 已进入系统设置，或 `floatService` false / `run` 409（Deeke 被退掉） | 仍在目标 App 内的 overlay：点「关闭/取消」或 **一次** back 后重看节点 |
+| 已进入系统设置，或 `floatService` false / `run` 409（DeekeScript 被退掉） | 仍在目标 App 内的 overlay：点「关闭/取消」或 **一次** back 后重看节点 |
 | 业务次数/间隔不清 | |
 | 支付、批量删除、向**用户未要求**的对象发私信：整段 `run-file` 前口头确认（找节点片段仍要做） | |
 
