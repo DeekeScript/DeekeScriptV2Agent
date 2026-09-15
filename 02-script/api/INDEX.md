@@ -10,6 +10,9 @@
 | App | 当前包名与版本、启动应用、打开 URL | 两者 | [App.md](App.md) |
 | System | 休眠、剪贴板、toast、等界面、退出 | 两者 | [System.md](System.md) |
 | Storage | 键值存储；页面写入、脚本读取 | 两者 | [Storage.md](Storage.md) |
+| Sqlite | SQLite 表存储；写入自动建表 | 两者 | [Sqlite.md](Sqlite.md) |
+| Files | 应用私有目录文件读写与路径 | 两者 | [Files.md](Files.md) |
+| Env | 目录 File 句柄（优先用 Files 路径） | 两者 | [Env.md](Env.md) |
 | Http | GET/POST、上传下载、流式 POST | 两者 | [Http.md](Http.md) |
 | Engines | 启动/关闭独立脚本运行时 | 两者 | [Engines.md](Engines.md) |
 | Access | 检查与申请无障碍、悬浮窗及其它权限 | 两者 | [Access.md](Access.md) |
@@ -18,11 +21,11 @@
 | FloatPage | 悬浮窗（floats/ + setData） | 两者 | [FloatPage.md](FloatPage.md) |
 | FloatDialogs | 后台弹窗、toast、悬浮球显隐与可点 | 两者 | [FloatDialogs.md](FloatDialogs.md) |
 | Device | 屏幕尺寸、机型、网络、位置、已装应用 | 两者 | [Device.md](Device.md) |
-| Files | 应用私有目录文件读写与路径 | 两者 | [Files.md](Files.md) |
 | DeekeScript | 框架版本、读项目文件、批量取节点原始数据 | tasks.js | [DeekeScript.md](DeekeScript.md) |
 | console | 打印调试；日志悬浮窗显示与样式 | 两者 | [console.md](console.md) |
 | Log | 把日志写入文件（不打印到控制台） | 两者 | [Log.md](Log.md) |
 | Images | 截图、找图、找色、OCR | tasks.js | [Images.md](Images.md) |
+| Colors | OpenCV 找色（日常优先 Images） | tasks.js | [Colors.md](Colors.md) |
 | ScreenRecord | 屏幕录制（mp4） | 两者 | [ScreenRecord.md](ScreenRecord.md) |
 | MediaStore | 系统媒体库：图/视频/音频/下载/文档 | 两者 | [MediaStore.md](MediaStore.md) |
 | Audio | 音频播放 | 两者 | [Audio.md](Audio.md) |
