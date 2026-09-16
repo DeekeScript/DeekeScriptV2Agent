@@ -1,6 +1,6 @@
 # 权限：页面启动与脚本自检
 
-无障碍、悬浮窗是运行自动化的默认门槛。页面点「运行」时检查一次；任务脚本开头再检查一次。其它权限按业务调对应 `ensureXxx`。
+无障碍、悬浮窗等权限由开发者控制：在页面点「运行」前检查，并在任务脚本开头再自检。其它权限按业务调对应 `ensureXxx`。框架不会自动弹权限提示。
 
 API：[`Access.md`](api/Access.md)、[`Dialogs.md`](api/Dialogs.md)、[`Engines.md`](api/Engines.md)。
 

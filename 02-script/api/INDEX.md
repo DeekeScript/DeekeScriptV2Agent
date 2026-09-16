@@ -8,9 +8,10 @@
 | UiObject | 对节点点击、输入、滚动、读属性 | tasks.js | [UiObject.md](UiObject.md) |
 | Gesture | 按坐标点击、滑动、返回/Home/最近任务 | tasks.js | [Gesture.md](Gesture.md) |
 | App | 当前包名与版本、启动应用、打开 URL | 两者 | [App.md](App.md) |
-| System | 休眠、剪贴板、toast、等界面、退出 | 两者 | [System.md](System.md) |
+| System | 休眠、剪贴板、toast、音量/振动、shell、等界面、退出 | 两者 | [System.md](System.md) |
 | Storage | 键值存储；页面写入、脚本读取 | 两者 | [Storage.md](Storage.md) |
 | Sqlite | SQLite 表存储；写入自动建表 | 两者 | [Sqlite.md](Sqlite.md) |
+| Sms | 监听短信 / 提取验证码 | tasks.js | [Sms.md](Sms.md) |
 | Files | 应用私有目录文件读写与路径 | 两者 | [Files.md](Files.md) |
 | Env | 目录 File 句柄（优先用 Files 路径） | 两者 | [Env.md](Env.md) |
 | Http | GET/POST、上传下载、流式 POST | 两者 | [Http.md](Http.md) |
@@ -20,7 +21,7 @@
 | FloatWindow | 项目悬浮球菜单：绑定、更新、收起 | 两者 | [FloatWindow.md](FloatWindow.md) |
 | FloatPage | 悬浮窗（floats/ + setData） | 两者 | [FloatPage.md](FloatPage.md) |
 | FloatDialogs | 后台弹窗、toast、悬浮球显隐与可点 | 两者 | [FloatDialogs.md](FloatDialogs.md) |
-| Device | 屏幕尺寸、机型、网络、位置、已装应用 | 两者 | [Device.md](Device.md) |
+| Device | 屏幕尺寸、机型、网络、位置、电量、亮度、已装应用 | 两者 | [Device.md](Device.md) |
 | DeekeScript | 框架版本、读项目文件、批量取节点原始数据 | tasks.js | [DeekeScript.md](DeekeScript.md) |
 | console | 打印调试；日志悬浮窗显示与样式 | 两者 | [console.md](console.md) |
 | Log | 把日志写入文件（不打印到控制台） | 两者 | [Log.md](Log.md) |

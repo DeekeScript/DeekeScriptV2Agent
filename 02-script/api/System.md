@@ -1,6 +1,6 @@
 # System
 
-休眠、时间、前台 Activity/包名、剪贴板、toast、等待界面、退出引擎、无障碍模式、常亮等。
+休眠、时间、前台 Activity/包名、剪贴板、toast、音量/振动、shell、等待界面、退出引擎、无障碍模式、常亮等。
 
 ## 可用上下文
 
@@ -24,13 +24,18 @@
 | waitForPackage | `waitForPackage(packageName, period, timeout)` | 包名；间隔；总超时 | `boolean` | 等到出现为 true，超时 false |
 | exit | `exit()` | 无 | `void` | 关闭脚本引擎 |
 | cleanUp | `cleanUp()` | 无 | `void` | 可用 |
-| AiSpeechToken | `AiSpeechToken(key: string, secret: string)` | key、secret | `string` | 远程 AI 话术 token（返回 body 字符串，需自行解析） |
-| generateWindowElements | `generateWindowElements()` | 无 | `void` | 把当前界面节点记入日志，便于排错 |
-| getDataFrom | `getDataFrom(key, dataForm, content)` | 配置 key、数据来源类型、内容类型 | `string \| null` | 取 dataForm 类型表单数据 |
 | setTimeWindowShow | `setTimeWindowShow(show: boolean)` | 是否显示 | `void` | 运行时间悬浮窗显隐 |
 | setAccessibilityMode | `setAccessibilityMode(mode: string)` | `'fast'` 快速；其它为正常 | `void` | 切换无障碍扫描。快速会过滤非重要节点；按 id/text 查找不受影响。立即生效 |
 | setKeepScreenOn | `setKeepScreenOn(keepOn: boolean)` | 是否常亮 | `void` | 通过右侧悬浮窗实现。无悬浮窗权限或隐藏了右侧悬浮窗则不生效 |
 | getLocaleInfo | `getLocaleInfo()` | 无 | `{ language, country, tag }` | 系统语言区域。需 Android 7.0+ |
+| vibrate | `vibrate(ms)` / `vibrate(pattern, repeat)` | 毫秒；或模式数组与 repeat（-1 不重复） | `void` | 振动 |
+| cancelVibrate | `cancelVibrate()` | 无 | `void` | 取消振动 |
+| getVolume | `getVolume(stream?)` | music/ring/notification/alarm/system/voice，默认 music | `number` | 当前音量 |
+| getMaxVolume | `getMaxVolume(stream?)` | 同上 | `number` | 最大音量 |
+| setVolume | `setVolume(volume)` / `setVolume(stream, volume)` | 音量或流+音量 | `boolean` | 设置音量 |
+| getRingerMode | `getRingerMode()` | 无 | `number` | 0 静音，1 振动，2 正常 |
+| setRingerMode | `setRingerMode(mode)` | 0/1/2 | `boolean` | 部分机型受勿扰限制可能失败 |
+| shell | `shell(cmd, root?)` | 命令；root 默认 false | `{ code, result, error }` | 执行 shell，超时 30s |
 
 d.ts 还列出与 locale 返回字段同名的属性 `language` / `country` / `tag`。请以 `getLocaleInfo()` 为准。
 
