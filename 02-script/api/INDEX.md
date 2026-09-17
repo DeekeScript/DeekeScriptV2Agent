@@ -6,7 +6,7 @@
 |------|------|------------|------|
 | UiSelector | 按 text/id/className 等筛选屏幕节点 | tasks.js | [UiSelector.md](UiSelector.md) |
 | UiObject | 对节点点击、输入、滚动、读属性 | tasks.js | [UiObject.md](UiObject.md) |
-| Gesture | 按坐标点击、滑动、返回/Home/最近任务 | tasks.js | [Gesture.md](Gesture.md) |
+| Gesture | 按坐标点击、滑动、多指手势、返回/Home/最近任务 | tasks.js | [Gesture.md](Gesture.md) |
 | App | 当前包名与版本、启动应用、打开 URL | 两者 | [App.md](App.md) |
 | System | 休眠、剪贴板、toast、音量/振动、shell、等界面、退出 | 两者 | [System.md](System.md) |
 | Storage | 键值存储；页面写入、脚本读取 | 两者 | [Storage.md](Storage.md) |
@@ -25,22 +25,24 @@
 | DeekeScript | 框架版本、读项目文件、批量取节点原始数据 | tasks.js | [DeekeScript.md](DeekeScript.md) |
 | console | 打印调试；日志悬浮窗显示与样式 | 两者 | [console.md](console.md) |
 | Log | 把日志写入文件（不打印到控制台） | 两者 | [Log.md](Log.md) |
-| Images | 截图、找图、找色、OCR | tasks.js | [Images.md](Images.md) |
+| Images | 截图、摄像头拍照、找图、找色、OCR | tasks.js | [Images.md](Images.md) |
 | Colors | OpenCV 找色（日常优先 Images） | tasks.js | [Colors.md](Colors.md) |
 | ScreenRecord | 屏幕录制（mp4） | 两者 | [ScreenRecord.md](ScreenRecord.md) |
 | MediaStore | 系统媒体库：图/视频/音频/下载/文档 | 两者 | [MediaStore.md](MediaStore.md) |
-| Audio | 音频播放 | 两者 | [Audio.md](Audio.md) |
+| Audio | 音频播放与麦克风录音 | 两者 | [Audio.md](Audio.md) |
 | KeyBoards | DeekeScript 输入法 | tasks.js | [KeyBoards.md](KeyBoards.md) |
 | Hid | 蓝牙 HID 点击/滑动/按键 | tasks.js | [Hid.md](Hid.md) |
 | Encrypt | MD5/SHA/Base64/AES | 两者 | [Encrypt.md](Encrypt.md) |
 | Threads | 创建线程（慎用，优先定时器或 Engines） | 两者 | [Threads.md](Threads.md) |
 | Timer | setTimeout / setInterval | 两者 | [timer.md](timer.md) |
 | Promise | Promise.then（无 async/await） | 两者 | [Promise.md](Promise.md) |
-| WebSocket | 原生 WebSocket | 两者 | [WebSocket.md](WebSocket.md) |
+| WebSocket | 原生 WebSocket 客户端 | 两者 | [WebSocket.md](WebSocket.md) |
 | SocketIoClient | Socket.IO 客户端 | 两者 | [SocketIo.md](SocketIo.md) |
 | NotificationBridge | 监听其它 App 通知 | tasks.js | [Notification.md](Notification.md) |
 | ForegroundServiceBridge | 前台服务保活 | tasks.js | [Foreground.md](Foreground.md) |
-| Intent | URI/Intent 打开 Activity | 两者 | [Intent.md](Intent.md) |
+| Intent | 构造/启动 Intent、发收广播与打开 URI | 两者 | [Intent.md](Intent.md) |
+| Events | 按键、亮灭屏、无障碍/窗口事件；可 emit 自定义 | tasks.js | [Events.md](Events.md) |
+| Sensors | 加速度计等传感器只读采样 | 两者 | [Sensors.md](Sensors.md) |
 | Cos | 腾讯云对象存储上传 | 两者 | [Cos.md](Cos.md) |
 | DevicePolicy | Device Owner：锁屏、亮屏 | 两者 | [DevicePolicy.md](DevicePolicy.md) |
 | DeviceApp | Device Owner：静默安装卸载与权限 | tasks.js | [DeviceApp.md](DeviceApp.md) |

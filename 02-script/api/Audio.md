@@ -1,6 +1,6 @@
 # Audio
 
-音频播放。支持网络流、`file://`、`content://`、绝对路径、`project://` 项目相对路径，以及默认按项目根解析的相对路径。
+音频播放与麦克风录音。播放支持网络流、`file://`、`content://`、绝对路径、`project://` 项目相对路径，以及默认按项目根解析的相对路径。录音需 `RECORD_AUDIO` 权限。
 
 ## 上下文
 
@@ -10,6 +10,8 @@
 | `tasks/*.js` | 是 |
 
 ## 方法
+
+播放：
 
 | 方法 | 参数 | 返回 | 说明 |
 |------|------|------|------|
@@ -31,6 +33,16 @@
 | `canPlayInBackground()` | 无 | `boolean` | 是否具备后台播放能力（查前台服务权限） |
 | `hasForegroundServicePermission()` | 无 | `boolean` | 是否已声明前台服务权限（Android 9+ 后台播放建议用前台服务） |
 
+录音（AAC / m4a，需 `RECORD_AUDIO`）：
+
+| 方法 | 参数 | 返回 | 说明 |
+|------|------|------|------|
+| `startRecord()` | 无 | `boolean` | 开始录音；默认写入 cache `record_时间戳.m4a` |
+| `startRecord(path)` | `path {string}` 可选 | `boolean` | 指定输出路径 |
+| `stopRecord()` | 无 | `string` | 停止并返回文件路径；失败返回 `""` |
+| `isRecording()` | 无 | `boolean` | 是否正在录音 |
+| `getRecordingPath()` | 无 | `string` | 当前录音输出路径 |
+
 ## 最小片段
 
 ```javascript
@@ -39,10 +51,18 @@ if (Audio.play('project://assets/bg_music.mp3')) {
   Audio.setVolume(0.5, 0.5);
   console.log('开始播放背景音乐');
 }
+
+// 录音
+if (Audio.startRecord()) {
+  System.sleep(3000);
+  let path = Audio.stopRecord();
+  console.log('录音文件：' + path);
+}
 ```
 
 ## 注意
 
 - 用完调用 `release()`。
+- 录音需系统已授予麦克风（`RECORD_AUDIO`）权限；已在录音中再 `startRecord` 会失败。
 - 后台播放查 `canPlayInBackground()` / `hasForegroundServicePermission()`。常驻任务见 [`Foreground.md`](./Foreground.md)。
 - 路径：`https://`、`file://`、`content://`、`/sdcard/...`、`project://assets/a.mp3`。

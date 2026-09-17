@@ -38,6 +38,12 @@
 | hasSmsPermission | `hasSmsPermission()` | 无 | `boolean` | 是否有短信接收权限（`Sms`） |
 | requestSmsPermission | `requestSmsPermission()` | 无 | `void` | 申请短信接收/读取 |
 | isSmsPermissionPermanentlyDenied | `isSmsPermissionPermanentlyDenied()` | 无 | `boolean` | 短信权限被永久拒绝 |
+| hasCameraPermission | `hasCameraPermission()` | 无 | `boolean` | 是否有摄像头权限（`Images.takePhoto`） |
+| requestCameraPermission | `requestCameraPermission()` | 无 | `void` | 申请摄像头；异步，需前台 Activity |
+| isCameraPermissionPermanentlyDenied | `isCameraPermissionPermanentlyDenied()` | 无 | `boolean` | 摄像头权限被永久拒绝 |
+| hasRecordAudioPermission | `hasRecordAudioPermission()` | 无 | `boolean` | 是否有麦克风权限（`Audio.startRecord`） |
+| requestRecordAudioPermission | `requestRecordAudioPermission()` | 无 | `void` | 申请麦克风 |
+| isRecordAudioPermissionPermanentlyDenied | `isRecordAudioPermissionPermanentlyDenied()` | 无 | `boolean` | 麦克风权限被永久拒绝 |
 | canWriteSettings | `canWriteSettings()` | 无 | `boolean` | 是否允许修改系统设置（亮度等） |
 | openWriteSettings | `openWriteSettings()` | 无 | `void` | 打开「修改系统设置」授权页 |
 
