@@ -25,13 +25,13 @@
 | DeekeScript | 框架版本、读项目文件、批量取节点原始数据 | tasks.js | [DeekeScript.md](DeekeScript.md) |
 | console | 打印调试；日志悬浮窗显示与样式 | 两者 | [console.md](console.md) |
 | Log | 把日志写入文件（不打印到控制台） | 两者 | [Log.md](Log.md) |
-| Images | 截图、摄像头拍照、找图、找色、OCR | tasks.js | [Images.md](Images.md) |
-| Colors | OpenCV 找色（日常优先 Images） | tasks.js | [Colors.md](Colors.md) |
+| Images | 截图、摄像头拍照、找图、找色、OCR；支持路径找图/容差找色/多点色 | tasks.js | [Images.md](Images.md) |
+| Colors | OpenCV 找色（日常优先 Images；支持 tolerance） | tasks.js | [Colors.md](Colors.md) |
 | ScreenRecord | 屏幕录制（mp4） | 两者 | [ScreenRecord.md](ScreenRecord.md) |
 | MediaStore | 系统媒体库：图/视频/音频/下载/文档 | 两者 | [MediaStore.md](MediaStore.md) |
 | Audio | 音频播放与麦克风录音 | 两者 | [Audio.md](Audio.md) |
 | KeyBoards | DeekeScript 输入法 | tasks.js | [KeyBoards.md](KeyBoards.md) |
-| Hid | 蓝牙 HID 点击/滑动/按键 | tasks.js | [Hid.md](Hid.md) |
+| Hid | 蓝牙 HID 点击/滑动/按键；含 tapImage/type/waitImage 等高层封装 | tasks.js | [Hid.md](Hid.md) |
 | Encrypt | MD5/SHA/Base64/AES | 两者 | [Encrypt.md](Encrypt.md) |
 | Threads | 创建线程（慎用，优先定时器或 Engines） | 两者 | [Threads.md](Threads.md) |
 | Timer | setTimeout / setInterval | 两者 | [timer.md](timer.md) |

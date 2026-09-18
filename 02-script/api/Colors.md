@@ -8,22 +8,39 @@
 
 ## 方法
 
-| 方法 | 签名 | 返回值 | 说明 |
-|------|------|--------|------|
-| getMat | `getMat(file: string)` | `Mat` | 从项目存储目录读图 |
-| getMatByAssetsFile | `getMatByAssetsFile(file: string)` | `Mat` | assets 示例目录 |
-| getMatByAssetFile | `getMatByAssetFile(file: string)` | `Mat` | assets 路径 |
-| find | `find(source: Mat, hexColor: string, rect?: Rect)` | `Point[]` | 按 `#RRGGBB` / `RRGGBB` 找色 |
-| show | `show(image: Mat)` | `void` | 调试打像素日志 |
-
-## 最小片段
+### getMat(file)
 
 ```javascript
 let mat = Colors.getMat('img/screen.png');
-let points = Colors.find(mat, 'FF0000');
-console.log(points.length);
+```
+
+### getMatByAssetsFile(file) / getMatByAssetFile(file)
+
+```javascript
+let mat1 = Colors.getMatByAssetsFile('demo.png');
+let mat2 = Colors.getMatByAssetFile('project/assets/img/a.png');
+```
+
+### find(source, hexColor, rect?, tolerance?)
+
+`#RRGGBB` / `RRGGBB`；自动处理 BGR/RGBA。
+
+```javascript
+let mat = Colors.getMat('img/screen.png');
+let points = Colors.find(mat, '#FF0000');
+let points2 = Colors.find(mat, 'FF0000', null, 5);
+console.log(points.length, points2.length);
+```
+
+### show(image)
+
+调试输出像素日志。
+
+```javascript
+Colors.show(Colors.getMat('img/screen.png'));
 ```
 
 ## 注意
 
+- 需要容差/区域/多点特征时，优先 `Images.findColor*` / `findMultiColors`。
 - 索引见 [`INDEX.md`](INDEX.md)。

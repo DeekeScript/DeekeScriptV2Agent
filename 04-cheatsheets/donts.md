@@ -7,9 +7,10 @@
 | 列表 `bind` 空数组指望自动 Empty | 自己放 `"type": "empty"` + `showIf` |
 | `webview` 不写 `style.height` | 必须写高度，否则默认 240dp |
 | HID / 图色 / 媒体不申请权限 | 图色与录屏 `Access.isMediaProjectionEnable`；媒体 `hasMediaReadPermission`；HID 蓝牙。见对应 API 卡 |
+| 纯 HID 脚本还手写 `capture`+`findOne`+`tap` | 优先 `Hid.tapImage` / `waitImage` / `type` / `ensureConnected`，见 [`Hid.md`](../02-script/api/Hid.md) |
 | DeviceApp 等 DO API 不先查 `isDeviceOwner` | 先 [`do-mode.md`](../02-script/api/do-mode.md) |
 | `executeScript` 写成 `./tasks` | 相对**项目根**：`tasks/sample.js`（与 `require` 不同） |
-| 默认用 KeyBoards 输入、且不检查状态 | 优先 `setText` / 剪贴板；要用输入法先 `KeyBoards.canInput()` |
+| 默认用 KeyBoards 输入、且不检查状态 | 优先 `setText` / 剪贴板；HID 模式用 `Hid.type`/`paste`；要用输入法先 `KeyBoards.canInput()` |
 | 找到「发送」但 `clickable=false` 就放弃 | 点 `parent()`，或 `Gesture.click` 中心；点坐标前可 `FloatDialogs.setFloatWindowClickable(false)` |
 | 有 `FloatDialogs.show` 却不关弹窗就点节点 | 开始前 `FloatDialogs.closeAll()` |
 | 用页面根 `title` 同时又放 `navBar` | 自制顶栏时 `"title": { "hidden": true }` |
