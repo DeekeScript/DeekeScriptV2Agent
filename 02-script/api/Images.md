@@ -1,6 +1,6 @@
 # Images
 
-截图、摄像头拍照、找图、找色、裁剪、缩放、文字识别。截图被运行时间悬浮窗挡住时，先 `System.setTimeWindowShow(false)`。
+截图、摄像头拍照、找图、裁剪、缩放。文字识别见 [`Ocr.md`](./Ocr.md)；日常取色/找色见下方「颜色」；OpenCV `Mat` 找色见 [`Colors.md`](./Colors.md)。截图被运行时间悬浮窗挡住时，先 `System.setTimeWindowShow(false)`。
 
 ## 上下文
 
@@ -84,86 +84,9 @@ let cropped = Images.crop(Images.capture(), 0, 0, 200, 200);
 let scaled = Images.scale(cropped, 0.5);
 ```
 
-## 文字
-
-匹配模式 `mode`：`contains`（默认）/ `exact` / `regex`。`TextAndRegion`：`text` `rect` `confidence`。
-
-### getTextAndRegion(file)
-
-```javascript
-let lines = Images.getTextAndRegion(Images.capture());
-console.log(lines[0].text, lines[0].confidence);
-```
-
-### getTextAndRegionInRegion(file, l, t, w, h)
-
-```javascript
-let lines = Images.getTextAndRegionInRegion(Images.capture(), 0, 0, 1080, 600);
-```
-
-### getText(file) / getTextInRegion(...)
-
-```javascript
-let all = Images.getText(Images.capture());
-let part = Images.getTextInRegion(Images.capture(), 0, 100, 1080, 400);
-```
-
-### ocr() / ocr(l, t, w, h)
-
-```javascript
-let lines = Images.ocr();
-let regionLines = Images.ocr(0, 0, 1080, 500);
-```
-
-### hasText / hasTextExact / hasTextMatches
-
-```javascript
-Images.hasText(screen, '登录');
-Images.hasTextExact(screen, '确定');
-Images.hasTextMatches(screen, '\\d{4,}');
-```
-
-### findText / findTextExact / findTextMatches
-
-```javascript
-let hits = Images.findText(screen, '关注');
-let exact = Images.findTextExact(screen, '下一步');
-let reg = Images.findTextMatches(screen, '￥\\d+');
-```
-
-### findTextFirst / findTextCenter
-
-```javascript
-let first = Images.findTextFirst(screen, '搜索');
-let p = Images.findTextCenter(screen, '登录');
-if (p) Hid.tap(p.x, p.y);
-```
-
-### findTextPosition(file, kw, mode?)
-
-```javascript
-let rects = Images.findTextPosition(screen, '百度一下');
-```
-
-### findTextInRegion
-
-```javascript
-// 旧：区域内字符串
-let arr = Images.findTextInRegion(screen, 0, 0, 1080, 1920);
-// 新：区域内按关键字，带坐标
-let hits = Images.findTextInRegion(screen, '关注', 0, 200, 1080, 800);
-```
-
-### waitText / waitTextGone
-
-```javascript
-Images.waitText('加载完成', 10000);
-Images.waitTextGone('加载中', 8000);
-```
-
 ## 颜色
 
-颜色格式：`rgba(...)` / `rgb(...)` / `#RRGGBB`。
+颜色格式：`rgba(...)` / `rgb(...)` / `#RRGGBB`。下列均在 `Images` 上。
 
 ### getColor / getColorHex
 
@@ -198,4 +121,4 @@ let p = Images.findMultiColors(screen, '#FF0000', [[10, 0, '#00FF00'], [0, 10, '
 
 - 未开录屏权限不要 `capture()`。
 - 找图阈值常用 `0.8`。未找到为 `null`。
-- 相关：[`Access.md`](./Access.md)、[`Hid.md`](./Hid.md)、[`Colors.md`](./Colors.md)。
+- 相关：[`Ocr.md`](./Ocr.md)、[`Access.md`](./Access.md)、[`Hid.md`](./Hid.md)、[`Colors.md`](./Colors.md)。

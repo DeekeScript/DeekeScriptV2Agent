@@ -12,7 +12,7 @@
 ## 前置权限与硬件
 
 1. 蓝牙：`Access.hasBluetoothConnectionPermission()`；再 `Hid.initBluetooth(context)`。
-2. 图色联动还需录屏：`Access.isMediaProjectionEnable()`，见 [`Images.md`](./Images.md)。
+2. 图色联动还需录屏：`Access.isMediaProjectionEnable()`，见 [`Images.md`](./Images.md) / [`Ocr.md`](./Ocr.md)。
 
 ```javascript
 if (!Access.hasBluetoothConnectionPermission()) {
@@ -132,6 +132,6 @@ Hid.waitText('完成', 10000);
 
 ## 注意
 
-- HID 不做 `UiSelector`。纯 HID 用 [`Images.md`](./Images.md) + 上表图色联动。
+- HID 不做 `UiSelector`。纯 HID 用 [`Images.md`](./Images.md) / [`Ocr.md`](./Ocr.md) + 上表图色联动。
 - `waitFor` 是等 **BLE 数据**，不是等 UI。
-- 相关：[`Access.md`](./Access.md)、[`Images.md`](./Images.md)。
+- 相关：[`Access.md`](./Access.md)、[`Images.md`](./Images.md)、[`Ocr.md`](./Ocr.md)。

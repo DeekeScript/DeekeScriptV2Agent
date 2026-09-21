@@ -95,7 +95,8 @@
 
 | 需求 | 打开 |
 |------|------|
-| 图色 / OCR | [Images.md](./02-script/api/Images.md) |
+| 图色 / 找图找色 | [Images.md](./02-script/api/Images.md) |
+| OCR 识字 | [Ocr.md](./02-script/api/Ocr.md) |
 | 屏幕录制 | [ScreenRecord.md](./02-script/api/ScreenRecord.md) |
 | 悬浮窗 | [FloatPage.md](./02-script/api/FloatPage.md) |
 | 蓝牙 HID | [Hid.md](./02-script/api/Hid.md) |

@@ -25,7 +25,8 @@
 | DeekeScript | 框架版本、读项目文件、批量取节点原始数据 | tasks.js | [DeekeScript.md](DeekeScript.md) |
 | console | 打印调试；日志悬浮窗显示与样式 | 两者 | [console.md](console.md) |
 | Log | 把日志写入文件（不打印到控制台） | 两者 | [Log.md](Log.md) |
-| Images | 截图、摄像头拍照、找图、找色、OCR；支持路径找图/容差找色/多点色 | tasks.js | [Images.md](Images.md) |
+| Images | 截图、摄像头拍照、找图、找色；支持路径找图/容差找色/多点色 | tasks.js | [Images.md](Images.md) |
+| Ocr | Images 上的文字识别（区域/正则/等待） | tasks.js | [Ocr.md](Ocr.md) |
 | Colors | OpenCV 找色（日常优先 Images；支持 tolerance） | tasks.js | [Colors.md](Colors.md) |
 | ScreenRecord | 屏幕录制（mp4） | 两者 | [ScreenRecord.md](ScreenRecord.md) |
 | MediaStore | 系统媒体库：图/视频/音频/下载/文档 | 两者 | [MediaStore.md](MediaStore.md) |

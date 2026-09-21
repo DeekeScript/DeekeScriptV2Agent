@@ -1,6 +1,6 @@
 # Colors
 
-基于 OpenCV 的颜色查找（`Mat`）。日常找色/截图优先用 [`Images`](Images.md)。
+基于 OpenCV 的颜色查找（`Mat`）。日常找色/截图优先用 [`Images`](Images.md) 上的 `getColor` / `findColor*`。
 
 ## 可用上下文
 
