@@ -8,6 +8,8 @@
 | UiObject | 对节点点击、输入、滚动、读属性 | tasks.js | [UiObject.md](UiObject.md) |
 | Gesture | 按坐标点击、滑动、返回/Home/最近任务 | tasks.js | [Gesture.md](Gesture.md) |
 | App | 当前包名与版本、启动应用、打开 URL | 两者 | [App.md](App.md) |
+| Alipay | 支付宝 App 支付（orderString → PayTask） | 两者 | [Alipay.md](Alipay.md) |
+| QrCode | 本地生成二维码图片（ZXing） | 两者 | [QrCode.md](QrCode.md) |
 | System | 休眠、剪贴板、toast、等界面、退出 | 两者 | [System.md](System.md) |
 | Storage | 键值存储；页面写入、脚本读取 | 两者 | [Storage.md](Storage.md) |
 | Http | GET/POST、上传下载、流式 POST | 两者 | [Http.md](Http.md) |

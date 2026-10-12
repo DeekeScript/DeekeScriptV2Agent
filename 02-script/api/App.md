@@ -38,4 +38,5 @@ App.launch('top.deeke.script');
 ## 注意
 
 - 从后台拉起其它 App，部分机型还要后台弹窗权限，见 [`Access`](Access.md) / [`permission.md`](../permission.md)。
+- 支付宝 **App 支付**（`orderString`）用 [`Alipay`](Alipay.md)，不要用 `openUrl` 冒充 App 收银台。
 - 索引见 [`INDEX.md`](INDEX.md)。
