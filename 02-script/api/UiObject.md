@@ -24,6 +24,8 @@
 | find | `find(obj: UiSelector)` | 子选择器 | `UiObject[]` | 当前节点子孙中所有符合条件的节点 |
 | findOne | `findOne(obj: UiSelector)` | 子选择器 | `UiObject` | 子孙中第一个符合条件的节点 |
 | bounds | `bounds()` | 无 | `Rect` | 屏幕上的边界。`Rect` 含 `left`/`top`/`right`/`bottom`，以及 `width()`/`height()`/`centerX()`/`centerY()` |
+| highlight | `highlight(seconds?: number, strokeDp?: number, color?: string\|number)` | 均可省略：秒数默认 2、线宽默认 1、颜色默认蓝 | `boolean` | 框选闪烁；阻塞到结束；新一次清掉上一次。颜色支持 `#RGB`/`#RRGGBB`/`#AARRGGBB`、`rgba(r,g,b,a)`、数字 ARGB |
+| clearHighlight | `clearHighlight()` | 无 | `boolean` | 立刻清掉当前高亮（若有） |
 | text | `text()` | 无 | `string` | 文本 |
 | desc | `desc()` | 无 | `string` | 描述（contentDescription） |
 | id | `id()` | 无 | `string` | 资源 id |

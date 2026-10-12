@@ -2,7 +2,7 @@
 
 布尔开关：左侧文案，右侧滑动开关，不是勾选框。
 
-**启停 / 开关键闭状态用 `switch`，不要用「启用」「停用」按钮切换。** 列表行内同样用 `switch`；删除等一次性动作才用小按钮。完整列表配方见 [`list-manage.md`](../../03-recipes/list-manage.md)。
+**启停 / 开关闭状态用 `switch`，不要用「启用」「停用」按钮切换。** 列表行内同样用 `switch`；删除等一次性动作才用小按钮。完整列表配方见 [`list-manage.md`](../../03-recipes/list-manage.md)。
 
 通用字段见 [通用字段](./_common.md)。
 
@@ -10,6 +10,7 @@
 |--------|------|------|
 | name | String | 对应 `data` 中的键。页面根表单必填。列表行内可省略，用 `e.item` / `e.index` 定位 |
 | label | String | 开关说明（表单整行时常用；列表行内可省略，文案放旁边 `text`） |
+| size | String | `sm` / `小` 行高约 36dp；`md` / `中` 约 42dp；`lg` / `大` 约 48dp（默认）。别名同 [`button`](./button.md) |
 | value | Boolean / String | 页面根表单的默认值。列表未写 `value` 时默认读 `item.enabled`。整段 `{{item.enabled}}` 会保留布尔，不要再靠字符串插值判断开/关 |
 | onChange | String | 切换时调用。`e.value` 为布尔。写在 list / grid 行内时还有 `e.item`、`e.index`；写了 `name` 时有 `e.name` |
 | style.color | String | 打开后轨道和滑块颜色。不写则跟 `window.theme.primary`。**不要写 `style.background`**，否则会给整行刷底 |
@@ -28,6 +29,18 @@
 { "type": "switch", "name": "blue", "label": "蓝色开关", "value": true, "style": { "color": "#1565C0" } }
 ```
 
+```json
+{ "type": "switch", "name": "compact", "label": "紧凑开关", "size": "sm", "style": { "color": "#0B6E6A" } }
+```
+
+## 什么时候用大 / 小
+
+| 场景 | size | 说明 |
+|------|------|------|
+| 设置页整行开关 | 默认大 / `lg` | 与表单其它控件对齐 |
+| 卡片内多行开关、参数页功能开关 | `sm` 或 `md` | 更紧凑，避免占高 |
+| 列表行内启停 | **建议 `sm`** | 与行内小按钮高度更协调 |
+
 ## 列表行内（启停 + 小删除）
 
 ```json
@@ -36,7 +49,7 @@
   "style": { "gap": 8, "valign": "center" },
   "children": [
     { "type": "text", "text": "{{item.content}}", "style": { "weight": 1 } },
-    { "type": "switch", "onChange": "onToggle" },
+    { "type": "switch", "size": "sm", "onChange": "onToggle" },
     {
       "type": "button",
       "text": "删除",

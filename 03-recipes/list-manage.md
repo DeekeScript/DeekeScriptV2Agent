@@ -61,6 +61,7 @@
               },
               {
                 "type": "switch",
+                "size": "sm",
                 "onChange": "onToggle"
               },
               {

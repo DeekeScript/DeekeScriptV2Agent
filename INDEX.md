@@ -62,7 +62,7 @@
 | [02-script/pitfalls/skip-on-item-failure.md](./02-script/pitfalls/skip-on-item-failure.md) | 刷流：单条失败 skip |
 | [02-script/pitfalls/keep-host-alive.md](./02-script/pitfalls/keep-host-alive.md) | 操作第三方 App：禁止连按返回把 DeekeScript 退出 |
 
-常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`Alipay`、`QrCode`、`System`、`Storage`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`、`FloatPage`。
+常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`Alipay`、`QrCode`、`System`、`Storage`、`Sqlite`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`、`FloatPage`。
 
 ## 配方（抄文件清单与片段）
 
@@ -95,7 +95,8 @@
 
 | 需求 | 打开 |
 |------|------|
-| 图色 / OCR | [Images.md](./02-script/api/Images.md) |
+| 图色 / 找图找色 | [Images.md](./02-script/api/Images.md) |
+| OCR 识字 | [Ocr.md](./02-script/api/Ocr.md) |
 | 屏幕录制 | [ScreenRecord.md](./02-script/api/ScreenRecord.md) |
 | 悬浮窗 | [FloatPage.md](./02-script/api/FloatPage.md) |
 | 蓝牙 HID | [Hid.md](./02-script/api/Hid.md) |

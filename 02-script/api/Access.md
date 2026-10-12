@@ -1,6 +1,6 @@
 # Access
 
-检查与申请权限。无障碍、悬浮窗是自动化默认门槛；其它按需申请。封装用法见 [`../permission.md`](../permission.md)。
+检查与申请权限。无障碍、悬浮窗等均由开发者在脚本里用 `Access` 检查并引导开启；其它权限按需申请。封装用法见 [`../permission.md`](../permission.md)。
 
 ## 可用上下文
 
@@ -35,6 +35,17 @@
 | requestBluetoothConnectionPermission | `requestBluetoothConnectionPermission()` | 无 | `void` | 申请蓝牙 |
 | isBluetoothPermissionPermanentlyDenied | `isBluetoothPermissionPermanentlyDenied()` | 无 | `boolean` | 蓝牙权限被永久拒绝 |
 | openBluetoothPermissionSettings | `openBluetoothPermissionSettings()` | 无 | `void` | 打开蓝牙相关设置 |
+| hasSmsPermission | `hasSmsPermission()` | 无 | `boolean` | 是否有短信接收权限（`Sms`） |
+| requestSmsPermission | `requestSmsPermission()` | 无 | `void` | 申请短信接收/读取 |
+| isSmsPermissionPermanentlyDenied | `isSmsPermissionPermanentlyDenied()` | 无 | `boolean` | 短信权限被永久拒绝 |
+| hasCameraPermission | `hasCameraPermission()` | 无 | `boolean` | 是否有摄像头权限（`Images.takePhoto`） |
+| requestCameraPermission | `requestCameraPermission()` | 无 | `void` | 申请摄像头；异步，需前台 Activity |
+| isCameraPermissionPermanentlyDenied | `isCameraPermissionPermanentlyDenied()` | 无 | `boolean` | 摄像头权限被永久拒绝 |
+| hasRecordAudioPermission | `hasRecordAudioPermission()` | 无 | `boolean` | 是否有麦克风权限（`Audio.startRecord`） |
+| requestRecordAudioPermission | `requestRecordAudioPermission()` | 无 | `void` | 申请麦克风 |
+| isRecordAudioPermissionPermanentlyDenied | `isRecordAudioPermissionPermanentlyDenied()` | 无 | `boolean` | 麦克风权限被永久拒绝 |
+| canWriteSettings | `canWriteSettings()` | 无 | `boolean` | 是否允许修改系统设置（亮度等） |
+| openWriteSettings | `openWriteSettings()` | 无 | `void` | 打开「修改系统设置」授权页 |
 
 ## 最小片段
 
@@ -50,6 +61,6 @@ if (!Access.isAccessibilityServiceEnabled()) {
 
 ## 注意
 
-- 工程默认检查无障碍 + 悬浮窗，不要假设系统已自动弹过。
+- 无障碍、悬浮窗等均由开发者在页面 / 任务脚本里自行检查并引导，不要假设框架会自动弹窗。
 - 永久拒绝时打开设置页，不要反复 `requestXxx`。
 - 授权后回到页面再启动脚本。索引见 [`INDEX.md`](INDEX.md)。

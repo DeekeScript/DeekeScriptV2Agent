@@ -1,6 +1,6 @@
 # Device
 
-屏幕、系统版本、机型、网络、位置、已安装应用。
+屏幕、系统版本、机型、网络、位置、电量、亮度、已安装应用。
 
 ## 可用上下文
 
@@ -52,6 +52,24 @@ d.ts 里还有一批与返回对象字段同名的属性（如 `ipv4`、`latitud
 | getNavigationBarHeight | `getNavigationBarHeight()` | 无 | `number` | 底部导航栏高度；隐藏或物理键为 0 |
 | getInstalledPackages | `getInstalledPackages()` | 无 | `string[]` | 已装应用包名 |
 | getInstalledApplications | `getInstalledApplications()` | 无 | 数组 | 每项含 packageName、appName、versionName、versionCode |
+| getBattery | `getBattery()` | 无 | `{ level, isCharging, status, plugged, temperature, voltage }` | 电量 0–100；plugged 为 ac/usb/wireless/none |
+| isScreenOn | `isScreenOn()` | 无 | `boolean` | 屏幕是否亮着 |
+| wakeUp | `wakeUp(millis?)` | 可选保持毫秒，默认约 3000 | `void` | 点亮屏幕；不保证解锁 |
+| getMemoryInfo | `getMemoryInfo()` | 无 | `{ totalMem, availMem, threshold, lowMemory }` | 内存字节与是否低内存 |
+| getBrightness | `getBrightness()` | 无 | `number` | 系统亮度 0–255；失败 -1 |
+| setBrightness | `setBrightness(value)` | 0–255 | `boolean` | 需修改系统设置权限；会切到手动亮度 |
+| isAutomaticBrightness | `isAutomaticBrightness()` | 无 | `boolean` | 是否自动亮度 |
+| setAutomaticBrightness | `setAutomaticBrightness(auto)` | 是否自动 | `boolean` | 需修改系统设置权限 |
+| canWriteSettings | `canWriteSettings()` | 无 | `boolean` | 是否已允许修改系统设置 |
+| openWriteSettings | `openWriteSettings()` | 无 | `void` | 打开系统设置授权页 |
+
+亮度写入前：
+
+```javascript
+if (!Device.canWriteSettings()) {
+  Device.openWriteSettings(); // 或 Access.openWriteSettings()
+}
+```
 
 ## 最小片段
 

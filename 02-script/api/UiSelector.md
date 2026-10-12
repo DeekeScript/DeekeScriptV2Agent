@@ -16,22 +16,15 @@
 | 方法 | 签名 | 参数 | 返回值 | 说明 |
 |------|------|------|--------|------|
 | UiSelector | `UiSelector(simpleMode?: boolean)` | `simpleMode` 可选，默认简单模式 | `UiSelector` | 创建选择器 |
-| setLevel | `setLevel(level: number)` | `level` 层级 | `UiSelector` | 限制查找层级 |
-| getLevel | `getLevel()` | 无 | `number` | 当前层级限制 |
 | id | `id(id: string)` | 资源 id | `UiSelector` | 节点 id 等于该字符串（viewIdResourceName） |
 | className | `className(className: string)` | 类名，如 `TextView` | `UiSelector` | className 等于该字符串 |
-| classNameMatches | `classNameMatches(className: string)` | 正则或字符串 | `UiSelector` | className 正则匹配 |
 | bounds | `bounds(left, top, right, bottom)` | 四边相对屏幕的距离 | `UiSelector` | 按 bounds 范围筛选 |
 | text | `text(text: string)` | 完整文本 | `UiSelector` | text 等于该字符串 |
 | textContains | `textContains(text: string)` | 子串 | `UiSelector` | text 包含该字符串；可链式多次 |
 | textMatches | `textMatches(text: string)` | 正则或字符串 | `UiSelector` | text 正则匹配；普通字符串效果接近包含 |
-| textStartsWith | `textStartsWith(text: string)` | 前缀 | `UiSelector` | text 以前缀开头 |
-| textEndsWith | `textEndsWith(text: string)` | 后缀 | `UiSelector` | text 以后缀结尾 |
 | desc | `desc(desc: string)` | 完整描述 | `UiSelector` | contentDescription 等于该字符串 |
 | descContains | `descContains(desc: string)` | 子串 | `UiSelector` | 描述包含该字符串 |
 | descMatches | `descMatches(desc: string)` | 正则或字符串 | `UiSelector` | 描述正则匹配 |
-| descStartsWith | `descStartsWith(desc: string)` | 前缀 | `UiSelector` | 描述以前缀开头 |
-| descEndsWith | `descEndsWith(desc: string)` | 后缀 | `UiSelector` | 描述以后缀结尾 |
 | clickable | `clickable(bool: boolean)` | 是否可点击 | `UiSelector` | |
 | selected | `selected(bool: boolean)` | 是否已选择 | `UiSelector` | |
 | checked | `checked(bool: boolean)` | 是否被选中 | `UiSelector` | |

@@ -1,6 +1,6 @@
 # Notification
 
-监听其它 App 发出的系统通知。全局对象名是 `NotificationBridge`。
+监听其它 App 发出的系统通知。全局对象名是 `NotificationBridge`。短信验证码若走通知栏，可优先用本模块，见 [`Sms.md`](Sms.md)。
 
 ## 上下文
 

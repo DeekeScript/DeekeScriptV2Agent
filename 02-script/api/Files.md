@@ -50,6 +50,8 @@
 | isExternalStorageReadable | `isExternalStorageReadable()` | 无 | `boolean` | 外部存储可读 |
 | getExtension | `getExtension(path: string)` | 路径 | `string` | 扩展名不含点；无则空串 |
 | getNameWithoutExtension | `getNameWithoutExtension(path: string)` | 路径 | `string` | 不含扩展名的文件名 |
+| zip | `zip(sourcePath, zipPath)` | 源文件/目录、目标 zip | `boolean` | 压缩 |
+| unzip | `unzip(zipPath, destDir)` | zip、目标目录 | `boolean` | 解压（防 zip slip） |
 
 读项目内脚本/配置文件也可用 [`DeekeScript.readFile`](DeekeScript.md)（相对 JS 项目根）。
 
