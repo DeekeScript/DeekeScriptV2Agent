@@ -35,14 +35,15 @@ if (!permission.ensureRun()) {
 - `ensureRun()` **只检查无障碍 + 悬浮窗**。都开了返回 `true`。
 - `Dialogs.confirm` 是异步回调：`ensureRun` / `ensureXxx` 弹出后立刻返回 `false`。调用方必须 `if (!permission.ensureRun())` 后停止。
 - 不要把 Demo 的 `hint()` 写进工程。
-- 图色 / 通知 / 媒体 / 文件 / 位置 / 蓝牙：用到再调对应 `ensureXxx`。
+- 图色 / 通知 / 媒体 / 文件 / 位置 / 蓝牙 / 电池优化：用到再调对应 `ensureXxx`。
 - 已被永久拒绝的权限，走设置页，不要反复 `requestXxx`。
 - `runScript(jsFile)` 的路径相对**项目根**。
+- 省电限制：`ensureBatteryHint()` 检查 `Access.isIgnoringBatteryOptimizations()`，未豁免则引导 `requestIgnoreBatteryOptimizations()`；也可直接用 `Access.openIgnoreBatteryOptimizationSettings()`。
 
 ## 生成文件
 
 需要权限模块时：把 [`snippets/common-permission.js`](snippets/common-permission.js) **整文件复制**为工程里的 `common/permission.js`。不要改导出表结构。
 
-导出：`ensureRun`、`runScript`、`ensureAccessibility`、`ensureFloat`、`ensureScreenCapture`（截图与 ScreenRecord 共用）、`ensureBackgroundAlert`、`ensureNotification`、`ensureMedia`、`ensureStorage`、`ensureLocation`、`ensureBluetooth`。
+导出：`ensureRun`、`runScript`、`ensureAccessibility`、`ensureFloat`、`ensureScreenCapture`（截图与 ScreenRecord 共用）、`ensureBackgroundAlert`、`ensureNotification`、`ensureMedia`、`ensureStorage`、`ensureLocation`、`ensureBluetooth`、`ensureBatteryHint`、`openBatteryIgnore`。
 
 任务骨架见 [`task-template.md`](task-template.md)。

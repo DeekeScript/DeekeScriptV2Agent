@@ -46,6 +46,9 @@
 | isRecordAudioPermissionPermanentlyDenied | `isRecordAudioPermissionPermanentlyDenied()` | 无 | `boolean` | 麦克风权限被永久拒绝 |
 | canWriteSettings | `canWriteSettings()` | 无 | `boolean` | 是否允许修改系统设置（亮度等） |
 | openWriteSettings | `openWriteSettings()` | 无 | `void` | 打开「修改系统设置」授权页 |
+| isIgnoringBatteryOptimizations | `isIgnoringBatteryOptimizations()` | 无 | `boolean` | 是否已忽略电池优化（省电白名单 / 不优化本应用） |
+| requestIgnoreBatteryOptimizations | `requestIgnoreBatteryOptimizations()` | 无 | `boolean` | 弹出系统确认框，请求忽略电池优化；已忽略返回 `true`，失败会打开设置列表并返回 `false` |
+| openIgnoreBatteryOptimizationSettings | `openIgnoreBatteryOptimizationSettings()` | 无 | `void` | 打开系统「电池优化」应用列表（与底座设置页「电池优化豁免」同一入口） |
 
 ## 最小片段
 
@@ -59,8 +62,22 @@ if (!Access.isAccessibilityServiceEnabled()) {
 }
 ```
 
+```javascript
+// 省电限制 / 电池优化豁免（保活常用）
+if (!Access.isIgnoringBatteryOptimizations()) {
+  Dialogs.confirm('提示', '请允许忽略电池优化，避免脚本被系统杀掉', function (ok) {
+    if (ok) {
+      Access.requestIgnoreBatteryOptimizations();
+      // 部分机型对话框无效时，可改用：
+      // Access.openIgnoreBatteryOptimizationSettings();
+    }
+  });
+}
+```
+
 ## 注意
 
 - 无障碍、悬浮窗等均由开发者在页面 / 任务脚本里自行检查并引导，不要假设框架会自动弹窗。
 - 永久拒绝时打开设置页，不要反复 `requestXxx`。
 - 授权后回到页面再启动脚本。索引见 [`INDEX.md`](INDEX.md)。
+- 电池优化：`requestIgnoreBatteryOptimizations` 需 Manifest 已声明 `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS`（底座已声明）；部分国产 ROM 可能忽略该 Intent，可回退到 `openIgnoreBatteryOptimizationSettings`。

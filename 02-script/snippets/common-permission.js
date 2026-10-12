@@ -124,6 +124,19 @@ function ensureRun() {
   });
 }
 
+function openBatteryIgnore() {
+  Access.openIgnoreBatteryOptimizationSettings();
+}
+
+function ensureBatteryHint() {
+  if (Access.isIgnoringBatteryOptimizations()) {
+    return true;
+  }
+  return confirmOpen('请允许忽略电池优化，避免脚本被系统杀掉', function () {
+    Access.requestIgnoreBatteryOptimizations();
+  });
+}
+
 function runScript(jsFile) {
   if (!jsFile) {
     Dialogs.show('提示', '没有可执行的脚本文件');
@@ -147,5 +160,7 @@ module.exports = {
   ensureMedia: ensureMedia,
   ensureStorage: ensureStorage,
   ensureLocation: ensureLocation,
-  ensureBluetooth: ensureBluetooth
+  ensureBluetooth: ensureBluetooth,
+  ensureBatteryHint: ensureBatteryHint,
+  openBatteryIgnore: openBatteryIgnore
 };
