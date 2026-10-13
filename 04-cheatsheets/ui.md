@@ -47,7 +47,7 @@
 | `picker` | `name` `options` | 固定文案滚轮；日期时间不要用 picker |
 | `segmented` | `name` `options` | 一行互斥分段 |
 | `tabs` | `name` `options` / `children` | 选项卡 |
-| `navBar` | `title` `leftText` `onLeft` `onRight` | 页内导航栏。系统顶栏用页面 `title` |
+| `navBar` | `title` `leftText` `onLeft` `onRight` | 页内导航栏。系统顶栏用页面 `title`；右上角按钮用 `title.right`（`icon`/`text` + `onTap`） |
 | `sideBar` | `name` `items` | 左侧分类轨 |
 | `indexBar` | `bind` `item` `indexKey` | 通讯录字母轨 |
 | `steps` | `name` `value` `items` | 步骤条，下标从 0 |

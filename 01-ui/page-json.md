@@ -35,6 +35,18 @@
 | fontWeight | String | `bold` |
 | align | String | `left` / `center` / `right` |
 | style | Object | 也可把 fontSize / color 等写在 `style` 里 |
+| right / actions / rightActions | Object / Array | 右上角按钮。单项或数组均可 |
+
+### title.right 项
+
+| 参数名 | 类型 | 说明 |
+|--------|------|------|
+| icon / src / image | String | 图标路径（png / svg），与 `text` 至少写一个 |
+| text / title / label | String | 文案按钮；有 `icon` 时作无障碍描述 |
+| onTap / onClick | String | 轻触调用的 `Page` 方法 |
+| action | Object | JSON action（`navigate` / `toast` / `back` 等） |
+| size | Number | 图标边长 dp，默认 24 |
+| color / tint / iconColor | String | 可选着色；彩色 SVG 一般不必写 |
 
 ```json
 {
@@ -59,8 +71,26 @@
 ```
 
 ```json
+{
+  "title": {
+    "text": "话术",
+    "fontSize": 17,
+    "color": "#FFFFFF",
+    "background": "#0B6E6A",
+    "right": [
+      { "icon": "img/add.svg", "text": "添加", "onTap": "onOpenAdd" }
+    ]
+  }
+}
+```
+
+```json
 { "title": { "text": "关于", "hidden": true } }
 ```
+
+系统顶栏右侧用 `title.right`。页内自绘顶栏用 [navBar](./components/navBar.md)（配合 `title.hidden: true`）。不要叠两套顶栏。
+
+工程示例：`pages/titleBar`（组件列表「顶栏右侧」）。
 
 ## 内容区与状态栏
 
