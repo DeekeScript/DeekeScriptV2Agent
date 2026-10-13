@@ -82,6 +82,8 @@
 | margin | Number | 四边外边距 dp |
 | marginTop / marginRight / marginBottom / marginLeft | Number | 单边外边距 |
 | background | String | 背景色。button 不写则跟 `window.theme.primary` |
+| borderWidth | Number | 描边宽度 dp。与 `borderColor` 一起用 |
+| borderColor | String | 描边颜色。`#RRGGBB` / `#AARRGGBB`，也支持 `{{path}}` |
 | radius | Number | 圆角 dp |
 | fontSize | Number | 字号 sp |
 | color | String | 文字颜色 |
@@ -96,5 +98,5 @@
 ## 注意
 
 - `sticky` 只对 `body` 第一层有效，写在嵌套子节点上无效。
-- 文案、路径类字段支持 `{{path}}`，对应 `Page.data`。`style` 里的 `background` / `color` 也支持 `{{path}}`。
+- 文案、路径类字段支持 `{{path}}`，对应 `Page.data`。`style` 里的 `background` / `color` / `borderColor` 也支持 `{{path}}`。
 - 列表循环里用 `{{item}}`、`{{item.xxx}}`、`{{index}}`，见 [list](./list.md)。

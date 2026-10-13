@@ -1,6 +1,6 @@
 # card
 
-白底圆角容器，可整体绑定 `action`。写上 `name` 和 `value` 后变成**可选中卡片**：同一 `name` 对应 `data` 里的字段，选中后底色变成浅绿并带边框。
+白底圆角容器，可整体绑定 `action`。写上 `name` 和 `value` 后变成**可选中卡片**：同一 `name` 对应 `data` 里的字段。未选中用 `style.background` / `style.borderColor` / `style.borderWidth`；选中用 `selectedBackground`（默认 `#E6F2F0`），描边用 `selectedBorder`（不写则跟选中底色）。
 
 卡片本身不改选中态，要点了之后在 `page.js` 里 `setData`，其它卡片才会跟着变。`multiple: true` 时值为数组，可多选。
 
@@ -13,6 +13,8 @@
 | value | String | 该卡片代表的选项值 |
 | multiple | Boolean | `true` 为多选，值为数组；默认多选一 |
 | selectedBackground | String | 选中底色，默认 `#E6F2F0` |
+| selectedBorder | String | 选中描边色。不写则跟 `selectedBackground` |
+| selectedColor | String | 选中后卡片内文字颜色。不写则白字 |
 | onTap | String | 轻触时调用的 `Page` 方法，`e.value` 是该卡片的 `value` |
 | action | Object | 整卡点击动作 |
 
