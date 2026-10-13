@@ -10,6 +10,7 @@
 | App | 当前包名与版本、启动应用、打开 URL | 两者 | [App.md](App.md) |
 | Alipay | 支付宝 App 支付（orderString → PayTask） | 两者 | [Alipay.md](Alipay.md) |
 | QrCode | 本地生成二维码图片（ZXing） | 两者 | [QrCode.md](QrCode.md) |
+| Share | 系统分享面板（文本 / 文件，createChooser） | 两者 | [Share.md](Share.md) |
 | System | 休眠、剪贴板、toast、音量/振动、shell、等界面、退出 | 两者 | [System.md](System.md) |
 | Storage | 键值存储；页面写入、脚本读取 | 两者 | [Storage.md](Storage.md) |
 | Sqlite | SQLite 表存储；写入自动建表 | 两者 | [Sqlite.md](Sqlite.md) |
