@@ -14,8 +14,8 @@
 | 找到「发送」但 `clickable=false` 就放弃 | 点 `parent()`，或 `Gesture.click` 中心；点坐标前可 `FloatDialogs.setFloatWindowClickable(false)` |
 | 有 `FloatDialogs.show` 却不关弹窗就点节点 | 开始前 `FloatDialogs.closeAll()` |
 | 用页面根 `title` 同时又放 `navBar` | 自制顶栏时 `"title": { "hidden": true }` |
-| 系统顶栏右侧按钮塞进筛选行 / 自绘 sticky | 用 `title.right`（`icon`/`text` + `onTap`）。见 [`page-json.md`](../01-ui/page-json.md) |
-| 用户要蓝色，按钮仍默认绿 | 入口 `window.theme.primary`；`button` 写 `style.background`；导航栏/状态栏/底栏 `selectedColor` 一起改 |
+| 标题栏右侧按钮塞进筛选行 / 自绘 sticky | 用 `title.right`（`icon`/`text` + `onTap`）。见 [`page-json.md`](../01-ui/page-json.md)，示例 `pages/titleBar` |
+| 用户要蓝色，按钮仍默认绿 | 入口 `window.theme.primary`；`button` 写 `style.background`；标题栏/状态栏/底栏 `selectedColor` 一起改 |
 | 搜索框点击变绿/变红当成组件自带 | 旧引擎会把 `theme.primary` 刷到聚焦底。新引擎默认灰边白底。不要给 search 写艳色 `style.background` |
 | 用「启用/停用」大按钮做布尔开关 | `"type": "switch"`。见 [`list-manage.md`](../03-recipes/list-manage.md) |
 | 列表表单不用 `e.item` / `e.index`，去编每行假 `name` | 列表里 switch / input / checkbox / radio / slider 等 `onChange` 都有 `e.value`、`e.item`、`e.index`。见 [`switch.md`](../01-ui/components/switch.md)、[`events.md`](../01-ui/events.md) |

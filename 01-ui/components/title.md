@@ -1,6 +1,6 @@
 # title
 
-页面内容区的大标题，比 `text` 更醒目。不是顶部导航栏。
+页面内容区的大标题，比 `text` 更醒目。不是标题栏 TitleBar。
 
 通用字段见 [通用字段](./_common.md)。
 
@@ -21,4 +21,4 @@
 
 ## 注意
 
-顶栏文案写在页面根上的 `title` 对象，不是这个组件。
+标题栏写在页面根上的 `title`。右侧按钮用 `title.right`，见 [页面 JSON](../page-json.md)。示例 `pages/titleBar`。

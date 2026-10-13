@@ -2,11 +2,11 @@
 
 页内导航栏，**不是**页面根上的 `title`。适合 `title.hidden: true` 时自己画返回和标题。页面 `style.padding` 写成 `0`，导航栏才会贴着内容区顶端。
 
-只想在系统顶栏右上角放「添加 / 更多」等按钮时，优先用页面 `title.right`（见 [页面 JSON](../page-json.md#title-对象)），不必隐藏系统顶栏再画一套 NavBar。
+只想在标题栏右侧放「分享 / 添加」等按钮时，用页面 `title.right`（见 [页面 JSON](../page-json.md#title-对象)），不必隐藏标题栏再画一套 NavBar。示例 `pages/titleBar`。
 
-返回图标默认 32dp，与系统顶栏 `pre_page` 一致。
+返回图标默认 32dp，与标题栏返回图标一致。
 
-通用字段见 [通用字段](./_common.md)。系统顶栏见 [页面 JSON](../page-json.md)。
+通用字段见 [通用字段](./_common.md)。标题栏见 [页面 JSON](../page-json.md)。
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
@@ -28,5 +28,5 @@
 
 ## 注意
 
-- 隐藏系统顶栏：页面 `"title": { "hidden": true }`，再用本组件。
-- 不要和入口 `window.title` / 页面 `title` 重复画两套顶栏。
+- 隐藏标题栏：页面 `"title": { "hidden": true }`，再用本组件。
+- 不要和入口 `window.title` / 页面 `title` 重复画两套栏。

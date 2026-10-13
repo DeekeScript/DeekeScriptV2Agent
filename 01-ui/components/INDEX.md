@@ -4,6 +4,8 @@
 
 底部 TabBar **不是** `body` 里的 `type`，写在入口 `bottomMenus`，见 [tabBar](../capabilities/tabBar.md)。
 
+标题栏 TitleBar 也**不是** `body` 里的 `type`。写在页面根 `title`，右侧按钮用 `title.right`。见 [页面 JSON](../page-json.md)。示例 `pages/titleBar`。
+
 overlay（`popup` / `actionSheet` / `dialog` / `modal` / `popover` / `toast` / `mask` / `imageViewer`）写在 `body` 或页面根 `popups` 里都盖在最上层，不占正文布局。
 
 ## 展示
@@ -11,7 +13,7 @@ overlay（`popup` / `actionSheet` / `dialog` / `modal` / `popover` / `toast` / `
 | type | 一句话 | 链接 |
 |------|--------|------|
 | text | 普通正文 | [text](./text.md) |
-| title | 页内大标题，不是顶栏 | [title](./title.md) |
+| title | 页内大标题，不是标题栏 | [title](./title.md) |
 | notice | 灰色说明小字 | [notice](./notice.md) |
 | tag | 短标签 | [tag](./tag.md) |
 | badge | 红色角标；不写文案则红点 | [badge](./badge.md) |
@@ -60,7 +62,7 @@ overlay（`popup` / `actionSheet` / `dialog` / `modal` / `popover` / `toast` / `
 |------|--------|------|
 | tabs | 页内选项卡，不是底部 TabBar | [tabs](./tabs.md) |
 | segmented | 一行互斥分段，无面板 | [segmented](./segmented.md) |
-| navBar | 页内导航栏；系统顶栏用页面 `title` | [navBar](./navBar.md) |
+| navBar | 页内导航栏；标题栏用页面 `title`，右侧用 `title.right` | [navBar](./navBar.md) |
 | sideBar | 左侧分类轨 | [sideBar](./sideBar.md) |
 | indexBar | 通讯录字母轨 | [indexBar](./indexBar.md) |
 | steps | 步骤条 | [steps](./steps.md) |

@@ -7,7 +7,7 @@
 | 参数名 | 类型 | 必填 | 说明 |
 |--------|------|------|------|
 | id | String | 否 | 页面标记。跳转可写文件夹，或入口 `pages` 中的 id |
-| title | String / Object | 否 | 导航栏。不写则不显示。字符串为标题；对象见下表 |
+| title | String / Object | 否 | 标题栏 TitleBar。不写则不显示。字符串为标题；对象见下表。不是 `body` 里的 `type` |
 | style | Object | 否 | 内容区：`padding` / `margin` / `background`。未写 padding 时为 16（dp） |
 | statusBar | String / Object | 否 | 顶部状态栏。字符串为背景色；对象为 `background` + `color`（`light` / `dark`） |
 | js | String | 否 | 默认加载同目录 `page.js` |
@@ -21,17 +21,17 @@
 2. 再加载当前目录 `page.json`。
 3. 同名字段由页面覆盖（`style` / `title` / `statusBar` 等）。
 
-入口 `window.title` 只是默认样式；**页面未写 `title` 时不显示导航栏**。
+入口 `window.title` 只是默认样式；**页面未写 `title` 时不显示标题栏**。
 
 ## title 对象
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
 | text | String | 标题文案，支持 `{{path}}`（如 `{{pageTitle}}`，对应 `Page.data`） |
-| hidden | Boolean | `true` 则隐藏导航栏 |
+| hidden | Boolean | `true` 则隐藏标题栏 |
 | fontSize | Number | 字号（sp） |
 | color | String | 文字颜色 `#RRGGBB` |
-| background | String | 导航栏背景色 |
+| background | String | 标题栏背景色 |
 | fontWeight | String | `bold` |
 | align | String | `left` / `center` / `right` |
 | style | Object | 也可把 fontSize / color 等写在 `style` 里 |
@@ -73,12 +73,13 @@
 ```json
 {
   "title": {
-    "text": "话术",
-    "fontSize": 17,
+    "text": "标题栏",
+    "fontSize": 18,
     "color": "#FFFFFF",
-    "background": "#0B6E6A",
+    "background": "#006A65",
     "right": [
-      { "icon": "img/add.svg", "text": "添加", "onTap": "onOpenAdd" }
+      { "text": "分享", "onTap": "onShare" },
+      { "icon": "img/add.svg", "text": "添加", "onTap": "onAdd" }
     ]
   }
 }
@@ -88,9 +89,23 @@
 { "title": { "text": "关于", "hidden": true } }
 ```
 
-系统顶栏右侧用 `title.right`。页内自绘顶栏用 [navBar](./components/navBar.md)（配合 `title.hidden: true`）。不要叠两套顶栏。
+标题栏右侧用 `title.right`。页内自绘导航栏用 [navBar](./components/navBar.md)（配合 `title.hidden: true`）。不要叠两套栏。
 
-工程示例：`pages/titleBar`（组件列表「顶栏右侧」）。
+工程示例：`pages/titleBar`（示例列表「标题栏」）。右侧同时有文案「分享」和图标「添加」。
+
+```javascript
+Page({
+  data: { hint: '还没有点击右侧按钮' },
+  onShare() {
+    this.setData({ hint: '已点「分享」' });
+    System.toast('分享');
+  },
+  onAdd() {
+    this.setData({ hint: '已点「添加」' });
+    System.toast('添加');
+  }
+});
+```
 
 ## 内容区与状态栏
 
