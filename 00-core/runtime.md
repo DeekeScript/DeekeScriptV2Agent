@@ -11,7 +11,7 @@
 
 | 文件 | 职责 |
 |------|------|
-| `deekeScript.json` | 识别工程；有界面时写 `homePage` / `window` / `pages` / `bottomMenus`；`floatWindow` 仅用户要自定义菜单时再写 |
+| `deekeScript.json` | 识别工程；有界面时写 `homePage` / `window` / `pages` / `bottomMenus`。不写 `floatWindow` 则不展示球；`"floatWindow": {}` 是默认球；有 `menus` 才是自定义菜单 |
 | `pages/<id>/page.json` | 这一页长什么样；`action` 见 [`page-json.md`](../01-ui/page-json.md#json-action) |
 | `pages/<id>/page.js` | `Page({})`：数据、生命周期、跳转或拉起脚本 |
 | `tasks/*.js` | 找节点、循环、切 App |

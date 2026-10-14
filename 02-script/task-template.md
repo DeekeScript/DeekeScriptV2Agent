@@ -86,7 +86,7 @@ if (!permission.ensureRun()) {
 }
 ```
 
-未配 `floatWindow.menus` 时，用户可连点悬浮球两次停止。不必生成 stop 菜单。
+没写 `floatWindow` 时没有悬浮球，任务须在 `tasks/*.js` 里 `Engines.closeAll()` 自己结束。写了 `floatWindow` 但没有 `menus` 时，用户可连点悬浮球两次停止，不必生成 stop 菜单。
 
 ## 仅当用户要悬浮窗菜单时
 

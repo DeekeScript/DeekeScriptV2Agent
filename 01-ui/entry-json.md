@@ -18,7 +18,7 @@
 | bottomMenus | Array | 否 | 见下表 | 底部 Tab。不配或 `[]` 则隐藏底栏 |
 | bottomMenusHidden | Boolean | 否 | true | 强制隐藏底栏 |
 | tabBar | Object | 否 | 见 window.tabBar | 也可写在入口根上，与 `window.tabBar` 同类 |
-| floatWindow | Object | 否 | 见下表 | 项目悬浮窗展开菜单。**默认不写**（连点两次即可停任务）。仅用户要自定义菜单时再配。开发器球不读此配置 |
+| floatWindow | Object | 否 | 见下表 | 不写则不展示球。`"floatWindow": {}` 或 `menus` 为空：默认球，连点两次停止。`menus` 有内容才是自定义菜单。开发器球不读此配置 |
 
 兼容：`homePage` 写成页面 id（如 `"home"`）会先在 `pages` 中查找，未找到则按 `pages/home` 加载。
 
@@ -86,7 +86,7 @@
 
 ## floatWindow
 
-只作用于**项目悬浮窗**（点「运行」进入项目后，或打包 App）。**用户未要求菜单时不要写本节。** 不写则与开发器一致：连点两次停止（3 秒内）。一旦配置，`menus` 最多 5 个，超过只展示前 5 个。
+只作用于**项目悬浮窗**（点「运行」进入项目后，或打包 App）。不写本字段则不展示悬浮球。要默认球写 `"floatWindow": {}`（`menus` 不写或为空，连点两次停止，3 秒内）。`menus` 有内容才展开自定义菜单，最多 5 个，超过只展示前 5 个。开发器那颗球不读此配置。
 
 | 参数名 | 类型 | 说明 |
 |--------|------|------|
@@ -170,4 +170,4 @@
 }
 ```
 
-**不要**在完整示例里默认抄 `floatWindow`。用户未要求自定义菜单时不要写该字段（默认连点两次即可停）。需要菜单时见 [floatWindow](./capabilities/floatWindow.md)。写好入口后给 `homePage` 目录写 [页面 JSON](./page-json.md)。
+**不要**在完整示例里默认抄带 `menus` 的 `floatWindow`。不写该字段则不展示球；只要默认球写 `"floatWindow": {}`。需要菜单时见 [floatWindow](./capabilities/floatWindow.md)。写好入口后给 `homePage` 目录写 [页面 JSON](./page-json.md)。

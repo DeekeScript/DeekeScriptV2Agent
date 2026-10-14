@@ -38,7 +38,7 @@
 ## 生成时（摘要，细节以 constraints 为准）
 
 - 页面成对；入口必须 `icon` 且生成图片文件。
-- 默认不写 `floatWindow`。有 menus 则 `onTap` 与 `FloatWindow.on` 同一轮；手动停 `FloatWindow.stopTask()`，任务内自动停 `Engines.closeAll()`。
+- 默认不写 `floatWindow`（不展示球）。要连点两次停止就写 `"floatWindow": {}`。有 menus 则 `onTap` 与 `FloatWindow.on` 同一轮；手动停 `FloatWindow.stopTask()`，任务内自动停 `Engines.closeAll()`。
 - 找节点：`UiSelector().text('发送').findOne()`；点击前一般先 `filter` 屏内。
 - 输入：click 后**重新 find** 再 `setText`。刷流：单条失败 skip 到下一条未处理（同屏优先，不要无条件滑动）。
 - 第三方 App：写选择器前先调研每种形态和层级；写循环前回答进度模型（一屏几条、何时滚动）；开发中分段 `run`，整段 `run-file` 只做验收。

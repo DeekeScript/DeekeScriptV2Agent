@@ -1,8 +1,12 @@
 # 悬浮球（项目悬浮窗）
 
-配置项目悬浮窗菜单时**只读这篇**：JSON `menus` 与 `FloatWindow.on` **同一轮**交付。
+配置项目悬浮窗时**只读这篇**。JSON `menus` 与 `FloatWindow.on` **同一轮**交付。
 
-**用户没提自定义菜单时：不要写 `floatWindow`。** 默认连点两次停止（第一次变关闭图标，3 秒内再点）。硬规则见 [`constraints.md`](../../00-core/constraints.md) MUST 10–11。
+项目悬浮球按入口 `floatWindow` 分三种：
+
+- **不写** `floatWindow`：不展示悬浮球。硬规则见 [`constraints.md`](../../00-core/constraints.md) MUST 10–11。
+- **写了但 `menus` 为空或不写**（`"floatWindow": {}`）：系统默认球，连点两次停止（第一次变关闭图标，3 秒内再点）。
+- **`menus` 有内容**：自定义菜单。
 
 需要系统悬浮层上的**悬浮窗**（进度、按钮）时用 [`floatPage.md`](./floatPage.md)，不要扩写 menus。
 
@@ -34,9 +38,10 @@ if (done) {
 ## 生成决策
 
 ```
-用户要悬浮球菜单？
-├─ 否 → 不写 floatWindow
-└─ 是 → 同一轮输出：
+用户要悬浮球？
+├─ 不展示 → 不写 floatWindow
+├─ 只要连点两次停止 → 写 "floatWindow": {}（menus 不写或 []）
+└─ 自定义菜单 → 同一轮输出：
        ① deekeScript.json → floatWindow.menus（每项 onTap）
        ② FloatWindow.on 绑定全部菜单项
        ③ 停止 → FloatWindow.stopTask()；页面按钮同理（禁止 Engines.closeAll）
@@ -170,10 +175,11 @@ task.run();
 
 `FloatWindow.on` 写在 `tasks/*.js` 开头或 `common/floatMenu.js`，不要只写在 `page.js`。页面「运行」仍用 `permission.runScript`。页面 JSON `action` 与悬浮球 menus 无关。
 
-| 用户要什么 | 是否写 `floatWindow.menus` |
+| 用户要什么 | 是否写 `floatWindow` |
 |----------|---------------------------|
-| 未提及，或只要能停 | **不写**（连点两次，3 秒内） |
-| 展开：开始 / 停止 / 隐藏 / 跳过 | **必须** menus + `FloatWindow.on` |
+| 不展示球 | **不写** |
+| 只要能连点两次停 | 写 `"floatWindow": {}`（不要写有内容的 menus） |
+| 展开：开始 / 停止 / 隐藏 / 跳过 | **必须** `menus` + `FloatWindow.on` |
 
 ## 相关
 

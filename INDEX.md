@@ -87,7 +87,7 @@
 | HID / 图色 / DO / 打包 | api/INDEX 扩展卡，先读权限 |
 | 操作第三方 App | task-template；code-org；device；App / UiSelector / Gesture / System；**app-survey**；**progress-model**；**segment-test**；page-state；skip-on-item-failure；**keep-host-alive** |
 | 评论 / 发帖 / 私信 | app-survey + comment-input + stale-node + segment-test + UiObject；需要输入法再开 KeyBoards |
-| 悬浮球菜单 | floatWindow（用户没提则不要生成） |
+| 悬浮球菜单 | 不写 `floatWindow` 则隐藏；`{}` 为默认球；有 menus 才生成菜单 |
 | 悬浮窗 | floatPage / floats/（用户没提则不要生成） |
 | 调试 tasks | device + segment-test + ai-http-api |
 

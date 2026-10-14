@@ -17,7 +17,7 @@
 | 7 | Rhino 1.8：可用 `function` / 箭头 / `var` / `let`。颜色 `#RRGGBB`；尺寸 dp，字号 sp。 |
 | 8 | `require` **优先** `./`、`../` 相对当前文件。不以 `./`/`../` 开头时相对项目根。禁止磁盘绝对路径。导出用 `module.exports`。 |
 | 9 | **先连手机，再编写**。改完文件就 **`write` 同步**到手机；写完后必须按 [`device.md`](./device.md) 调试验证再交付。仅 `run` 传代码字符串做短验证时可跳过本次 `write`。 |
-| 10 | **默认不写** `floatWindow` / `menus`。未配时连点两次停止（第一次变关闭图标，**3 秒内**再点）。用户要自定义菜单时：`menus` 最多 5 个；每项用 `onTap`，与 `FloatWindow.on` **同一轮**交付。停止回调写 `FloatWindow.stopTask()`。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md)。 |
+| 10 | **默认不写** `floatWindow`：项目不展示悬浮球。要系统默认球（连点两次停止，第一次变关闭图标，**3 秒内**再点）时写 `"floatWindow": {}`（`menus` 不写或 `[]`）。用户要自定义菜单时：`menus` 有内容，最多 5 个；每项用 `onTap`，与 `FloatWindow.on` **同一轮**交付。停止回调写 `FloatWindow.stopTask()`。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md)。 |
 | 10b | **默认不写** `FloatPage` / `floats/`。仅用户要悬浮窗（系统层 JSON 界面）时生成；与悬浮球 menus 分离。见 [`floatPage.md`](../01-ui/capabilities/floatPage.md)。 |
 | 11 | 停任务：菜单手动 → `FloatWindow.stopTask()`；任务内自动 → `tasks/*.js` 里 `Engines.closeAll()`（须在任务脚本线程）。见 [`floatWindow.md`](../01-ui/capabilities/floatWindow.md#停任务权威)。 |
 | 12 | 入口必须写 `icon`，且该路径的**文件必须生成**。 |
@@ -74,7 +74,7 @@
 | 评论 / 输入 | `click` → 重 find → `setText` → 校验 `text` | `var input=…; input.click(); input.setText(…)` |
 | 刷流 / 进主页失败 | skip 本条并前进到下一条未处理（同屏优先） | 同一条反复进主页；或同屏还有条目却 swipe |
 | 列表循环 | 先数当前屏目标；耗尽再滚动 | 处理第一条就滑；套用一屏一条的滑动 |
-| 手动停（无 menus） | 连点悬浮球两次 | 无故生成 stop 菜单 |
+| 手动停（写了 `floatWindow` 但无 menus） | 连点悬浮球两次 | 没写 `floatWindow` 却假设球还在；无故生成 stop 菜单 |
 | 自动停 | `tasks/*.js` 里 `Engines.closeAll()` | 只在页面回调里 closeAll |
 | 任务已验证 | 先调研（带图看屏 + 节点）；分段 `run`；再 `run-file` 验收 | 只测 Storage / 权限 / write；或不看屏；或只看图不打 logs |
 | 操作第三方 App | 并列形态都摸到；父子层分开；单步分段测；验收才整段 | 只做一种形态；子项当父项；一上来 `run-file`；或以「会真实发出」为由不启动目标 App |

@@ -6,7 +6,7 @@
 
 | 展厅里可能看到 | 生成时 |
 |----------------|--------|
-| 默认就配了 `floatWindow.menus` | 用户没提菜单就不要写 `floatWindow` |
+| 默认就配了 `floatWindow.menus` | 用户没提菜单就不要写 `menus`。不写整个 `floatWindow` 是不展示球；只要默认球写 `"floatWindow": {}` |
 | 展厅有 `pages/floatPage` + `floats/` | 用户没提悬浮窗就不要写 `FloatPage` / `floats/` |
 | `permission.hint('请在文件…')` | 不要写进产物 |
 | `page.js` 里 `System.sleep` | 用 `setTimeout` |

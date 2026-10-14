@@ -33,7 +33,8 @@ Engines.executeScript('tasks/xxx.js');
 |------|-----|
 | 任务内自动结束 | `Engines.closeAll()`（写在 `tasks/*.js`） |
 | 用户点菜单停止 | `FloatWindow.stopTask()`（`onTap` + `FloatWindow.on`） |
-| 未配 menus | 连点悬浮球两次（不必再写 stop） |
+| 写了 `floatWindow` 且没有 menus | 连点悬浮球两次（不必再写 stop） |
+| 没写 `floatWindow` | 无悬浮球，只能任务内 `Engines.closeAll()` |
 
 菜单回调 / 页面按钮里 `Engines.closeAll()` **无效**。
 
