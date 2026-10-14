@@ -1,6 +1,6 @@
 # Events
 
-统一事件总线：按键、屏幕亮灭、无障碍事件、窗口切换；可用 `emit` 派发自定义事件。全局对象名是 `Events`。按键需无障碍已连接，且服务配置允许过滤按键事件。脚本结束会自动清理监听。
+统一事件总线：按键、屏幕亮灭、无障碍事件、窗口切换；可用 `emit` 派发自定义事件。全局对象名是 `Events`。按键需无障碍已连接，且服务配置允许过滤按键事件。某个脚本结束时，只清掉这个脚本自己注册的监听，页面上注册的会留下。
 
 ## 上下文
 
@@ -39,6 +39,8 @@
 | `screen_off` | 无参 | 灭屏 |
 | `accessibility` | `(obj, eventType)` | 无障碍事件 |
 | `window_changed` | `(obj)` | 窗口状态变化 |
+| `script_start` | 无参 | 主脚本开始。系统派发，发生在任务正文之前，要在页面里听 |
+| `script_stop` | 无参 | 主脚本停止（跑完、报错、`Engines.closeAll()`）。系统派发，任务顶部注册也能收到 |
 | 自定义名 | `(...args)` | 用 `Events.emit` 自行派发 |
 
 按键 `event` 对象字段：`keyCode`、`action`、`key`（如 `volume_up` / `volume_down` / `back`）、`repeatCount`。

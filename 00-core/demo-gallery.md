@@ -8,6 +8,7 @@
 |----------------|--------|
 | 默认就配了 `floatWindow.menus` | 用户没提菜单就不要写 `menus`。不写整个 `floatWindow` 是不展示球；只要默认球写 `"floatWindow": {}` |
 | 展厅有 `pages/floatPage` + `floats/` | 用户没提悬浮窗就不要写 `FloatPage` / `floats/` |
+| 展厅 `components/runBar` 运行条 | 用户没要运行提示就不要生成 |
 | `permission.hint('请在文件…')` | 不要写进产物 |
 | `page.js` 里 `System.sleep` | 用 `setTimeout` |
 | 页面按钮 `Engines.closeAll()` 停任务 | 用 `FloatWindow.stopTask()`；任务内自动停才 `Engines.closeAll()` |
