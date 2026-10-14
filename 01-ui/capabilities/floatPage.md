@@ -6,6 +6,7 @@
 
 - 目录：`floats/<id>/page.json` + `page.js`（同正式页语法）。
 - 显示前检查 `Access.isFloatWindowsEnabled()`。
+- `inStatusBar: true` 时还必须检查无障碍已开启。未开启时窗口仍能画在状态栏区域，但无法点击。
 - 脚本用 `FloatPage.setData(id, data)` 更新；浮层内用 `Page({ data, onTap... })`。
 - 同时最多 3 个；`navigate` / `switchTab` / 底栏 / 下拉刷新不要用。
 

@@ -20,7 +20,7 @@ floats/<id>/page.js
 
 `show('status')` → `floats/status/`。也可 `floats/...` 或 `pages/...` 完整路径。最多同时 **3** 个。需悬浮窗权限：`Access.isFloatWindowsEnabled()`。
 
-外壳默认黑底 `#000000`；`opacity`（0~1，默认 0.5）与 `background` 可配。`touchable: false` 时手指和坐标手势都穿透。`gestureTouchable: false` 时只有 `Gesture.click` / `swipe` 等坐标手势穿透，手指仍可点。内容区 `style.background` 建议透明，文字用浅色。
+外壳默认黑底 `#000000`；`opacity`（0~1，默认 0.5）与 `background` 可配。`touchable: false` 时手指和坐标手势都穿透。`gestureTouchable: false` 时只有 `Gesture.click` / `swipe` 等坐标手势穿透，手指仍可点。`inStatusBar: true` 把窗口盖到状态栏上，必须先开启无障碍（`Access.isAccessibilityServiceEnabled()`）。未开启时条仍可能画出来，但点击会被状态栏吃掉。内容区 `style.background` 建议透明，文字用浅色。
 
 浮层内 **禁止依赖**：`navigate` / `redirect` / `back` / `switchTab` / 底栏 / 下拉刷新（调用无效）。
 
@@ -28,7 +28,7 @@ floats/<id>/page.js
 
 | 方法 | 参数 | 返回 | 说明 |
 |------|------|------|------|
-| `show(id)` / `show(id, options)` | `x,y,width,height`,`path`,`opacity`,`background`,`draggable,focusable,touchable,gestureTouchable` | `boolean` | 无权限 / 无目录 / 超限 → `false` |
+| `show(id)` / `show(id, options)` | `x,y,width,height`,`path`,`opacity`,`background`,`draggable,focusable,touchable,gestureTouchable,inStatusBar` | `boolean` | 无权限 / 无目录 / 超限 → `false` |
 | `hide(id)` | | | 隐藏，保留实例与数据 |
 | `close(id)` / `closeAll()` | | | 销毁实例并清空数据；下次 show 为新建；`stopTask` 也会 `closeAll` |
 | `exists(id)` | | `boolean` | 实例是否存在（含 hide） |
