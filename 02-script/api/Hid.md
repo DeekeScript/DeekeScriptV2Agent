@@ -4,6 +4,18 @@
 
 坐标是像素，原点在屏幕左上角，包含状态栏。
 
+板子连上后有三条通道。`key_` 前缀一律走字母键盘。
+
+| 通道 | 方法 |
+|------|------|
+| 触摸屏 | `tap` / `press` / `longClick` / `doubleTap` / `tapRandom` / `swipe` / `swipex` / `touchDown` / `touchMove` / `touchUp` / `touchUp2`，以及找图、找色、找字后的点击 |
+| 字母键盘 | 全部 `key_` 方法，以及 `keyDown` / `keyUp` / `keyPress` / `keyDown_code` / `keyUp_code` / `keyPress_code` 里的字符、方向、修饰键。`clear` 也走键盘 |
+| 消费控制 | `back` / `back1` / `home` / `recents` / `power` / `volUp` / `volDown` / `paste` |
+
+`type` 按字符拆开：数字、字母、回车走字母键盘；空格、其他符号和中文走 `paste`（消费控制）。
+
+`keyPress(3)` Home、`keyPress(4)` 返回、`keyPress(187)` 最近任务、`keyPress(24)` 音量加、`keyPress(25)` 音量减、`keyPress(26)` 电源、`keyPress(82)` 菜单，这几个键值走消费控制，和上面的系统键是同一个键。其余 `keyPress` 走字母键盘。贴文字用 `paste`，不要用 `key_paste`（Ctrl+V）。
+
 ## 上下文
 
 | 环境 | 可用 |
@@ -42,7 +54,8 @@ if (!Hid.connectAndWait()) {
 | Android 键值 | `keyPress(code)`，回车 `66`，A `29`，退格 `67` | |
 | HID 键盘用途号 | `keyPress_code(usage)`，a 是 `0x04`，回车 `0x28`，退格 `0x2A` | 不要把 Android 键值传给 `_code` |
 | 退格 / 向后删除 | `key_del` 删光标前；`key_delete` 删光标后 | |
-| 输入一串 | `type`。字母数字逐键，中文整段粘贴 | 中文不要 `key_abc` |
+| 输入一串 | `type`。数字、字母、回车走键盘；空格、符号和中文走 `paste` | 中文不要 `key_abc` |
+| 贴一段文字 | `paste(text)`，消费控制 | 不要用 `key_paste`。那是键盘 Ctrl+V |
 | 是否连上 | `isConnected()`。`getConnectState()` 与它相同 | |
 
 ## 连接
@@ -56,7 +69,7 @@ if (!Hid.connectAndWait()) {
 | isConnected | `isConnected()` | `boolean` | 指令通道是否还在 |
 | getConnectState | `getConnectState()` | `boolean` | 同 `isConnected`，兼容旧脚本 |
 | getConnectedDevices | `getConnectedDevices()` | `BluetoothDevice\|null` | 当前这一台，不是列表 |
-| getName | `getName()` | `string` | 设备名，如 `DeekeScript-000001`。未连接为 `""` |
+| getName | `getName()` | `string` | 设备名，如 `DeekeScript-0001`。未连接为 `""` |
 | disconnect | `disconnect()` | `boolean` | 断开本次连接。系统配对还在 |
 
 第一次配对时手机上可能要点确认。`disconnect` 不会取消配对。
@@ -88,7 +101,7 @@ Hid.swipex(540, 1600, 540, 600, 80);
 
 ## 系统键
 
-都会作用在当前前台界面。调试时不要用 `home` / `recents` 把 DeekeScript 送走。
+这些方法都走消费控制，作用在当前前台界面。调试时不要用 `home` / `recents` 把 DeekeScript 送走。
 
 | 方法 | 签名 | 返回值 | 说明 |
 |------|------|--------|------|
@@ -108,7 +121,7 @@ Hid.back();
 
 ## 键盘
 
-`keyDown` / `keyUp` / `keyPress` 的 `code` 是 Android `KeyEvent` 键值。`keyDown_code` / `keyUp_code` / `keyPress_code` 的 `code` 是 HID 用途号，两套不能混用。
+`key_` 前缀的方法都走字母键盘。`keyDown` / `keyUp` / `keyPress` 的 `code` 是 Android `KeyEvent` 键值。`keyDown_code` / `keyUp_code` / `keyPress_code` 的 `code` 是 HID 用途号，两套不能混用。字符、方向和修饰键走字母键盘。Home `3`、返回 `4`、最近任务 `187`、音量加 `24`、音量减 `25`、电源 `26`、菜单 `82` 走消费控制。往输入框贴文字用 `paste`，不要用 `key_paste`。
 
 | 方法 | 签名 | 返回值 | 说明 |
 |------|------|--------|------|
@@ -121,7 +134,7 @@ Hid.back();
 | keyUpAll | `keyUpAll()` | `boolean` | 松开还按着的键 |
 | key_select | `key_select()` | `boolean` | Ctrl+A |
 | key_copy | `key_copy()` | `boolean` | Ctrl+C |
-| key_paste | `key_paste()` | `boolean` | Ctrl+V。光标要在输入框 |
+| key_paste | `key_paste()` | `boolean` | 键盘 Ctrl+V。`key_` 前缀都是键盘。贴文字用 `paste` |
 | key_cat | `key_cat()` | `boolean` | Ctrl+X |
 | key_del | `key_del()` | `boolean` | 退格，删光标前 |
 | key_delete | `key_delete()` | `boolean` | Delete，删光标后 |
@@ -135,9 +148,9 @@ Hid.back();
 
 | 方法 | 签名 | 返回值 | 说明 |
 |------|------|--------|------|
-| type | `type(text)` | `boolean` | 数字和字母逐键；换行是回车；空格和其他符号走粘贴。含中文则整段粘贴。空串返回 `true` |
-| paste | `paste(text)` | `boolean` | 写入剪贴板再 Ctrl+V |
-| clear | `clear()` | `boolean` | 全选后退格。退格失败再试 Delete |
+| type | `type(text)` | `boolean` | 数字、字母、回车走字母键盘。空格、其他符号和中文走 `paste`（消费控制）。空串返回 `true` |
+| paste | `paste(text)` | `boolean` | 消费控制。写入剪贴板再发粘贴键。不调用 `key_paste` |
+| clear | `clear()` | `boolean` | 字母键盘。先 `key_select`，再 `key_del`。退格失败再试 `key_delete` |
 
 ```javascript
 Hid.type('hello');
