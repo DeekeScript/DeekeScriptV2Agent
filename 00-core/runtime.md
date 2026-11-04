@@ -100,6 +100,7 @@ onPicked(e) {
 | `Engines.closeAll` | 勿用 | 勿用 | 是 | 仅任务线程自动结束 |
 | `FloatWindow.stopTask` | 菜单回调 | 菜单回调 | 一般不用 | 用户手动停 |
 | `require` / `Http` / `Storage` / `console` / `setTimeout` / `Dialogs` / `Access` / `FloatWindow` / `FloatDialogs` | 是 | 是 | 是 | |
+| `Adb`（无线调试） | 引导配对/填端口 | 是 | 是 | Android 11+；首次 `pairWithCode`，日常 `connectSaved`。见 [`Adb.md`](../02-script/api/Adb.md) |
 | `System.sleep` | 禁止 | 禁止 | 是 | |
 | `UiSelector` / `App.launch` / `Gesture` / `Images` | 不要当主流程 | 否 | 是 | |
 | WebView ↔ Page | 无 | 无 | 无 | 外链用 `openUrl` |

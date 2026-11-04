@@ -36,6 +36,7 @@
 | Audio | 音频播放与麦克风录音 | 两者 | [Audio.md](Audio.md) |
 | KeyBoards | DeekeScript 输入法 | tasks.js | [KeyBoards.md](KeyBoards.md) |
 | Hid | 蓝牙 HID 点击/滑动/按键；含 tapImage/type/waitImage 等高层封装 | tasks.js | [Hid.md](Hid.md) |
+| Adb | Android 11+ 无线调试：本机 pair/connect 后 shell、点击、授权、装包 | 两者 | [Adb.md](Adb.md) |
 | Encrypt | MD5/SHA/Base64/AES | 两者 | [Encrypt.md](Encrypt.md) |
 | Threads | 创建线程（慎用，优先定时器或 Engines） | 两者 | [Threads.md](Threads.md) |
 | Timer | setTimeout / setInterval | 两者 | [timer.md](timer.md) |

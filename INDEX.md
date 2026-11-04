@@ -62,7 +62,7 @@
 | [02-script/pitfalls/skip-on-item-failure.md](./02-script/pitfalls/skip-on-item-failure.md) | 刷流：单条失败 skip |
 | [02-script/pitfalls/keep-host-alive.md](./02-script/pitfalls/keep-host-alive.md) | 操作第三方 App：禁止连按返回把 DeekeScript 退出 |
 
-常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`Alipay`、`QrCode`、`Share`、`System`、`Storage`、`Sqlite`、`Http`、`Engines`、`Access`、`Dialogs`、`FloatWindow`、`FloatPage`。
+常用 API：`UiSelector`、`UiObject`、`Gesture`、`App`、`Alipay`、`QrCode`、`Share`、`System`、`Storage`、`Sqlite`、`Http`、`Engines`、`Access`、`Adb`、`Dialogs`、`FloatWindow`、`FloatPage`。
 
 ## 配方（抄文件清单与片段）
 
@@ -84,7 +84,7 @@
 | 只要界面 | entry / page-json / page-js / events / _common / data-binding / form-name / navigate；components/INDEX 后只开用到的 type。有底栏再读 tabBar；工作台读 workbench；列表启停读 list-manage |
 | 界面 + 脚本 | 上面两套 + permission + require + code-org + ui-and-task + workbench（无障碍一节） |
 | 自定义组件 | component-custom + custom-picker |
-| HID / 图色 / DO / 打包 | api/INDEX 扩展卡，先读权限 |
+| HID / Adb 无线调试 / 图色 / DO / 打包 | api/INDEX 扩展卡，先读权限；无线调试读 [Adb.md](./02-script/api/Adb.md) |
 | 操作第三方 App | task-template；code-org；device；App / UiSelector / Gesture / System；**app-survey**；**progress-model**；**segment-test**；page-state；skip-on-item-failure；**keep-host-alive** |
 | 评论 / 发帖 / 私信 | app-survey + comment-input + stale-node + segment-test + UiObject；需要输入法再开 KeyBoards |
 | 悬浮球菜单 | 不写 `floatWindow` 则隐藏；`{}` 为默认球；有 menus 才生成菜单 |
@@ -100,6 +100,7 @@
 | 屏幕录制 | [ScreenRecord.md](./02-script/api/ScreenRecord.md) |
 | 悬浮窗 | [FloatPage.md](./02-script/api/FloatPage.md) |
 | 蓝牙 HID | [Hid.md](./02-script/api/Hid.md) |
+| 无线调试 Adb | [Adb.md](./02-script/api/Adb.md) |
 | 输入法 | [KeyBoards.md](./02-script/api/KeyBoards.md) |
 | Device Owner | [do-mode.md](./02-script/api/do-mode.md) |
 | 通知 / 前台 | [Notification.md](./02-script/api/Notification.md)、[Foreground.md](./02-script/api/Foreground.md) |
