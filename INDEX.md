@@ -84,7 +84,7 @@
 | 只要界面 | entry / page-json / page-js / events / _common / data-binding / form-name / navigate；components/INDEX 后只开用到的 type。有底栏再读 tabBar；工作台读 workbench；列表启停读 list-manage |
 | 界面 + 脚本 | 上面两套 + permission + require + code-org + ui-and-task + workbench（无障碍一节） |
 | 自定义组件 | component-custom + custom-picker |
-| HID / Adb 无线调试 / 图色 / DO / 打包 | api/INDEX 扩展卡，先读权限；无线调试读 [Adb.md](./02-script/api/Adb.md) |
+| HID / Adb 无线调试 / 图色 / DO / 打包 | api/INDEX 扩展卡，先读权限。Hid 与 Adb 认界面主要靠图色；无障碍一些场景也用图色认内容。DO 只在用户要专用机时用，开启通常要恢复出厂。无线调试读 [Adb.md](./02-script/api/Adb.md) |
 | 操作第三方 App | task-template；code-org；device；App / UiSelector / Gesture / System；**app-survey**；**progress-model**；**segment-test**；page-state；skip-on-item-failure；**keep-host-alive** |
 | 评论 / 发帖 / 私信 | app-survey + comment-input + stale-node + segment-test + UiObject；需要输入法再开 KeyBoards |
 | 悬浮球菜单 | 不写 `floatWindow` 则隐藏；`{}` 为默认球；有 menus 才生成菜单 |

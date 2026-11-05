@@ -1,6 +1,6 @@
 # Adb
 
-Android 11+ **无线调试**：App 在本机与 `adbd` 配对后，脚本可 `shell`、点击、授权、装包。不依赖电脑，也不依赖蓝牙 HID。
+Android 11+ **无线调试**：App 在本机与 `adbd` 配对后，脚本可 `shell`、点击、授权、装包。不依赖电脑，也不依赖蓝牙 HID。认界面主要靠 [`Images.md`](./Images.md) / [`Ocr.md`](./Ocr.md)，再用 `Adb.tap` / `Adb.swipe`。无障碍在一些场景也要用图色认内容。
 
 不要对 `Adb` 使用 `typeof`。多数方法返回 `{ ok, error?, result?, all?, ... }`；先看 `ok`。
 
@@ -99,33 +99,49 @@ Adb.connectSaved();
 | exec / execute | 同 `shell` | `object` | 别名 |
 | service | `service(destination, writeUtf8?, maxBytes?)` | `object` | 原始 Adb service |
 | serviceBytes | `serviceBytes(destination, maxBytes?)` | `object` | 返回字节 |
-| push / pull | `push(local, remote)` / `pull(remote, local)` | `object` | 传文件 |
-| install | `install(apkPath, ...extraArgs)` | `object` | 装包 |
-| installMultiple | `installMultiple(apkPaths)` | `object` | 多包 |
-| uninstall | `uninstall(packageName)` | `object` | 卸包 |
-| pushAndInstall | `pushAndInstall(apkPath, ...extraArgs)` | `object` | 推送并安装 |
+| push | `push(local, remote)` | `object` | 把本地文件推到设备路径 |
+| pull / pullAndSave | `pull(remote, local)` | `object` | 把设备文件拉到本地 |
+| install / pushAndInstall | `install(apkPath, ...extraArgs)` | `object` | 安装 apk |
+| installMultiple | `installMultiple(apkPaths)` | `object` | 按顺序安装多个 apk |
+| uninstall | `uninstall(packageName)` | `object` | 卸载应用 |
 
 ## 输入与系统
 
 | 方法 | 签名 | 返回值 | 说明 |
 |------|------|--------|------|
 | tap | `tap(x, y)` | `object` | 点击 |
-| swipe | `swipe(x1, y1, x2, y2, durationMs?)` | `object` | 滑动，默认 300ms |
-| drag | `drag(x1, y1, x2, y2, durationMs?)` | `object` | 拖拽 |
+| swipe | `swipe(x1, y1, x2, y2, durationMs?)` | `object` | 直线滑动，默认 300ms |
+| drag | `drag(x1, y1, x2, y2, durationMs?)` | `object` | 按住拖动，默认 500ms |
 | longPress / press | `longPress(x, y, durationMs?)` | `object` | 长按，默认 800ms |
-| keyEvent / key | `keyEvent(codeOrName)` | `object` | 按键 |
-| text / type | `text(value)` | `object` | `input text` |
-| home / back / recents / power | 无参 | `object` | 导航与电源 |
-| volumeUp / volumeDown / mute / enter / del / menu / wake / sleep | 无参 | `object` | 其它键 |
-| screenshot / screencap | `screenshot(localPath)` | `object` | 截图到路径 |
-| screenshotBytes | `screenshotBytes()` | `object` | 截图字节 |
-| startApp | `startApp(packageName, activity?)` | `object` | 启动 |
-| forceStop / clearApp | `forceStop(pkg)` / `clearApp(pkg)` | `object` | 强停 / 清数据 |
-| grant / revoke | `grant(pkg, permission)` / `revoke(pkg, permission)` | `object` | 授权 |
-| settingsGet / settingsPut / settingsDelete | 见 IntelliSense | `object` | 读写 settings |
-| dumpsys / activityTop / currentFocus | 见 IntelliSense | `object` | 调试界面 |
-| waitForShell | `waitForShell(cmd, expectContains, timeoutMs?, intervalMs?)` | `object` | 等到输出包含某串 |
-| waitConnected | `waitConnected(timeoutMs?, intervalMs?)` | `object` | 等到连上 |
+| keyEvent / key | `keyEvent(codeOrName)` | `object` | 发送按键。名字全集见文档「按键名」；其它键传 Android KeyEvent 数字码 |
+| text / type | `text(value)` | `object` | 向当前焦点输入文字 |
+| power | `power()` | `object` | 亮屏 |
+| wake | `wake()` | `object` | 亮屏 |
+| sleep | `sleep()` | `object` | 息屏 |
+| home | `home()` | `object` | 回到桌面 |
+| back | `back()` | `object` | 返回上一层 |
+| recents | `recents()` | `object` | 打开最近任务 |
+| volumeUp | `volumeUp()` | `object` | 音量加 |
+| volumeDown | `volumeDown()` | `object` | 音量减 |
+| mute | `mute()` | `object` | 静音 |
+| enter | `enter()` | `object` | 回车 |
+| del | `del()` | `object` | 退格 |
+| menu | `menu()` | `object` | 菜单键 |
+| screenshot / screencap | `screenshot(localPath)` | `object` | 截图保存到文件 |
+| screenshotBytes | `screenshotBytes()` | `object` | 截图返回字节 |
+| startApp | `startApp(packageName, activity?)` | `object` | 启动应用 |
+| forceStop | `forceStop(pkg)` | `object` | 强行停止应用 |
+| clearApp | `clearApp(pkg)` | `object` | 清除应用数据 |
+| grant | `grant(pkg, permission)` | `object` | 授予运行时权限 |
+| revoke | `revoke(pkg, permission)` | `object` | 撤销运行时权限 |
+| settingsGet | `settingsGet(namespace, key)` | `object` | 读取系统设置 |
+| settingsPut | `settingsPut(namespace, key, value)` | `object` | 写入系统设置 |
+| settingsDelete | `settingsDelete(namespace, key)` | `object` | 删除系统设置 |
+| dumpsys | `dumpsys(service)` | `object` | 导出系统服务调试信息 |
+| activityTop | `activityTop()` | `object` | 查看当前前台 Activity |
+| currentFocus | `currentFocus()` | `object` | 查看当前焦点窗口 |
+| waitForShell | `waitForShell(cmd, expectContains, timeoutMs?, intervalMs?)` | `object` | 反复执行命令，直到输出包含期望文字 |
+| waitConnected | `waitConnected(timeoutMs?, intervalMs?)` | `object` | 等到连上 adbd |
 
 ```javascript
 Adb.shell('pm list packages | head');

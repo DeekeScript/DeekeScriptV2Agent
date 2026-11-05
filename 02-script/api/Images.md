@@ -1,6 +1,6 @@
 # Images
 
-截图、摄像头拍照、找图、裁剪、缩放。文字识别见 [`Ocr.md`](./Ocr.md)；日常取色/找色见下方「颜色」；OpenCV `Mat` 找色见 [`Colors.md`](./Colors.md)。截图被运行时间悬浮窗挡住时，先 `System.setTimeWindowShow(false)`。
+截图、摄像头拍照、找图、裁剪、缩放。Hid 和 Adb 认界面主要靠图色（本篇与 [`Ocr.md`](./Ocr.md)、[`Colors.md`](./Colors.md)）；无障碍在一些场景也要用图色认内容。文字识别见 [`Ocr.md`](./Ocr.md)；日常取色/找色见下方「颜色」；OpenCV `Mat` 找色见 [`Colors.md`](./Colors.md)。截图被运行时间悬浮窗挡住时，先 `System.setTimeWindowShow(false)`。
 
 ## 上下文
 

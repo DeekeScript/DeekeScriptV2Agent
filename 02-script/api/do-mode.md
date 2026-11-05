@@ -1,6 +1,8 @@
 # DO 模式
 
-Device Owner（设备所有者）是 Android 最高级管理权限：静默安装卸载、管其它应用权限、锁屏、禁截屏、Kiosk。**DeekeScript 本身和打包后的 App 都可以设为 Device Owner。**
+把手机当专用机时用。不弹确认就能安装、卸载应用，可以限制系统设置，或把手机锁在一个应用里不让退出。**DeekeScript 本身和打包后的 App 都可以设为 Device Owner。**
+
+开启比较麻烦：已经在用的手机通常要先恢复出厂并退出账号。权限一旦给了，只能再恢复出厂才能拿掉。用户没明确要专用机时，不要选 DO。
 
 相关 API：[`DevicePolicy.md`](./DevicePolicy.md)、[`DeviceApp.md`](./DeviceApp.md)、[`DeviceHardware.md`](./DeviceHardware.md)、[`DeviceKiosk.md`](./DeviceKiosk.md)。
 
