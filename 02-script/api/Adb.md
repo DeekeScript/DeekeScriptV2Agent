@@ -15,10 +15,10 @@ Android 11+ **无线调试**：App 在本机与 `adbd` 配对后，脚本可 `sh
 
 1. Android 11+：`Adb.isSupported()`。
 2. 打开 Wi‑Fi，打开「开发者选项 → 无线调试」。
-3. **第一次**（或清数据 / 撤销授权 / 换 applicationId 后）：点「使用配对码配对设备」，再 `Adb.pairWithCode`。
-4. **日常**：无线调试开着即可；`Adb.connectSaved()`，失败再手填**连接端口**（主界面 `IP:端口` 冒号后）。不要一失败就重新配对。
+3. **第一次**（或清数据 / 撤销授权 / 换 applicationId 后）：点「使用配对码配对设备」，用 `App.notifyInput` 在通知栏回复 6 位码，再 `Adb.pairWithCode`。不要切回本应用，否则配对弹窗常被关掉。
+4. **日常**：无线调试开着即可；`Adb.connectSaved()` 会自动扫描连接端口。扫不到再 `pairWithCode`（同样自动扫描）。手填端口只在手动配对。
 
-配对端口和连接端口**不是同一个**。配对码弹窗上的是配对端口；主界面 `IP:端口` 里是连接端口。
+配对端口和连接端口**不是同一个**。默认不用抄。只有手动配对才区分：配对码弹窗上的是配对端口；主界面 `IP:端口` 里是连接端口。
 
 ```javascript
 if (!Adb.isSupported()) {
@@ -26,13 +26,14 @@ if (!Adb.isSupported()) {
 }
 let c = Adb.connectSaved();
 if (!c.ok) {
-  let port = Dialogs.input('连接端口', String(Adb.getPort() || ''));
-  if (port) {
-    c = Adb.connect(Number(port));
-  }
-}
-if (!c.ok) {
-  let code = Dialogs.input('仍失败再填 6 位配对码（可留空取消）', '');
+  let code = App.notifyInput(
+    '无线调试配对',
+    '点「输入」回复 6 位配对码。不要回到本应用。',
+    '6 位配对码',
+    function () {
+      Adb.openWirelessDebuggingSettings();
+    }
+  );
   if (!code) {
     throw new Error(c.error || '连接失败');
   }
@@ -49,7 +50,7 @@ console.log(Adb.shell('id'));
 | 需求 | 用 | 不用 |
 |------|----|------|
 | 第一次信任本 App | `pairWithCode(code)` 或 `{code, pairPort, connectPort}` | 不要每次任务都 pair |
-| 日常重连 | `connectSaved()`；失败 `connect(连接端口)` | 不要把「端口变了」当成要重新配对 |
+| 日常重连 | `connectSaved()`（自动扫描） | 不要一上来手填端口；扫不到再 `pairWithCode`，仍失败才手动配对 |
 | 任意命令 | `shell(cmd)` | 返回对象，读 `result` / `all` |
 | 点一下 / 滑动 | `tap` / `swipe` | 与 Hid/Gesture 不同通道；已连 Adb 即可 |
 | 电脑上的 `adb` CLI | 本 API 无关 | Agent 设备调试仍用工程 `/ai` 与电脑 adb，不要混 |
@@ -62,7 +63,7 @@ console.log(Adb.shell('id'));
 | status | `status()` | `object` | host/port/开关等摘要 |
 | isConnected | `isConnected()` | `boolean` | 是否已连上 |
 | getConnectState | `getConnectState()` | `boolean` | 同 `isConnected` |
-| pairWithCode | `pairWithCode(code[, timeoutMs])` 或 `pairWithCode({code, timeoutMs?, pairPort?, connectPort?})` | `object` | 推荐首次配对。默认扫描约 60s。可选手填端口（与 Mac `adb pair IP:端口` 同思路） |
+| pairWithCode | `pairWithCode(code[, timeoutMs])` 或 `pairWithCode({code, timeoutMs?, pairPort?, connectPort?})` | `object` | 推荐首次配对。6 位码用 `App.notifyInput` 在通知栏回复。默认扫描约 60s。可选手填端口（与 Mac `adb pair IP:端口` 同思路） |
 | pairCode / easyPair | 同 `pairWithCode` | `object` | 别名 |
 | pair | `pair(port, code)` / `pair(host, port, code)` / `pair({host,port,code})` | `object` | 只配对不自动 connect |
 | connect | `connect()` / `connect(port)` / `connect(host, port)` / `connect("ip:port")` / `connect({host,port})` | `object` | 无参等同 `connectSaved`。本机自动试 Wi‑Fi IP |
@@ -78,14 +79,16 @@ console.log(Adb.shell('id'));
 | help | `help()` | `string` | 方法列表打到控制台 |
 
 ```javascript
-// 首次：保持配对弹窗，只填 6 位码
-Adb.pairWithCode('643102');
+// 首次：通知栏回复 6 位码，保持配对弹窗
+let code = App.notifyInput('无线调试配对', '点「输入」回复 6 位码', '6 位配对码', function () {
+  Adb.openWirelessDebuggingSettings();
+});
+Adb.pairWithCode(String(code));
 // 或与 Mac 一样手抄端口
 Adb.pairWithCode({ code: '643102', pairPort: 37123, connectPort: 5555 });
 
-// 日常
+// 日常：自动扫描，不用手填端口
 Adb.connectSaved();
-Adb.connect(37151);
 ```
 
 ## 执行与文件
@@ -134,7 +137,7 @@ Adb.grant('com.example.app', 'android.permission.CAMERA');
 
 ## 注意
 
-- `connectSaved` 失败多半是**连接端口变了**，先 `connect(端口)`；只有撤销授权、清数据、换包名丢密钥后才 `pairWithCode`。
+- `connectSaved` 会自动扫描连接端口。仍失败再 `pairWithCode`（只填 6 位码，端口也自动扫描）。两条都扫不到才手填端口，见手动配对。
 - 华为等机型 adbd 常不监听 `127.0.0.1`，实现会自动试 Wi‑Fi IP；手填时也可抄设置页局域网 IP。
-- 从本 App 弹 `Dialogs.input` 可能导致系统配对弹窗被盖住；自动发现失败时用手填 `pairPort` + `connectPort`。
+- 6 位码用 `App.notifyInput`，不要用 `Dialogs.input` 把本应用拉回前台，否则系统配对弹窗常被关掉。自动发现失败时再手填 `pairPort` + `connectPort`，同样用通知栏逐条回复。
 - 调试时勿循环 `Adb.home()` / `Adb.back()` 把宿主送走；原则同 [`keep-host-alive.md`](../pitfalls/keep-host-alive.md)。

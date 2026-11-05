@@ -21,6 +21,7 @@
 | sendBroadcast | `sendBroadcast(intent: Intent)` | Intent | `void` | 可用 |
 | launch | `launch(packageName: string)` | 包名 | `void` | 按包名打开应用 |
 | notifySuccess | `notifySuccess(title: string, content: string)` | 标题、内容 | `void` | 显示成功通知 |
+| notifyInput | `notifyInput(title, content, hint?, afterPosted?)` 或 `notifyInput(title, content, hint, timeoutMs, afterPosted)` | 标题、正文；可选提示、超时、通知发出后的回调 | `string` | 通知栏回复。不拉回本应用。取消、划掉或超时返回 `''`。没有通知权限抛异常。一次一个输入框 |
 | getAppVersionName | `getAppVersionName(packageName: string)` | 包名 | `string` | 指定应用版本名 |
 | getAppVersionCode | `getAppVersionCode(packageName: string)` | 包名 | `number` | 指定应用版本号 |
 | openAppSetting | `openAppSetting(packageName: string)` | 包名 | `void` | 打开该应用的系统设置页 |
@@ -33,6 +34,15 @@
 
 ```javascript
 App.launch('top.deeke.script');
+
+let code = App.notifyInput(
+  '无线调试配对',
+  '点「输入」回复 6 位配对码。不要回到本应用。',
+  '6 位配对码',
+  function () {
+    Adb.openWirelessDebuggingSettings();
+  }
+);
 ```
 
 ## 注意
