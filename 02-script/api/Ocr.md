@@ -2,7 +2,15 @@
 
 对截图或指定区域做 OCR。API 挂在 `Images` 上。截图/找图见 [`Images.md`](./Images.md)。
 
-匹配模式 `mode`：`contains`（默认）/ `exact` / `regex`。`TextAndRegion`：`text` `rect` `confidence`。
+`TextAndRegion`：`text` `rect` `confidence`。
+
+`findText` / `findTextFirst` / `findTextCenter` / `findTextPosition` / `findTextRegionsInRegion` / `waitText` / `waitTextGone` 的第三（或对应）参数 **`mode` 同一套**：匹配 OCR **整行**，可省略，默认 `contains`。
+
+| `mode` | 含义 | 关键字怎么写 |
+|--------|------|----------------|
+| `"contains"`（默认） | 行文本包含关键字 | `"登录"` |
+| `"exact"` | 整行完全相等 | `"确定"` |
+| `"regex"` | Java 正则，行内 `find` | `"\\d{4,}"`；非法正则当不匹配 |
 
 ## 上下文
 
@@ -50,7 +58,8 @@ Images.hasTextMatches(screen, '\\d{4,}');
 ### findText / findTextExact / findTextMatches
 
 ```javascript
-let hits = Images.findText(screen, '关注');
+let hits = Images.findText(screen, '关注'); // 默认 contains
+let regHits = Images.findText(screen, '\\d+', 'regex');
 let exact = Images.findTextExact(screen, '下一步');
 let reg = Images.findTextMatches(screen, '￥\\d+');
 ```
@@ -59,23 +68,36 @@ let reg = Images.findTextMatches(screen, '￥\\d+');
 
 ```javascript
 let first = Images.findTextFirst(screen, '搜索');
+let exactFirst = Images.findTextFirst(screen, '确定', 'exact');
 let p = Images.findTextCenter(screen, '登录');
 if (p) Hid.tap(p.x, p.y);
 ```
 
-### findTextPosition(file, kw, mode?)
+### findTextPosition(file, keyword, mode?)
+
+返回匹配行的 `Rect[]`。第三参数 `mode`：`contains`（默认）/ `exact` / `regex`。
 
 ```javascript
 let rects = Images.findTextPosition(screen, '百度一下');
+Images.findTextPosition(screen, '确定', 'exact');
+Images.findTextPosition(screen, '\\d{4,}', 'regex');
 ```
 
-### findTextInRegion
+### findTextInRegion(file, l, t, w, h)
+
+区域内文字 `string[]`。
 
 ```javascript
-// 旧：区域内字符串
 let arr = Images.findTextInRegion(screen, 0, 0, 1080, 1920);
-// 新：区域内按关键字，带坐标
-let hits = Images.findTextInRegion(screen, '关注', 0, 200, 1080, 800);
+```
+
+### findTextRegionsInRegion(file, keyword, l, t, w, h)
+
+区域内按关键字查找，返回 `TextAndRegion[]`。可加 `mode`。
+
+```javascript
+let hits = Images.findTextRegionsInRegion(screen, '关注', 0, 200, 1080, 800);
+let regHits = Images.findTextRegionsInRegion(screen, '^下一.?$', 'regex', 0, 0, 1080, 400);
 ```
 
 ### waitText / waitTextGone
