@@ -85,7 +85,7 @@ Images.findTextPosition(screen, '\\d{4,}', 'regex');
 
 ### findTextInRegion(file, l, t, w, h)
 
-区域内文字 `string[]`。
+区域内文字 `string[]`（只有文字，没有坐标）。按关键字找坐标用 `findTextRegionsInRegion`。
 
 ```javascript
 let arr = Images.findTextInRegion(screen, 0, 0, 1080, 1920);
