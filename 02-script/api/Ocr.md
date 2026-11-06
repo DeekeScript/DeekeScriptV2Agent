@@ -4,7 +4,7 @@
 
 `TextAndRegion`：`text` `rect` `confidence`。
 
-`findText` / `findTextFirst` / `findTextCenter` / `findTextPosition` / `waitText` / `waitTextGone` 的第三（或对应）参数 **`mode` 同一套**：匹配 OCR **整行**，可省略，默认 `contains`。
+`findText` / `findTextFirst` / `findTextCenter` / `findTextPosition` / `findTextRegionsInRegion` / `waitText` / `waitTextGone` 的 **`mode` 同一套**：匹配 OCR **整行**，可省略，默认 `contains`。
 
 | `mode` | 含义 | 关键字怎么写 |
 |--------|------|----------------|
@@ -85,10 +85,29 @@ Images.findTextPosition(screen, '\\d{4,}', 'regex');
 
 ### findTextInRegion(file, l, t, w, h)
 
-区域内文字 `string[]`（只有文字，没有坐标）。区域内带坐标识别用 `getTextAndRegionInRegion`。
+区域内文字 `string[]`（只有文字，没有坐标）。按关键字找坐标用 `findTextRegionsInRegion`。
 
 ```javascript
 let arr = Images.findTextInRegion(screen, 0, 0, 1080, 1920);
+```
+
+### findTextRegionsInRegion(file, keyword, l, t, w, h)
+
+区域内按关键字查找，返回 `TextAndRegion[]`。`mode` 默认 `contains`。
+
+```javascript
+let hits = Images.findTextRegionsInRegion(screen, '关注', 0, 200, 1080, 800);
+if (hits.length > 0) {
+    console.log(hits[0].text, hits[0].rect.centerX(), hits[0].rect.centerY());
+}
+```
+
+### findTextRegionsInRegion(file, keyword, mode, l, t, w, h)
+
+带匹配模式的区域查找。`mode`：`contains` / `exact` / `regex`。
+
+```javascript
+let hits = Images.findTextRegionsInRegion(screen, '^下一.?$', 'regex', 0, 0, 1080, 400);
 ```
 
 ### waitText / waitTextGone
