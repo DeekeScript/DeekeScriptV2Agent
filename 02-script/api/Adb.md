@@ -53,6 +53,8 @@ console.log(Adb.shell('id'));
 | 日常重连 | `connectSaved()`（自动扫描） | 不要一上来手填端口；扫不到再 `pairWithCode`，仍失败才手动配对 |
 | 任意命令 | `shell(cmd)` | 返回对象，读 `result` / `all` |
 | 点一下 / 滑动 | `tap` / `swipe` | 与 Hid/Gesture 不同通道；已连 Adb 即可 |
+| 向焦点打字 | `text` / `type` | ASCII 走 `input text`；中文走剪贴板 + CTRL+V，不是「中文不稳、只能 clipPut」 |
+| 只写剪贴板 | `clipPut` | 自己决定何时粘贴时用 |
 | 电脑上的 `adb` CLI | 本 API 无关 | Agent 设备调试仍用工程 `/ai` 与电脑 adb，不要混 |
 
 ## 配对与连接
@@ -114,7 +116,8 @@ Adb.connectSaved();
 | drag | `drag(x1, y1, x2, y2, durationMs?)` | `object` | 按住拖动，默认 500ms |
 | longPress / press | `longPress(x, y, durationMs?)` | `object` | 长按，默认 800ms |
 | keyEvent / key | `keyEvent(codeOrName)` | `object` | 发送按键。名字全集见文档「按键名」；其它键传 Android KeyEvent 数字码 |
-| text / type | `text(value)` | `object` | 向当前焦点输入文字 |
+| text / type | `text(value)` | `object` | 向当前焦点输入。可打印 ASCII（码点 32–126）走 `input text`，空格转 `%s`。中文及其它非该范围字符：先 `clipPut`，再 `input keycombination 113 50`（CTRL+V）；失败再按键码 `279`（`KEYCODE_PASTE`）。成功可带 `via`：`clip+ctrlv` 或 `clip+paste`。空串直接成功 |
+| clipPut | `clipPut(text)` | `object` | 只写系统剪贴板。优先本应用 `ClipboardManager`（`via` 为 `ClipboardManager`）；失败再写 `/data/local/tmp` 后 `cmd clipboard set-text` |
 | power | `power()` | `object` | 亮屏 |
 | wake | `wake()` | `object` | 亮屏 |
 | sleep | `sleep()` | `object` | 息屏 |
@@ -148,6 +151,8 @@ Adb.shell('pm list packages | head');
 Adb.home();
 Adb.tap(500, 800);
 Adb.swipe(500, 1400, 500, 400, 300);
+Adb.text('hello');   // input text
+Adb.text('你好');    // ClipboardManager + CTRL+V，不行再 KEYCODE_PASTE
 Adb.grant('com.example.app', 'android.permission.CAMERA');
 ```
 
@@ -156,4 +161,5 @@ Adb.grant('com.example.app', 'android.permission.CAMERA');
 - `connectSaved` 会自动扫描连接端口。仍失败再 `pairWithCode`（只填 6 位码，端口也自动扫描）。两条都扫不到才手填端口，见手动配对。
 - 华为等机型 adbd 常不监听 `127.0.0.1`，实现会自动试 Wi‑Fi IP；手填时也可抄设置页局域网 IP。
 - 6 位码用 `App.notifyInput`，不要用 `Dialogs.input` 把本应用拉回前台，否则系统配对弹窗常被关掉。自动发现失败时再手填 `pairPort` + `connectPort`，同样用通知栏逐条回复。
+- `Adb.text` 中文走剪贴板粘贴（CTRL+V / `KEYCODE_PASTE`），不要再写成「中文不稳定、只能自己 clipPut」。只想写剪贴板、自己粘贴时才用 `clipPut`。
 - 调试时勿循环 `Adb.home()` / `Adb.back()` 把宿主送走；原则同 [`keep-host-alive.md`](../pitfalls/keep-host-alive.md)。

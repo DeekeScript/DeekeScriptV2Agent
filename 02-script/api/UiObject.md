@@ -13,8 +13,11 @@
 |------|------|------|--------|------|
 | click | `click()` | 无 | `boolean` | 点击。`true` 只表示无障碍已把点击发给节点，不保证界面已响应；`false` 一定没点上 |
 | longClick | `longClick()` | 无 | `boolean` | 长按 |
-| scrollForward | `scrollForward()` | 无 | `boolean` | 向前滑：下方内容上移或右方内容左移。`false` 可判断到底 |
-| scrollBackward | `scrollBackward()` | 无 | `boolean` | 向后滑。`false` 可判断到顶 |
+| scrollForward | `scrollForward()` | 无 | `boolean` | 向前滑：下方内容上移或右方内容左移。`false` 可判断到底。滑动前先 `canScrollForward()` |
+| scrollBackward | `scrollBackward()` | 无 | `boolean` | 向后滑。`false` 可判断到顶。滑动前先 `canScrollBackward()` |
+| canScrollForward | `canScrollForward()` | 无 | `boolean` | 是否声明向前滑（`ACTION_SCROLL_FORWARD`）。先查 `getActionList()`，没有列表再看旧 `getActions()` 位掩码。为 `true` 再 `scrollForward()` 更稳 |
+| canScrollBackward | `canScrollBackward()` | 无 | `boolean` | 是否声明向后滑（`ACTION_SCROLL_BACKWARD`），判断方式同 `canScrollForward()` |
+| actions | `actions()` | 无 | `string[]` | 当前节点支持的无障碍动作名，如 `ACTION_CLICK`、`ACTION_SCROLL_FORWARD`、`ACTION_SET_TEXT`。优先 `getActionList()`；空则按旧位掩码展开。未识别 id 写成 `0x` 加十六进制。`console.log` 整个节点也会带 `actions`、`canScrollForward`、`canScrollBackward` |
 | setSelection | `setSelection(start: number, end: number)` | 起止下标 | `boolean` | 选中输入框文本 |
 | copy | `copy()` | 无 | `boolean` | 复制已选中文本 |
 | cut | `cut()` | 无 | `boolean` | 剪切已选中文本；仅输入框且已有选区 |
@@ -43,7 +46,7 @@
 | isEnabled | `isEnabled()` | 无 | `boolean` | 是否已启用 |
 | isFocusable | `isFocusable()` | 无 | `boolean` | 是否可获焦点 |
 | isFocused | `isFocused()` | 无 | `boolean` | 是否已获焦点 |
-| isScrollable | `isScrollable()` | 无 | `boolean` | 是否可滚动 |
+| isScrollable | `isScrollable()` | 无 | `boolean` | 节点标了可滚动。不一定同时有向前、向后两个动作；能否滑看 `canScrollForward()` / `canScrollBackward()` |
 | isVisibleToUser | `isVisibleToUser()` | 无 | `boolean` | 是否对用户可见 |
 | isEditable | `isEditable()` | 无 | `boolean` | 是否可编辑 |
 | isPassword | `isPassword()` | 无 | `boolean` | 是否密码框 |
@@ -58,11 +61,17 @@ let sendButton = UiSelector().text('发送').findOne();
 if (sendButton) {
   sendButton.click();
 }
+
+let list = UiSelector().scrollable(true).findOne();
+if (list && list.canScrollForward()) {
+  list.scrollForward();
+}
 ```
 
 ## 注意
 
 - `click()` 返回 `true` 不代表业务已完成，只代表无障碍已发送点击。
+- `isScrollable()` 只表示可滚动标记；滑动前用 `canScrollForward()` / `canScrollBackward()`。需要看全部动作时用 `actions()`。
 - `setText` / `paste` / `cut` / `copy` / `setSelection` 针对可编辑节点。
 - **点击后节点常失效**：评论占位框、搜索框、半屏面板、键盘弹起后，点击前拿到的 `UiObject` 往往不是真正可输入的那个。必须 `click` → `sleep` → **重新 find**（优先 `editable(true).focused(true)`）→ 再 `setText`/`paste` → 再读 `text()` 校验。禁止对旧变量直接写入。见 [`stale-node-after-click.md`](../pitfalls/stale-node-after-click.md)、配方 [`comment-input.md`](../../03-recipes/comment-input.md)。
 - `setText` 返回 `true` 不等于内容已进框；半屏里「发送」等文案节点可能 `isClickable() === false`，要点 `parent()` 或 [`Gesture.click`](Gesture.md) 中心。
