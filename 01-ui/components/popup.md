@@ -21,6 +21,7 @@
 | style.borderColor | String | 边框颜色；只写颜色时宽度默认 1 |
 | style.borderWidth | Number | 边框宽度 dp |
 | body / children | Array | 弹层里的节点，和页面 `body` 一样 |
+| footer / actions / buttons | Array / Object | 底部按钮，固定在滚动内容外面、靠右。数组或单个对象。没写 `type` 的项当成按钮。不跟 `body` 滚动 |
 
 ```json
 {
@@ -33,8 +34,10 @@
       "position": "bottom",
       "showIf": "formOpen",
       "body": [
-        { "type": "textarea", "name": "remark", "label": "备注" },
-        { "type": "button", "text": "保存", "onTap": "onSaveForm" }
+        { "type": "textarea", "name": "remark", "label": "备注" }
+      ],
+      "footer": [
+        { "type": "button", "text": "保存", "size": "sm", "onTap": "onSaveForm" }
       ]
     }
   ]

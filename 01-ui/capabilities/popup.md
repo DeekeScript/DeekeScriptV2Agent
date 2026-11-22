@@ -21,6 +21,7 @@
 | style.borderColor | String | 边框颜色；只写颜色时宽度默认 1 |
 | style.borderWidth | Number | 边框宽度 dp |
 | body / children | Array | 弹层里的节点，和页面 `body` 一样 |
+| footer / actions / buttons | Array / Object | 底部按钮，固定在滚动内容外面、靠右。不跟 `body` 滚动。`modal` 同样用这个字段 |
 
 打开关闭自带过渡：底部上滑、顶部下滑、侧边滑入、居中缩放淡入，遮罩同时淡入淡出。
 
@@ -39,8 +40,10 @@
       "position": "bottom",
       "showIf": "formOpen",
       "body": [
-        { "type": "textarea", "name": "remark", "label": "备注" },
-        { "type": "button", "text": "保存", "onTap": "onSaveForm" }
+        { "type": "textarea", "name": "remark", "label": "备注" }
+      ],
+      "footer": [
+        { "type": "button", "text": "保存", "size": "sm", "onTap": "onSaveForm" }
       ]
     }
   ]

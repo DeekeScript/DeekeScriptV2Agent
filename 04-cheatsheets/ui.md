@@ -61,10 +61,10 @@
 | `list` | `bind` `item`；可选 `direction: row` | 数组逐条 |
 | `grid` | `bind` `columns` `item` | 宫格 |
 | `collapse` | `name` `items` `accordion` | 折叠 |
-| `popup` | `showIf` `position` `body` | 也可写在根 `popups` |
+| `popup` | `showIf` `position` `body` `footer` | 也可写在根 `popups`。按钮放 `footer`，靠右且不滚动 |
 | `actionSheet` | `showIf` `items` | 底部动作列表 |
 | `dialog` | `showIf` `title` `text` | 居中确认 |
-| `modal` | `showIf` `body` | 居中内容 |
+| `modal` | `showIf` `body` `footer` | 居中内容。表单放 `body`，右下角按钮放 `footer` |
 | `popover` | `showIf` `for` `text` | 气泡 |
 | `toast` | `text` 或 `this.toast` | 轻提示 |
 | `mask` / `overlay` | `showIf` `opacity` | 蒙层 |

@@ -75,7 +75,7 @@ overlay（`popup` / `actionSheet` / `dialog` / `modal` / `popover` / `toast` / `
 | popup | 盖在当前页上的弹层 | [popup](./popup.md) |
 | actionSheet | 底部动作列表 | [actionSheet](./actionSheet.md) |
 | dialog | 居中确认框 | [dialog](./dialog.md) |
-| modal | 居中内容容器 | [modal](./modal.md) |
+| modal | 居中内容容器，按钮用 footer 靠右 | [modal](./modal.md) |
 | popover | 贴着组件的气泡 | [popover](./popover.md) |
 | toast | 轻提示；优先 `this.toast` / `action.toast` | [toast](./toast.md) |
 | mask / overlay | 独立背景蒙层 | [mask](./mask.md) |
